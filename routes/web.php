@@ -25,3 +25,7 @@ Route::get('/rawat-medis/detail', 'RekamMedisController@detail')->name('rekam-me
 Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
 Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
 Route::get('/cppt/tambah', 'CpptController@create')->name('cppt.create');
+
+Route::get('/asesmen/awal-dewasa/perawat', 'AsesmenController@awalDewasaPerawat')->name('asesmen.awal-dewasa.perawat');
+
+

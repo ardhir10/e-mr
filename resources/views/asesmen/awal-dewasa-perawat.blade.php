@@ -38,6 +38,15 @@
                                             <span style="float:right;" class="float-right">:&nbsp;</span>
                                         </td>
                                         <td class="rightCol" width="60%">
+                                            <input type="text">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftCol" width="40%">
+                                            <label for="">Nomor MR</label>
+                                            <span style="float:right;" class="float-right">:&nbsp;</span>
+                                        </td>
+                                        <td class="rightCol" width="60%">
                                             <input type="text" class="form-control form-control-sm" value="0281"
                                                 readonly>
                                         </td>

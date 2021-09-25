@@ -281,10 +281,10 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
+                                            <a href="{{route('asesmen.awal-dewasa.perawat')}}" class="btn btn-sm btn-secondary  mb-2 w-100"
                                                 style="text-align: left">
                                                 <i class="" style="height:18px" data-feather="user-check"></i>
-                                                PERAWAT</button>
+                                                PERAWAT</a>
                                             <button class="btn btn-sm btn-secondary  mb-2 w-100"
                                                 style="text-align: left">
                                                 <i class="" style="height:18px" data-feather="user-check"></i>
