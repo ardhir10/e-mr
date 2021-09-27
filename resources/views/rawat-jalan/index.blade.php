@@ -22,43 +22,47 @@
                         <form action="" class="row">
                             <div class="form-group col-lg-4">
                                 <label for="">Dokter</label>
-                                <select class="form-select form-select-sm " name="" id="">
+                                <select class="form-select form-select-sm " name="dokter" id="">
+                                    <option value="">--PILIH DOKTER</option>
+
                                     @foreach ($dokter as $dkt)
-                                    <option value="">{{$dkt->fs_dokter}}</option>
+                                    <option {{ $dkt->fs_dokter === $request->get('dokter') ? 'selected=selected':''}}  value="{{$dkt->fs_dokter}}">{{$dkt->fs_dokter}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Masuk :</label>
-                                <input class="form-control form-control-sm" type="date" value>
+                                <input class="form-control form-control-sm" name="tgl_masuk" type="date" value="{{$request->get('tgl_masuk')}}">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Sampai Dengan :</label>
-                                <input class="form-control form-control-sm" type="date" value>
+                                <input class="form-control form-control-sm" name="tgl_masuk_sampai" type="date" value="{{$request->get('tgl_masuk_sampai')}}">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="">Poliklinik</label>
-                                <select class="form-select form-select-sm " name="" id="">
-                                    <option value="">Umum Poli</option>
-                                    <option value="">THT</option>
-                                    <option value="">Umum Anak</option>
+                                <select class="form-select form-select-sm " name="layanan" id="">
+                                    <option value="">--PILIH LAYANAN</option>
+                                    @foreach ($layanan as $ly)
+                                        <option {{ $ly->FS_NM_LAYANAN === $request->get('layanan') ? 'selected=selected':''}}  value="{{$ly->FS_NM_LAYANAN}}">{{$ly->FS_NM_LAYANAN}}</option>
+                                        
+                                    @endforeach
                                 </select>
                             </div>
+                            <div class="mt-2">
+                                <button class="btn btn-sm btn-success">
+                                    <i class=" fa fa-search"></i>
 
+                                    Cari
+                                </button>
+                                <a href="{{route('rawat-jalan.index')}}" class="btn btn-sm btn-danger">
+                                    <i class=" fa fa-refresh"></i>
+                                    <i class="fa fa-sync" aria-hidden="true"></i>
+
+                                    Reset
+                                </a>
+                            </div>
                         </form>
-                        <div class="mt-2">
-                            <button class="btn btn-sm btn-success">
-                                <i class=" fa fa-search"></i>
-
-                                Cari
-                            </button>
-                            <button class="btn btn-sm btn-danger">
-                                <i class=" fa fa-refresh"></i>
-                                <i class="fa fa-sync" aria-hidden="true"></i>
-
-                                Reset
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -83,7 +87,7 @@
                                     <th>Rekam Medis</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="font-size: 12px">
 
                                 @foreach ($rawat_jalan as $rj)
                                 <tr>

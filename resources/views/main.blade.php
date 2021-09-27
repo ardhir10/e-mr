@@ -22,6 +22,12 @@
 
     <link href="{{asset('/assets')}}/libs/datatables.net-dt/css/jquery.dataTables.min.css" id="app-style"
         rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs Css -->
+    <link href="{{asset('/assets')}}/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+    <!-- alertifyjs default themes  Css -->
+    <link href="{{asset('/assets')}}/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+
     @stack('styles')
     <style>
         .breadcrumb-item+.breadcrumb-item::before {
@@ -45,7 +51,7 @@
 </head>
 
 
-<body>
+<body style="background: #efefef;">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -61,7 +67,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
-        <div class="main-content" style="background: #efefef;">
+        <div class="main-content" >
             @yield('content')
             <!-- End Page-content -->
 
@@ -113,11 +119,21 @@
     </script>
     <script src="{{asset('/assets')}}/js/app.js"></script>
     <script src="{{asset('/assets')}}/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{asset('/assets')}}/libs/alertifyjs/build/alertify.min.js"></script>
 
     @stack('scripts')
     <script>
         $('.ada').val();
 
+
+        // --- FUNCTION DELETE
+        function confirmDelete(urlDelete){
+            alertify.confirm("Yakin Hapus ingin menghapus data ?", function () {
+                window.location = urlDelete;
+            }, function () {
+                alertify.error("Cancel")
+            }).set({title:"Delete"})
+        }
     </script>
 
 </body>

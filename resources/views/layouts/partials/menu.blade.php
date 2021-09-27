@@ -84,19 +84,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="apps-calendar.html">
+                            <a href="{{route('satuan-tugas-medis.index')}}">
                                 <i class="icon nav-icon" data-feather="slack"></i>
                                 <span class="menu-item" data-key="t-calendar">Satuan Tugas Medis</span>
                             </a>
                         </li>
                         <li>
-                            <a href="apps-calendar.html">
+                            <a href="{{route('layanan.index')}}">
                                 <i class="icon nav-icon" data-feather="settings"></i>
                                 <span class="menu-item" data-key="t-calendar">Layanan/Bagian</span>
                             </a>
                         </li>
-
-                        
 
                          
                     </ul>

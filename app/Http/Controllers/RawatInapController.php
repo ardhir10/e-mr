@@ -3,12 +3,57 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class RawatInapController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data['page_title'] = "List Pasien Rawat Inap";
+        $data['request'] = $request;
+
+        // ---  UNTUK MENDAPATKAN DATA DOKTER
+        $QUERY_DOKTER = "select	fs_kd_peg fs_kd_dokter , 
+		fs_nm_peg fs_dokter 
+        from	td_peg
+        where	fn_profesi_medis in (0,1,2)
+        and		FB_SUDAH_RESIGN = 0
+        order	by fs_nm_peg";
+        $data['dokter'] = DB::select($QUERY_DOKTER);
+
+        // ---  UNTUK MENDAPATKAN DATA LAYANAN
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan'] = DB::select($QUERY_LAYANAN);
+
+        // ---  UNTUK MENDAPATKAN DATA RAWAT INAP
+        $whereDokter = "";
+        if ($request->get('dokter')) {
+            $whereDokter = "and fs_nm_peg like '%{$request->get('dokter')}%'";
+        }
+        $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
+        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai') : date('Y-m-d');
+        $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr, 
+		FS_NM_PASIEN, bb.FB_JNS_KELAMIN, '' fn_umur, 
+		fs_nm_layanan, fs_nm_peg fs_dokter, fs_nm_jaminan, 
+		FD_TGL_KELUAR = case FD_TGL_KELUAR
+		when '3000-01-01' then ''
+		else	FD_TGL_KELUAR end 
+        from	TA_REGISTRASI aa
+        inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan 
+        inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+        where	aa.fd_tgl_void = '3000-01-01'
+        and		fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'
+        and		ff.FS_KD_INSTALASI_DK in (3)
+        $whereDokter
+        ";
+        $data['rawat_inap'] = DB::select($QUERY_RAWAT_JALAN);
+        
         return view('rawat-inap.index', $data);
     }
 }

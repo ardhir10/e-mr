@@ -87,7 +87,7 @@
                                      <th>Action</th>
                                  </tr>
                              </thead>
-                             <tbody>
+                            <tbody style="font-size: 12px">
 
                                 @foreach ($rekam_medis as $rm)
                                     <tr>

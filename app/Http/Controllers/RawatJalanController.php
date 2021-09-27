@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class RawatJalanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data['page_title'] = "List Pasien Rawat Jalan";
+        $data['request'] = $request;
 
+        // ---  UNTUK MENDAPATKAN DATA DOKTER
         $QUERY_DOKTER = "select	fs_kd_peg fs_kd_dokter , 
 		fs_nm_peg fs_dokter 
         from	td_peg
@@ -19,6 +21,25 @@ class RawatJalanController extends Controller
         order	by fs_nm_peg";
         $data['dokter'] = DB::select($QUERY_DOKTER);
 
+        // ---  UNTUK MENDAPATKAN DATA LAYANAN
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan'] = DB::select($QUERY_LAYANAN);
+
+        // ---  UNTUK MENDAPATKAN DATA RAWAT JALAN
+        $whereDokter = "";
+        $whereLayanan= "";
+        if($request->get('dokter')){
+            $whereDokter = "and fs_nm_peg like '%{$request->get('dokter')}%'";
+        }
+        if($request->get('layanan')){
+            $whereLayanan = "and fs_nm_layanan like '%{$request->get('layanan')}%'";
+        }
+        $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
+        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai'): date('Y-m-d');
         $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr, 
 		FS_NM_PASIEN, bb.FB_JNS_KELAMIN, '' fn_umur, 
 		fs_nm_layanan, fs_nm_peg fs_dokter, fs_nm_jaminan 	 
@@ -29,9 +50,13 @@ class RawatJalanController extends Controller
         inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
         inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
         where	aa.fd_tgl_void = '3000-01-01'
-        and		fd_tgl_masuk between '2021-09-10' and '2021-09-10'
-        and		ff.FS_KD_INSTALASI_DK in (1,2,4)";
+        and		fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'
+        and		ff.FS_KD_INSTALASI_DK in (1,2,4)
+        $whereDokter
+        $whereLayanan
+        ";
         $data['rawat_jalan'] = DB::select($QUERY_RAWAT_JALAN);
+        
         return view('rawat-jalan.index', $data);
     }
 }
