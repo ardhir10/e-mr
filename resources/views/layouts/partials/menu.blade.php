@@ -4,7 +4,7 @@
             <div class="navbar-brand-box" style="    box-shadow: -2px 6px 3px rgb(52 58 64 / 8%);">
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/')}}/images/logo-hospital.jpg" alt="" height="50">
+                        <img src="{{asset('assets/')}}/images/logo-hospital-small.jpg" alt="" height="50">
                     </span>
                     <span class="logo-lg">
                         <img src="{{asset('assets/')}}/images/logo-hospital.jpg" alt="" height="50">
@@ -36,6 +36,16 @@
                         <li class="menu-title" data-key="t-dashboards">HOME</li>
 
                         <li>
+                            <a href="{{route('dashboard')}}">
+                                {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
+                                {{-- <i class="fas fa-search" ></i> --}}
+                                <i class="icon nav-icon" data-feather="trello"></i>
+
+
+                                <span class="menu-item" data-key="t-sales">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('rekam-medis.index')}}">
                                 {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
                                 {{-- <i class="fas fa-search" ></i> --}}
@@ -66,19 +76,19 @@
                         <li class="menu-title" data-key="t-applications">DATA MASTER</li>
 
                         <li>
-                            <a href="apps-calendar.html">
+                            <a href="javascrip::void()">
                                 <i class="icon nav-icon" data-feather="home"></i>
                                 <span class="menu-item" data-key="t-calendar">Setup Rumah Sakit</span>
                             </a>
                         </li>
                         <li>
-                            <a href="apps-calendar.html">
+                            <a href="{{route('user.index')}}">
                                 <i class="icon nav-icon" data-feather="users"></i>
                                 <span class="menu-item" data-key="t-calendar">Setup User</span>
                             </a>
                         </li>
                         <li>
-                            <a href="apps-calendar.html">
+                            <a href="{{route('role.index')}}">
                                 <i class="icon nav-icon" data-feather="sliders"></i>
                                 <span class="menu-item" data-key="t-calendar">Setup Role User</span>
                             </a>
