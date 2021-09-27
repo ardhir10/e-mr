@@ -38,7 +38,7 @@
                                             <span style="float:right;" class="float-right">:&nbsp;</span>
                                         </td>
                                         <td class="rightCol" width="60%">
-                                            <input type="text">
+                                            <input type="text" >
                                         </td>
                                     </tr>
                                     <tr>

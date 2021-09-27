@@ -27,45 +27,45 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" class="row">
+                        <form action="" method="GET" class="row">
                             <div class="form-group col-lg-2">
                                 <label for="">Nama</label>
-                                <input class="form-control form-control-sm" type="text" value placeholder="masukkan nama pasien">
+                                <input class="form-control form-control-sm" name="nama" type="text" value="{{$request->get('nama')}}" placeholder="masukkan nama pasien">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Alamat</label>
-                                <input class="form-control form-control-sm" type="text" value placeholder="masukkan alamat pasien">
+                                <input class="form-control form-control-sm" name="alamat" type="text" value="{{$request->get('alamat')}}" placeholder="masukkan alamat pasien">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Telepon</label>
-                                <input class="form-control form-control-sm" type="number" value placeholder="masukkan telepon pasien">
+                                <input class="form-control form-control-sm" name="telepon" type="number" value="{{$request->get('telepon')}}" placeholder="masukkan telepon pasien">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">HP</label>
-                                <input class="form-control form-control-sm" type="number" value placeholder="masukkan nomor hp pasien">
+                                <input class="form-control form-control-sm" name="hp" type="number" value="{{$request->get('hp')}}" placeholder="masukkan nomor hp pasien">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Nomor MR</label>
-                                <input class="form-control form-control-sm" type="text" value placeholder="masukkan nomor MR">
+                                <input class="form-control form-control-sm" name="nomor_mr" type="text" value="{{$request->get('nomor_mr')}}" placeholder="masukkan nomor MR">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Lahir</label>
-                                <input class="form-control form-control-sm" type="date" value placeholder="masukkan tanggal lahir">
+                                <input class="form-control form-control-sm" name="tgl_lahir"type="date" value="{{$request->get('tgl_lahir')}}" paceholder="masukkan tanggal lahir">
                             </div>
-                        </form>
-                        <div class="mt-2">
+                             <div class="mt-2">
                             <button class="btn btn-sm btn-success">
                                 <i class=" fa fa-search" ></i>
 
                                 Cari
                             </button>
-                            <button class="btn btn-sm btn-danger">
+                            <a href="{{route('rekam-medis.index')}}" class="btn btn-sm btn-danger">
                                 <i class=" fa fa-refresh"></i>
                                 <i class="fa fa-sync" aria-hidden="true"></i>
-
                                 Reset
-                            </button>
+                            </a>
                         </div>
+                        </form>
+                       
                     </div>
                 </div>
             </div>
@@ -88,30 +88,23 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                 <tr>
-                                     <td>1</td>
-                                     <td>31093039</td>
-                                     <td>Aris S</td>
-                                     <td>20-01-1987</td>
-                                     <td>Bekasi</td>
-                                     <td>-</td>
-                                     <td>0819829282</td>
+
+                                @foreach ($rekam_medis as $rm)
+                                    <tr>
+                                     <td>{{$loop->iteration}}</td>
+                                     <td>{{$rm->fs_mr}}</td>
+                                     <td>{{$rm->fs_nm_pasien}}</td>
+                                     <td>{{$rm->fd_tgl_lahir}}</td>
+                                     <td>{{$rm->FS_ALM_PASIEN}}</td>
+                                     <td>{{$rm->FS_TLP_PASIEN}}</td>
+                                     <td>{{$rm->FS_HP_PASIEN}}</td>
                                      <td>
                                          <a href="{{route('rekam-medis.detail')}}">Lihat</a>
                                      </td>
                                  </tr>
-                                 <tr>
-                                     <td>2</td>
-                                     <td>83938938</td>
-                                     <td>Suyono</td>
-                                     <td>02-09-1991</td>
-                                     <td>Bogor</td>
-                                     <td>-</td>
-                                     <td>08981928292</td>
-                                     <td>
-                                         <a href="{{route('rekam-medis.detail')}}">Lihat</a>
-                                     </td>
-                                 </tr>
+                                @endforeach
+                                 
+                                 
                                   
                                  
                              </tbody>
