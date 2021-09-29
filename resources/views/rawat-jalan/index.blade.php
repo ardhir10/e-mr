@@ -32,11 +32,11 @@
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Masuk :</label>
-                                <input class="form-control form-control-sm" name="tgl_masuk" type="date" value="{{$request->get('tgl_masuk')}}">
+                                <input class="form-control form-control-sm" name="tgl_masuk" type="date" value="{{$request->get('tgl_masuk') ?: date('Y-m-d')}}">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Sampai Dengan :</label>
-                                <input class="form-control form-control-sm" name="tgl_masuk_sampai" type="date" value="{{$request->get('tgl_masuk_sampai')}}">
+                                <input class="form-control form-control-sm" name="tgl_masuk_sampai" type="date" value="{{$request->get('tgl_masuk_sampai') ?: date('Y-m-d')}}">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="">Poliklinik</label>
@@ -92,7 +92,7 @@
                                 @foreach ($rawat_jalan as $rj)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$rj->fd_tgl_masuk}}</td>
+                                    <td>{{date('d-m-Y',strtotime($rj->fd_tgl_masuk))}}</td>
                                     <td>{{$rj->fs_kd_reg}}</td>
                                     <td>{{$rj->fs_mr}}</td>
                                     <td>{{$rj->FS_NM_PASIEN}}</td>
@@ -101,7 +101,7 @@
                                     @else
                                         <td>L</td>
                                     @endif
-                                    <td>{{$rj->fn_umur}}</td>
+                                    <td>{{$rj->fn_umur}} Th {{$rj->fn_umur_bulan}} Bl</td>
                                     <td>{{$rj->fs_nm_layanan}}</td>
                                     <td>{{$rj->fs_dokter}}</td>
                                     <td>{{$rj->fs_nm_jaminan}}</td>

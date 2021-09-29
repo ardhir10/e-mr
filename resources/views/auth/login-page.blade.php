@@ -12,7 +12,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Pichforest" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('/assets')}}/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('/assets')}}/images/logo-solvus-small.jpeg">
 
     <!-- Bootstrap Css -->
     <link href="{{asset('/assets')}}/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -20,27 +20,66 @@
     <link href="{{asset('/assets')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{asset('/assets')}}/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <style>
+        .overlay-body {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
+        .pos-absolute {
+            position: absolute;
+        }
+
+        .wd-100p {
+            width: 100% !important;
+        }
+
+        /* .ht-100p {
+            height: 100%;
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+        }
+
+        a-0 {
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+        } */
+
+    </style>
 </head>
 
 
-<body>
+<body style="overflow: hidden">
 
     <!-- <body data-layout="horizontal"> -->
-
+    <video id="headVideo" class="pos-absolute a-0 wd-100p ht-100p object-fit-cover" autoplay="" muted="" loop=""
+        __idm_id__="902646785">
+        <source src="{{asset('/assets')}}/video/1.mp4" type="video/mp4">
+        <source src="/public/videos/video1.ogv" type="video/ogg">
+        <source src="/public/videos/video1.webm" type="video/webm">
+    </video>
     <div class="authentication-bg min-vh-100">
-        <div class="bg-overlay bg-white"></div>
+        <div class=" "></div>
         <div class="container">
             <div class="d-flex flex-column min-vh-100 px-3 pt-4">
                 <div class="row justify-content-center my-auto">
                     <div class="col-md-8 col-lg-6 col-xl-4">
 
-                        <div class="text-center  py-5">
-                            <div class="mb-4 mb-md-5">
-                                <a href="index.html" class="d-block auth-logo">
-                                    <img src="{{asset('assets/')}}/images/logo-hospital.jpg" alt="" height="100"
+                        <div class="text-center bg-white pd-1 py-5" style="border-radius: 30px;padding: 22px;">
+                            <div class="mb-2 mb-md-3">
+                                <a href="index.html" class="d-block auth-logo" style="padding: 10px 41px">
+                                    <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" width="100%"
                                         class="auth-logo-dark">
-                                    <img src="{{asset('assets/')}}/images/logo-hospital.jpg" alt="" height="100"
+                                    <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" width="100%"
                                         class="auth-logo-light">
                                 </a>
                             </div>
@@ -49,12 +88,12 @@
                                 <p>Sign in to continue to Solvus E-MR</p>
                             </div>
                             <form action="{{ route('login') }}" method="post">
-                                @csrf 
-                                
-                                
+                                @csrf
+
+
                                 @if(session('errors'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                     
+
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -76,7 +115,7 @@
 
 
                                 <div class="form-floating form-floating-custom mb-3">
-                                    <input type="text" class="form-control" id="input-username" name="email"
+                                    <input type="text" class="form-control form-control-sm" id="input-username" name="email"
                                         placeholder="Enter User Name">
                                     <label for="input-username">Email/Username</label>
                                     <div class="form-floating-icon">

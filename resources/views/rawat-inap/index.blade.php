@@ -75,7 +75,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Masuk</th>
                                     <th>Register</th>
                                     <th>MR</th>
                                     <th>Nama Pasien</th>
@@ -91,7 +91,7 @@
                                 @foreach ($rawat_inap as $ri)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$ri->fd_tgl_masuk}}</td>
+                                    <td>{{date('d-m-Y',strtotime($ri->fd_tgl_masuk))}}</td>
                                     <td>{{$ri->fs_kd_reg }}</td>
                                     <td>{{$ri->fs_mr }}</td>
                                     <td>{{$ri->FS_NM_PASIEN }}</td>
@@ -103,7 +103,7 @@
                                     <td>{{$ri->fn_umur}}</td>
                                     <td>{{$ri->fs_dokter}}</td>
                                     <td>{{$ri->fs_nm_jaminan}}</td>
-                                    <td>{{$ri->FD_TGL_KELUAR}}</td>
+                                    <td>{{date('d-m-Y',strtotime($ri->FD_TGL_KELUAR))}}</td>
                                     <td>
                                         <a href="{{route('rekam-medis.detail')}}">
                                             Lihat

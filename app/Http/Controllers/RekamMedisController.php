@@ -15,6 +15,7 @@ class RekamMedisController extends Controller
         
         $parameterSeachQuery = [];
         foreach ($allParameterSearch as $key => $value) {
+            $isSearcable = true;
             switch ($key) {
                 case 'nama':
                     $key = 'fs_nm_pasien';
@@ -35,15 +36,17 @@ class RekamMedisController extends Controller
                     $key = 'fd_tgl_lahir';
                     break;
                 default:
-                    # code...
+                    $isSearcable = false;
                     break;
             }
-            array_push($parameterSeachQuery,'and '.$key." like '%$value%'");
+            if($isSearcable){
+                array_push($parameterSeachQuery,'and '.$key." like '%$value%'");
+            }
         }
         $whereQuery = implode($parameterSeachQuery, ' ') ;
         
         $QUERY = "select fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr where 1=1 $whereQuery ";
-        $data['rekam_medis'] = DB::select($QUERY);
+        $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
         // $data['datatables'] = Datatables::of($data['rekam_medis'])->make(true);
 

@@ -8,7 +8,7 @@
     <title>Solvus | E- MR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('/assets')}}/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('/assets')}}/images/logo-solvus-small.jpeg">
 
     <!-- plugin css -->
     <link href="{{asset('/assets')}}/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />

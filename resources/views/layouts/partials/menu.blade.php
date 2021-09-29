@@ -4,10 +4,10 @@
             <div class="navbar-brand-box" style="    box-shadow: -2px 6px 3px rgb(52 58 64 / 8%);">
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/')}}/images/logo-hospital-small.jpg" alt="" height="50">
+                        <img src="{{asset('assets/')}}/images/logo-solvus-small.jpeg" alt="" height="35">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('assets/')}}/images/logo-hospital.jpg" alt="" height="50">
+                        <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" height="35">
                     </span>
                     
                     {{-- <span>E-MR</span> --}}
@@ -75,12 +75,6 @@
 
                         <li class="menu-title" data-key="t-applications">DATA MASTER</li>
 
-                        <li>
-                            <a href="javascrip::void()">
-                                <i class="icon nav-icon" data-feather="home"></i>
-                                <span class="menu-item" data-key="t-calendar">Setup Rumah Sakit</span>
-                            </a>
-                        </li>
                         <li>
                             <a href="{{route('user.index')}}">
                                 <i class="icon nav-icon" data-feather="users"></i>

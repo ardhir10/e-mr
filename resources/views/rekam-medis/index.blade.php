@@ -30,6 +30,7 @@
                         <form action="" method="GET" class="row">
                             <div class="form-group col-lg-2">
                                 <label for="">Nama</label>
+                                <input type="hidden" name="seach" id="" value="true">
                                 <input class="form-control form-control-sm" name="nama" type="text" value="{{$request->get('nama')}}" placeholder="masukkan nama pasien">
                             </div>
                             <div class="form-group col-lg-2">
@@ -94,7 +95,7 @@
                                      <td>{{$loop->iteration}}</td>
                                      <td>{{$rm->fs_mr}}</td>
                                      <td>{{$rm->fs_nm_pasien}}</td>
-                                     <td>{{$rm->fd_tgl_lahir}}</td>
+                                     <td>{{date('d-m-Y',strtotime($rm->fd_tgl_lahir))}}</td>
                                      <td>{{$rm->FS_ALM_PASIEN}}</td>
                                      <td>{{$rm->FS_TLP_PASIEN}}</td>
                                      <td>{{$rm->FS_HP_PASIEN}}</td>

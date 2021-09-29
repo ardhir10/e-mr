@@ -41,7 +41,10 @@ class RawatJalanController extends Controller
         $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
         $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai'): date('Y-m-d');
         $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr, 
-		FS_NM_PASIEN, bb.FB_JNS_KELAMIN, '' fn_umur, 
+		FS_NM_PASIEN, bb.FB_JNS_KELAMIN, 
+         DATEDIFF(YYYY, bb.fd_tgl_lahir,aa.fd_tgl_masuk ) fn_umur, 
+		 DATEDIFF(m, bb.fd_tgl_lahir,aa.fd_tgl_masuk )%12 fn_umur_bulan, 
+        bb.fd_tgl_lahir, 
 		fs_nm_layanan, fs_nm_peg fs_dokter, fs_nm_jaminan 	 
         from	TA_REGISTRASI aa
         inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
