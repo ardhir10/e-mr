@@ -129,27 +129,26 @@
 
         option = {
             legend: {},
-            xAxis: [
-                 {
+            xAxis: [{
                     type: 'category',
                     data: @json($chart['ts']['rm']),
-                    position:'bottom',
+                    position: 'bottom',
                 },
                 {
                     type: 'category',
                     data: @json($chart['ts']['rj']),
-                    position:'bottom',
-                     offset: 20
+                    position: 'bottom',
+                    offset: 20
 
                 },
                 {
                     type: 'category',
                     data: @json($chart['ts']['ri']),
-                    position:'bottom',
-                     offset: 40
+                    position: 'bottom',
+                    offset: 40
 
                 },
-               
+
             ],
             yAxis: {
                 type: 'value'
@@ -160,49 +159,57 @@
                 bottom: "20%",
                 right: "8%",
             },
-            dataZoom :{
-                type:"inside"
+            dataZoom: {
+                type: "inside"
             },
             tooltip: {
                 trigger: 'axis'
             },
-            series: [
-                 {
+            series: [{
                     name: "Rekam Medis",
                     data: @json($chart['series']['rm']),
                     type: 'line',
-                    symbol:'rect',
-                     symbolSize: 6,
+                    symbol: 'rect',
+                    symbolSize: 6,
 
-                    xAxisIndex:0,
+                    xAxisIndex: 0,
                     itemStyle: {
                         color: '#A1CB47'
+                    },
+                    lineStyle: {
+                        width: 1
                     }
                 },
                 {
                     name: "Rawat Jalan",
                     data: @json($chart['series']['rj']),
                     type: 'line',
-                    symbol:'circle',
-                     symbolSize: 6,
+                    symbol: 'circle',
+                    symbolSize: 6,
 
-                    xAxisIndex:1,
+                    xAxisIndex: 1,
                     itemStyle: {
                         color: '#1965AA'
+                    },
+                    lineStyle: {
+                        width: 1
                     }
                 },
                 {
                     name: "Rawat Inap",
                     data: @json($chart['series']['ri']),
                     type: 'line',
-                    symbol:'circle',
-                     symbolSize: 6,
-                    xAxisIndex:2,
+                    symbol: 'circle',
+                    symbolSize: 6,
+                    xAxisIndex: 2,
                     itemStyle: {
                         color: '#E76D19'
+                    },
+                    lineStyle: {
+                        width: 1
                     }
                 },
-               
+
             ]
         };
 
