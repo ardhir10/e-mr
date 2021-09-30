@@ -22,6 +22,7 @@
                         <form action="" class="row">
                             <div class="form-group col-lg-4">
                                 <label for="">Dokter</label>
+                                <input type="hidden" name="seach" id="" value="true">
                                 <select class="form-select form-select-sm " name="dokter" id="">
                                     <option value="">--PILIH DOKTER</option>
 
@@ -100,10 +101,10 @@
                                     @else
                                     <td>L</td>
                                     @endif
-                                    <td>{{$ri->fn_umur}}</td>
+                                    <td>{{$ri->fn_umur}} Th {{$ri->fn_umur_bulan}} Bl</td>
                                     <td>{{$ri->fs_dokter}}</td>
                                     <td>{{$ri->fs_nm_jaminan}}</td>
-                                    <td>{{date('d-m-Y',strtotime($ri->FD_TGL_KELUAR))}}</td>
+                                    <td>{{ $ri->FD_TGL_KELUAR == '' ? '' : date('d-m-Y',strtotime($ri->FD_TGL_KELUAR))}}</td>
                                     <td>
                                         <a href="{{route('rekam-medis.detail')}}">
                                             Lihat
