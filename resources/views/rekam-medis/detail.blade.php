@@ -70,16 +70,20 @@
         font-size: 12px !important;
         border: 1px solid #ebebeb;
     }
+
     .table-catatan-perkembangan td {
-            font-size: 12px !important;
+        font-size: 12px !important;
         border: 1px solid #ebebeb;
     }
-    table.dataTable thead th, table.dataTable thead td {
+
+    table.dataTable thead th,
+    table.dataTable thead td {
         padding: 10px 18px;
         background: #B4C6E7;
-        color:black;
+        color: black;
         border-bottom: 1px solid #ebebeb !important;
     }
+
     table.dataTable.no-footer {
         border-bottom: 1px solid #ebebeb !important;
     }
@@ -117,7 +121,7 @@
                         <h5 class="card-title">Detail Pasien</h5>
                     </div>
                     <div class="card-body">
-                           
+
                         <div class="row">
                             <div class="col-lg-5">
                                 <table class="table table-sm table-bordered">
@@ -126,7 +130,7 @@
                                             Nomor MR
                                         </td>
                                         <td class="rightCol">
-                                            000281
+                                            {{$rekam_medis->FS_MR}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -134,7 +138,7 @@
                                             Nama Pasien
                                         </td>
                                         <td class="rightCol">
-                                            CARISA AQILA
+                                            {{$rekam_medis->FS_NM_PASIEN}}
                                         </td>
                                     </tr>
 
@@ -143,7 +147,8 @@
                                             Kabupaten
                                         </td>
                                         <td class="rightCol">
-                                            KAB. KAMPAR
+                                            -
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -151,36 +156,12 @@
                                             Kecamatan
                                         </td>
                                         <td class="rightCol">
-                                            TAPUNG HILIR
+                                            -
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="leftCol">
-                                            Lelurahan
-                                        </td>
-                                        <td class="rightCol">
-                                            TAPUNG MAKMUR
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leftCol">
-                                            Tgl Lahir
-                                        </td>
-                                        <td class="rightCol">
-                                            02-12-2013
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leftCol">
-                                            Jenis Kelamin
-                                        </td>
-                                        <td class="rightCol">
-                                            PEREMPUAN
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leftCol">
-                                            Golongan Darah
+                                            Kelurahan
                                         </td>
                                         <td class="rightCol">
                                             -
@@ -188,10 +169,38 @@
                                     </tr>
                                     <tr>
                                         <td class="leftCol">
+                                            Tgl Lahir
+                                        </td>
+                                        <td class="rightCol">
+                                            {{date('d-m-Y',strtotime($rekam_medis->FD_TGL_LAHIR))}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftCol">
+                                            Jenis Kelamin
+                                        </td>
+                                        <td class="rightCol">
+                                            @if ($rekam_medis->FB_JNS_KELAMIN)
+                                            PEREMPUAN
+                                            @else
+                                            LAKI-LAKI
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftCol">
+                                            Golongan Darah
+                                        </td>
+                                        <td class="rightCol">
+                                            {{$rekam_medis->FS_GOL_DARAH}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leftCol">
                                             Agama
                                         </td>
                                         <td class="rightCol">
-                                            ISLAM
+                                            {{$rekam_medis->fs_nm_agama}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -199,7 +208,7 @@
                                             No Telp / HP
                                         </td>
                                         <td class="rightCol">
-                                            082173552111
+                                            {{$rekam_medis->FS_TLP_PASIEN}}
                                         </td>
                                     </tr>
 
@@ -211,44 +220,38 @@
                                     <div class="col-lg-7">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Laboratorium
                                                 </button>
                                             </div>
 
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Radiologi
                                                 </button>
                                             </div>
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Resep
                                                 </button>
                                             </div>
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Resume Medis
                                                 </button>
                                             </div>
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Resume Keperawatan
                                                 </button>
                                             </div>
                                             <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2"
-                                                    style="text-align: left">
+                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
                                                     <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
                                                     Singkat Kunjungan
                                                 </button>
@@ -257,7 +260,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
-                                        <img src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-avatar-image-vector-icon-stock-isolated-object-avatar-137151815.jpg"
+                                        <img src="{{asset('assets/images/no_avatar.png')}}"
                                             width="100%" height="auto" alt="">
                                     </div>
                                 </div>
@@ -281,8 +284,8 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <a href="{{route('asesmen.awal-dewasa.perawat')}}" class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
+                                            <a href="{{route('asesmen.awal-dewasa.perawat')}}"
+                                                class="btn btn-sm btn-secondary  mb-2 w-100" style="text-align: left">
                                                 <i class="" style="height:18px" data-feather="user-check"></i>
                                                 PERAWAT</a>
                                             <button class="btn btn-sm btn-secondary  mb-2 w-100"
@@ -438,7 +441,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td style="vertical-align:top;"style="vertical-align:top;">1</td>
+                                            <td style="vertical-align:top;" style="vertical-align:top;">1</td>
                                             <td style="vertical-align:top;">
                                                 <span style="d-block">20-01-1987</span>
                                                 <span style="d-block">14:24</span>
@@ -451,19 +454,35 @@
                                                 <table class="no-border">
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">S:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">O:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">A:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">P:</td>
-                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -476,8 +495,8 @@
                                                 Yono
                                             </td>
                                         </tr>
-                                         <tr>
-                                            <td style="vertical-align:top;"style="vertical-align:top;">1</td>
+                                        <tr>
+                                            <td style="vertical-align:top;" style="vertical-align:top;">1</td>
                                             <td style="vertical-align:top;">
                                                 <span style="d-block">20-01-1987</span>
                                                 <span style="d-block">14:24</span>
@@ -490,19 +509,35 @@
                                                 <table class="no-border">
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">S:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">O:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">A:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                     <tr>
                                                         <td style="border: 0px !important;vertical-align:top;">P:</td>
-                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi harum velit repellat earum quibusdam veritatis eveniet non fugiat sint rem veniam eos, nobis sunt quasi asperiores nam laudantium amet aliquid.</td>
+                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet
+                                                            consectetur adipisicing elit. Animi harum velit repellat
+                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
+                                                            eos, nobis sunt quasi asperiores nam laudantium amet
+                                                            aliquid.</td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -515,7 +550,7 @@
                                                 Yono
                                             </td>
                                         </tr>
-                                        
+
 
                                     </tbody>
 

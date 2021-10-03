@@ -12,7 +12,7 @@ class RekamMedisController extends Controller
         $data['page_title'] = "Pencarian Rekam Medis Pasien";
         $data['request'] = $request;
         $allParameterSearch = array_filter($request->all());
-        
+
         $parameterSeachQuery = [];
         foreach ($allParameterSearch as $key => $value) {
             $isSearcable = true;
@@ -44,18 +44,34 @@ class RekamMedisController extends Controller
             }
         }
         $whereQuery = implode($parameterSeachQuery, ' ') ;
-        
+
         $QUERY = "select fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr where 1=1 $whereQuery ";
         $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
         // $data['datatables'] = Datatables::of($data['rekam_medis'])->make(true);
 
-        
+
         return view('rekam-medis.index',$data);
     }
 
-    public function detail(){
+    public function detail($nomorMr){
+        $QUERY = "select *,bb.fs_nm_agama from
+        tc_mr aa
+        inner	join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        where FS_MR = '$nomorMr'";
+        $dataRekamMedis = DB::select($QUERY);
+        if(count($dataRekamMedis) < 1){
+            $dataRekamMedis = [];
+        }else{
+            $dataRekamMedis = $dataRekamMedis[0];
+        }
+
+        // dd($dataRekamMedis);
+
+
         $data['page_title'] = "Rekam Medis Pasien";
+
+        $data['rekam_medis'] = $dataRekamMedis;
         return view('rekam-medis.detail', $data);
     }
 }
