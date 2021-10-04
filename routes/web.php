@@ -31,7 +31,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
-    Route::get('/cppt/tambah', 'CpptController@create')->name('cppt.create');
+
+    // --- CPPT
+    Route::get('/cppt/tambah/{id}', 'CpptController@create')->name('cppt.create');
+    Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
+    Route::get('/cppt/detail/{id}', 'CpptController@detail')->name('cppt.detail');
 
     // --- SATUAN TUGAS MEDIS
     Route::get('/data-master/satuan-tugas-medis', 'SatuanTugasMedisController@index')->name('satuan-tugas-medis.index');

@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}}</h5>
                     </div>
-                    <form action="{{route('cppt.store',$rekam_medis->FS_MR)}}" method="POST">
+                    <form action="{{route('cppt.store',$rekam_medis->FS_MR)}}" method="">
                     @csrf
                     <div class="card-body">
                          @if ($errors->any())
@@ -143,8 +143,8 @@
                                         <td class="rightCol" width="60%">
                                             <select class="form-select form-select-sm" id="" name="cProfesi">
                                                 <option value="">-- Pilih Profesi</option>
-                                                <option {{ old('cProfesi') == 'Dokter' ? 'selected=selected' :'' }} value="Dokter">Dokter</option>
-                                                <option {{ old('cProfesi') == 'Perawat' ? 'selected=selected' :'' }} value="Perawat">Perawat</option>
+                                                <option {{ $CPPT->FS_PROFESI == 'Dokter' ? 'selected=selected' :'' }} value="Dokter">Dokter</option>
+                                                <option {{ $CPPT->FS_PROFESI == 'Perawat' ? 'selected=selected' :'' }} value="Perawat">Perawat</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -158,7 +158,7 @@
                                             <select class="form-select form-select-sm" id="" name="cLayanan">
                                                 <option value="">-- Pilih Layanan/Bagian</option>
                                                 @foreach ($layanan_bagian as $lb)
-                                                <option {{old('cLayanan') == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }} value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
+                                                <option {{$CPPT->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }} value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -173,7 +173,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="" style=""><span style="font-weight: 700;font-size: 24px;">S</span>ubjective </label><span class="text-danger">*</span>:
-                                    <textarea name="cSubjective" class="form-control" id="" cols="30" rows="3">{{old('cSubjective')}}</textarea>
+                                    <textarea name="cSubjective" class="form-control" id="" cols="30" rows="3">{{$CPPT->FT_SUBJECTIVE}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for=""><span style="font-weight: 700;font-size: 24px;">O</span>bjective </label><span class="text-danger">*</span>:
-                                    <textarea name="cObjective" class="form-control" id="" cols="30" rows="3">{{old('cObjective')}}</textarea>
+                                    <textarea name="cObjective" class="form-control" id="" cols="30" rows="3">{{$CPPT->FT_OBJECTIVE}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for=""><span style="font-weight: 700;font-size: 24px;">A</span>ssesmen </label><span class="text-danger">*</span> :
-                                    <textarea name="cAssesmen" class="form-control" id="" cols="30" rows="3">{{old('cAssesmen')}}</textarea>
+                                    <textarea name="cAssesmen" class="form-control" id="" cols="30" rows="3">{{$CPPT->FT_ASSESMENT}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -206,25 +206,25 @@
                                                 <tr>
                                                     <td style="vertical-align: top">1.</td>
                                                     <td>
-                                                        <textarea rows="2" name="cPlan1" type="text" class="form-control form-control-sm">{{old('cPlan1')}}</textarea>
+                                                        <textarea rows="2" name="cPlan1" type="text" class="form-control form-control-sm">{{$CPPT->FS_PLAN1}}</textarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">2.</td>
                                                     <td>
-                                                        <textarea rows="2" name="cPlan2" type="text" class="form-control form-control-sm">{{old('cPlan2')}}</textarea>
+                                                        <textarea rows="2" name="cPlan2" type="text" class="form-control form-control-sm">{{$CPPT->FS_PLAN2}}</textarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">3.</td>
                                                     <td>
-                                                        <textarea rows="2" name="cPlan3" type="text" class="form-control form-control-sm">{{old('cPlan3')}}</textarea>
+                                                        <textarea rows="2" name="cPlan3" type="text" class="form-control form-control-sm">{{$CPPT->FS_PLAN3}}</textarea>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">4.</td>
                                                     <td>
-                                                        <textarea rows="3" name="cPlan4" type="text" class="form-control form-control-sm">{{old('cPlan4')}}</textarea>
+                                                        <textarea rows="3" name="cPlan4" type="text" class="form-control form-control-sm">{{$CPPT->FS_PLAN4}}</textarea>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -239,43 +239,43 @@
                                                 <tr>
                                                     <td style="vertical-align: top">1.a</td>
                                                     <td>
-                                                        <input type="text" name="cIppa1a" value="{{old('cIppa1a')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa1a" value="{{$CPPT->FS_IPPA1A}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">1.b</td>
                                                     <td>
-                                                        <input type="text" name="cIppa1b" value="{{old('cIppa1b')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa1b" value="{{$CPPT->FS_IPPA1B}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">2.a</td>
                                                     <td>
-                                                        <input type="text" name="cIpp2a" value="{{old('cIpp2a')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIpp2a" value="{{$CPPT->FS_IPPA2A}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">2.b</td>
                                                     <td>
-                                                        <input type="text" name="cIppa2b" value="{{old('cIppa2b')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa2b" value="{{$CPPT->FS_IPPA2B}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">3.a</td>
                                                     <td>
-                                                        <input type="text" name="cIppa3a" value="{{old('cIppa3a')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa3a" value="{{$CPPT->FS_IPPA3A}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">3.b</td>
                                                     <td>
-                                                        <input type="text" name="cIppa3b" value="{{old('cIppa3b')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa3b" value="{{$CPPT->FS_IPPA3B}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="vertical-align: top">3.c</td>
                                                     <td>
-                                                        <input type="text" name="cIppa3c" value="{{old('cIppa3b')}}" class="form-control form-control-sm">
+                                                        <input type="text" name="cIppa3c" value="{{$CPPT->FS_IPPA3C}}" class="form-control form-control-sm">
                                                     </td>
                                                 </tr>
 
@@ -288,10 +288,10 @@
                             </div>
                         </div>
                         <div style="margin-top:20px;">
-                            <button type="submit" class="btn btn-success">
+                            {{-- <button type="submit" class="btn btn-success">
                                 <i class="fa fa-save"></i>
                                 SAVE
-                            </button>
+                            </button> --}}
 
                             <a href="{{route('rekam-medis.detail',$rekam_medis->FS_MR)}}" class="btn btn-danger">
                                 <i class="fa fa-arrow-left"></i>

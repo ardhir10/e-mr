@@ -88,6 +88,27 @@
         border-bottom: 1px solid #ebebeb !important;
     }
 
+    /*
+    *  STYLE 3
+    */
+
+    .style-3::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    .style-3::-webkit-scrollbar
+    {
+        width: 6px;
+        background-color: #F5F5F5;
+    }
+
+    .style-3::-webkit-scrollbar-thumb
+    {
+        background-color: #000000;
+    }
+
 </style>
 
 @endpush
@@ -115,6 +136,7 @@
         <!-- end page title -->
 
         <div class="row">
+
             <div class="col-lg-10">
                 <div class="card">
                     <div class="card-header">
@@ -260,8 +282,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-5">
-                                        <img src="{{asset('assets/images/no_avatar.png')}}"
-                                            width="100%" height="auto" alt="">
+                                        <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
+                                            alt="">
                                     </div>
                                 </div>
                             </div>
@@ -272,10 +294,15 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-lg-12">
                 <div class="card">
+
                     <div class="card-body">
                         <div class="assesmen-section row">
+                            <div class="col-12">
+                                @include('components.flash-message')
+                            </div>
                             <div class="col-lg-3">
                                 <div class="card border border-dark">
                                     <div class="card-header  border-dark"
@@ -337,7 +364,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <a href="{{route('cppt.create')}}" class="btn btn-success ">
+                                <a href="{{route('cppt.create',$rekam_medis->FS_MR)}}" class="btn btn-success ">
                                     <i data-feather="folder-plus"></i>
                                     Tambah CPPT</a>
                             </div>
@@ -431,7 +458,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal Jam</th>
-                                            <th>Lupa</th>
+                                            <th>*</th>
                                             <th>Profesi / Bagian</th>
                                             <th>Hasil Pemeriksaan/Assesmen, Analisis dan Rencana Penatalaksanaan</th>
                                             <th>Instruksi / Tindak Lanjut</th>
@@ -440,116 +467,62 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($CPPT as $cppt)
                                         <tr>
                                             <td style="vertical-align:top;" style="vertical-align:top;">1</td>
                                             <td style="vertical-align:top;">
-                                                <span style="d-block">20-01-1987</span>
-                                                <span style="d-block">14:24</span>
+                                                <span
+                                                    style="d-block">{{date('d-m-Y H:i:s',strtotime($cppt->FD_DATE))}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
-                                                <a href="">Lihat Detail</a>
+                                                <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
                                             </td>
-                                            <td style="vertical-align:top;">Dokter</td>
+                                            <td style="vertical-align:top;">{{$cppt->FS_PROFESI}}</td>
                                             <td>
-                                                <table class="no-border">
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">S:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">O:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">A:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">P:</td>
-                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                </table>
+                                                <div style=" height: 250px;overflow: auto;" class="style-3">
+                                                    <table class="no-border">
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">S:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FT_SUBJECTIVE}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">O:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FT_OBJECTIVE}}
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">A:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P1:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P2:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P3:</td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
                                             </td>
                                             <td style="vertical-align:top;">-</td>
                                             <td style="vertical-align:top;">
                                                 <span class="d-block">Verified By :</span>
-                                                <span class="d-block">dr.Rahayu</span>
+                                                <span class="d-block">{{$cppt->FS_DPJP}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
-                                                Yono
+                                                {{$cppt->FS_USER}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="vertical-align:top;" style="vertical-align:top;">1</td>
-                                            <td style="vertical-align:top;">
-                                                <span style="d-block">20-01-1987</span>
-                                                <span style="d-block">14:24</span>
-                                            </td>
-                                            <td style="vertical-align:top;">
-                                                <a href="">Lihat Detail</a>
-                                            </td>
-                                            <td style="vertical-align:top;">Dokter</td>
-                                            <td>
-                                                <table class="no-border">
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">S:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">O:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">A:</td>
-                                                        <td style="border: 0px !important;">Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">P:</td>
-                                                        <td style="border: 0px !important;"> Lorem ipsum dolor, sit amet
-                                                            consectetur adipisicing elit. Animi harum velit repellat
-                                                            earum quibusdam veritatis eveniet non fugiat sint rem veniam
-                                                            eos, nobis sunt quasi asperiores nam laudantium amet
-                                                            aliquid.</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                            <td style="vertical-align:top;">-</td>
-                                            <td style="vertical-align:top;">
-                                                <span class="d-block">Verified By :</span>
-                                                <span class="d-block">dr.Rahayu</span>
-                                            </td>
-                                            <td style="vertical-align:top;">
-                                                Yono
-                                            </td>
-                                        </tr>
+                                        @endforeach
+
 
 
                                     </tbody>

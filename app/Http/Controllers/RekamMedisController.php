@@ -66,6 +66,8 @@ class RekamMedisController extends Controller
             $dataRekamMedis = $dataRekamMedis[0];
         }
 
+        $QUERY_CPPT = "select * from TAR_CPPT where FS_MR = '$nomorMr' order by FN_ID desc";
+        $data['CPPT']= DB::select($QUERY_CPPT);
         // dd($dataRekamMedis);
 
 
