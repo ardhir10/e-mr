@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class RawatInapController extends Controller
 {
     public function index(Request $request)
@@ -38,7 +39,7 @@ class RawatInapController extends Controller
             $whereDokter = "and fs_nm_peg like '%{$request->get('dokter')}%'";
         }
 
-        if($request->seach == true){
+        if ($request->seach == true) {
             $whereNotHome = "";
         }
 
@@ -61,13 +62,11 @@ class RawatInapController extends Controller
         inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
         where	aa.fd_tgl_void = '3000-01-01'
         and		ff.FS_KD_INSTALASI_DK in (3) ";
+        $QUERY_RAWAT_JALAN .= "
+        and (fd_tgl_keluar = '3000-01-01' or (fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'))
+        $whereDokter
+        ";
 
-        if ($request->seach == true) {
-            $QUERY_RAWAT_JALAN .= "
-            and		(fd_tgl_keluar = '3000-01-01' or (fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'))
-            $whereDokter
-            ";
-        }
 
 
 
