@@ -82,7 +82,7 @@
 
 
         </div> <!-- end row-->
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-12 col-sm-12">
                 <!-- Card -->
                 <div class="card">
@@ -104,7 +104,7 @@
             </div>
 
 
-        </div>
+        </div> --}}
 
 
 
@@ -119,103 +119,6 @@
 
 
 <script>
-    generateChart();
-
-    function generateChart() {
-
-        var chartDom = document.getElementById('dashboard-statistic');
-        var myChart = echarts.init(chartDom, 'dark');
-        var option;
-
-        option = {
-            legend: {},
-            xAxis: [{
-                    type: 'category',
-                    data: @json($chart['ts']['rm']),
-                    position: 'bottom',
-                },
-                {
-                    type: 'category',
-                    data: @json($chart['ts']['rj']),
-                    position: 'bottom',
-                    offset: 20
-
-                },
-                {
-                    type: 'category',
-                    data: @json($chart['ts']['ri']),
-                    position: 'bottom',
-                    offset: 40
-
-                },
-
-            ],
-            yAxis: {
-                type: 'value'
-            },
-            grid: {
-                top: "10%",
-                left: "8%",
-                bottom: "20%",
-                right: "8%",
-            },
-            dataZoom: {
-                type: "inside"
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            series: [{
-                    name: "Rekam Medis",
-                    data: @json($chart['series']['rm']),
-                    type: 'line',
-                    symbol: 'rect',
-                    symbolSize: 6,
-
-                    xAxisIndex: 0,
-                    itemStyle: {
-                        color: '#A1CB47'
-                    },
-                    lineStyle: {
-                        width: 1
-                    }
-                },
-                {
-                    name: "Rawat Jalan",
-                    data: @json($chart['series']['rj']),
-                    type: 'line',
-                    symbol: 'circle',
-                    symbolSize: 6,
-
-                    xAxisIndex: 1,
-                    itemStyle: {
-                        color: '#1965AA'
-                    },
-                    lineStyle: {
-                        width: 1
-                    }
-                },
-                {
-                    name: "Rawat Inap",
-                    data: @json($chart['series']['ri']),
-                    type: 'line',
-                    symbol: 'circle',
-                    symbolSize: 6,
-                    xAxisIndex: 2,
-                    itemStyle: {
-                        color: '#E76D19'
-                    },
-                    lineStyle: {
-                        width: 1
-                    }
-                },
-
-            ]
-        };
-
-        option && myChart.setOption(option);
-
-    }
 
 </script>
 @endpush

@@ -44,7 +44,7 @@
                                     <option value="">--PILIH LAYANAN</option>
                                     @foreach ($layanan as $ly)
                                         <option {{ $ly->FS_NM_LAYANAN === $request->get('layanan') ? 'selected=selected':''}}  value="{{$ly->FS_NM_LAYANAN}}">{{$ly->FS_NM_LAYANAN}}</option>
-                                        
+
                                     @endforeach
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                                 </a>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -107,9 +107,9 @@
                                     <td>{{$rj->fs_nm_jaminan}}</td>
 
                                     <td>
-                                        <a href="{{route('rekam-medis.detail')}}">
+                                        {{-- <a href="{{route('rekam-medis.detail')}}">
                                             Lihat
-                                        </a>
+                                        </a> --}}
                                     </td>
 
                                 </tr>
