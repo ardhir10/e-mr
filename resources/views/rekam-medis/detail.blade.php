@@ -92,20 +92,17 @@
     *  STYLE 3
     */
 
-    .style-3::-webkit-scrollbar-track
-    {
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    .style-3::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         background-color: #F5F5F5;
     }
 
-    .style-3::-webkit-scrollbar
-    {
+    .style-3::-webkit-scrollbar {
         width: 6px;
         background-color: #F5F5F5;
     }
 
-    .style-3::-webkit-scrollbar-thumb
-    {
+    .style-3::-webkit-scrollbar-thumb {
         background-color: #000000;
     }
 
@@ -145,7 +142,7 @@
                     <div class="card-body">
 
                         <div class="row">
-                            <div class="col-lg-5">
+                            <div class="col-lg-7">
                                 <table class="table table-sm table-bordered">
                                     <tr>
                                         <td class="leftCol">
@@ -169,7 +166,7 @@
                                             Kabupaten
                                         </td>
                                         <td class="rightCol">
-                                            -
+                                            {{$rekam_medis->fs_nm_kabupaten}}
 
                                         </td>
                                     </tr>
@@ -178,7 +175,8 @@
                                             Kecamatan
                                         </td>
                                         <td class="rightCol">
-                                            -
+                                            {{$rekam_medis->fs_nm_kecamatan}}
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -186,7 +184,8 @@
                                             Kelurahan
                                         </td>
                                         <td class="rightCol">
-                                            -
+                                            {{$rekam_medis->fs_nm_kelurahan}}
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -236,9 +235,8 @@
 
                                 </table>
                             </div>
-                            <div class="col-lg-7">
+                            <div class="col-lg-5">
                                 <div class="row">
-
                                     <div class="col-lg-7">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -482,31 +480,37 @@
                                                 <div style=" height: 250px;overflow: auto;" class="style-3">
                                                     <table class="no-border">
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">S:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">S:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FT_SUBJECTIVE}}
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">O:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">O:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FT_OBJECTIVE}}
                                                             </td>
 
                                                         </tr>
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">A:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">A:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P1:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">P1:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P2:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">P2:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P3:</td>
+                                                            <td style="border: 0px !important;vertical-align:top;">P3:
+                                                            </td>
                                                             <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
                                                         </tr>
                                                     </table>

@@ -55,9 +55,12 @@ class RekamMedisController extends Controller
     }
 
     public function detail($nomorMr){
-        $QUERY = "select *,bb.fs_nm_agama from
+        $QUERY = "select *,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
         tc_mr aa
-        inner	join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        left join TA_KELURAHAN cc on aa.fs_kd_kelurahan = cc.fs_kd_kelurahan
+        left join TA_KECAMATAN dd on cc.fs_kd_kecamatan = dd.fs_kd_kecamatan
+        left join TA_KABUPATEN ee on dd.fs_kd_kabupaten = ee.fs_kd_kabupaten
         where FS_MR = '$nomorMr'";
         $dataRekamMedis = DB::select($QUERY);
         if(count($dataRekamMedis) < 1){
