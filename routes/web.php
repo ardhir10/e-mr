@@ -72,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/data-master/role/{id}/update', 'RoleController@update')->name('role.update');
     Route::get('/data-master/role/{id}/delete', 'RoleController@delete')->name('role.delete');
 
+    // --- LIST DOKTER
+    Route::get('/data-master/dokter', 'DokterController@index')->name('dokter.index');
+
 });
 
 Route::get('/asesmen/awal-dewasa/perawat', 'AsesmenController@awalDewasaPerawat')->name('asesmen.awal-dewasa.perawat');

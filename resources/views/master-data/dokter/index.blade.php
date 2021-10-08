@@ -19,8 +19,8 @@
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center">
                 <h4 class="card-title">{{$page_title}}</h4>
-                <a href="{{route('user.create')}}" class="btn btn-success btn-sm"> Create New <i
-                        class="fa fa-plus align-middle"></i></a>
+                {{-- <a href="{{route('satuan-tugas-medis.create')}}" class="btn btn-success btn-sm"> Create New <i
+                        class="fa fa-plus align-middle"></i></a> --}}
             </div>
             <div class="card-body">
                 <div class="col-12">
@@ -30,33 +30,23 @@
                     <thead>
                         <tr>
                             <th width="5%">No</th>
-                            <th width="20%">Nama </th>
-                            <th width="20%">Kode Pegawai </th>
-                            <th>Email </th>
-                            <th>Username </th>
-                            <th width="20%">Action</th>
+                            <th>Nama </th>
+                            {{-- <th width="20%">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody style="font-size: 12px">
-                        @foreach ($users as $user)
+                        @foreach ($dokter as $dk)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->fs_kd_peg}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->username}}</td>
-                            <td>
-                                <a href="{{route('user.edit',$user->id)}}"
+                            <td>{{$dk->fs_dokter}}</td>
+                            {{-- <td>
+                                <a href="{{route('satuan-tugas-medis.edit',$ly->FS_KD_LAYANAN)}}"
                                     class="btn btn-sm btn-warning">
                                     <i class="fa fa-edit"></i> EDIT</a>
-
-                                    @if (Auth::user()->id != $user->id)
-
-                                    <button class="btn btn-sm btn-danger"
-                                    onclick="return confirmDelete('{{route('user.delete',$user->id)}}')">
+                                <button class="btn btn-sm btn-danger"
+                                    onclick="return confirmDelete('{{route('satuan-tugas-medis.delete',$ly->FS_KD_LAYANAN)}}')">
                                     <i class="fa fa-trash"></i> DELETE</button>
-                                    @endif
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
 

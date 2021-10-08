@@ -46,7 +46,7 @@ class AuthController extends Controller
             filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username' => $request->email,
             'password' => $request->password
         ];
-        
+
 
         Auth::attempt($data);
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
@@ -97,6 +97,7 @@ class AuthController extends Controller
         $user->email = strtolower($request->email);
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
+        $user->fs_kd_peg = $request->fs_kd_peg;
         $user->email_verified_at = \Carbon\Carbon::now();
         $simpan = $user->save();
 

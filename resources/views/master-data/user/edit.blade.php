@@ -48,7 +48,7 @@
                         <label for=""><strong>Password</strong></label>
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                   
+
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>

@@ -9,7 +9,7 @@
                     <span class="logo-lg">
                         <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" height="35">
                     </span>
-                    
+
                     {{-- <span>E-MR</span> --}}
                 </a>
 
@@ -71,7 +71,7 @@
                                 <span class="menu-item" data-key="t-sales">Pasien Rawat Inap</span>
                             </a>
                         </li>
- 
+
 
                         <li class="menu-title" data-key="t-applications">DATA MASTER</li>
 
@@ -99,8 +99,14 @@
                                 <span class="menu-item" data-key="t-calendar">Layanan/Bagian</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{route('dokter.index')}}">
+                                <i class="icon nav-icon" data-feather="user-check"></i>
+                                <span class="menu-item" data-key="t-calendar">List Dokter</span>
+                            </a>
+                        </li>
 
-                         
+
                     </ul>
                 </div>
                 <!-- Sidebar -->

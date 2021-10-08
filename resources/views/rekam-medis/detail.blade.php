@@ -61,9 +61,14 @@
 
     .riwayat-kunjungan th {
         border: 1px solid black;
-        padding: 2px 2px;
+        padding: 18px 2px;
         font-size: 12px;
-        background: #ECA576;
+        background: #B4C6E7;
+        /* background: white; */
+        position: sticky;
+        top: 0;
+        /* Don't forget this, required for the stickiness */
+        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
     }
 
     .table-catatan-perkembangan th {
@@ -142,7 +147,56 @@
                     <div class="card-body">
 
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-3">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="dropdown" style="width:100%">
+                                            <button class="btn btn-secondary dropdown-toggle " style="width:100%"
+                                                type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                aria-expanded="true">
+                                                {{-- <i class="fa fa-clipboard" data-feather="clipboard"></i> --}}
+                                                LIST RIWAYAT <i data-feather="chevron-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark " style="width:100%"
+                                                aria-labelledby="dropdownMenuButton2" data-popper-placement="top-start"
+                                                style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
+                                                <li>
+
+                                                    <a class="dropdown-item" href="#">Riwayat Laboratorium</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Riwayat Radiologi</a></li>
+
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Riwayat Resep</a></li>
+
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Riwayat Resume Medis</a></li>
+
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Riwayat Resume Keperawatan</a>
+                                                </li>
+
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Riwayat Singkat Kunjungan</a></li>
+                                            </ul>
+                                        </div>
+                                        <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
+                                            alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
                                 <table class="table table-sm table-bordered">
                                     <tr>
                                         <td class="leftCol">
@@ -235,56 +289,7 @@
 
                                 </table>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Laboratorium
-                                                </button>
-                                            </div>
 
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Radiologi
-                                                </button>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Resep
-                                                </button>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Resume Medis
-                                                </button>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Resume Keperawatan
-                                                </button>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button class="btn  btn-secondary w-100 mb-2" style="text-align: left">
-                                                    <i class="fa fa-clipboard" data-feather="clipboard"></i> Riwayat
-                                                    Singkat Kunjungan
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -309,14 +314,27 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <a href="{{route('asesmen.awal-dewasa.perawat')}}"
-                                                class="btn btn-sm btn-secondary  mb-2 w-100" style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                PERAWAT</a>
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                DOKTER</button>
+                                            <div class="dropdown" style="width:100%">
+                                                <button class="btn btn-secondary  dropdown-toggle " style="width:100%"
+                                                    type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                    aria-expanded="true">
+                                                    FORM ASESMEN <i data-feather="chevron-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-dark " style="width:100%"
+                                                    aria-labelledby="dropdownMenuButton2"
+                                                    data-popper-placement="top-start"
+                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                    </li>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                </ul>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -329,14 +347,26 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                PERAWAT</button>
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                DOKTER</button>
+                                            <div class="dropdown" style="width:100%">
+                                                <button class="btn btn-secondary dropdown-toggle " style="width:100%"
+                                                    type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                    aria-expanded="true">
+                                                    FORM ASESMEN <i data-feather="chevron-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-dark " style="width:100%"
+                                                    aria-labelledby="dropdownMenuButton2"
+                                                    data-popper-placement="top-start"
+                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                    </li>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -349,14 +379,26 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                PERAWAT</button>
-                                            <button class="btn btn-sm btn-secondary  mb-2 w-100"
-                                                style="text-align: left">
-                                                <i class="" style="height:18px" data-feather="user-check"></i>
-                                                DOKTER</button>
+                                            <div class="dropdown" style="width:100%">
+                                                <button class="btn btn-secondary dropdown-toggle " style="width:100%"
+                                                    type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                    aria-expanded="true">
+                                                    FORM ASESMEN <i data-feather="chevron-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-dark " style="width:100%"
+                                                    aria-labelledby="dropdownMenuButton2"
+                                                    data-popper-placement="top-start"
+                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                    </li>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -370,8 +412,8 @@
                         <hr>
                         <div class="row">
                             <div class="col-lg-3">
-                                <div>
-                                    <h6 style="font-style: italic;">Riwayal Kunjungan Pasien</h6>
+                                <h6 style="font-style: italic;">RIWAYAT KUNJUNGAN PASIEN</h6>
+                                <div style="max-height: 400px;overflow:auto;margin-top:43px" class="style-3">
                                     <table class="riwayat-kunjungan" style="border-collapse: collapse;width: 100%;">
                                         <tr style="">
                                             <th>Tanggal</th>
@@ -379,71 +421,19 @@
                                             <th>Dokter</th>
                                             <th>RM</th>
                                         </tr>
+                                        @foreach ($riwayat_kunjungan as $rk)
                                         <tr>
-                                            <td>20-01-2021</td>
-                                            <td>IGD</td>
-                                            <td>dr.Rahayu</td>
-                                            <td>
-                                                {{-- <input type="checkbox" > --}}
-                                                <i data-feather="check" style="height: 15px;color:#21A366"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
+                                            <td>{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
+                                            <td>{{$rk->fs_nm_layanan}}</td>
+                                            <td>{{$rk->fs_dokter}}</td>
                                             <td>
                                                 <input type="checkbox">
+                                                {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                            <td>
-                                                <input type="checkbox">
-                                            </td>
-                                        </tr>
+                                        @endforeach
+
+
 
                                     </table>
                                 </div>
@@ -476,8 +466,8 @@
                                                 <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
                                             </td>
                                             <td style="vertical-align:top;">{{$cppt->FS_PROFESI}}</td>
-                                            <td>
-                                                <div style=" height: 250px;overflow: auto;" class="style-3">
+                                            <td style="vertical-align:top;">
+                                                <div style=" height: 200px;overflow: auto;" class="style-3">
                                                     <table class="no-border">
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">S:
@@ -498,28 +488,36 @@
                                                             <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P1:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P2:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P3:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
-                                                        </tr>
+
                                                     </table>
                                                 </div>
                                             </td>
-                                            <td style="vertical-align:top;">-</td>
+                                            <td style="vertical-align:top;">-
+                                                <div style="height: 200px">
+
+                                                </div>
+                                                <table class="no-border">
+                                                    <tr>
+                                                        <td style="border: 0px !important;vertical-align:top;">P1:
+                                                        </td>
+                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 0px !important;vertical-align:top;">P2:
+                                                        </td>
+                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 0px !important;vertical-align:top;">P3:
+                                                        </td>
+                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
                                             <td style="vertical-align:top;">
                                                 <span class="d-block">Verified By :</span>
-                                                <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                <button class="btn btn-sm btn-success">Verified</button>
+                                                {{-- <span class="d-block">{{$cppt->FS_DPJP}}</span> --}}
                                             </td>
                                             <td style="vertical-align:top;">
                                                 {{$cppt->FS_USER}}

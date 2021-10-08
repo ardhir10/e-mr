@@ -55,7 +55,7 @@ class RekamMedisController extends Controller
     }
 
     public function detail($nomorMr){
-        $QUERY = "select *,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
+        $QUERY = "select aa.*,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
         left join TA_KELURAHAN cc on aa.fs_kd_kelurahan = cc.fs_kd_kelurahan
@@ -71,7 +71,18 @@ class RekamMedisController extends Controller
 
         $QUERY_CPPT = "select * from TAR_CPPT where FS_MR = '$nomorMr' order by FN_ID desc";
         $data['CPPT']= DB::select($QUERY_CPPT);
-        // dd($dataRekamMedis);
+
+        // --- RIWAYAT KUNJUNGAN
+        $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk, fs_nm_layanan, fs_nm_peg fs_dokter
+        from	TA_REGISTRASI aa
+        inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.FS_KD_LAYANAN = cc.FS_KD_LAYANAN
+        inner	join TD_PEG dd on aa.FS_KD_MEDIS = dd.fs_kd_peg
+        where	bb.fs_mr = '$nomorMr'
+        and		aa.fd_tgl_void = '3000-01-01'
+        order	by aa.FD_TGL_MASUK desc, FS_NM_LAYANAN";
+        $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
+
 
 
         $data['page_title'] = "Rekam Medis Pasien";

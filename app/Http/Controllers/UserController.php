@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 class UserController extends Controller
 {
 
@@ -20,7 +21,7 @@ class UserController extends Controller
     {
         $data['page_title'] = "Data User";
 
-       
+
         $data['users'] = User::orderBy('id','desc')->get();
         return view('master-data.user.index', $data);
     }
@@ -28,6 +29,13 @@ class UserController extends Controller
     public function create()
     {
         $data['page_title'] = "Buat Data User";
+        $QUERY = "select	fs_kd_peg fs_kd_dokter ,
+		fs_nm_peg fs_dokter
+        from	td_peg
+        where	fn_profesi_medis in (0,1,2)
+        and		FB_SUDAH_RESIGN = 0
+        order	by fs_nm_peg";
+        $data['dokter'] = DB::select($QUERY);
         return view('master-data.user.create', $data);
     }
     public function edit($id)
@@ -95,13 +103,13 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
         ];
-        
+
         if($request->password != ''){
             $parameterUpdate['password'] = Hash::make($request->password);
         }
 
 
-        
+
         // --- HANDLE PROCESS
         try {
             User::where('id',$id)->update($parameterUpdate);

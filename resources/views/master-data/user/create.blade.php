@@ -52,6 +52,16 @@
                         <label for=""><strong>Konfirmasi Password</strong></label>
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Password">
                     </div>
+                    <div class="form-group">
+                        <label for="">Select Kode Dokter</label>
+                        <select name="fs_kd_peg" class="form-control form-control-sm" id="">
+                            <option value="">--SELECT DOKTER </option>
+                            @foreach ($dokter as $d)
+                                <option value="{{$d->fs_kd_dokter}}">{{$d->fs_dokter}}</option>
+
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>
