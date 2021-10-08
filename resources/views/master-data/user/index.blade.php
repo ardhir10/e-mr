@@ -42,7 +42,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->fs_kd_peg}}</td>
+                            <td>{{$user->namaDokter()}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->username}}</td>
                             <td>

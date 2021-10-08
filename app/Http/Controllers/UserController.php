@@ -43,7 +43,14 @@ class UserController extends Controller
         $data['page_title'] = "Edit Data user";
 
         $data['user'] = User::find($id);
-
+        $data['page_title'] = "Buat Data User";
+        $QUERY = "select	fs_kd_peg fs_kd_dokter ,
+		fs_nm_peg fs_dokter
+        from	td_peg
+        where	fn_profesi_medis in (0,1,2)
+        and		FB_SUDAH_RESIGN = 0
+        order	by fs_nm_peg";
+        $data['dokter'] = DB::select($QUERY);
 
         return view('master-data.user.edit', $data);
     }
