@@ -31,7 +31,7 @@
                         <tr>
                             <th width="5%">No</th>
                             <th width="20%">Nama </th>
-                            <th width="20%">Kode Pegawai </th>
+                            <th width="20%">Nama Pegawai </th>
                             <th>Email </th>
                             <th>Username </th>
                             <th width="20%">Action</th>
