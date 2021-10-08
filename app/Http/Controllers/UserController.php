@@ -109,6 +109,7 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'fs_kd_peg' => $request->fs_kd_peg,
         ];
 
         if($request->password != ''){
