@@ -130,4 +130,57 @@ class CpptController extends Controller
         $data['CPPT'] = $data['CPPT'][0];
         return view('cppt.detail', $data);
     }
+
+    public function verified($id){
+
+
+        $kodePeg = Auth::user()->fs_kd_peg;
+        if($kodePeg == null){
+            return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
+        }
+
+
+
+        // --- HANDLE PROCESS
+        try {
+            $dokter = DB::table('TD_PEG')->where('FS_KD_PEG', $kodePeg)->first();
+            $namaDokter = $dokter->FS_NM_PEG;
+            $dataUpdate = [
+                'FS_VERIFIED_BY' => $kodePeg,
+                'FS_DPJP' => $namaDokter
+            ];
+            DB::table('TAR_CPPT')
+                ->where('FN_ID', $id)
+                ->update($dataUpdate);
+            return redirect()->back()->with(['success' => 'Data berhasil di verifikasi !']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['failed' => $th->getMessage()]);
+        }
+    }
+
+    public function unverified($id){
+
+        $kodePeg = Auth::user()->fs_kd_peg;
+        if($kodePeg == null){
+            return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
+        }
+
+
+
+        // --- HANDLE PROCESS
+        try {
+            $dokter = DB::table('TD_PEG')->where('FS_KD_PEG', $kodePeg)->first();
+            $namaDokter = $dokter->FS_NM_PEG;
+            $dataUpdate = [
+                'FS_VERIFIED_BY' => null,
+                'FS_DPJP' => null
+            ];
+            DB::table('TAR_CPPT')
+                ->where('FN_ID', $id)
+                ->update($dataUpdate);
+            return redirect()->back()->with(['success' => 'Data berhasil di unverifikasi !']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['failed' => $th->getMessage()]);
+        }
+    }
 }

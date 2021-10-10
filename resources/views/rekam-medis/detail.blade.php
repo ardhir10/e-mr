@@ -326,7 +326,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -359,7 +359,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -391,7 +391,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat')}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -496,28 +496,42 @@
                                                 <div style="height: 200px">
 
                                                 </div>
-                                                <table class="no-border">
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">P1:
-                                                        </td>
-                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">P2:
-                                                        </td>
-                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="border: 0px !important;vertical-align:top;">P3:
-                                                        </td>
-                                                        <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
-                                                    </tr>
-                                                </table>
+                                                <div style=" height: 200px;overflow: auto;" class="style-3">
+                                                    <table class="no-border">
+                                                        <tr>
+
+                                                            <td style="border: 0px !important;vertical-align:top;">P1:
+                                                            </td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P2:
+                                                            </td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P3:
+                                                            </td>
+                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <span class="d-block">Verified By :</span>
-                                                <button class="btn btn-sm btn-success">Verified</button>
-                                                {{-- <span class="d-block">{{$cppt->FS_DPJP}}</span> --}}
+                                                @if ($cppt->FS_VERIFIED_BY)
+                                                <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                <a href="{{route('cppt.unverified',$cppt->FN_ID)}}">
+                                                    <button class="btn btn-sm btn-danger">Unverified</button>
+                                                </a>
+                                                @else
+                                                <a href="{{route('cppt.verified',$cppt->FN_ID)}}">
+                                                    <button class="btn btn-sm btn-success">Verified</button>
+                                                </a>
+                                                @endif
+
                                             </td>
                                             <td style="vertical-align:top;">
                                                 {{$cppt->FS_USER}}

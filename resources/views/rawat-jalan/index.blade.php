@@ -107,9 +107,9 @@
                                     <td>{{$rj->fs_nm_jaminan}}</td>
 
                                     <td>
-                                        {{-- <a href="{{route('rekam-medis.detail')}}">
-                                            Lihat
-                                        </a> --}}
+                                         <td>
+                                         <a href="{{route('rekam-medis.detail',$rj->fs_mr)}}">Lihat</a>
+                                     </td>
                                     </td>
 
                                 </tr>

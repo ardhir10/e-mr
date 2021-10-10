@@ -33,9 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
 
     // --- CPPT
+
     Route::get('/cppt/tambah/{id}', 'CpptController@create')->name('cppt.create');
     Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
     Route::get('/cppt/detail/{id}', 'CpptController@detail')->name('cppt.detail');
+    Route::get('/cppt/verified/{id}', 'CpptController@verified')->name('cppt.verified');
+    Route::get('/cppt/unverified/{id}', 'CpptController@unverified')->name('cppt.un
+    verified');
 
     // --- SATUAN TUGAS MEDIS
     Route::get('/data-master/satuan-tugas-medis', 'SatuanTugasMedisController@index')->name('satuan-tugas-medis.index');
@@ -77,6 +81,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/asesmen/awal-dewasa/perawat', 'AsesmenController@awalDewasaPerawat')->name('asesmen.awal-dewasa.perawat');
+Route::get('/asesmen/awal-dewasa/perawat/{id}', 'AsesmenController@awalDewasaPerawat')->name('asesmen.awal-dewasa.perawat');
 
 
