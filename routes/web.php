@@ -38,8 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
     Route::get('/cppt/detail/{id}', 'CpptController@detail')->name('cppt.detail');
     Route::get('/cppt/verified/{id}', 'CpptController@verified')->name('cppt.verified');
-    Route::get('/cppt/unverified/{id}', 'CpptController@unverified')->name('cppt.un
-    verified');
+    Route::get('/cppt/unverified/{id}', 'CpptController@unverified')->name('cppt.unverified');
 
     // --- SATUAN TUGAS MEDIS
     Route::get('/data-master/satuan-tugas-medis', 'SatuanTugasMedisController@index')->name('satuan-tugas-medis.index');
