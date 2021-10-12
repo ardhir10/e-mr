@@ -54,14 +54,18 @@ class RekamMedisController extends Controller
         return view('rekam-medis.index',$data);
     }
 
-    public function detail($nomorMr){
+    public function detail($nomorMr,$kdDoker = ''){
+
+        $data['kd_dokter'] = $kdDoker;
         $QUERY = "select aa.*,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
         left join TA_KELURAHAN cc on aa.fs_kd_kelurahan = cc.fs_kd_kelurahan
         left join TA_KECAMATAN dd on cc.fs_kd_kecamatan = dd.fs_kd_kecamatan
         left join TA_KABUPATEN ee on dd.fs_kd_kabupaten = ee.fs_kd_kabupaten
+
         where FS_MR = '$nomorMr'";
+
         $dataRekamMedis = DB::select($QUERY);
         if(count($dataRekamMedis) < 1){
             $dataRekamMedis = [];
@@ -69,7 +73,12 @@ class RekamMedisController extends Controller
             $dataRekamMedis = $dataRekamMedis[0];
         }
 
-        $QUERY_CPPT = "select * from TAR_CPPT where FS_MR = '$nomorMr' order by FN_ID desc";
+
+        $QUERY_CPPT = "select * from TAR_CPPT aa
+        left join TA_LAYANAN ff on aa.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
+        where FS_MR = '$nomorMr'
+
+        order by FN_ID desc";
         $data['CPPT']= DB::select($QUERY_CPPT);
 
         // --- RIWAYAT KUNJUNGAN

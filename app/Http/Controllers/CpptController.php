@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class CpptController extends Controller
 {
-    public function create($nomorMr){
+    public function create($nomorMr, $kdDokter =''){
         $data['page_title'] = "Tambah Catatan SOAP";
 
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
@@ -18,15 +18,20 @@ class CpptController extends Controller
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
         inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
         inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
-        inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+        inner join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
 
         where aa.FS_MR = '$nomorMr'";
+
+        if($kdDokter != ''){
+            $QUERY .= "and dd.FS_KD_PEG = '$kdDokter'";
+        }
         $dataRekamMedis = DB::select($QUERY);
         if (count($dataRekamMedis) < 1) {
             $dataRekamMedis = [];
         } else {
             $dataRekamMedis = $dataRekamMedis[0];
         }
+
 
         $data['rekam_medis'] = $dataRekamMedis;
 
@@ -80,7 +85,6 @@ class CpptController extends Controller
         $parameterInsert['FS_DPJP'] = $request->cDpjp;
         $parameterInsert['FS_USER'] = Auth::user()->name;
 
-
         // --- HANDLE PROCESS
         try {
             DB::table('TAR_CPPT')->insert($parameterInsert);
@@ -106,7 +110,7 @@ class CpptController extends Controller
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
         inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
         inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
-        inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+        inner join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
 
         where aa.FS_MR = '$nomorMr'";
         $dataRekamMedis = DB::select($QUERY);

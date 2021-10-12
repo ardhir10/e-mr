@@ -27,14 +27,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/rekam-medis', 'RekamMedisController@index')->name('rekam-medis.index');
-    Route::get('/rawat-medis/detail/{no}', 'RekamMedisController@detail')->name('rekam-medis.detail');
+    Route::get('/rawat-medis/detail/{no}/{kd_dokter?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
 
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
 
     // --- CPPT
 
-    Route::get('/cppt/tambah/{id}', 'CpptController@create')->name('cppt.create');
+    Route::get('/cppt/tambah/{id}/{kd_dokter?}', 'CpptController@create')->name('cppt.create');
     Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
     Route::get('/cppt/detail/{id}', 'CpptController@detail')->name('cppt.detail');
     Route::get('/cppt/verified/{id}', 'CpptController@verified')->name('cppt.verified');

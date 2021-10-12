@@ -404,7 +404,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <a href="{{route('cppt.create',$rekam_medis->FS_MR)}}" class="btn btn-success ">
+                                <a href="{{route('cppt.create',[$rekam_medis->FS_MR,$kd_dokter])}}" class="btn btn-success ">
                                     <i data-feather="folder-plus"></i>
                                     Tambah CPPT</a>
                             </div>
@@ -465,7 +465,10 @@
                                             <td style="vertical-align:top;">
                                                 <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
                                             </td>
-                                            <td style="vertical-align:top;">{{$cppt->FS_PROFESI}}</td>
+                                            <td style="vertical-align:top;">
+                                                {{$cppt->FS_PROFESI}}
+                                                <span class="d-block">{{$cppt->FS_NM_LAYANAN}}</span>
+                                            </td>
                                             <td style="vertical-align:top;">
                                                 <div style=" height: 200px;overflow: auto;" class="style-3">
                                                     <table class="no-border">
