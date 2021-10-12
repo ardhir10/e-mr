@@ -326,7 +326,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -359,7 +359,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Anak',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -391,7 +391,7 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',$rekam_medis->FS_MR)}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Kebidanan',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
@@ -404,7 +404,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <a href="{{route('cppt.create',[$rekam_medis->FS_MR,$kd_dokter])}}" class="btn btn-success ">
+                                <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}" class="btn btn-success ">
                                     <i data-feather="folder-plus"></i>
                                     Tambah CPPT</a>
                             </div>
@@ -467,7 +467,7 @@
                                             </td>
                                             <td style="vertical-align:top;">
                                                 {{$cppt->FS_PROFESI}}
-                                                <span class="d-block">{{$cppt->FS_NM_LAYANAN}}</span>
+                                                <span class="badge bg-secondary">{{$cppt->FS_NM_LAYANAN}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <div style=" height: 200px;overflow: auto;" class="style-3">

@@ -32,9 +32,9 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">{{$page_title}}</h5>
+                        <h5 class="card-title">{{$page_title}} ({{$type}})</h5>
                     </div>
-                    <form action="{{route('cppt.store',$rekam_medis->FS_MR)}}" method="POST">
+                    <form action="{{route('asesmen-awal-perawat.store')}}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -93,6 +93,10 @@
                                     </table>
                                 </div>
                                 <div class="col-lg-6">
+                                    <input type="hidden" class="form-control form-control-sm" name="cFrom"
+                                                    value="{{$from}}" readonly>
+                                    <input type="hidden" class="form-control form-control-sm" name="cType"
+                                                    value="{{$type}}" readonly>
                                     <table class="w-100">
                                         <tr>
                                             <td class="leftCol">
@@ -100,8 +104,11 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                @if ($kd_reg != '')
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                @else
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="" readonly>
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,6 +128,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
+                                                <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
+                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
                                                 <input type="text" class="form-control form-control-sm" name="cDpjp"
                                                     value="{{$rekam_medis->FS_NM_PEG}}" readonly>
                                             </td>
@@ -150,7 +159,7 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol" width="60%">
-                                                <select class="form-select form-select-sm" id="" name="cProfesi">
+                                                <select class="form-select form-select-sm" id="" name="cProfesi" required>
                                                     <option value="">-- Pilih Profesi</option>
                                                     <option {{ old('cProfesi') == 'Dokter' ? 'selected=selected' :'' }}
                                                         value="Dokter">Dokter</option>
@@ -166,7 +175,7 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                <select class="form-select form-select-sm" id="" name="cLayanan">
+                                                <select class="form-select form-select-sm" id="" name="cLayanan" required>
                                                     <option value="">-- Pilih Layanan/Bagian</option>
                                                     @foreach ($layanan_bagian as $lb)
                                                     <option
@@ -187,7 +196,7 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Assesmen Awal Terintegrasi Pasien Dewasa Rawat Jalan
+                                            <h4 class="card-title">Assesmen Awal Terintegrasi Pasien {{$type}} Rawat Jalan
                                             </h4>
                                         </div><!-- end card header -->
                                         <table class="detail-asesmen w-100 table-bordered">
@@ -200,7 +209,7 @@
                                                                     saat masuk RS) : </strong></label>
                                                         </div>
                                                         <div class="col-6">
-                                                            <textarea class="form-control form-control-sm" name="" id=""
+                                                            <textarea class="form-control form-control-sm" name="cAlasanKunjungan" id=""
                                                                 rows="1"></textarea>
                                                         </div>
 
@@ -225,8 +234,7 @@
                                                                     <label for="">TD :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="text"
-                                                                        class="form-control form-control-sm">
+                                                                    <input type="number" step="0.1" name="cTd" class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
                                                                     mmHG
@@ -237,7 +245,7 @@
                                                                     <label for="">TB :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="text"
+                                                                    <input type="number" step="0.1" name="cTb"
                                                                         class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
@@ -251,7 +259,7 @@
                                                                     <label for="">Nadi :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="text"
+                                                                    <input type="number" step="0.1" name="cNadi"
                                                                         class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
@@ -260,10 +268,10 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-3 text-align-right">
-                                                                    <label for="">TB :</label>
+                                                                    <label for="">BB :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="text"
+                                                                    <input type="number" step="0.1" name="cBb"
                                                                         class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
@@ -277,7 +285,7 @@
                                                                     <label for=""> Respirasi :</label>
                                                                 </div>
                                                                 <div class="col-3">
-                                                                    <input type="text"
+                                                                    <input type="number" step="0.1" name="cRespirasi"
                                                                         class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
@@ -292,7 +300,7 @@
                                                                     <label for="">Suhu :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="text"
+                                                                    <input type="number" step="0.1" name="cSuhu"
                                                                         class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
@@ -331,28 +339,28 @@
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <input type="checkbox"
-                                                                                            value="Tidak"
-                                                                                            name="cPernahDirawat[1][]">
+
+                                                                                            name="cRkuPernahDirawatTidak">
                                                                                         Tidak
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <input type="checkbox"
-                                                                                            value="Ya"
-                                                                                            name="cPernahDirawat[1][]">
+
+                                                                                            name="cRkuPernahDirawatYa">
                                                                                         Ya
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <span
                                                                                             class="align-top">Diagnosa</span>
-                                                                                        <input type="text">
+                                                                                        <input type="text" name="cRkuPernahDirawatDiagnosa" value="">
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <span
                                                                                             class="align-top">Kapan</span>
-                                                                                        <input type="text">
+                                                                                        <input type="text" name="cRkuPernahDirawatKapan" value="">
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -368,25 +376,25 @@
                                                                                 <td class="d-flex p-0">
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="checkbox">
+                                                                                        <input type="checkbox"  name="cRkuPernahDioperasiTidak">
                                                                                         Tidak
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="checkbox">
+                                                                                        <input type="checkbox"  name="cRkuPernahDioperasiYa">
                                                                                         Ya
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <span class="align-top">Jenis
                                                                                             Operasi</span>
-                                                                                        <input type="text">
+                                                                                        <input type="text" value="" name="cRkuPernahDioperasiJenis">
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <span
                                                                                             class="align-top">Kapan</span>
-                                                                                        <input type="text">
+                                                                                        <input type="text" value="" name="cRkuPernahDioperasiKapan">
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -401,19 +409,19 @@
                                                                                 <td class="d-flex p-0">
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="checkbox">
+                                                                                        <input type="checkbox" name="cRkuMsdpoTidak" >
                                                                                         Tidak
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="checkbox">
+                                                                                        <input type="checkbox" name="cRkuMsdpoYa" >
                                                                                         Ya
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <span class="align-top">Obat
                                                                                         </span>
-                                                                                        <input type="text">
+                                                                                        <input type="text" name="cRkuMsdpoObat" value="">
                                                                                     </div>
 
                                                                                 </td>
@@ -424,47 +432,47 @@
                                                             </li>
                                                             <li>b. Riwayat Penyakit Keluarga
                                                                 <ul>
-                                                                    <li class="null"><input type="checkbox">
+                                                                    <li class="null"><input type="checkbox" name="cRkuRpkTidak" >
                                                                         Tidak</li>
                                                                     <li class="null">
                                                                         <div class="d-flex align-top">
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkYa" > <span
                                                                                     class="align-top"> Ya</span>
                                                                                 &nbsp;&nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkHipertensi" > <span
                                                                                     class="align-top">
                                                                                     Hipertensi</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkJantung" > <span
                                                                                     class="align-top">
                                                                                     Jantung</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkDM" > <span
                                                                                     class="align-top"> DM</span>
                                                                                 &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkParu" > <span
                                                                                     class="align-top">
                                                                                     Paru</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuRpkHepatitis" > <span
                                                                                     class="align-top">
                                                                                     Hepatitis</span> &nbsp;:
                                                                             </div>
-                                                                            Lainnya&nbsp; <input type="text">
+                                                                            Lainnya&nbsp; <input type="text" name="cRkuRpkLainnya" value="">
                                                                         </div>
                                                                     </li>
 
@@ -472,35 +480,35 @@
                                                             </li>
                                                             <li>c. Ketergantungan
                                                                 <ul>
-                                                                    <li class="null"><input type="checkbox">
+                                                                    <li class="null"><input type="checkbox" name="cRkuKetTidak" >
                                                                         Tidak</li>
                                                                     <li class="null">
                                                                         <div class="d-flex align-top">
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuKetYa" > <span
                                                                                     class="align-top"> Ya</span>
                                                                                 &nbsp;&nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuKetObat" > <span
                                                                                     class="align-top">
                                                                                     Obat-obatan</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuKetAlkohol" > <span
                                                                                     class="align-top">
                                                                                     Alkohol</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRkuKetRokok" > <span
                                                                                     class="align-top">
                                                                                     Rokok</span> &nbsp;:
                                                                             </div>
-                                                                            Lainnya&nbsp; <input type="text">
+                                                                            Lainnya&nbsp; <input type="text" name="cRkuKetLainnya" value="">
                                                                         </div>
                                                                     </li>
 
@@ -510,12 +518,12 @@
                                                                 <div class="d-flex">
                                                                     d. Riwayat Alergi :
                                                                     <div style="margin-left:30px;">
-                                                                        <input type="checkbox"> Tidak
+                                                                        <input type="checkbox" name="cRkuRaTidak" > Tidak
                                                                     </div>
                                                                     <div style="margin-left:30px;">
-                                                                        <input type="checkbox"> Ya , sebutkan
+                                                                        <input type="checkbox" name="cRkuRaYa" > Ya , sebutkan
                                                                     </div>
-                                                                    <input style="margin-left:10px;" type="text">
+                                                                    <input style="margin-left:10px;" type="text" name="cRkuRaLainnya" value="">
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -547,42 +555,42 @@
                                                                         <div class="d-flex align-top">
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSpsiTenang" > <span
                                                                                     class="align-top">
                                                                                     Tenang</span> &nbsp;&nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
-                                                                                    class="align-top">
+                                                                                <input type="checkbox" name="cRpSpsiCemas" > <span
+                                                                                    class="align-top" >
                                                                                     Cemas</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSpsiTakut" > <span
                                                                                     class="align-top">
                                                                                     Takut</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
-                                                                                    class="align-top">
+                                                                                <input type="checkbox" name="cRpSpsiMarah" > <span
+                                                                                    class="align-top" >
                                                                                     Marah</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
-                                                                                    class="align-top">
+                                                                                <input type="checkbox" name="cRpSpsiSedih" > <span
+                                                                                    class="align-top" >
                                                                                     Sedih</span> &nbsp;:
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSpsiBunuhDiri" > <span
                                                                                     class="align-top">
                                                                                     Kecenderungan Bunuh
                                                                                     Diri</span> &nbsp;:
                                                                             </div>
-                                                                            lapor ke&nbsp; <input type="text">
+                                                                            lapor ke&nbsp; <input type="text" name="cRpSpsilaporKe" value="">
                                                                         </div>
                                                                     </li>
                                                                     <li class="null">
@@ -591,7 +599,7 @@
                                                                                 style="margin-right:30px">
                                                                                 <span class="align-top"> Lain
                                                                                     lain,sebutkan </span> &nbsp;
-                                                                                <textarea name="" id="" cols="100"
+                                                                                <textarea cols="100" name="cRpSpsiLainnya"
                                                                                     rows="1"></textarea>:
                                                                             </div>
                                                                         </div>
@@ -604,28 +612,28 @@
                                                                 <ul>
                                                                     <li class="null d-flex">
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSmenSadar"> <span
                                                                                 class="align-top"> Sadar dan orientasi
                                                                                 baik</span>
                                                                             &nbsp;&nbsp;
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSmenMasalahPrilaku"> <span
                                                                                 class="align-top"> Ada masalah prilaku,
                                                                                 sebutkan</span>
-                                                                            &nbsp;&nbsp; <input type="text">
+                                                                            &nbsp;&nbsp; <input type="text" name="cRpSmenMasalahPrilakuSebutkan" value="">
                                                                         </div>
 
                                                                     </li>
                                                                     <li class="null d-flex">
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSmenPrilakuKekerasaSebelumnya"> <span
                                                                                 class="align-top"> Prilaku kekerasan
                                                                                 yang dialami pasien sebelumnya</span>
-                                                                            &nbsp;&nbsp;<input type="text">
+                                                                            &nbsp;&nbsp;<input type="text" name="cRpSmenPrilakuKekerasaSebelumnyaSebutkan" value="">
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSmenTidakDinilai"> <span
                                                                                 class="align-top"> Tidak dapat
                                                                                 dinilai</span>
                                                                             &nbsp;&nbsp;
@@ -644,12 +652,12 @@
                                                                             &nbsp;&nbsp;
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSsosHpdakBaik"> <span
                                                                                 class="align-top"> Baik</span>
                                                                             &nbsp;&nbsp;
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
-                                                                            <input type="checkbox"> <span
+                                                                            <input type="checkbox" name="cRpSsosHpdakTidakBaik"> <span
                                                                                 class="align-top"> Tidak Baik</span>
                                                                             &nbsp;&nbsp;
                                                                         </div>
@@ -667,15 +675,15 @@
 
                                                                         <div class="m-r-1" style="margin-right:30px">
                                                                             <span class="align-top"> Nama </span>
-                                                                            &nbsp;&nbsp; <input type="text">
+                                                                            &nbsp;&nbsp; <input type="text" name="cRpSsosKtyddNama">
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
                                                                             <span class="align-top"> Hubungan </span>
-                                                                            &nbsp;&nbsp; <input type="text">
+                                                                            &nbsp;&nbsp; <input type="text" name="cRpSsosKtyddHubungan">
                                                                         </div>
                                                                         <div class="m-r-1" style="margin-right:30px">
                                                                             <span class="align-top"> Telepon </span>
-                                                                            &nbsp;&nbsp; <input type="text">
+                                                                            &nbsp;&nbsp; <input type="text" name="cRpSsosKtyddTelepon">
                                                                         </div>
 
                                                                     </li>
@@ -694,35 +702,35 @@
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoPNS"> <span
                                                                                     class="align-top">
                                                                                     PNS</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoSwasta"> <span
                                                                                     class="align-top">
                                                                                     Swsasta</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoWiraswasta"> <span
                                                                                     class="align-top">
                                                                                     Wiraswasta</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoPetani"> <span
                                                                                     class="align-top">
                                                                                     Petani</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoPekerjaanLainnya" > <span
                                                                                     class="align-top">
                                                                                     Lainnya</span> &nbsp;:
                                                                             </div>
-                                                                            &nbsp; <input type="text">
+                                                                            &nbsp; <input type="text" name="cRpSekoPekerjaanLainnyaText">
                                                                         </div>
                                                                     </li>
 
@@ -736,35 +744,35 @@
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoJKN"> <span
                                                                                     class="align-top">
                                                                                     JKN</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoJamkesda"> <span
                                                                                     class="align-top">
                                                                                     Jamkesda</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoAsuransi"> <span
                                                                                     class="align-top">
                                                                                     Asuransi</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoPribadi"> <span
                                                                                     class="align-top">
                                                                                     Pribadi</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpSekoAsuransiLainnya"> <span
                                                                                     class="align-top">
                                                                                     Lainnya</span> &nbsp;:
                                                                             </div>
-                                                                            &nbsp; <input type="text">
+                                                                            &nbsp; <input type="text" name="cRpSekoAsuransiLainnyaText">
                                                                         </div>
                                                                     </li>
 
@@ -779,41 +787,41 @@
 
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaIslam"> <span
                                                                                     class="align-top">
                                                                                     Islam</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaKristen"> <span
                                                                                     class="align-top">
                                                                                     Kristen</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaKatolik"> <span
                                                                                     class="align-top">
                                                                                     Katolik</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaHindu"> <span
                                                                                     class="align-top">
                                                                                     Hindu</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaBudha"> <span
                                                                                     class="align-top">
                                                                                     Budha</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px">
-                                                                                <input type="checkbox"> <span
+                                                                                <input type="checkbox" name="cRpAgamaKepercayaanLain"> <span
                                                                                     class="align-top">
                                                                                     Kepercayaan lain</span> &nbsp;:
                                                                             </div>
-                                                                            &nbsp; <input type="text">
+                                                                            &nbsp; <input type="text" name="cRpAgamaKepercayaanLainText">
                                                                         </div>
                                                                     </li>
                                                                 </ul>
@@ -872,7 +880,6 @@
                                                         <li class="null">
                                                             <div class="d-flex">
                                                                 <div class="m-r-1" style="margin-right:30px;width:35%">
-                                                                    <input type="checkbox" disabled>
                                                                     <span class="align-top"> Durasi</span> &nbsp;&nbsp;
                                                                     <input type="text">
                                                                     &nbsp;&nbsp;
@@ -1030,7 +1037,7 @@
                                     SAVE
                                 </button>
 
-                                <a href="{{route('rekam-medis.detail',$rekam_medis->FS_MR)}}" class="btn btn-danger">
+                                <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>
@@ -1054,21 +1061,21 @@
 <script src="{{asset('/')}}assets/js/pages/form-wizard.init.js"></script>
 <script>
     $('#data-table').DataTable({});
-    $("input:checkbox").on('click', function () {
-        // in the handler, 'this' refers to the box clicked on
-        var $box = $(this);
-        if ($box.is(":checked")) {
-            // the name of the box is retrieved using the .attr() method
-            // as it is assumed and expected to be immutable
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            // the checked state of the group/box on the other hand will change
-            // and the current value is retrieved using .prop() method
-            $(group).prop("checked", false);
-            $box.prop("checked", true);
-        } else {
-            $box.prop("checked", false);
-        }
-    });
+    // $("input:checkbox").on('click', function () {
+    //     // in the handler, 'this' refers to the box clicked on
+    //     var $box = $(this);
+    //     if ($box.is(":checked")) {
+    //         // the name of the box is retrieved using the .attr() method
+    //         // as it is assumed and expected to be immutable
+    //         var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    //         // the checked state of the group/box on the other hand will change
+    //         // and the current value is retrieved using .prop() method
+    //         $(group).prop("checked", false);
+    //         $box.prop("checked", true);
+    //     } else {
+    //         $box.prop("checked", false);
+    //     }
+    // });
 
 </script>
 @endpush

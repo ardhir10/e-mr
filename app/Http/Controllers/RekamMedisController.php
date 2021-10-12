@@ -54,9 +54,12 @@ class RekamMedisController extends Controller
         return view('rekam-medis.index',$data);
     }
 
-    public function detail($nomorMr,$kdDoker = ''){
+    public function detail($from,$nomorMr,$kdDokter = '',$kdReg=''){
 
-        $data['kd_dokter'] = $kdDoker;
+        $data['kd_dokter'] = $kdDokter;
+        $data['kd_reg'] = $kdReg;
+        $data['from'] = $from;
+
         $QUERY = "select aa.*,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama

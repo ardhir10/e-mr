@@ -107,7 +107,7 @@
                                     <td>{{$rj->fs_nm_jaminan}}</td>
 
                                          <td>
-                                         <a href="{{route('rekam-medis.detail',[$rj->fs_mr,$rj->fs_kd_dokter])}}">Lihat</a>
+                                         <a href="{{route('rekam-medis.detail',['rawatjalan',$rj->fs_mr,$rj->fs_kd_dokter,$rj->fs_kd_reg])}}">Lihat</a>
                                      </td>
 
                                 </tr>

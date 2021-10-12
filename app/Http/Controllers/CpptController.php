@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class CpptController extends Controller
 {
-    public function create($nomorMr, $kdDokter =''){
+    public function create($from,$nomorMr, $kdDokter ='',$kdReg = ''){
         $data['page_title'] = "Tambah Catatan SOAP";
+
+        $data['kd_reg'] = $kdReg;
+        $data['from'] = $from;
 
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
-        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,dd.FS_KD_PEG,fs_nm_jaminan
         from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
@@ -24,6 +27,9 @@ class CpptController extends Controller
 
         if($kdDokter != ''){
             $QUERY .= "and dd.FS_KD_PEG = '$kdDokter'";
+        }
+        if($kdReg != ''){
+            $QUERY .= "and cc.FS_KD_REG = '$kdReg'";
         }
         $dataRekamMedis = DB::select($QUERY);
         if (count($dataRekamMedis) < 1) {
@@ -75,22 +81,35 @@ class CpptController extends Controller
         $parameterInsert['FS_PLAN2'] = $request->cPlan2;
         $parameterInsert['FS_PLAN3'] = $request->cPlan3;
         $parameterInsert['FS_PLAN4'] = $request->cPlan4;
+
         $parameterInsert['FS_IPPA1A'] = $request->cIppa1a;
         $parameterInsert['FS_IPPA1B'] = $request->cIppa1b;
+        $parameterInsert['FS_IPPA1C'] = $request->cIppa1c;
+
         $parameterInsert['FS_IPPA2A'] = $request->cIpp2a;
         $parameterInsert['FS_IPPA2B'] = $request->cIppa2b;
+        $parameterInsert['FS_IPPA2C'] = $request->cIppa2c;
+
         $parameterInsert['FS_IPPA3A'] = $request->cIppa3a;
         $parameterInsert['FS_IPPA3B'] = $request->cIppa3b;
         $parameterInsert['FS_IPPA3C'] = $request->cIppa3c;
+
+        $parameterInsert['FS_IPPA4A'] = $request->cIppa4a;
+        $parameterInsert['FS_IPPA4B'] = $request->cIppa4b;
+        $parameterInsert['FS_IPPA4C'] = $request->cIppa4c;
+
         $parameterInsert['FS_DPJP'] = $request->cDpjp;
         $parameterInsert['FS_USER'] = Auth::user()->name;
+        $parameterInsert['FS_REGISTER'] = $request->cRegister;
+        $parameterInsert['FS_KD_PEG'] = $request->cKdpeg;
+        $parameterInsert['FS_FROM'] = $request->cFrom;
 
         // --- HANDLE PROCESS
         try {
             DB::table('TAR_CPPT')->insert($parameterInsert);
-            return redirect()->route('rekam-medis.detail',$nomorMr)->with(['success' => 'Data berhasil dibuat !']);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom,$request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data berhasil dibuat !']);
         } catch (\Throwable $th) {
-            return redirect()->route('rekam-medis.detail', $nomorMr)->with(['failed' => $th->getMessage()]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
         }
     }
 

@@ -100,7 +100,7 @@
                                      <td>{{$rm->FS_TLP_PASIEN}}</td>
                                      <td>{{$rm->FS_HP_PASIEN}}</td>
                                      <td>
-                                         <a href="{{route('rekam-medis.detail',$rm->fs_mr)}}">Lihat</a>
+                                         <a href="{{route('rekam-medis.detail',['rekammedis',$rm->fs_mr])}}">Lihat</a>
                                      </td>
                                  </tr>
                                 @endforeach

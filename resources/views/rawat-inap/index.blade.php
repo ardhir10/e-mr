@@ -106,9 +106,9 @@
                                     <td>{{$ri->fs_nm_jaminan}}</td>
                                     <td>{{ $ri->FD_TGL_KELUAR == '' ? '' : date('d-m-Y',strtotime($ri->FD_TGL_KELUAR))}}</td>
                                     <td>
-                                        <a href="{{route('rekam-medis.detail',$ri->fs_mr)}}">
-                                            Lihat
-                                        </a>
+
+                                         <a href="{{route('rekam-medis.detail',['rawatinap',$ri->fs_mr,$ri->fs_kd_dokter,$ri->fs_kd_reg])}}">Lihat</a>
+
                                     </td>
 
                                 </tr>

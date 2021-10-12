@@ -14,6 +14,7 @@
                             <li class="breadcrumb-item"><a href="javascript: void(0);">E-MR</a></li>
                             <li class="breadcrumb-item ">Rekam Medis</li>
                             <li class="breadcrumb-item active">Buat CPPT</li>
+                        <li class="breadcrumb-item active">{{$from}}</li>
                         </ol>
                     </div>
                 </div>
@@ -86,6 +87,8 @@
                                     </table>
                                 </div>
                                 <div class="col-lg-6">
+                                    <input type="hidden" class="form-control form-control-sm" name="cFrom"
+                                                    value="{{$from}}" readonly>
                                     <table class="w-100">
                                         <tr>
                                             <td class="leftCol">
@@ -93,8 +96,11 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                @if ($kd_reg != '')
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                @else
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="" readonly>
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -114,6 +120,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
+                                                <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
+                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
                                                 <input type="text" class="form-control form-control-sm" name="cDpjp"
                                                     value="{{$rekam_medis->FS_NM_PEG}}" readonly>
                                             </td>
@@ -245,6 +253,14 @@
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">1.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa1c"
+                                                                            value="{{old('cIppa1c')}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -267,6 +283,14 @@
                                                                     <td>
                                                                         <input type="text" name="cIppa2b"
                                                                             value="{{old('cIppa2b')}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">2.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa2c"
+                                                                            value="{{old('cIppa2c')}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -312,10 +336,32 @@
                                                         <td>
                                                             <textarea rows="3" name="cPlan4" type="text"
                                                                 class="form-control form-control-sm">{{old('cPlan4')}}</textarea>
-                                                            <table style="width: 100%">
+                                                             <table style="width: 100%">
 
-
-
+                                                                <tr>
+                                                                    <td style="vertical-align: top">4.a</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4a"
+                                                                            value="{{old('cIppa4a')}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">4.b</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4b"
+                                                                            value="{{old('cIppa4b')}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">4.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4c"
+                                                                            value="{{old('cIppa4c')}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -334,7 +380,7 @@
                                     SAVE
                                 </button>
 
-                                <a href="{{route('rekam-medis.detail',$rekam_medis->FS_MR)}}" class="btn btn-danger">
+                                <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>

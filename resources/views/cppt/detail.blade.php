@@ -247,6 +247,14 @@
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">1.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa1c"
+                                                                            value="{{$CPPT->FS_IPPA1C}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -269,6 +277,14 @@
                                                                     <td>
                                                                         <input type="text" name="cIppa2b"
                                                                             value="{{$CPPT->FS_IPPA2B}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">2.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa2c"
+                                                                            value="{{$CPPT->FS_IPPA2C}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -316,8 +332,30 @@
                                                                 class="form-control form-control-sm">{{$CPPT->FS_PLAN4}}</textarea>
                                                             <table style="width: 100%">
 
-
-
+                                                                <tr>
+                                                                    <td style="vertical-align: top">4.a</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4a"
+                                                                            value="{{$CPPT->FS_IPPA4A}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">3.b</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4b"
+                                                                            value="{{$CPPT->FS_IPPA4B}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="vertical-align: top">4.c</td>
+                                                                    <td>
+                                                                        <input type="text" name="cIppa4c"
+                                                                            value="{{$CPPT->FS_IPPA4C}}"
+                                                                            class="form-control form-control-sm">
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -337,7 +375,7 @@
                                 SAVE
                             </button> --}}
 
-                                <a href="{{route('rekam-medis.detail',$rekam_medis->FS_MR)}}" class="btn btn-danger">
+                                <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>

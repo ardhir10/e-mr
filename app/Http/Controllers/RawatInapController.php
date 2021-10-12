@@ -50,7 +50,7 @@ class RawatInapController extends Controller
 		FS_NM_PASIEN, bb.FB_JNS_KELAMIN,
         DATEDIFF(YYYY, bb.fd_tgl_lahir,aa.fd_tgl_masuk ) fn_umur,
 		 DATEDIFF(m, bb.fd_tgl_lahir,aa.fd_tgl_masuk )%12 fn_umur_bulan,
-		fs_nm_layanan, fs_nm_peg fs_dokter, fs_nm_jaminan,
+		fs_nm_layanan, fs_nm_peg fs_dokter, fs_nm_jaminan,ee.fs_kd_peg fs_kd_dokter,
 		FD_TGL_KELUAR = case FD_TGL_KELUAR
 		    when '3000-01-01' then ''
 		else	FD_TGL_KELUAR end
