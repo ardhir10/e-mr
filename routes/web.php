@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/rekam-medis', 'RekamMedisController@index')->name('rekam-medis.index');
+    Route::get('/rekam-medis/datatables', 'RekamMedisController@getRekamMedis')->name('rekam-medis.datatables');
     Route::get('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
 
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');

@@ -211,7 +211,7 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <textarea class="form-control form-control-sm" name="cAlasanKunjungan" id=""
-                                                                rows="1"></textarea>
+                                                                rows="2"></textarea>
                                                         </div>
 
                                                     </div>

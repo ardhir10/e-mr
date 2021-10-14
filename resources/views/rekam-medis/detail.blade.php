@@ -467,7 +467,7 @@
                                     <tbody>
                                         @foreach ($CPPT as $cppt)
                                         <tr>
-                                            <td style="vertical-align:top;" style="vertical-align:top;">1</td>
+                                            <td style="vertical-align:top;" style="vertical-align:top;">{{$loop->iteration}}</td>
                                             <td style="vertical-align:top;">
                                                 <span
                                                     style="d-block">{{date('d-m-Y H:i:s',strtotime($cppt->FD_DATE))}}</span>
@@ -491,37 +491,56 @@
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">O:
                                                             </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FT_OBJECTIVE}}
-                                                            </td>
+
+                                                            @if ($cppt->TB_FROM == 'cppt')
+                                                                <td style="border: 0px !important;">{{$cppt->FT_OBJECTIVE}}
+                                                                </td>
+                                                            @else
+                                                                <td style="border: 0px !important;">
+                                                                    <ul>
+                                                                        <li>TD : {{$cppt->TD}} mmHG</li>
+                                                                        <li>TB : {{$cppt->TB}} cm</li>
+                                                                        <li>Nadi : {{$cppt->NADI}} x/menit</li>
+                                                                        <li>BB : {{$cppt->BB}} kg</li>
+                                                                        <li>Respirasi : {{$cppt->RESPIRASI}} x/menit</li>
+                                                                        <li>Suhu : {{$cppt->SUHU}} c</li>
+                                                                    </ul>
+                                                                </td>
+                                                            @endif
+
 
                                                         </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">A:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P:
-                                                            </td>
-                                                            <td style="border: 0px !important;">
-                                                                <ul style="padding: 0px;">
-                                                                    <li style="margin-bottom:10px;" class="testPosition">1 : {{$cppt->FS_PLAN1}}</li>
-                                                                    <li style="margin-bottom:10px;">2 : {{$cppt->FS_PLAN2}}</li>
-                                                                    <li style="margin-bottom:10px;">3 : {{$cppt->FS_PLAN3}}</li>
-                                                                    <li style="margin-bottom:10px;">4 : {{$cppt->FS_PLAN4}}</li>
-                                                                </ul>
-                                                            </td>
-                                                        </tr>
+
+                                                        @if ($cppt->TB_FROM == 'cppt')
+                                                            <tr>
+                                                                <td style="border: 0px !important;vertical-align:top;">A:
+                                                                </td>
+                                                                <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="border: 0px !important;vertical-align:top;">P:
+                                                                </td>
+                                                                <td style="border: 0px !important;">
+                                                                    <ul style="padding: 0px;">
+                                                                        <li style="margin-bottom:10px;" class="testPosition">1 : {{$cppt->FS_PLAN1}}</li>
+                                                                        <li style="margin-bottom:10px;">2 : {{$cppt->FS_PLAN2}}</li>
+                                                                        <li style="margin-bottom:10px;">3 : {{$cppt->FS_PLAN3}}</li>
+                                                                        <li style="margin-bottom:10px;">4 : {{$cppt->FS_PLAN4}}</li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
 
                                                     </table>
                                                 </div>
                                             </td>
                                             <td style="vertical-align:top;">-
                                                 <div style="height: 200px">
-                                                <p class="ngikut">HEHE</p>
+                                                {{-- <p class="ngikut">HEHE</p> --}}
 
                                                 </div>
+                                                @if ($cppt->TB_FROM == 'cppt')
                                                 <div style=" height: 200px;overflow: auto;" class="style-3">
 
                                                     <table class="no-border">
@@ -543,6 +562,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
+                                                @endif
 
 
                                             </td>

@@ -48,10 +48,66 @@ class RekamMedisController extends Controller
         $QUERY = "select fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr where 1=1 $whereQuery ";
         $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
-        // $data['datatables'] = Datatables::of($data['rekam_medis'])->make(true);
+        if($request->from == 'yajra'){
+            return $data['datatables'] = Datatables::of($data['rekam_medis'])
+            ->addColumn('tgl_lahir', function($qr) {
+                return date('d-m-Y',strtotime($qr->fd_tgl_lahir));
+            })
 
+            ->addColumn('action', function ($qr) {
+                return '<a href="'.route('rekam-medis.detail',['rekammedis',$qr->fs_mr]).'" class=" "> Lihat Detail</a>';
+            })
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->toJson();
+
+        }
+        $data['jumlah_data'] = count( $data['rekam_medis']);
 
         return view('rekam-medis.index',$data);
+    }
+
+    public function getRekamMedis(Request $request){
+        $data['request'] = $request;
+        $allParameterSearch = array_filter($request->all());
+
+        $parameterSeachQuery = [];
+        foreach ($allParameterSearch as $key => $value) {
+            $isSearcable = true;
+            switch ($key) {
+                case 'nama':
+                    $key = 'fs_nm_pasien';
+                    break;
+                case 'alamat':
+                    $key = 'FS_ALM_PASIEN';
+                    break;
+                case 'telepon':
+                    $key = 'FS_TLP_PASIEN';
+                    break;
+                case 'hp':
+                    $key = 'FS_HP_PASIEN';
+                    break;
+                case 'nomor_mr':
+                    $key = 'fs_mr';
+                    break;
+                case 'tgl_lahir':
+                    $key = 'fd_tgl_lahir';
+                    break;
+                default:
+                    $isSearcable = false;
+                    break;
+            }
+            if($isSearcable){
+                array_push($parameterSeachQuery,'and '.$key." like '%$value%'");
+            }
+        }
+        $whereQuery = implode($parameterSeachQuery, ' ') ;
+
+        $QUERY = "select fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr where 1=1 $whereQuery ";
+        $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
+        return  $data['datatables'] = Datatables::of($data['rekam_medis'])->make(true);
+
+
     }
 
     public function detail($from,$nomorMr,$kdDokter = '',$kdReg=''){
@@ -77,13 +133,62 @@ class RekamMedisController extends Controller
         }
 
 
-        $QUERY_CPPT = "select * from TAR_CPPT aa
+        $QUERY_CPPT = "select
+        aa.FN_ID,
+        aa.FD_DATE,
+        FS_NM_LAYANAN,
+        FT_SUBJECTIVE,
+        FT_OBJECTIVE,
+        FT_ASSESMENT,
+        FS_PLAN1,
+        FS_PLAN2,
+        FS_PLAN3,
+        FS_PLAN4,
+        FS_PROFESI,
+        FS_VERIFIED_BY,
+        FS_DPJP,
+        FS_USER,
+        'cppt' AS TB_FROM,
+        NULL AS TD,
+        NULL AS TB,
+        NULL AS NADI,
+        NULL AS BB,
+        NULL AS RESPIRASI,
+        NULL AS SUHU
+        from TAR_CPPT aa
         left join TA_LAYANAN ff on aa.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
+        where FS_MR = '$nomorMr'
+        UNION ALL
+
+        SELECT
+        cc.FN_ID AS FN_ID,
+        cc.FD_DATE,
+        dd.FS_NM_LAYANAN AS FS_NM_LAYANAN,
+        [FS_ALASAN_KUNJUNGAN] AS FT_SUBJECTIVE,
+        NULL AS FT_OBJECTIVE,
+        NULL AS FT_ASSESMENT,
+        NULL AS FS_PLAN1,
+        NULL AS FS_PLAN2,
+        NULL AS FS_PLAN3,
+        NULL AS FS_PLAN4,
+        [FS_PROFESI] AS FS_PROFESI,
+        NULL AS FS_VERIFIED_BY,
+        NULL AS FS_DPJP,
+        NULL AS FS_USER,
+        'asesmen' AS TB_FROM,
+        [FN_PF_TD] AS TD,
+        [FN_PF_TB] AS TB,
+        [FN_PF_NADI] AS NADI,
+        [FN_PF_BB] AS BB,
+        [FN_PF_RESPIRASI] AS RESPIRASI,
+        [FN_PF_SUHU] AS SUHU
+        FROM TAR_ASESMEN_PERAWAT cc
+        left join TA_LAYANAN dd on cc.FS_KD_LAYANAN = dd.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
 
         order by FN_ID desc";
         $data['CPPT']= DB::select($QUERY_CPPT);
-
+        // dd($data['CPPT']);
         // --- RIWAYAT KUNJUNGAN
         $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk, fs_nm_layanan, fs_nm_peg fs_dokter
         from	TA_REGISTRASI aa
