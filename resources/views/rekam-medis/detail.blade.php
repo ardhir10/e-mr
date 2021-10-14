@@ -72,12 +72,12 @@
     }
 
     .table-catatan-perkembangan th {
-        font-size: 12px !important;
+        font-size: 11px !important;
         border: 1px solid #ebebeb;
     }
 
     .table-catatan-perkembangan td {
-        font-size: 12px !important;
+        font-size: 10px !important;
         border: 1px solid #ebebeb;
     }
 
@@ -404,7 +404,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}" class="btn btn-success ">
+                                <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}"
+                                    class="btn btn-success ">
                                     <i data-feather="folder-plus"></i>
                                     Tambah CPPT</a>
                             </div>
@@ -413,25 +414,34 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <h6 style="font-style: italic;">RIWAYAT KUNJUNGAN PASIEN</h6>
-                                <div style="max-height: 400px;overflow:auto;margin-top:43px" class="style-3">
-                                    <table class="riwayat-kunjungan" style="border-collapse: collapse;width: 100%;">
-                                        <tr style="">
-                                            <th>Tanggal</th>
-                                            <th>Layanan</th>
-                                            <th>Dokter</th>
-                                            <th>RM</th>
-                                        </tr>
-                                        @foreach ($riwayat_kunjungan as $rk)
-                                        <tr>
-                                            <td>{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
-                                            <td>{{$rk->fs_nm_layanan}}</td>
-                                            <td>{{$rk->fs_dokter}}</td>
-                                            <td>
-                                                <input type="checkbox">
-                                                {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                <div style="" class="style-3 ">
+                                {{-- <div style="max-height: 400px;overflow-y:auto;" class="style-3"> --}}
+                                    <table class="cell-border table-catatan-perkembangan"
+                                        style="border-collapse: collapse;width: 100%;" id="data-table2">
+                                        <thead>
+                                            <tr style="">
+                                                <th>Tanggal</th>
+                                                <th>Bagian
+                                                    Layanan</th>
+                                                <th>Dokter</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach ($riwayat_kunjungan as $rk)
+                                            <tr>
+                                                <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
+                                                <td style="padding:2px ;">
+                                                    {{$rk->fs_nm_layanan}}</td>
+                                                <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
+                                                <td style="padding:2px ;">
+                                                    <input type="checkbox" class="" checked>
+                                                    {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
 
 
 
@@ -441,7 +451,7 @@
                             </div>
                             <div class="col-lg-9">
                                 <h6 style="font-style: italic;">CATATAN PERKEMBANGAN PASIEN TERINTEGRASI</h6>
-                                <table class="cell-border table-catatan-perkembangan" id="data-table">
+                                <table class="cell-border table-catatan-perkembangan " id="data-table">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -470,8 +480,8 @@
                                                 <span class="badge bg-secondary">{{$cppt->FS_NM_LAYANAN}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
-                                                <div style=" height: 200px;overflow: auto;" class="style-3">
-                                                    <table class="no-border">
+                                                <div style=" height: 200px;overflow: auto;" class="style-3 detail-soap">
+                                                    <table class="no-border " >
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">S:
                                                             </td>
@@ -491,15 +501,29 @@
                                                             <td style="border: 0px !important;">{{$cppt->FT_ASSESMENT}}
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td style="border: 0px !important;vertical-align:top;">P:
+                                                            </td>
+                                                            <td style="border: 0px !important;">
+                                                                <ul style="padding: 0px;">
+                                                                    <li style="margin-bottom:10px;" class="testPosition">1 : {{$cppt->FS_PLAN1}}</li>
+                                                                    <li style="margin-bottom:10px;">2 : {{$cppt->FS_PLAN2}}</li>
+                                                                    <li style="margin-bottom:10px;">3 : {{$cppt->FS_PLAN3}}</li>
+                                                                    <li style="margin-bottom:10px;">4 : {{$cppt->FS_PLAN4}}</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
 
                                                     </table>
                                                 </div>
                                             </td>
                                             <td style="vertical-align:top;">-
                                                 <div style="height: 200px">
+                                                <p class="ngikut">HEHE</p>
 
                                                 </div>
                                                 <div style=" height: 200px;overflow: auto;" class="style-3">
+
                                                     <table class="no-border">
                                                         <tr>
 
@@ -527,11 +551,11 @@
                                                 @if ($cppt->FS_VERIFIED_BY)
                                                 <span class="d-block">{{$cppt->FS_DPJP}}</span>
                                                 <a href="{{route('cppt.unverified',$cppt->FN_ID)}}">
-                                                    <button class="btn btn-sm btn-danger">Unverified</button>
+                                                    <button class="btn btn-sm btn-danger">Unverify</button>
                                                 </a>
                                                 @else
                                                 <a href="{{route('cppt.verified',$cppt->FN_ID)}}">
-                                                    <button class="btn btn-sm btn-success">Verified</button>
+                                                    <button class="btn btn-sm btn-success">Verify</button>
                                                 </a>
                                                 @endif
 
@@ -564,6 +588,44 @@
 @push('scripts')
 <script>
     $('#data-table').DataTable({});
+    $('#data-table2').DataTable({
+        // "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "columnDefs": [{
+                "orderable": false,
+                "targets": [3]
+            },
+            {
+                "orderable": true,
+                "targets": [0, 1, 2]
+            }
+        ]
+        //   "ordering": false
+    });
 
+
+
+$(".detail-soap").scroll(function() { //.box is the class of the div
+    var p = $( ".testPosition" );
+    var position = $(p).offset();
+    // position = $(position).css(position)
+    position['position'] = 'absolute';
+    console.log('POSITION',position);
+    $('.ngikut').css(position);
+    console.log($('.testPosition').isInViewport());
+});
+
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
 </script>
 @endpush

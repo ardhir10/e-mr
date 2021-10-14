@@ -23,7 +23,7 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}}</h5>
@@ -96,11 +96,13 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                @if ($kd_reg != '')
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
+
+                                                {{-- @if ($kd_reg != '')
                                                     <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
                                                 @else
                                                     <input type="text" class="form-control form-control-sm" name="cRegister" value="" readonly>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                         </tr>
                                         <tr>

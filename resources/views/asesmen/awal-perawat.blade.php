@@ -2,7 +2,7 @@
 
 @push('styles')
 <style>
-    .detail-asesmen,
+    .detail-asesmen
     td {
         padding: 8px;
     }
@@ -104,11 +104,12 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                @if ($kd_reg != '')
+                                                <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                {{-- @if ($kd_reg != '')
                                                     <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
                                                 @else
                                                     <input type="text" class="form-control form-control-sm" name="cRegister" value="" readonly>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                         </tr>
                                         <tr>

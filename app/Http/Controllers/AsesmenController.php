@@ -33,6 +33,8 @@ class AsesmenController extends Controller
         if ($kdReg != '') {
             $QUERY .= "and cc.FS_KD_REG = '$kdReg'";
         }
+
+        $QUERY .= 'ORDER BY cc.FS_KD_REG desc';
         $dataRekamMedis = DB::select($QUERY);
         if (count($dataRekamMedis) < 1) {
             $dataRekamMedis = [];

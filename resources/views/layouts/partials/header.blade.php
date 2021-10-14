@@ -11,7 +11,7 @@
             </div>
 
             <div class="d-flex">
-                
+
                 <div class="dropdown d-inline-block">
                     <button type="button" class="d-none btn header-item noti-icon right-bar-toggle" id="right-bar-toggle">
                         <i class="icon-sm" data-feather="settings"></i>
@@ -25,7 +25,7 @@
                         alt="Header Avatar">
                         <span class="ms-2 d-none d-sm-block user-item-desc">
                             <span class="user-name">{{Auth::user()->name}}</span>
-                            {{-- <span class="user-sub-title">Administrator</span> --}}
+                            <span class="user-sub-title">{{Auth::user()->namaDokter()}}</span>
                         </span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -34,7 +34,7 @@
                             <h6 class="mb-0 text-white">{{Auth::user()->roles->pluck('name')}}</h6>
                             <p class="mb-0 font-size-11 text-white-50 fw-semibold">{{Auth::user()->email}}</p>
                         </div>
-                         
+
                         <a class="dropdown-item" href="{{route('user.edit',Auth::user()->id)}}"><i class="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Edit Profile</span></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{route('logout')}}"><i class="mdi mdi-logout text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Logout</span></a>
