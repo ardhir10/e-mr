@@ -116,6 +116,10 @@
 <script>
     if (@json($jumlah_data) > 0) {
         var table = $('#yajra-datatable').DataTable({
+            "language":
+            {
+            "processing": "<img style='width:70px; height:auto;' src='{{asset('/assets/images/loading-buffering.gif')}}' />",
+            },
             processing: true,
             serverSide: true,
             ajax: window.location.href + '&from=yajra',
