@@ -156,7 +156,7 @@ class RekamMedisController extends Controller
         NULL AS RESPIRASI,
         NULL AS SUHU
         from TAR_CPPT aa
-        left join TA_LAYANAN ff on aa.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
+        left join TA_LAYANAN bb on aa.FS_KD_LAYANAN = bb.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
         UNION ALL
 
@@ -185,10 +185,38 @@ class RekamMedisController extends Controller
         FROM TAR_ASESMEN_PERAWAT cc
         left join TA_LAYANAN dd on cc.FS_KD_LAYANAN = dd.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
+            UNION ALL
+        SELECT
+        ee.FN_ID AS FN_ID,
+        ee.FD_DATE,
+        ff.FS_NM_LAYANAN AS FS_NM_LAYANAN,
+        [FJ_DS] AS FT_SUBJECTIVE,
+        [FJ_DO] AS FT_OBJECTIVE,
+        FS_TINDAKAN_TERAPI AS FT_ASSESMENT,
+        NULL AS FS_PLAN1,
+        NULL AS FS_PLAN2,
+        NULL AS FS_PLAN3,
+        NULL AS FS_PLAN4,
+        [FS_PROFESI] AS FS_PROFESI,
+        NULL AS FS_VERIFIED_BY,
+        NULL AS FS_DPJP,
+        NULL AS FS_USER,
+        'asesmen_dokter' AS TB_FROM,
+        null AS TD,
+        null AS TB,
+        null AS NADI,
+        null AS BB,
+        null AS RESPIRASI,
+        null AS SUHU
+        FROM TAR_ASESMEN_DOKTER ee
+        left join TA_LAYANAN ff on ee.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
+        where FS_MR = '$nomorMr'
 
         order by FN_ID desc";
         $data['CPPT']= DB::select($QUERY_CPPT);
-        // dd($data['CPPT']);
+
+
+
         // --- RIWAYAT KUNJUNGAN
         $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk, fs_nm_layanan, fs_nm_peg fs_dokter
         from	TA_REGISTRASI aa

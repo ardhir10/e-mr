@@ -81,7 +81,14 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
+// --- ASESMEN PERAWAT
 Route::get('/asesmen/awal-dewasa/perawat/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenController@awalPerawat')->name('asesmen.awal-dewasa.perawat');
+Route::get('/asesmen/awal-dewasa/perawat-detail/{type}/{id}', 'AsesmenController@detailPerawat')->name('asesmen.detail.perawat');
 Route::post('/asesmen/awal-dewasa/perawat', 'AsesmenController@store')->name('asesmen-awal-perawat.store');
 
+// --- ASESMEN DOKTER
+Route::get('/asesmen/awal-dewasa/dokter/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenDokterController@create')->name('asesmen.awal-dewasa.dokter');
+Route::post('/asesmen/awal-dewasa/dokter', 'AsesmenDokterController@store')->name('asesmen-awal-dokter.store');
+Route::get('/asesmen/awal-dewasa/dokter-detail/{type}/{id}', 'AsesmenDokterController@detail')->name('asesmen.detail.dokter');
 

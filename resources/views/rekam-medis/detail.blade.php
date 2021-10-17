@@ -331,7 +331,10 @@
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
-                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">DOKTER</a>
+                                                    </li>
                                                 </ul>
                                             </div>
 
@@ -364,7 +367,10 @@
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
-                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                    <li>
+                                                         <a class="dropdown-item"
+                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Anak',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">DOKTER</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -396,7 +402,7 @@
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
-                                                    <li><a class="dropdown-item" href="#">DOKTER</a></li>
+                                                    <li><a class="dropdown-item" href="#">DOKTER (Masih Error)</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -473,7 +479,14 @@
                                                     style="d-block">{{date('d-m-Y H:i:s',strtotime($cppt->FD_DATE))}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
-                                                <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
+                                                @if ($cppt->TB_FROM == 'cppt')
+                                                    <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
+
+                                                @elseif ($cppt->TB_FROM == 'asesmen_dokter')
+                                                    <a href="{{route('asesmen.detail.dokter',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
+                                                @else
+                                                    <a href="{{route('asesmen.detail.perawat',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
+                                                @endif
                                             </td>
                                             <td style="vertical-align:top;">
                                                 {{$cppt->FS_PROFESI}}
@@ -485,8 +498,11 @@
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">S:
                                                             </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FT_SUBJECTIVE}}
-                                                            </td>
+                                                            @if ($cppt->TB_FROM == 'asesmen_dokter')
+                                                                <td style="border: 0px !important;">{{json_decode($cppt->FT_SUBJECTIVE)->Text}}</td>
+                                                            @else
+                                                                <td style="border: 0px !important;">{{$cppt->FT_SUBJECTIVE}}</td>
+                                                            @endif
                                                         </tr>
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">O:
@@ -495,6 +511,18 @@
                                                             @if ($cppt->TB_FROM == 'cppt')
                                                                 <td style="border: 0px !important;">{{$cppt->FT_OBJECTIVE}}
                                                                 </td>
+                                                            @elseif ($cppt->TB_FROM == 'asesmen_dokter')
+                                                            <td style="border: 0px !important;">
+                                                                <ul>
+                                                                    <li>Keadaan Umum : {{json_decode($cppt->FT_OBJECTIVE)->KeadaanUmum}}</li>
+                                                                    <li>Kesadaran : {{json_decode($cppt->FT_OBJECTIVE)->Kesadaran}}</li>
+                                                                    <li>TD : {{json_decode($cppt->FT_OBJECTIVE)->TD}} mmHg</li>
+                                                                    <li>Nadi : {{json_decode($cppt->FT_OBJECTIVE)->Nadi}} x/menit</li>
+                                                                    <li>Respirasi : {{json_decode($cppt->FT_OBJECTIVE)->Respirasi}} x/menit</li>
+                                                                    <li>Suhu : {{json_decode($cppt->FT_OBJECTIVE)->Suhu}} C</li>
+                                                                </ul>
+                                                            </td>
+
                                                             @else
                                                                 <td style="border: 0px !important;">
                                                                     <ul>
@@ -507,10 +535,7 @@
                                                                     </ul>
                                                                 </td>
                                                             @endif
-
-
                                                         </tr>
-
                                                         @if ($cppt->TB_FROM == 'cppt')
                                                             <tr>
                                                                 <td style="border: 0px !important;vertical-align:top;">A:
@@ -562,6 +587,19 @@
                                                         </tr>
                                                     </table>
                                                 </div>
+                                                @endif
+
+                                                @if ($cppt->TB_FROM == 'asesmen_dokter')
+                                                    {{-- <ul>
+                                                        <li>Pulang <input type="checkbox" disabled {{json_decode($cppt->FT_ASSESMENT)->Pulang == 'on' ? 'checked' : ''}}></li>
+                                                        <li>Kontrol Tgl : {{json_decode($cppt->FT_ASSESMENT)->KontrolTanggalText}}</li>
+                                                        <li>Konsul Ke : {{json_decode($cppt->FT_ASSESMENT)->KonsulKeText}}</li>
+                                                        <li>Rujuk Ke : {{json_decode($cppt->FT_ASSESMENT)->RujukKeText}}</li>
+                                                        <li>Ruang Rawat : {{json_decode($cppt->FT_ASSESMENT)->RawatInapText}}</li>
+                                                    </ul> --}}
+                                                    <span>{{$cppt->FT_ASSESMENT}}</span>
+                                                @else
+
                                                 @endif
 
 

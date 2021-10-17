@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AsesmenController extends Controller
 {
     public function awalPerawat($from,$type,$nomorMr,$kdDokter = '', $kdReg=''){
-        $data['page_title'] = "Asesmen Awal Rawat Jalan";
+        $data['page_title'] = "Asesmen Awal";
         $data['kd_reg'] = $kdReg;
         $data['from'] = $from;
         $data['type'] = $type;
@@ -223,5 +223,54 @@ class AsesmenController extends Controller
 
 
         // DB::table('TAR_ASESMEN_PERAWAT')->insert($parameterInsert);
+    }
+
+    public function detailPerawat($type,$id){
+        $data['page_title'] = "Detail Asesmen Awal ";
+        $data['type'] = $type;
+        $data['from'] = 'ALL';
+
+
+        $dataAsesmenPerawat = AsesmenPerawat::find($id);
+        $data['data_asesmen'] = $dataAsesmenPerawat;
+
+        // --- DETAIL HEADER
+        $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
+        aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
+        from
+        tc_mr aa
+        inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
+        inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
+        inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+
+        where aa.FS_MR = '$dataAsesmenPerawat->FS_MR'";
+        if ($dataAsesmenPerawat->FS_KD_PEG != '') {
+            $QUERY .= "and dd.FS_KD_PEG = '$dataAsesmenPerawat->FS_KD_PEG'";
+        }
+        if ($dataAsesmenPerawat->FS_REGISTER != '') {
+            $QUERY .= "and cc.FS_KD_REG = '$dataAsesmenPerawat->FS_REGISTER'";
+        }
+
+        $QUERY .= 'ORDER BY cc.FS_KD_REG desc';
+        $dataRekamMedis = DB::select($QUERY);
+        if (count($dataRekamMedis) < 1) {
+            $dataRekamMedis = [];
+        } else {
+            $dataRekamMedis = $dataRekamMedis[0];
+        }
+        // dd($dataAsesmenPerawat);
+
+        $data['rekam_medis'] = $dataRekamMedis;
+
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
+
+        return view('asesmen.awal-perawat-detail', $data);
     }
 }
