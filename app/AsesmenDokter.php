@@ -13,8 +13,8 @@ class AsesmenDokter extends Model
         'FJ_DIAGNOSA_SEKUNDER' => 'array',
         'FJ_RENCANA_TINDAK_LANJUT' => 'array'
     ];
-    protected $guarded = [];
 
+    protected $guarded = [];
     protected $table = 'TAR_ASESMEN_DOKTER';
     protected $primaryKey = 'FN_ID';
 

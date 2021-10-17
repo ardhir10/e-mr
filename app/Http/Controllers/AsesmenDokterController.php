@@ -174,9 +174,9 @@ class AsesmenDokterController extends Controller
         $data['from'] = 'ALL';
 
 
-        $dataAsesmenPerawat = AsesmenDokter::find($id);
-        $data['data_asesmen'] = $dataAsesmenPerawat;
-
+        $dataAsesmen = AsesmenDokter::find($id);
+        $data['data_asesmen'] = $dataAsesmen;
+        // dd($dataAsesmen);
         // --- DETAIL HEADER
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
@@ -188,12 +188,12 @@ class AsesmenDokterController extends Controller
         inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
         inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
 
-        where aa.FS_MR = '$dataAsesmenPerawat->FS_MR'";
-        if ($dataAsesmenPerawat->FS_KD_PEG != '') {
-            $QUERY .= "and dd.FS_KD_PEG = '$dataAsesmenPerawat->FS_KD_PEG'";
+        where aa.FS_MR = '$dataAsesmen->FS_MR'";
+        if ($dataAsesmen->FS_KD_PEG != '') {
+            $QUERY .= "and dd.FS_KD_PEG = '$dataAsesmen->FS_KD_PEG'";
         }
-        if ($dataAsesmenPerawat->FS_REGISTER != '') {
-            $QUERY .= "and cc.FS_KD_REG = '$dataAsesmenPerawat->FS_REGISTER'";
+        if ($dataAsesmen->FS_REGISTER != '') {
+            $QUERY .= "and cc.FS_KD_REG = '$dataAsesmen->FS_REGISTER'";
         }
 
         $QUERY .= 'ORDER BY cc.FS_KD_REG desc';
@@ -203,7 +203,7 @@ class AsesmenDokterController extends Controller
         } else {
             $dataRekamMedis = $dataRekamMedis[0];
         }
-        // dd($dataAsesmenPerawat);
+        // dd($dataAsesmen);
 
         $data['rekam_medis'] = $dataRekamMedis;
 

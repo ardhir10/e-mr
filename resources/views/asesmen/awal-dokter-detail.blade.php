@@ -233,12 +233,12 @@
                                                                                         class="d-block fw-bold text-decoration-underline">Data
                                                                                         Subyektif</span>
                                                                                     <span class="d-block fst-italic"
-                                                                                        style="">Subjective Data</span>
+                                                                                        style="">Subjective Data </span>
                                                                                 </td>
                                                                                 <td class="d-flex p-0">
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="checkbox"
+                                                                                        <input type="checkbox" {{$data_asesmen->FJ_DS['Auto'] == 'on' ? 'checked':''}}
                                                                                             name="cDsAuto">
                                                                                         Auto
                                                                                     </div>
@@ -246,7 +246,7 @@
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         <input type="checkbox"
-                                                                                            name="cDsAllo">
+                                                                                            name="cDsAllo" {{$data_asesmen->FJ_DS['Allo'] == 'on' ? 'checked':''}}>
                                                                                         <span class="align-top">Allo
                                                                                             :</span>
                                                                                     </div>
@@ -254,7 +254,7 @@
                                                                                         style="margin-left:30px;width: 510px;">
                                                                                         <textarea name="cDsText" id=""
                                                                                             cols="30" rows="5"
-                                                                                            style="width:100%"></textarea>
+                                                                                            style="width:100%">{{$data_asesmen->FJ_DS['Text']}}</textarea>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -283,7 +283,7 @@
                                                                                         style="margin-left:30px;width: ;">
                                                                                         <textarea name="cRpd" id=""
                                                                                             cols="30"
-                                                                                            rows="5"></textarea>
+                                                                                            rows="5">{{$data_asesmen->FS_RPD}}</textarea>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td width="15%" class="p-0"
@@ -304,7 +304,7 @@
                                                                                         style="margin-left:30px;width:;">
                                                                                         <textarea name="cRo" id=""
                                                                                             cols="30"
-                                                                                            rows="5"></textarea>
+                                                                                            rows="5">{{$data_asesmen->FS_RO}}</textarea>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
@@ -333,7 +333,7 @@
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['KeadaanUmum']}}"
                                                                                             name="cDoKeadaanUmum">
 
                                                                                     </div>
@@ -348,7 +348,7 @@
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Kesadaran']}}"
                                                                                             name="cDoKesadaran">
 
                                                                                     </div>
@@ -360,19 +360,19 @@
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">E
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSE']}}"
                                                                                             name="cDoGCSE">
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">V
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSV']}}"
                                                                                             name="cDoGCSV">
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">M
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSM']}}"
                                                                                             name="cDoGCSM">
 
                                                                                     </div>
@@ -383,28 +383,28 @@
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         TD :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['TD']}}"
                                                                                             name="cDoTD">
                                                                                         mmHg
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         Nadi :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Nadi']}}"
                                                                                             name="cDoNadi">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         Respirasi :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Respirasi']}}"
                                                                                             name="cDoRespirasi">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         Suhu :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Suhu']}}"
                                                                                             name="cDoSuhu">
                                                                                         C
                                                                                     </div>
@@ -444,83 +444,83 @@
                                             <tr>
                                                 <td>Kepala / <span class="fst-italic">Head</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfKepalaNormal" style="width:100%;">
+                                                    <input type="text" name="cPfKepalaNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['KepalaNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfKepalaTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfKepalaTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['KepalaTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Mulut / <span class="fst-italic">Mouth</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfMulutNormal" style="width:100%;">
+                                                    <input type="text" name="cPfMulutNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['MulutNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfMulutTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfMulutTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['MulutTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Leher / <span class="fst-italic">Neck</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfLeherNormal" style="width:100%;">
+                                                    <input type="text" name="cPfLeherNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['LeherNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfLeherTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfLeherTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['LeherTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Jantung / <span class="fst-italic">Cor</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfJantungNormal" style="width:100%;">
+                                                    <input type="text" name="cPfJantungNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['JantungNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfJantungTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfJantungTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['JantungTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Paru-paru / <span class="fst-italic">Pulmo</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfParuParuNormal" style="width:100%;">
+                                                    <input type="text" name="cPfParuParuNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['ParuParuNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfParuParuTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfParuParuTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['ParuParuTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Perut / <span class="fst-italic">Abdomen</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfPerutNormal" style="width:100%;">
+                                                    <input type="text" name="cPfPerutNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['PerutNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfPerutTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfPerutTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['PerutTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Alat Gerak / <span class="fst-italic">Extremities</span></td>
                                                 <td>
-                                                    <input type="text" name="cPfAlatGerakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfAlatGerakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['AlatGerakNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfAlatGerakTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfAlatGerakTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['AlatGerakTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Anus & Genitalia <span class="fst-italic"></span></td>
                                                 <td>
-                                                    <input type="text" name="cPfAnusGenitaliaNormal" style="width:100%;">
+                                                    <input type="text" name="cPfAnusGenitaliaNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['AnusGenitaliaNormal']}}">
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="cPfAnusGenitaliaTidakNormal" style="width:100%;">
+                                                    <input type="text" name="cPfAnusGenitaliaTidakNormal" style="width:100%;" value="{{$data_asesmen->FJ_PEMERIKSAAN_FISIK['AnusGenitaliaTidakNormal']}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <span class="fw-bold d-block">Pemeriksaan Penunjang : </span>
-                                                    <textarea name="cPemeriksaanPenunjang" id="" style="width: 100%" rows="4"></textarea>
+                                                    <textarea name="cPemeriksaanPenunjang" id="" style="width: 100%" rows="4">{{$data_asesmen->FS_PEMERIKSAAN_PENUNJANG}}</textarea>
                                                 </td>
                                                 <td colspan="3">
                                                     <span class="fw-bold d-block">TINDAKAN & TERAPI : </span>
-                                                    <textarea name="cTindakanTerapi" id="" style="width: 100%" rows="4"></textarea>
+                                                    <textarea name="cTindakanTerapi" id="" style="width: 100%" rows="4">{{$data_asesmen->FS_TINDAKAN_TERAPI}}</textarea>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -528,20 +528,20 @@
                                                 >
                                                     <span class="fw-bold d-block">Diagnosa Utama : (kode ICD 10) </span>
                                                     <select name="cKodeDiagnosis" class="form-control" id="">
-                                                        <option value="">---PILIH KODE DIAGNOSIS</option>
-                                                        <option value="DUMMYCODE">DUMMYCODE</option>
+                                                        <option {{$data_asesmen->FS_KODE_DIAGNOSIS == '' ? 'selected=selected' : ''}} value="">---PILIH KODE DIAGNOSIS</option>
+                                                        <option {{$data_asesmen->FS_KODE_DIAGNOSIS == 'DUMMYCODE' ? 'selected=selected' : ''}} value="DUMMYCODE">DUMMYCODE</option>
                                                     </select>
                                                     {{-- <textarea name="" id="" style="width: 100%" rows="4"></textarea> --}}
                                                     <hr>
                                                     <span class="fw-bold d-block">Diagnosa Sekunder : </span>
                                                     <ul>
-                                                        <li>1. <input type="text" name="cDiagnosaSekunder1"></li>
-                                                        <li>2. <input type="text" name="cDiagnosaSekunder2"></li>
+                                                        <li>1. <input type="text" value="{{$data_asesmen->FJ_DIAGNOSA_SEKUNDER[1]}}" name="cDiagnosaSekunder1"></li>
+                                                        <li>2. <input type="text" value="{{$data_asesmen->FJ_DIAGNOSA_SEKUNDER[2]}}" name="cDiagnosaSekunder2"></li>
                                                     </ul>
                                                 </td>
                                                 <td colspan="3" style="vertical-align: top">
                                                     <span class="fw-bold d-block"></span>
-                                                    <textarea name="cDetailDiagnosis" id="" style="width: 100%" rows="10"></textarea>
+                                                    <textarea name="cDetailDiagnosis" id="" style="width: 100%" rows="10">{{$data_asesmen->FS_DETAIL_DIAGNOSIS}}</textarea>
                                                 </td>
                                             </tr>
 
@@ -550,36 +550,36 @@
                                         <ul>
                                             <li class="d-flex">
                                                 <div class="m-r-1" style="margin-left:30px;">
-                                                    <input type="checkbox" name="cRtlPulang">
+                                                    <input type="checkbox" name="cRtlPulang" {{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['Pulang'] == 'on' ? 'checked':''}}>
                                                     <span class="align-top">Pulang</span>
                                                 </div>
                                             </li>
                                             <li class="d-flex">
                                                 <div class="m-r-1" style="margin-left:30px;">
-                                                    <input type="checkbox" name="cRtlKontrolTanggal">
+                                                    <input type="checkbox" name="cRtlKontrolTanggal" {{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['KontrolTanggal'] == 'on' ? 'checked':''}}>
                                                     <span class="align-top">Kontrol Tanggal : </span>
-                                                    <input type="date" name="cRtlKontrolTanggalText">
+                                                    <input type="date" name="cRtlKontrolTanggalText" value="{{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['KontrolTanggalText']}}">
                                                 </div>
                                             </li>
                                             <li class="d-flex">
                                                 <div class="m-r-1" style="margin-left:30px;">
-                                                    <input type="checkbox" name="cRtlKonsulKe">
+                                                    <input type="checkbox" name="cRtlKonsulKe" {{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['KonsulKe'] == 'on' ? 'checked':''}}>
                                                     <span class="align-top">Konsul Ke : </span>
-                                                    <input type="text" name="cRtlKontulKeText">
+                                                    <input type="text" name="cRtlKontulKeText" value="{{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['KonsulKeText']}}">
                                                 </div>
                                             </li>
                                             <li class="d-flex">
                                                 <div class="m-r-1" style="margin-left:30px;">
-                                                    <input type="checkbox" name="cRtlRujukKe">
+                                                    <input type="checkbox" name="cRtlRujukKe" {{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['RujukKe'] == 'on' ? 'checked':''}}>
                                                     <span class="align-top">Rujuk Ke : </span>
-                                                    <input type="text" name="cRtlRujukKeText">
+                                                    <input type="text" name="cRtlRujukKeText" value="{{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['RujukKeText']}}">
                                                 </div>
                                             </li>
                                             <li class="d-flex">
                                                 <div class="m-r-1" style="margin-left:30px;">
-                                                    <input type="checkbox" name="cRtlRawatInap">
+                                                    <input type="checkbox" name="cRtlRawatInap" {{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['RawatInap'] == 'on' ? 'checked':''}}>
                                                     <span class="align-top">Rawat Inap , Ruangan : </span>
-                                                    <input type="text" name="cRtlRawatInapText">
+                                                    <input type="text" name="cRtlRawatInapText" value="{{$data_asesmen->FJ_RENCANA_TINDAK_LANJUT['RawatInapText']}}">
                                                 </div>
                                             </li>
                                         </ul>
