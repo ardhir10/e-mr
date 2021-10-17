@@ -212,7 +212,7 @@ class RekamMedisController extends Controller
         left join TA_LAYANAN ff on ee.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
 
-        order by FN_ID desc";
+        order by FD_DATE desc";
         $data['CPPT']= DB::select($QUERY_CPPT);
 
 
