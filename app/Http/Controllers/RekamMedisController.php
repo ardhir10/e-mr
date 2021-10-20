@@ -186,6 +186,7 @@ class RekamMedisController extends Controller
         left join TA_LAYANAN dd on cc.FS_KD_LAYANAN = dd.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
             UNION ALL
+
         SELECT
         ee.FN_ID AS FN_ID,
         ee.FD_DATE,
@@ -210,6 +211,33 @@ class RekamMedisController extends Controller
         null AS SUHU
         FROM TAR_ASESMEN_DOKTER ee
         left join TA_LAYANAN ff on ee.FS_KD_LAYANAN = ff.FS_KD_LAYANAN
+        where FS_MR = '$nomorMr'
+
+        UNION ALL
+        SELECT
+        gg.FN_ID AS FN_ID,
+        gg.FD_DATE,
+        hh.FS_NM_LAYANAN AS FS_NM_LAYANAN,
+        [FJ_DS] AS FT_SUBJECTIVE,
+        [FJ_DO] AS FT_OBJECTIVE,
+        FS_TINDAKAN_TERAPI AS FT_ASSESMENT,
+        NULL AS FS_PLAN1,
+        NULL AS FS_PLAN2,
+        NULL AS FS_PLAN3,
+        NULL AS FS_PLAN4,
+        [FS_PROFESI] AS FS_PROFESI,
+        NULL AS FS_VERIFIED_BY,
+        NULL AS FS_DPJP,
+        NULL AS FS_USER,
+        'asesmen_dokter_bidan' AS TB_FROM,
+        null AS TD,
+        null AS TB,
+        null AS NADI,
+        null AS BB,
+        null AS RESPIRASI,
+        null AS SUHU
+        FROM TAR_ASESMEN_DOKTER_BIDAN gg
+        left join TA_LAYANAN hh on gg.FS_KD_LAYANAN = hh.FS_KD_LAYANAN
         where FS_MR = '$nomorMr'
 
         order by FD_DATE desc";

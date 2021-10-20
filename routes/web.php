@@ -92,3 +92,9 @@ Route::get('/asesmen/awal-dewasa/dokter/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?
 Route::post('/asesmen/awal-dewasa/dokter', 'AsesmenDokterController@store')->name('asesmen-awal-dokter.store');
 Route::get('/asesmen/awal-dewasa/dokter-detail/{type}/{id}', 'AsesmenDokterController@detail')->name('asesmen.detail.dokter');
 
+// --- ASESMEN BIDAN
+Route::get('/asesmen/awal-bidan/dokter/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenBidanController@create')->name('asesmen.awal-bidan.dokter');
+Route::post('/asesmen/awal-dewasa/dokter-bidan', 'AsesmenBidanController@store')->name('asesmen-awal-bidan-dokter.store');
+Route::get('/asesmen/awal-dewasa/dokter-bidan-detail/{type}/{id}', 'AsesmenBidanController@detail')->name('asesmen.detail.dokterbidan');
+
+
