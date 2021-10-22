@@ -162,9 +162,9 @@
                                             <td class="rightCol" width="60%">
                                                 <select class="form-select form-select-sm" id="" name="cProfesi" required>
                                                     <option value="">-- Pilih Profesi</option>
-                                                    <option {{ old('cProfesi') == 'Dokter' ? 'selected=selected' :'' }}
+                                                    <option
                                                         value="Dokter">Dokter</option>
-                                                    <option {{ old('cProfesi') == 'Perawat' ? 'selected=selected' :'' }}
+                                                    <option selected=selected
                                                         value="Perawat">Perawat</option>
                                                 </select>
                                             </td>
@@ -180,7 +180,7 @@
                                                     <option value="">-- Pilih Layanan/Bagian</option>
                                                     @foreach ($layanan_bagian as $lb)
                                                     <option
-                                                        {{old('cLayanan') == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
+                                                        {{$rekam_medis->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
                                                         value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
                                                     @endforeach
                                                 </select>
@@ -711,7 +711,7 @@
                                                                                 style="margin-right:30px;width:10%">
                                                                                 <input type="checkbox" name="cRpSekoSwasta"> <span
                                                                                     class="align-top">
-                                                                                    Swsasta</span> &nbsp;
+                                                                                    Swasta</span> &nbsp;
                                                                             </div>
                                                                             <div class="m-r-1"
                                                                                 style="margin-right:30px;width:10%">
@@ -855,12 +855,12 @@
                                                             Apakah ada nyeri
                                                             <div class="m-r-1"
                                                                 style="margin-left:30px;margin-right:30px">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnNyeriTidak"> <span class="align-top">
                                                                     Tidak</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnNyeriYa"> <span class="align-top">
                                                                     Ya</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -874,7 +874,7 @@
                                                             <div class="m-r-1"
                                                                 style="margin-left:30px;margin-right:30px">
                                                                 <span class="align-top"> Lokasi</span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnLokasi">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                         </li>
@@ -882,13 +882,13 @@
                                                             <div class="d-flex">
                                                                 <div class="m-r-1" style="margin-right:30px;width:35%">
                                                                     <span class="align-top"> Durasi</span> &nbsp;&nbsp;
-                                                                    <input type="text">
+                                                                    <input type="text" name="cSnDurasi">
                                                                     &nbsp;&nbsp;
                                                                 </div>
                                                                 <div class="m-r-1"
                                                                     style="margin-left:30px;margin-right:30px;">
                                                                     <span class="align-top"> Frekuensi</span>
-                                                                    <input type="text">
+                                                                    <input type="text" name="cSnFrekuensi">
                                                                     &nbsp;&nbsp;
                                                                 </div>
                                                             </div>
@@ -899,25 +899,25 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbMinumObat">
                                                                 <span class="align-top"> Minum Obat</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
-                                                                <span class="align-top"> Mendengarkan Musik</span>
+                                                                <input type="checkbox" name="cSnNhbMendengarkanMusik">
+                                                                <span class="align-top" > Mendengarkan Musik</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
 
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbIstirahat">
                                                                 <span class="align-top"> Istirahat</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbBerubahPosisiTidur">
                                                                 <span class="align-top"> Berubah Posisi/ Tidur </span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -925,9 +925,9 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbLainnya">
                                                                 <span class="align-top"> Lain-lain</span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnNhbLainnyaText">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                         </li>
@@ -937,13 +937,13 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:50%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnDkdYa">
                                                                 <span class="align-top"> Ya, pukul </span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnDkdPukul">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:50%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnDkdTidak">
                                                                 <span class="align-top"> Tidak</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -959,7 +959,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate0"> <span class="align-top">
                                                                     0</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -973,7 +973,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate1"> <span class="align-top">
                                                                     1-3</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -987,7 +987,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate2"> <span class="align-top">
                                                                     4-6</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -999,7 +999,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate3"> <span class="align-top">
                                                                     7-9</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1011,7 +1011,7 @@
                                                          <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate4"> <span class="align-top">
                                                                     10</span>
                                                                 &nbsp;&nbsp;
                                                             </div>

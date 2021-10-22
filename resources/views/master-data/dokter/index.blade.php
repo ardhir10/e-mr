@@ -15,7 +15,7 @@
 </div> --}}
 <!-- end page title -->
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header justify-content-between d-flex align-items-center">
                 <h4 class="card-title">{{$page_title}}</h4>

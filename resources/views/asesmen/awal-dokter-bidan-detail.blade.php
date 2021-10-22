@@ -33,7 +33,7 @@
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}} ({{$type}})</h5>
                     </div>
-                    <form action="{{route('asesmen-awal-dokter.store')}}" method="POST">
+                    <form action="{{route('asesmen-awal-dokter-bidan.update',$data_asesmen->FN_ID)}}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -501,19 +501,52 @@
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
-                                                                                            @foreach ($data_asesmen->FJ_RPSL as $item)
-                                                                                                @if ($item['PersalinanKe'] != null)
+                                                                                            @if ($data_asesmen->FJ_RPSL != '')
+                                                                                                        @for ($i = 0; $i < 5; $i++)
+                                                                                                            <tr>
+                                                                                                                <td><input type="number" name="cRpsl[{{$i}}][PersalinanKe]" value="{{$data_asesmen->FJ_RPSL[$i]['PersalinanKe']}}"></td>
+                                                                                                                <td>
+                                                                                                                    <select name="cRpsl[{{$i}}][Tahun]" id="">
+                                                                                                                    <?php
+                                                                                                                    for ($year = (int)date('Y'); 1900 <= $year; $year--): ?>
+                                                                                                                        <option {{$data_asesmen->FJ_RPSL[$i]['Tahun'] == $year ? 'selected=selected' : ''}} value="<?=$year;?>"><?=$year;?></option>
+                                                                                                                    <?php endfor; ?>
+                                                                                                                    </select>
+                                                                                                                </td>
+                                                                                                                <td><input type="text" name="cRpsl[{{$i}}][JenisPersalinan]" value="{{$data_asesmen->FJ_RPSL[$i]['JenisPersalinan']}}"></td>
+                                                                                                                <td><input type="text" name="cRpsl[{{$i}}][Sex]" value="{{$data_asesmen->FJ_RPSL[$i]['Sex']}}"></td>
+                                                                                                                <td><input type="number" name="cRpsl[{{$i}}][BeratLahir]" value="{{$data_asesmen->FJ_RPSL[$i]['BeratLahir']}}" step="0.01"></td>
+                                                                                                                <td><input type="text" name="cRpsl[{{$i}}][Keadaan]" value="{{$data_asesmen->FJ_RPSL[$i]['Keadaan']}}"></td>
+                                                                                                            </tr>
+                                                                                                        @endfor
+                                                                                                        {{-- <tr>
+                                                                                                            <td align="center">{{$item['PersalinanKe']}}</td>
+                                                                                                            <td align="center">{{$item['Tahun']}}</td>
+                                                                                                            <td align="center">{{$item['JenisPersalinan']}}</td>
+                                                                                                            <td align="center">{{$item['Sex']}}</td>
+                                                                                                            <td align="center">{{$item['BeratLahir']}}</td>
+                                                                                                            <td align="center">{{$item['Keadaan']}}</td>
+                                                                                                        </tr> --}}
+                                                                                            @else
+                                                                                                @for ($i = 0; $i < 5; $i++)
+                                                                                                    <tr>
+                                                                                                        <td><input type="number" name="cRpsl[{{$i}}][PersalinanKe]"></td>
+                                                                                                        <td>
+                                                                                                            <select name="cRpsl[{{$i}}][Tahun]" id="">
+                                                                                                            <?php
+                                                                                                            for ($year = (int)date('Y'); 1900 <= $year; $year--): ?>
+                                                                                                                <option value="<?=$year;?>"><?=$year;?></option>
+                                                                                                            <?php endfor; ?>
+                                                                                                            </select>
+                                                                                                        </td>
+                                                                                                        <td><input type="text" name="cRpsl[{{$i}}][JenisPersalinan]"></td>
+                                                                                                        <td><input type="text" name="cRpsl[{{$i}}][Sex]"></td>
+                                                                                                        <td><input type="number" name="cRpsl[{{$i}}][BeratLahir]" step="0.01"></td>
+                                                                                                        <td><input type="text" name="cRpsl[{{$i}}][Keadaan]"></td>
+                                                                                                    </tr>
+                                                                                                    @endfor
+                                                                                            @endif
 
-                                                                                                <tr>
-                                                                                                    <td align="center">{{$item['PersalinanKe']}}</td>
-                                                                                                    <td align="center">{{$item['Tahun']}}</td>
-                                                                                                    <td align="center">{{$item['JenisPersalinan']}}</td>
-                                                                                                    <td align="center">{{$item['Sex']}}</td>
-                                                                                                    <td align="center">{{$item['BeratLahir']}}</td>
-                                                                                                    <td align="center">{{$item['Keadaan']}}</td>
-                                                                                                </tr>
-                                                                                                @endif
-                                                                                            @endforeach
 
                                                                                         </tbody>
 
@@ -765,10 +798,10 @@
 
 
                             <div style="margin-top:20px;">
-                                {{-- <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success">
                                     <i class="fa fa-save"></i>
                                     SAVE
-                                </button> --}}
+                                </button>
 
                                 <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>

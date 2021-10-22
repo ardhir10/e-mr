@@ -71,6 +71,12 @@
         box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
     }
 
+    .table-catatan-perkembangan tr:nth-child(even) {
+          background-color: #b5d3e754;
+    }
+    .detail-harp tr {
+          background-color:transparent !important;
+    }
     .table-catatan-perkembangan th {
         font-size: 11px !important;
         border: 1px solid #ebebeb;
@@ -426,11 +432,11 @@
                                 <h6 style="font-style: italic;">RIWAYAT KUNJUNGAN PASIEN</h6>
                                 <div style="" class="style-3 ">
                                 {{-- <div style="max-height: 400px;overflow-y:auto;" class="style-3"> --}}
-                                    <table class="cell-border table-catatan-perkembangan"
+                                    <table class="table table-striped table-catatan-perkembangan"
                                         style="border-collapse: collapse;width: 100%;" id="data-table2">
                                         <thead>
                                             <tr style="">
-                                                <th>Tanggal</th>
+                                                 <th>Tanggal</th>
                                                 <th>Bagian
                                                     Layanan</th>
                                                 <th>Dokter</th>
@@ -441,9 +447,10 @@
 
                                             @foreach ($riwayat_kunjungan as $rk)
                                             <tr>
-                                                <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
+                                                 <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
                                                 <td style="padding:2px ;">
-                                                    {{$rk->fs_nm_layanan}}</td>
+                                                    {{$rk->fs_nm_layanan}}
+                                                </td>
                                                 <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
                                                 <td style="padding:2px ;">
                                                     <input type="checkbox" class="" checked>
@@ -485,21 +492,29 @@
                                             <td style="vertical-align:top;">
                                                 @if ($cppt->TB_FROM == 'cppt')
                                                     <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
+                                                    <small>CPPT</small>
                                                 @elseif ($cppt->TB_FROM == 'asesmen_dokter')
                                                     <a href="{{route('asesmen.detail.dokter',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
+                                                    <small>Asesmen Dokter</small>
+
                                                 @elseif ($cppt->TB_FROM == 'asesmen_dokter_bidan')
                                                     <a href="{{route('asesmen.detail.dokterbidan',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
+                                                    <small>Asesmen Dokter Bidan</small>
+
                                                 @else
                                                     <a href="{{route('asesmen.detail.perawat',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
+                                                    <small>Asesmen Perawat</small>
+
                                                 @endif
                                             </td>
                                             <td style="vertical-align:top;">
-                                                {{$cppt->FS_PROFESI}}
-                                                <span class="badge bg-secondary">{{$cppt->FS_NM_LAYANAN}}</span>
+                                                <span class="badge bg-primary " style="font-size: 10px;margin-bottom:3px;">{{$cppt->FS_PROFESI}}</span>
+                                                <span class="badge bg-secondary " style="font-size: 10px">{{$cppt->FS_NM_LAYANAN}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <div style=" height: 200px;overflow: auto;" class="style-3 detail-soap">
-                                                    <table class="no-border " >
+                                                    <table class="no-border detail-harp" >
+                                                        {{-- SUBJECTIVE --}}
                                                         <tr>
                                                             <td style="border: 0px !important;vertical-align:top;">S:
                                                             </td>
@@ -509,7 +524,9 @@
                                                                 <td style="border: 0px !important;">{{$cppt->FT_SUBJECTIVE}}</td>
                                                             @endif
                                                         </tr>
-                                                        <tr>
+
+                                                        {{-- OBJECTIVE --}}
+                                                        <tr class="different">
                                                             <td style="border: 0px !important;vertical-align:top;">O:
                                                             </td>
 
@@ -557,6 +574,7 @@
                                                             @endif
                                                         </tr>
                                                         @if ($cppt->TB_FROM == 'cppt')
+                                                            {{-- OBJECTIVE --}}
                                                             <tr>
                                                                 <td style="border: 0px !important;vertical-align:top;">A:
                                                                 </td>
@@ -568,10 +586,18 @@
                                                                 </td>
                                                                 <td style="border: 0px !important;">
                                                                     <ul style="padding: 0px;">
+                                                                        @if ($cppt->FS_PLAN1 != '')
                                                                         <li style="margin-bottom:10px;" class="testPosition">1 : {{$cppt->FS_PLAN1}}</li>
+                                                                        @endif
+                                                                        @if ($cppt->FS_PLAN2 != '')
                                                                         <li style="margin-bottom:10px;">2 : {{$cppt->FS_PLAN2}}</li>
+                                                                        @endif
+                                                                        @if ($cppt->FS_PLAN3 != '')
                                                                         <li style="margin-bottom:10px;">3 : {{$cppt->FS_PLAN3}}</li>
+                                                                        @endif
+                                                                        @if ($cppt->FS_PLAN4 != '')
                                                                         <li style="margin-bottom:10px;">4 : {{$cppt->FS_PLAN4}}</li>
+                                                                        @endif
                                                                     </ul>
                                                                 </td>
                                                             </tr>
@@ -626,15 +652,50 @@
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <span class="d-block">Verified By :</span>
-                                                @if ($cppt->FS_VERIFIED_BY)
-                                                <span class="d-block">{{$cppt->FS_DPJP}}</span>
-                                                <a href="{{route('cppt.unverified',$cppt->FN_ID)}}">
-                                                    <button class="btn btn-sm btn-danger">Unverify</button>
-                                                </a>
+                                                @if ($cppt->TB_FROM == 'cppt')
+                                                     @if ($cppt->FS_VERIFIED_BY)
+                                                        <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                        <a href="{{route('cppt.unverified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-danger">Unverify</button>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{route('cppt.verified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-success">Verify</button>
+                                                        </a>
+                                                    @endif
+                                                @elseif ($cppt->TB_FROM == 'asesmen_dokter')
+                                                    @if ($cppt->FS_VERIFIED_BY)
+                                                        <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                        <a href="{{route('asesmen-dokter.unverified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-danger">Unverify</button>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{route('asesmen-dokter.verified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-success">Verify</button>
+                                                        </a>
+                                                    @endif
+                                                @elseif ($cppt->TB_FROM == 'asesmen_dokter_bidan')
+                                                    @if ($cppt->FS_VERIFIED_BY)
+                                                        <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                        <a href="{{route('asesmen-dokter-bidan.unverified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-danger">Unverify</button>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{route('asesmen-dokter-bidan.verified',$cppt->FN_ID)}}">
+                                                            <button class="btn btn-sm btn-success">Verify</button>
+                                                        </a>
+                                                    @endif
                                                 @else
-                                                <a href="{{route('cppt.verified',$cppt->FN_ID)}}">
-                                                    <button class="btn btn-sm btn-success">Verify</button>
-                                                </a>
+                                                    @if ($cppt->FS_VERIFIED_BY)
+                                                            <span class="d-block">{{$cppt->FS_DPJP}}</span>
+                                                            <a href="{{route('asesmen-perawat.unverified',$cppt->FN_ID)}}">
+                                                                <button class="btn btn-sm btn-danger">Unverify</button>
+                                                            </a>
+                                                        @else
+                                                            <a href="{{route('asesmen-perawat.verified',$cppt->FN_ID)}}">
+                                                                <button class="btn btn-sm btn-success">Verify</button>
+                                                            </a>
+                                                        @endif
                                                 @endif
 
                                             </td>
@@ -667,18 +728,20 @@
 <script>
     $('#data-table').DataTable({});
     $('#data-table2').DataTable({
-        // "bPaginate": false,
+        "bPaginate": false,
         "bLengthChange": false,
         "bFilter": true,
         "bInfo": false,
         "bAutoWidth": false,
-        "columnDefs": [{
+        "order": [[ 0, "desc" ]],
+        "columnDefs": [
+            {
                 "orderable": false,
                 "targets": [3]
             },
             {
                 "orderable": true,
-                "targets": [0, 1, 2]
+                "targets": [[ 0, "desc" ], 1, 2]
             }
         ]
         //   "ordering": false

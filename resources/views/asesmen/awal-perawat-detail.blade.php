@@ -29,12 +29,15 @@
         <!-- end page title -->
 
         <div class="row">
+            <div class="col-12">
+                @include('components.flash-message')
+            </div>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">{{$page_title}} ({{$type}})</h5>
+                        <h5 class="card-title">{{$page_title}}</h5>
                     </div>
-                    <form action="{{route('asesmen-awal-perawat.store')}}" method="POST">
+                    <form action="{{route('asesmen-awal-perawat.update',$data_asesmen->FN_ID)}}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -883,12 +886,12 @@
                                                             Apakah ada nyeri
                                                             <div class="m-r-1"
                                                                 style="margin-left:30px;margin-right:30px">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox"  name="cSnNyeriTidak" {{$data_asesmen->FJ_SN_NYERI['Tidak'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     Tidak</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnNyeriYa" {{$data_asesmen->FJ_SN_NYERI['Ya'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     Ya</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -896,13 +899,13 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px">
                                                                 <span class="align-top"> Skala nyeri</span>
-                                                                <input type="text">
+                                                                <input type="text" value="{{$data_asesmen->FS_SN_NYERI}}">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1"
                                                                 style="margin-left:30px;margin-right:30px">
                                                                 <span class="align-top"> Lokasi</span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnLokasi" value="{{$data_asesmen->FS_SN_LOKASI}}">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                         </li>
@@ -910,13 +913,13 @@
                                                             <div class="d-flex">
                                                                 <div class="m-r-1" style="margin-right:30px;width:35%">
                                                                     <span class="align-top"> Durasi</span> &nbsp;&nbsp;
-                                                                    <input type="text">
+                                                                    <input type="text" name="cSnDurasi" value="{{$data_asesmen->FS_SN_DURASI}}">
                                                                     &nbsp;&nbsp;
                                                                 </div>
                                                                 <div class="m-r-1"
                                                                     style="margin-left:30px;margin-right:30px;">
                                                                     <span class="align-top"> Frekuensi</span>
-                                                                    <input type="text">
+                                                                    <input type="text" name="cSnFrekuensi" value="{{$data_asesmen->FS_SN_FREKUENSI}}">
                                                                     &nbsp;&nbsp;
                                                                 </div>
                                                             </div>
@@ -927,12 +930,12 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbMinumObat" {{$data_asesmen->FJ_SN_NHB['MinumObat'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Minum Obat</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbMendengarkanMusik" {{$data_asesmen->FJ_SN_NHB['MendengarkanMusik'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Mendengarkan Musik</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -940,12 +943,12 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbIstirahat" {{$data_asesmen->FJ_SN_NHB['Istirahat'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Istirahat</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:25%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbBerubahPosisiTidur" {{$data_asesmen->FJ_SN_NHB['BerubahPosisiTidur'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Berubah Posisi/ Tidur </span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -953,9 +956,9 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnNhbLainnya" {{$data_asesmen->FJ_SN_NHB['Lainnya'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Lain-lain</span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnNhbLainnyaText" value="{{$data_asesmen->FJ_SN_NHB['LainnyaText']}}">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                         </li>
@@ -965,13 +968,13 @@
                                                         </li>
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px;width:50%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnDkdYa" {{$data_asesmen->FJ_SN_DKD['Ya'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Ya, pukul </span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnDkdPukul" value="{{$data_asesmen->FJ_SN_DKD['Pukul']}}">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:50%">
-                                                                <input type="checkbox">
+                                                                <input type="checkbox" name="cSnDkdTidak" {{$data_asesmen->FJ_SN_DKD['Tidak'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Tidak</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -987,7 +990,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox"  name="cSnRate0" {{$data_asesmen->FJ_SN_RATE['0'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     0</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1001,7 +1004,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate1" {{$data_asesmen->FJ_SN_RATE['1'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     1-3</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1015,7 +1018,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate2" {{$data_asesmen->FJ_SN_RATE['2'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     4-6</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1027,7 +1030,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate3" {{$data_asesmen->FJ_SN_RATE['3'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     7-9</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1039,7 +1042,7 @@
                                                          <li class="d-flex">
                                                             <div class="m-r-1"
                                                                 style="margin-right:30px;width:30%">
-                                                                <input type="checkbox"> <span class="align-top">
+                                                                <input type="checkbox" name="cSnRate4" {{$data_asesmen->FJ_SN_RATE['4'] == 'on' ?'checked':''}}> <span class="align-top">
                                                                     10</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
@@ -1061,10 +1064,10 @@
 
 
                             <div style="margin-top:20px;">
-                                {{-- <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success">
                                     <i class="fa fa-save"></i>
                                     SAVE
-                                </button> --}}
+                                </button>
 
                                 <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>

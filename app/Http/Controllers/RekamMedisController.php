@@ -172,8 +172,8 @@ class RekamMedisController extends Controller
         NULL AS FS_PLAN3,
         NULL AS FS_PLAN4,
         [FS_PROFESI] AS FS_PROFESI,
-        NULL AS FS_VERIFIED_BY,
-        NULL AS FS_DPJP,
+        FS_VERIFIED_BY AS FS_VERIFIED_BY,
+        FS_DPJP AS FS_DPJP,
         NULL AS FS_USER,
         'asesmen' AS TB_FROM,
         [FN_PF_TD] AS TD,
@@ -199,8 +199,8 @@ class RekamMedisController extends Controller
         NULL AS FS_PLAN3,
         NULL AS FS_PLAN4,
         [FS_PROFESI] AS FS_PROFESI,
-        NULL AS FS_VERIFIED_BY,
-        NULL AS FS_DPJP,
+        FS_VERIFIED_BY AS FS_VERIFIED_BY,
+        FS_DPJP AS FS_DPJP,
         NULL AS FS_USER,
         'asesmen_dokter' AS TB_FROM,
         null AS TD,
@@ -226,8 +226,8 @@ class RekamMedisController extends Controller
         NULL AS FS_PLAN3,
         NULL AS FS_PLAN4,
         [FS_PROFESI] AS FS_PROFESI,
-        NULL AS FS_VERIFIED_BY,
-        NULL AS FS_DPJP,
+        FS_VERIFIED_BY AS FS_VERIFIED_BY,
+        FS_DPJP AS FS_DPJP,
         NULL AS FS_USER,
         'asesmen_dokter_bidan' AS TB_FROM,
         null AS TD,
@@ -253,7 +253,7 @@ class RekamMedisController extends Controller
         inner	join TD_PEG dd on aa.FS_KD_MEDIS = dd.fs_kd_peg
         where	bb.fs_mr = '$nomorMr'
         and		aa.fd_tgl_void = '3000-01-01'
-        order	by aa.FD_TGL_MASUK desc, FS_NM_LAYANAN";
+        order	by aa.fd_tgl_masuk desc";
         $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
 
 

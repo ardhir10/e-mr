@@ -86,15 +86,27 @@ Route::middleware('auth')->group(function () {
 Route::get('/asesmen/awal-dewasa/perawat/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenController@awalPerawat')->name('asesmen.awal-dewasa.perawat');
 Route::get('/asesmen/awal-dewasa/perawat-detail/{type}/{id}', 'AsesmenController@detailPerawat')->name('asesmen.detail.perawat');
 Route::post('/asesmen/awal-dewasa/perawat', 'AsesmenController@store')->name('asesmen-awal-perawat.store');
+Route::post('/asesmen/awal-dewasa/perawat/{id}/update', 'AsesmenController@update')->name('asesmen-awal-perawat.update');
+Route::get('/asesmen/awal-dewasa/verified/{id}', 'AsesmenController@verified')->name('asesmen-perawat.verified');
+Route::get('/asesmen/awal-dewasa/unverified/{id}', 'AsesmenController@unverified')->name('asesmen-perawat.unverified');
+
 
 // --- ASESMEN DOKTER
 Route::get('/asesmen/awal-dewasa/dokter/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenDokterController@create')->name('asesmen.awal-dewasa.dokter');
 Route::post('/asesmen/awal-dewasa/dokter', 'AsesmenDokterController@store')->name('asesmen-awal-dokter.store');
 Route::get('/asesmen/awal-dewasa/dokter-detail/{type}/{id}', 'AsesmenDokterController@detail')->name('asesmen.detail.dokter');
+Route::get('/asesmen/awal-dewasa/dokter/verified/{id}', 'AsesmenDokterController@verified')->name('asesmen-dokter.verified');
+Route::get('/asesmen/awal-dewasa/dokter/unverified/{id}', 'AsesmenDokterController@unverified')->name('asesmen-dokter.unverified');
+Route::post('/asesmen/awal-dewasa/dokter/{id}/update', 'AsesmenDokterController@update')->name('asesmen-awal-dokter.update');
+
 
 // --- ASESMEN BIDAN
 Route::get('/asesmen/awal-bidan/dokter/{from}/{type}/{no}/{kd_dokter?}/{kd_reg?}', 'AsesmenBidanController@create')->name('asesmen.awal-bidan.dokter');
 Route::post('/asesmen/awal-dewasa/dokter-bidan', 'AsesmenBidanController@store')->name('asesmen-awal-bidan-dokter.store');
 Route::get('/asesmen/awal-dewasa/dokter-bidan-detail/{type}/{id}', 'AsesmenBidanController@detail')->name('asesmen.detail.dokterbidan');
+Route::get('/asesmen/awal-dewasa/dokter-bidan/verified/{id}', 'AsesmenBidanController@verified')->name('asesmen-dokter-bidan.verified');
+Route::get('/asesmen/awal-dewasa/dokter-bidan/unverified/{id}', 'AsesmenBidanController@unverified')->name('asesmen-dokter-bidan.unverified');
+Route::post('/asesmen/awal-dewasa/dokter-bidan/{id}/update', 'AsesmenBidanController@update')->name('asesmen-awal-dokter-bidan.update');
+
 
 

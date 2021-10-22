@@ -15,7 +15,7 @@ class CpptController extends Controller
 
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
-        cc.FS_JAM_MASUK,dd.FS_NM_PEG,dd.FS_KD_PEG,fs_nm_jaminan
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,dd.FS_KD_PEG,fs_nm_jaminan,cc.FS_KD_LAYANAN
         from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
@@ -164,8 +164,6 @@ class CpptController extends Controller
             return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
         }
 
-
-
         // --- HANDLE PROCESS
         try {
             $dokter = DB::table('TD_PEG')->where('FS_KD_PEG', $kodePeg)->first();
@@ -189,8 +187,6 @@ class CpptController extends Controller
         if($kodePeg == null){
             return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
         }
-
-
 
         // --- HANDLE PROCESS
         try {

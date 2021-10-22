@@ -33,7 +33,7 @@
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}} ({{$type}})</h5>
                     </div>
-                    <form action="{{route('asesmen-awal-dokter.store')}}" method="POST">
+                    <form action="{{route('asesmen-awal-dokter.update',$data_asesmen->FN_ID)}}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -165,9 +165,9 @@
                                                 <select class="form-select form-select-sm" id="" name="cProfesi"
                                                     required>
                                                     <option value="">-- Pilih Profesi</option>
-                                                    <option {{ old('cProfesi') == 'Dokter' ? 'selected=selected' :'' }}
+                                                    <option {{ $data_asesmen->FS_PROFESI == 'Dokter' ? 'selected=selected' :'' }}
                                                         value="Dokter">Dokter</option>
-                                                    <option {{ old('cProfesi') == 'Perawat' ? 'selected=selected' :'' }}
+                                                    <option {{ $data_asesmen->FS_PROFESI == 'Perawat' ? 'selected=selected' :'' }}
                                                         value="Perawat">Perawat</option>
                                                 </select>
                                             </td>
@@ -184,7 +184,7 @@
                                                     <option value="">-- Pilih Layanan/Bagian</option>
                                                     @foreach ($layanan_bagian as $lb)
                                                     <option
-                                                        {{old('cLayanan') == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
+                                                        {{$data_asesmen->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
                                                         value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
                                                     @endforeach
                                                 </select>
@@ -589,10 +589,10 @@
 
 
                             <div style="margin-top:20px;">
-                                {{-- <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success">
                                     <i class="fa fa-save"></i>
                                     SAVE
-                                </button> --}}
+                                </button>
 
                                 <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>

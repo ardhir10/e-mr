@@ -20,7 +20,7 @@ class AsesmenDokterController extends Controller
         // --- DETAIL HEADER
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
-        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG,cc.FS_KD_LAYANAN
         from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
@@ -215,5 +215,165 @@ class AsesmenDokterController extends Controller
         $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
 
         return view('asesmen.awal-dokter-detail', $data);
+    }
+
+    public function update(Request $request,$id)
+    {
+
+
+        // --- BAGIAN VALIDASI
+        $messages = [
+            'cProfesi.required' => 'Profesi wajib diisi !',
+            'cLayanan.required' => 'Layanan wajib diisi !',
+        ];
+        $request->validate([
+            'cProfesi' => 'required',
+            'cLayanan' => 'required',
+        ], $messages);
+
+
+        $parameterInsert['FD_DATE'] = date('Y-m-d H:i:s');
+        $parameterInsert['FS_MR'] = $request->cNomorMR;
+        $parameterInsert['FS_KD_LAYANAN'] = $request->cLayanan;
+        $parameterInsert['FS_PROFESI'] = $request->cProfesi;
+        $parameterInsert['FS_DPJP'] = $request->cDpjp;
+        $parameterInsert['FS_USER'] = Auth::user()->name;
+        $parameterInsert['FS_REGISTER'] = $request->cRegister;
+        $parameterInsert['FS_KD_PEG'] = $request->cKdpeg;
+        $parameterInsert['FS_FROM'] = $request->cFrom;
+        $parameterInsert['FS_TYPE'] = $request->cType;
+        $parameterInsert['FS_VERIFIED_BY'] = null;
+
+        // --- PENGKAJIAN
+        $FJ_DS = [
+            'Auto' => $request->cDsAuto ?? null,
+            'Allo' => $request->cDsAllo ?? null,
+            'Text' => $request->cDsText ?? null,
+        ];
+        $parameterInsert['FJ_DS'] = json_encode($FJ_DS);
+        $parameterInsert['FS_RPD'] = $request->cRpd;
+        $parameterInsert['FS_RO'] = $request->cRo;
+
+        $FJ_DO = [
+            'KeadaanUmum' => $request->cDoKeadaanUmum ?? null,
+            'Kesadaran' => $request->cDoKesadaran ?? null,
+            'GCSE' => $request->cDoGCSE ?? null,
+            'GCSV' => $request->cDoGCSV ?? null,
+            'GCSM' => $request->cDoGCSM ?? null,
+            'TD' => $request->cDoTD ?? null,
+            'Nadi' => $request->cDoNadi ?? null,
+            'Respirasi' => $request->cDoRespirasi ?? null,
+            'Suhu' => $request->cDoSuhu ?? null,
+        ];
+        $parameterInsert['FJ_DO'] = json_encode($FJ_DO);
+        $FJ_PEMERIKSAAN_FISIK  = [
+            'KepalaNormal' => $request->cPfKepalaNormal ?? null,
+            'KepalaTidakNormal' => $request->cPfKepalaTidakNormal ?? null,
+            'MulutNormal' => $request->cPfMulutNormal ?? null,
+            'MulutTidakNormal' => $request->cPfMulutTidakNormal ?? null,
+            'LeherNormal' => $request->cPfLeherNormal ?? null,
+            'LeherTidakNormal' => $request->cPfLeherTidakNormal ?? null,
+            'JantungNormal' => $request->cPfJantungNormal ?? null,
+            'JantungTidakNormal' => $request->cPfJantungTidakNormal ?? null,
+            'ParuParuNormal' => $request->cPfParuParuNormal ?? null,
+            'ParuParuTidakNormal' => $request->cPfParuParuTidakNormal ?? null,
+            'PerutNormal' => $request->cPfPerutNormal ?? null,
+            'PerutTidakNormal' => $request->cPfPerutTidakNormal ?? null,
+            'AlatGerakNormal' => $request->cPfAlatGerakNormal ?? null,
+            'AlatGerakTidakNormal' => $request->cPfAlatGerakTidakNormal ?? null,
+            'AnusGenitaliaNormal' => $request->cPfAnusGenitaliaNormal ?? null,
+            'AnusGenitaliaTidakNormal' => $request->cPfAnusGenitaliaTidakNormal ?? null,
+        ];
+        $parameterInsert['FJ_PEMERIKSAAN_FISIK '] = json_encode($FJ_PEMERIKSAAN_FISIK);
+
+        $parameterInsert['FS_PEMERIKSAAN_PENUNJANG '] = $request->cPemeriksaanPenunjang;
+        $parameterInsert['FS_TINDAKAN_TERAPI'] = $request->cTindakanTerapi;
+        $parameterInsert['FS_KODE_DIAGNOSIS'] = $request->cKodeDiagnosis;
+
+        $FJ_DIAGNOSA_SEKUNDER = [
+            '1' => $request->cDiagnosaSekunder1 ?? null,
+            '2' => $request->cDiagnosaSekunder2 ?? null,
+        ];
+        $parameterInsert['FJ_DIAGNOSA_SEKUNDER'] = json_encode($FJ_DIAGNOSA_SEKUNDER);
+        $parameterInsert['FS_DETAIL_DIAGNOSIS'] = $request->cDetailDiagnosis;
+
+
+        $FJ_RENCANA_TINDAK_LANJUT = [
+            'Pulang' => $request->cRtlPulang ?? null,
+            'KontrolTanggal' => $request->cRtlKontrolTanggal ?? null,
+            'KontrolTanggalText' => $request->cRtlKontrolTanggalText ?? null,
+            'KonsulKe' => $request->cRtlKonsulKe ?? null,
+            'KonsulKeText' => $request->cRtlKontulKeText ?? null,
+            'RujukKe' => $request->cRtlRujukKe ?? null,
+            'RujukKeText' => $request->cRtlRujukKeText ?? null,
+            'RawatInap' => $request->cRtlRawatInap ?? null,
+            'RawatInapText' => $request->cRtlRawatInapText ?? null,
+        ];
+        $parameterInsert['FJ_RENCANA_TINDAK_LANJUT'] = json_encode($FJ_RENCANA_TINDAK_LANJUT);
+
+        // dd($parameterInsert);
+        // --- HANDLE PROCESS
+        try {
+            AsesmenDokter::where('FN_ID', $id)->update($parameterInsert);
+
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil diupdate !']);
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+        }
+
+
+        // DB::table('TAR_ASESMEN_PERAWAT')->insert($parameterInsert);
+    }
+
+    public function verified($id)
+    {
+
+
+        $kodePeg = Auth::user()->fs_kd_peg;
+        if ($kodePeg == null) {
+            return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
+        }
+
+        // --- HANDLE PROCESS
+        try {
+            $dokter = DB::table('TD_PEG')->where('FS_KD_PEG', $kodePeg)->first();
+            $namaDokter = $dokter->FS_NM_PEG;
+            $dataUpdate = [
+                'FS_VERIFIED_BY' => $kodePeg,
+                'FS_DPJP' => $namaDokter
+            ];
+            DB::table('TAR_ASESMEN_DOKTER')
+            ->where('FN_ID', $id)
+                ->update($dataUpdate);
+            return redirect()->back()->with(['success' => 'Data berhasil di verifikasi !']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['failed' => $th->getMessage()]);
+        }
+    }
+
+    public function unverified($id)
+    {
+
+        $kodePeg = Auth::user()->fs_kd_peg;
+        if ($kodePeg == null) {
+            return redirect()->back()->with(['failed' => 'User tidak diizinkan !']);
+        }
+
+        // --- HANDLE PROCESS
+        try {
+            $dokter = DB::table('TD_PEG')->where('FS_KD_PEG', $kodePeg)->first();
+            $namaDokter = $dokter->FS_NM_PEG;
+            $dataUpdate = [
+                'FS_VERIFIED_BY' => null,
+                'FS_DPJP' => null
+            ];
+            DB::table('TAR_ASESMEN_DOKTER')
+            ->where('FN_ID', $id)
+                ->update($dataUpdate);
+            return redirect()->back()->with(['success' => 'Data berhasil di unverifikasi !']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['failed' => $th->getMessage()]);
+        }
     }
 }
