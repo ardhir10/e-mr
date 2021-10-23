@@ -327,7 +327,7 @@ class AsesmenBidanController extends Controller
     {
         $data['page_title'] = "Detail Asesmen Dokter ";
         $data['type'] = $type;
-        $data['from'] = 'ALL';
+        $data['from'] = $type;
 
 
         $dataAsesmen = AsesmenDokterBidan::find($id);

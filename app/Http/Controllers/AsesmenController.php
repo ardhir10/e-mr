@@ -266,7 +266,7 @@ class AsesmenController extends Controller
     public function detailPerawat($type,$id){
         $data['page_title'] = "Detail Asesmen Perawat";
         $data['type'] = $type;
-        $data['from'] = 'ALL';
+        $data['from'] = $type;
 
 
         $dataAsesmenPerawat = AsesmenPerawat::find($id);

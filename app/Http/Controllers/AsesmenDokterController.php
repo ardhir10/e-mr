@@ -171,7 +171,7 @@ class AsesmenDokterController extends Controller
     {
         $data['page_title'] = "Detail Asesmen Dokter ";
         $data['type'] = $type;
-        $data['from'] = 'ALL';
+        $data['from'] = $type;
 
 
         $dataAsesmen = AsesmenDokter::find($id);
@@ -311,7 +311,6 @@ class AsesmenDokterController extends Controller
         ];
         $parameterInsert['FJ_RENCANA_TINDAK_LANJUT'] = json_encode($FJ_RENCANA_TINDAK_LANJUT);
 
-        // dd($parameterInsert);
         // --- HANDLE PROCESS
         try {
             AsesmenDokter::where('FN_ID', $id)->update($parameterInsert);

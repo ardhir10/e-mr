@@ -115,9 +115,74 @@ class CpptController extends Controller
         }
     }
 
-    public function detail($id)
+    public function update(Request $request, $id)
+    {
+
+        // --- BAGIAN VALIDASI
+        $messages = [
+            'cProfesi.required' => 'Profesi wajib diisi !',
+            'cLayanan.required' => 'Layanan wajib diisi !',
+            'cSubjective.required' => 'Subjective wajib diisi !',
+            'cObjective.required' => 'Objective wajib diisi !',
+            'cAssesmen.required' => 'Assesmen wajib diisi !',
+        ];
+        $request->validate([
+            'cProfesi' => 'required',
+            'cLayanan' => 'required',
+            'cSubjective' => 'required',
+            'cObjective' => 'required',
+            'cAssesmen' => 'required',
+        ], $messages);
+
+
+        $parameterInsert['FD_DATE'] = date('Y-m-d H:i:s');
+        $parameterInsert['FS_MR'] = $request->cNomorMR;
+        $parameterInsert['FS_KD_LAYANAN'] = $request->cLayanan;
+        $parameterInsert['FS_PROFESI'] = $request->cProfesi;
+        $parameterInsert['FT_SUBJECTIVE'] = $request->cSubjective;
+        $parameterInsert['FT_OBJECTIVE'] = $request->cObjective;
+        $parameterInsert['FT_ASSESMENT'] = $request->cAssesmen;
+        $parameterInsert['FS_PLAN1'] = $request->cPlan1;
+        $parameterInsert['FS_PLAN2'] = $request->cPlan2;
+        $parameterInsert['FS_PLAN3'] = $request->cPlan3;
+        $parameterInsert['FS_PLAN4'] = $request->cPlan4;
+
+        $parameterInsert['FS_IPPA1A'] = $request->cIppa1a;
+        $parameterInsert['FS_IPPA1B'] = $request->cIppa1b;
+        $parameterInsert['FS_IPPA1C'] = $request->cIppa1c;
+
+        $parameterInsert['FS_IPPA2A'] = $request->cIpp2a;
+        $parameterInsert['FS_IPPA2B'] = $request->cIppa2b;
+        $parameterInsert['FS_IPPA2C'] = $request->cIppa2c;
+
+        $parameterInsert['FS_IPPA3A'] = $request->cIppa3a;
+        $parameterInsert['FS_IPPA3B'] = $request->cIppa3b;
+        $parameterInsert['FS_IPPA3C'] = $request->cIppa3c;
+
+        $parameterInsert['FS_IPPA4A'] = $request->cIppa4a;
+        $parameterInsert['FS_IPPA4B'] = $request->cIppa4b;
+        $parameterInsert['FS_IPPA4C'] = $request->cIppa4c;
+
+        $parameterInsert['FS_DPJP'] = $request->cDpjp;
+        $parameterInsert['FS_USER'] = Auth::user()->name;
+        $parameterInsert['FS_REGISTER'] = $request->cRegister;
+        $parameterInsert['FS_KD_PEG'] = $request->cKdpeg;
+        // --- HANDLE PROCESS
+
+        try {
+            DB::table('TAR_CPPT')->where('FN_ID',$id)->update($parameterInsert);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil diupdate !','hl'=> 'cppt'.$id]);
+
+        } catch (\Throwable $th) {
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+        }
+    }
+
+    public function detail($from,$id)
     {
         $data['page_title'] = "Detail Catatan SOAP";
+
+        $data['from'] = $from;
 
         $QUERY_CPPT = "select * from TAR_CPPT where FN_ID = '$id' order by FN_ID desc";
         $data['CPPT'] = DB::select($QUERY_CPPT);
@@ -125,7 +190,7 @@ class CpptController extends Controller
 
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
-        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
         from
         tc_mr aa
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama

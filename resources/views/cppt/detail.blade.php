@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}}</h5>
                     </div>
-                    <form action="{{route('cppt.store',$rekam_medis->FS_MR)}}" method="">
+                    <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -86,6 +86,8 @@
                                     </table>
                                 </div>
                                 <div class="col-lg-6">
+                                    <input type="hidden" class="form-control form-control-sm" name="cFrom"
+                                                    value="{{$from}}" readonly>
                                     <table class="w-100">
                                         <tr>
                                             <td class="leftCol">
@@ -94,7 +96,7 @@
                                             </td>
                                             <td class="rightCol">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                    value="{{$rekam_medis->FS_KD_REG}}" name="cRegister" readonly>
                                             </td>
                                         </tr>
                                         <tr>
@@ -114,6 +116,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
+                                                <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
+                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
                                                 <input type="text" class="form-control form-control-sm" name="cDpjp"
                                                     value="{{$rekam_medis->FS_NM_PEG}}" readonly>
                                             </td>
@@ -370,10 +374,10 @@
                             </div>
 
                             <div style="margin-top:20px;">
-                                {{-- <button type="submit" class="btn btn-success">
-                                <i class="fa fa-save"></i>
-                                SAVE
-                            </button> --}}
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-save"></i>
+                                    SAVE
+                                </button>
 
                                 <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>

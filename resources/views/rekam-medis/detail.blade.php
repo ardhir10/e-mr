@@ -424,6 +424,7 @@
                                     class="btn btn-success ">
                                     <i data-feather="folder-plus"></i>
                                     Tambah CPPT</a>
+                                    <h1>{{ session()->get('hl')}}</h1>
                             </div>
                         </div>
                         <hr>
@@ -471,10 +472,10 @@
                                 <table class="cell-border table-catatan-perkembangan " id="data-table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Tanggal Jam</th>
-                                            <th>*</th>
-                                            <th>Profesi / Bagian</th>
+                                            <th width="2%">No</th>
+                                            <th width="5%">Tanggal Jam</th>
+                                            <th width="5%">*</th>
+                                            <th width="5%">Profesi / Bagian</th>
                                             <th>Hasil Pemeriksaan/Assesmen, Analisis dan Rencana Penatalaksanaan</th>
                                             <th>Instruksi / Tindak Lanjut</th>
                                             <th>Verifikasi</th>
@@ -491,7 +492,7 @@
                                             </td>
                                             <td style="vertical-align:top;">
                                                 @if ($cppt->TB_FROM == 'cppt')
-                                                    <a href="{{route('cppt.detail',$cppt->FN_ID)}}">Lihat Detail</a>
+                                                    <a href="{{route('cppt.detail',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
                                                     <small>CPPT</small>
                                                 @elseif ($cppt->TB_FROM == 'asesmen_dokter')
                                                     <a href="{{route('asesmen.detail.dokter',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
@@ -508,8 +509,8 @@
                                                 @endif
                                             </td>
                                             <td style="vertical-align:top;">
-                                                <span class="badge bg-primary " style="font-size: 10px;margin-bottom:3px;">{{$cppt->FS_PROFESI}}</span>
-                                                <span class="badge bg-secondary " style="font-size: 10px">{{$cppt->FS_NM_LAYANAN}}</span>
+                                                <span class="badge bg-primary d-block" style="font-size: 10px;margin-bottom:3px;">{{$cppt->FS_PROFESI}}</span>
+                                                <span class="badge bg-secondary " style="font-size: 10px;    white-space: normal !important;">{{$cppt->FS_NM_LAYANAN}}</span>
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <div style=" height: 200px;overflow: auto;" class="style-3 detail-soap">
@@ -607,31 +608,76 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align:top;">-
-                                                <div style="height: 200px">
-                                                {{-- <p class="ngikut">HEHE</p> --}}
-
-                                                </div>
                                                 @if ($cppt->TB_FROM == 'cppt')
                                                 <div style=" height: 200px;overflow: auto;" class="style-3">
+                                                    <ul style="padding:13px">
 
-                                                    <table class="no-border">
-                                                        <tr>
+                                                        @if ($cppt->FS_PLAN1 != '')
+                                                            <li>{{$cppt->FS_PLAN1}}
+                                                                <ul style="padding:0px;margin-left: 11px;">
+                                                                    @if ($cppt->FS_IPPA1A != '')
+                                                                    <li>{{$cppt->FS_IPPA1A}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA1B != '')
+                                                                    <li>{{$cppt->FS_IPPA1B}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA1C != '')
+                                                                    <li>{{$cppt->FS_IPPA1C}}</li>
+                                                                    @endif
+                                                                </ul>
+                                                            </li>
+                                                        @endif
 
-                                                            <td style="border: 0px !important;vertical-align:top;">P1:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN1}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P2:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN2}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border: 0px !important;vertical-align:top;">P3:
-                                                            </td>
-                                                            <td style="border: 0px !important;">{{$cppt->FS_PLAN3}}</td>
-                                                        </tr>
-                                                    </table>
+                                                        @if ($cppt->FS_PLAN2 != '')
+                                                            <li>{{$cppt->FS_PLAN2}}
+                                                                <ul style="padding:0px;margin-left: 11px;">
+                                                                    @if ($cppt->FS_IPPA2A != '')
+                                                                    <li>{{$cppt->FS_IPPA2A}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA2B != '')
+                                                                    <li>{{$cppt->FS_IPPA2B}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA2C != '')
+                                                                    <li>{{$cppt->FS_IPPA2C}}</li>
+                                                                    @endif
+                                                                </ul>
+                                                            </li>
+                                                        @endif
+
+                                                        @if ($cppt->FS_PLAN3 != '')
+                                                            <li>{{$cppt->FS_PLAN3}}
+                                                                <ul style="padding:0px;margin-left: 11px;">
+                                                                    @if ($cppt->FS_IPPA3A != '')
+                                                                    <li>{{$cppt->FS_IPPA3A}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA3B != '')
+                                                                    <li>{{$cppt->FS_IPPA3B}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA3C != '')
+                                                                    <li>{{$cppt->FS_IPPA3C}}</li>
+                                                                    @endif
+                                                                </ul>
+                                                            </li>
+                                                        @endif
+
+                                                        @if ($cppt->FS_PLAN4 != '')
+                                                            <li>{{$cppt->FS_PLAN4}}
+                                                                <ul style="padding:0px;margin-left: 11px;">
+                                                                    @if ($cppt->FS_IPPA4A != '')
+                                                                    <li>{{$cppt->FS_IPPA4A}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA4B != '')
+                                                                    <li>{{$cppt->FS_IPPA4B}}</li>
+                                                                    @endif
+                                                                    @if ($cppt->FS_IPPA4C != '')
+                                                                    <li>{{$cppt->FS_IPPA4C}}</li>
+                                                                    @endif
+                                                                </ul>
+                                                            </li>
+                                                        @endif
+
+
+                                                    </ul>
                                                 </div>
                                                 @endif
 
