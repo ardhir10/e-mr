@@ -110,5 +110,6 @@ Route::get('/asesmen/awal-dewasa/dokter-bidan/verified/{id}', 'AsesmenBidanContr
 Route::get('/asesmen/awal-dewasa/dokter-bidan/unverified/{id}', 'AsesmenBidanController@unverified')->name('asesmen-dokter-bidan.unverified');
 Route::post('/asesmen/awal-dewasa/dokter-bidan/{id}/update', 'AsesmenBidanController@update')->name('asesmen-awal-dokter-bidan.update');
 
+Route::get('/geticd', 'AsesmenDokterController@getIcd')->name('');
 
 

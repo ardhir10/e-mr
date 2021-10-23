@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AsesmenDokter extends Model
 {
@@ -18,5 +19,9 @@ class AsesmenDokter extends Model
     protected $table = 'TAR_ASESMEN_DOKTER';
     protected $primaryKey = 'FN_ID';
 
+
+    public function getIcd(){
+        return DB::table('tc_icd10')->where('fs_kd_icd',$this->FS_KODE_DIAGNOSIS)->first();
+    }
 
 }

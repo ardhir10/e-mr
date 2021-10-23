@@ -1,6 +1,7 @@
 @extends('main')
 
 @push('styles')
+<link rel="stylesheet" href="{{asset('assets/libs/select2/select2.min.css')}}">
 <style>
     .detail-asesmen td {
         padding: 8px;
@@ -524,13 +525,9 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="vertical-align: top"
-                                                >
+                                                <td style="vertical-align: top">
                                                     <span class="fw-bold d-block">Diagnosa Utama : (kode ICD 10) </span>
-                                                    <select name="cKodeDiagnosis" class="form-control" id="">
-                                                        <option value="">---PILIH KODE DIAGNOSIS</option>
-                                                        <option value="DUMMYCODE">DUMMYCODE</option>
-                                                    </select>
+                                                    <select name="cKodeDiagnosis" class="form-control  select2"  id="icd"></select>
                                                     {{-- <textarea name="" id="" style="width: 100%" rows="4"></textarea> --}}
                                                     <hr>
                                                     <span class="fw-bold d-block">Diagnosa Sekunder : </span>
@@ -616,7 +613,20 @@
 @push('scripts')
 <!-- form wizard init -->
 <script src="{{asset('/')}}assets/js/pages/form-wizard.init.js"></script>
+<script src="{{asset('assets/libs/select2/select2.min.js')}}"></script>
 <script>
+   $(document).ready(function() {
+        $('#icd').select2({
+            // minimumInputLength: 3,
+            dropdownAutoWidth : true,
+            ajax: {
+                url: '{{ route("api.icd.search")}}',
+                dataType: 'json',
+            },
+        });
+    });
+
+
     $('#data-table').DataTable({});
     // $("input:checkbox").on('click', function () {
     //     // in the handler, 'this' refers to the box clicked on

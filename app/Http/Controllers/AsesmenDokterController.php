@@ -6,7 +6,7 @@ use App\AsesmenDokter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Yajra\DataTables\DataTables;
 class AsesmenDokterController extends Controller
 {
     public function create($from, $type, $nomorMr, $kdDokter = '', $kdReg = '')
@@ -166,6 +166,30 @@ class AsesmenDokterController extends Controller
         // DB::table('TAR_ASESMEN_PERAWAT')->insert($parameterInsert);
     }
 
+    function getIcd(Request $request){
+        // $QUERY = "select fs_kd_icd, fs_nm_icd From   tc_icd10 order   by fs_kd_icd";
+        if($request->input('term', '') != ''){
+            $icd = DB::table('tc_icd10')->select('fs_kd_icd as id', 'fs_nm_icd as text')
+            ->where('fs_nm_icd','LIKE',"%".$request->input('term', '')."%")
+            ->orWhere('fs_kd_icd','LIKE',"%".$request->input('term', '')."%")
+            ->get();
+        }else{
+            $icd = DB::table('tc_icd10')->select('fs_kd_icd as id', 'fs_nm_icd as text')
+            ->get();
+        }
+        // $cities = City::where('name', 'LIKE', '%' . $request->input('term', '') . '%')
+        // ->get(['id', 'name as text']);
+        $results = [];
+        foreach ($icd as $ic) {
+            # code...
+            $results[] = [
+                'id'=>$ic->id,
+                'text'=> "($ic->id) ".$ic->text,
+            ];
+        }
+        return ['results' => $results];
+    }
+
 
     public function detail($type, $id)
     {
@@ -176,8 +200,7 @@ class AsesmenDokterController extends Controller
 
         $dataAsesmen = AsesmenDokter::find($id);
         $data['data_asesmen'] = $dataAsesmen;
-        // dd($dataAsesmen);
-        // --- DETAIL HEADER
+         // --- DETAIL HEADER
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
         cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
@@ -186,7 +209,8 @@ class AsesmenDokterController extends Controller
         inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
         inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
         inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
-        inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+        inner join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+
 
         where aa.FS_MR = '$dataAsesmen->FS_MR'";
         if ($dataAsesmen->FS_KD_PEG != '') {
