@@ -1,6 +1,8 @@
 @extends('main')
 
 @push('styles')
+<link rel="stylesheet" href="{{asset('assets/libs/select2/select2.min.css')}}">
+
 <style>
     .detail-asesmen td {
         padding: 8px;
@@ -735,11 +737,14 @@
                                             <tr>
                                                 <td style="vertical-align: top"
                                                 >
-                                                    <span class="fw-bold d-block">Diagnosa Utama : (kode ICD 10) </span>
-                                                    <select name="cKodeDiagnosis" class="form-control" id="">
+                                                     <span class="fw-bold d-block">Diagnosa Utama : (kode ICD 10) </span>
+                                                    {{-- <select name="cKodeDiagnosis" class="form-control" id="">
                                                         <option {{$data_asesmen->FS_KODE_DIAGNOSIS == '' ? 'selected=selected' : ''}} value="">---PILIH KODE DIAGNOSIS</option>
                                                         <option {{$data_asesmen->FS_KODE_DIAGNOSIS == 'DUMMYCODE' ? 'selected=selected' : ''}} value="DUMMYCODE">DUMMYCODE</option>
-                                                    </select>
+                                                    </select> --}}
+                                                    <input style="margin-bottom:5px" type="text" class="form-control" readonly value="({{$data_asesmen->getIcd()->FS_KD_ICD}}) {{$data_asesmen->getIcd()->FS_NM_ICD}}">
+                                                    <small>Search ICD</small>
+                                                    <select name="cKodeDiagnosis" class="form-control  select2"  id="icd"></select>
                                                     {{-- <textarea name="" id="" style="width: 100%" rows="4"></textarea> --}}
                                                     <hr>
                                                     <span class="fw-bold d-block">Diagnosa Sekunder : </span>
@@ -825,7 +830,20 @@
 @push('scripts')
 <!-- form wizard init -->
 <script src="{{asset('/')}}assets/js/pages/form-wizard.init.js"></script>
+<script src="{{asset('assets/libs/select2/select2.min.js')}}"></script>
 <script>
+    $(document).ready(function() {
+
+        $('#icd').select2({
+            // minimumInputLength: 3,
+            dropdownAutoWidth : true,
+            ajax: {
+                url: '{{ route("api.icd.search")}}',
+                dataType: 'json',
+            },
+        });
+        $("#icd").select2('data', { id:"B02.2+", text: "Hello!"});
+    });
     $('#data-table').DataTable({});
     // $("input:checkbox").on('click', function () {
     //     // in the handler, 'this' refers to the box clicked on
