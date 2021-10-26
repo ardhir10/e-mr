@@ -26,6 +26,8 @@ class RawatJalanController extends Controller
         from	TA_LAYANAN aa
         inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
         where	1=1
+        and FS_NM_INSTALASI = 'INSTALASI RAWAT JALAN'
+
         order	by FS_NM_INSTALASI desc";
         $data['layanan'] = DB::select($QUERY_LAYANAN);
 
