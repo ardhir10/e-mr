@@ -26,7 +26,7 @@
                 <div class="col-12">
                     @include('components.flash-message')
                 </div>
-                <table class="cell-border" id="data-table">
+                <table class="cell-border table-striped" id="data-table">
                     <thead>
                         <tr>
                             <th width="5%">No</th>

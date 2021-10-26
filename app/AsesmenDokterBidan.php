@@ -23,7 +23,10 @@ class AsesmenDokterBidan extends Model
 
     public function getIcd()
     {
-        return DB::table('tc_icd10')->where('fs_kd_icd', $this->FS_KODE_DIAGNOSIS)->first();
+
+        $data = DB::table('tc_icd10')->where('fs_kd_icd', $this->FS_KODE_DIAGNOSIS)->first();
+
+        return $data;
     }
 
 }

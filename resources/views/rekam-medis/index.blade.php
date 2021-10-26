@@ -82,7 +82,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="cell-border" id="yajra-datatable">
+                        <table class="cell-border table-striped" id="yajra-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>

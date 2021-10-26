@@ -301,7 +301,8 @@ class RekamMedisController extends Controller
         inner	join TD_PEG dd on aa.FS_KD_MEDIS = dd.fs_kd_peg
         where	bb.fs_mr = '$nomorMr'
         and		aa.fd_tgl_void = '3000-01-01'
-        order	by aa.fd_tgl_masuk desc";
+        order	by aa.FD_TGL_MASUK desc, aa.fs_jam_masuk desc, FS_NM_LAYANAN";
+
         $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
 
 

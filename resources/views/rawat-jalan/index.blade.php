@@ -71,7 +71,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="cell-border" id="data-table">
+                        <table class="cell-border table-striped" id="data-table">
                             <thead>
                                 <tr>
                                     <th>No</th>

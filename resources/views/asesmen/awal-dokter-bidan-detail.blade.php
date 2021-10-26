@@ -742,7 +742,7 @@
                                                         <option {{$data_asesmen->FS_KODE_DIAGNOSIS == '' ? 'selected=selected' : ''}} value="">---PILIH KODE DIAGNOSIS</option>
                                                         <option {{$data_asesmen->FS_KODE_DIAGNOSIS == 'DUMMYCODE' ? 'selected=selected' : ''}} value="DUMMYCODE">DUMMYCODE</option>
                                                     </select> --}}
-                                                    <input style="margin-bottom:5px" type="text" class="form-control" readonly value="({{$data_asesmen->getIcd()->FS_KD_ICD}}) {{$data_asesmen->getIcd()->FS_NM_ICD}}">
+                                                    <input style="margin-bottom:5px" type="text" class="form-control" readonly value="({{optional(optional($data_asesmen)->getIcd())->FS_KD_ICD}}) {{optional(optional($data_asesmen)->getIcd())->FS_NM_ICD}}">
                                                     <small>Search ICD</small>
                                                     <select name="cKodeDiagnosis" class="form-control  select2"  id="icd"></select>
                                                     {{-- <textarea name="" id="" style="width: 100%" rows="4"></textarea> --}}

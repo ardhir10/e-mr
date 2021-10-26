@@ -38,9 +38,11 @@
             title: "Success !",
             text: "{!! session()->get('success') !!}",
             icon: "success",
-            showCancelButton: !0,
-            confirmButtonColor: "#038edc",
-            cancelButtonColor: "#f34e4e"
+            // showCancelButton: !0,
+            timer: 3000
+
+            // confirmButtonColor: "#038edc",
+            // cancelButtonColor: "#f34e4e"
         })
     </script>
     @endif
