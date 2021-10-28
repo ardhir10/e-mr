@@ -235,7 +235,7 @@
                                                                     <label for="">TD :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="number" step="0.1" name="cTd" class="form-control form-control-sm">
+                                                                    <input type="number" step="0.1" name="cTd" class="form-control form-control-sm" max="120">
                                                                 </div>
                                                                 <div class="col-4">
                                                                     mmHG
@@ -868,7 +868,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px">
                                                                 <span class="align-top"> Skala nyeri</span>
-                                                                <input type="text">
+                                                                <input type="text" name="cSnText">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1"

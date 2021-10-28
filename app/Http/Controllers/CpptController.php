@@ -50,6 +50,21 @@ class CpptController extends Controller
         order	by FS_NM_INSTALASI desc";
         $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
 
+        // --- RIWAYAT KUNJUNGAN
+        $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk, fs_nm_layanan,cc.fs_kd_layanan FS_KD_LAYANAN, fs_nm_peg FS_NM_PEG,dd.fs_kd_peg as FS_KD_PEG,
+        aa.FD_TGL_MASUK,
+        aa.FS_JAM_MASUK
+        from	TA_REGISTRASI aa
+        inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.FS_KD_LAYANAN = cc.FS_KD_LAYANAN
+        inner	join TD_PEG dd on aa.FS_KD_MEDIS = dd.fs_kd_peg
+        where	bb.fs_mr = '$nomorMr'
+        and		aa.fd_tgl_void = '3000-01-01'
+        order	by aa.FD_TGL_MASUK desc, aa.fs_jam_masuk desc, FS_NM_LAYANAN";
+
+        $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
+        // dd($data['riwayat_kunjungan']);
+
         return view('cppt.create', $data);
     }
 

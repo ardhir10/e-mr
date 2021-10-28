@@ -96,7 +96,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
+                                                    {{-- <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly> --}}
+                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$riwayat_kunjungan[0]->fs_kd_reg}}" readonly>
 
                                                 {{-- @if ($kd_reg != '')
                                                     <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
@@ -112,7 +113,7 @@
                                             </td>
                                             <td class="rightCol">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    value="{{date('d-m-Y',strtotime($rekam_medis->FD_TGL_MASUK))}} {{$rekam_medis->FS_JAM_MASUK}}"
+                                                    value="{{date('d-m-Y',strtotime($riwayat_kunjungan[0]->FD_TGL_MASUK))}} {{$riwayat_kunjungan[0]->FS_JAM_MASUK}}"
                                                     readonly>
                                             </td>
                                         </tr>
@@ -123,9 +124,9 @@
                                             </td>
                                             <td class="rightCol">
                                                 <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
-                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
+                                                    value="{{$riwayat_kunjungan[0]->FS_KD_PEG}}" readonly>
                                                 <input type="text" class="form-control form-control-sm" name="cDpjp"
-                                                    value="{{$rekam_medis->FS_NM_PEG}}" readonly>
+                                                    value="{{$riwayat_kunjungan[0]->FS_NM_PEG}}" readonly>
                                             </td>
                                         </tr>
                                         <tr>
@@ -173,7 +174,7 @@
                                                     <option value="">-- Pilih Layanan/Bagian</option>
                                                     @foreach ($layanan_bagian as $lb)
                                                     <option
-                                                        {{$rekam_medis->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
+                                                        {{$riwayat_kunjungan[0]->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
                                                         value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
                                                     @endforeach
                                                 </select>

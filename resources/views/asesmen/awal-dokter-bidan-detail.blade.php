@@ -630,7 +630,7 @@
                                                                                         style="margin-left:30px;">
                                                                                         TD :
                                                                                         <input type="text" class="" value="{{$data_asesmen->FJ_DO['TD']}}"
-                                                                                            name="cDoTD">
+                                                                                            name="cDoTD" max="1120">
                                                                                         mmHg
                                                                                     </div>
                                                                                     <div class="m-r-1"

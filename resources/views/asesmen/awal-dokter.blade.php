@@ -384,8 +384,8 @@
                                                                                     <div class="m-r-1"
                                                                                         style="margin-left:30px;">
                                                                                         TD :
-                                                                                        <input type="text" class=""
-                                                                                            name="cDoTD">
+                                                                                        <input type="number" class=""
+                                                                                            name="cDoTD" max="120">
                                                                                         mmHg
                                                                                     </div>
                                                                                     <div class="m-r-1"
