@@ -473,6 +473,7 @@ class AsesmenController extends Controller
             '2' => $request->cSnRate2 ?? null,
             '3' => $request->cSnRate3 ?? null,
             '4' => $request->cSnRate4 ?? null,
+            'text' => $request->cSnText ?? null,
 
         ];
         $parameterInsert['FJ_SN_RATE'] = json_encode($FJ_SN_RATE);

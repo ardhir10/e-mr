@@ -899,7 +899,7 @@
                                                         <li class="d-flex">
                                                             <div class="m-r-1" style="margin-right:30px">
                                                                 <span class="align-top"> Skala nyeri</span>
-                                                                <input type="text" value="{{$data_asesmen->FJ_SN_RATE['text'] ?? ''}}">
+                                                                <input type="text" name="cSnText" value="{{$data_asesmen->FJ_SN_RATE['text'] ?? ''}}">
                                                                 &nbsp;&nbsp;
                                                             </div>
                                                             <div class="m-r-1"
