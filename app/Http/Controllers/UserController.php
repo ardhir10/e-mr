@@ -36,6 +36,7 @@ class UserController extends Controller
         and		FB_SUDAH_RESIGN = 0
         order	by fs_nm_peg";
         $data['dokter'] = DB::select($QUERY);
+        $data['roles'] = Role::all();
         return view('master-data.user.create', $data);
     }
     public function edit($id)
@@ -51,6 +52,7 @@ class UserController extends Controller
         and		FB_SUDAH_RESIGN = 0
         order	by fs_nm_peg";
         $data['dokter'] = DB::select($QUERY);
+        $data['roles'] = Role::all();
 
         return view('master-data.user.edit', $data);
     }
@@ -58,15 +60,18 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
 
         // --- BAGIAN VALIDASI
         $messages = [
             'kd_satuan_tugas_medis.required' => 'Kode satuan tugas wajib diisi !',
             'nm_satuan_tugas_medis.required' => 'Nama satuan tugas wajib diisi !',
+            'role_id.required' => 'Role wajib diisi !',
         ];
         $request->validate([
             'kd_satuan_tugas_medis' => 'required',
             'nm_satuan_tugas_medis' => 'required',
+            'role_id' => 'required',
         ], $messages);
 
         $parameterInsert = [
@@ -95,11 +100,11 @@ class UserController extends Controller
             'username.unique' => 'Username Sudah ada !',
             'email.unique' => 'Email Sudah ada !',
         ];
-
         $request->validate([
             'email'                 => 'required|email|unique:users,email,'. $id,
             'username'              => 'required|unique:users,username,'.$id,
             'name' => 'required',
+            'role_id' => 'required',
         ], $messages);
 
 
@@ -110,6 +115,7 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'fs_kd_peg' => $request->fs_kd_peg,
+            'role_id' => $request->role_id,
         ];
 
         if($request->password != ''){

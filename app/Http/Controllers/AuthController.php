@@ -48,7 +48,9 @@ class AuthController extends Controller
         ];
 
 
+
         Auth::attempt($data);
+        // dd(Auth::attempt($data));
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
             return redirect()->route('dashboard');
@@ -71,7 +73,8 @@ class AuthController extends Controller
             'name'                  => 'required|min:3|max:35',
             'email'                 => 'required|email|unique:users,email',
             'username'              => 'required|unique:users,username',
-            'password'              => 'required|confirmed'
+            'password'              => 'required|confirmed',
+            'role_id'              => 'required'
         ];
 
         $messages = [
@@ -99,6 +102,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->fs_kd_peg = $request->fs_kd_peg;
         $user->email_verified_at = \Carbon\Carbon::now();
+        $user->role_id = $request->role_id;
         $simpan = $user->save();
 
         if ($simpan) {

@@ -24,7 +24,7 @@ class RoleController extends Controller
     {
         $data['page_title'] = "Edit Data user";
 
-        $data['user'] = User::find($id);
+        $data['role'] = Role::find($id);
 
 
         return view('master-data.role.edit', $data);
@@ -42,7 +42,7 @@ class RoleController extends Controller
             'name' => 'required',
         ], $messages);
 
-        
+
 
 
         // --- HANDLE PROCESS
@@ -56,42 +56,24 @@ class RoleController extends Controller
 
     public function update(Request $request, $id)
     {
+
         // --- BAGIAN VALIDASI
         $messages = [
-            'name.required' => 'Nama user wajib diisi !',
-            'email.required' => 'Email user wajib diisi !',
-            'username.required' => 'Username user wajib diisi !',
-            'username.unique' => 'Username Sudah ada !',
-            'email.unique' => 'Email Sudah ada !',
+            'name.required' => 'Role name wajib diisi !',
         ];
-
         $request->validate([
-            'email'                 => 'required|email|unique:users,email,' . $id,
-            'username'              => 'required|unique:users,username,' . $id,
             'name' => 'required',
         ], $messages);
 
 
 
 
-        $parameterUpdate = [
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-        ];
-
-        if ($request->password != '') {
-            $parameterUpdate['password'] = Hash::make($request->password);
-        }
-
-
-
         // --- HANDLE PROCESS
         try {
-            User::where('id', $id)->update($parameterUpdate);
-            return redirect()->route('user.index')->with(['success' => 'Data berhasil disimpan !']);
+            $role = Role::where('id', $id)->update(['name' => $request->name]);
+            return redirect()->route('role.index')->with(['success' => 'Data berhasil diupdate !']);
         } catch (\Throwable $th) {
-            return redirect()->route('user.index')->with(['failed' => $th->getMessage()]);
+            return redirect()->route('role.index')->with(['failed' => $th->getMessage()]);
         }
     }
 
@@ -100,10 +82,10 @@ class RoleController extends Controller
     {
 
         try {
-            User::destroy($id);
-            return redirect()->route('user.index')->with(['failed' => 'Data berhasil dihapus !']);
+            Role::destroy($id);
+            return redirect()->route('role.index')->with(['failed' => 'Data berhasil dihapus !']);
         } catch (\Throwable $th) {
-            return redirect()->route('user.index')->with(['failed' => $th->getMessage()]);
+            return redirect()->route('role.index')->with(['failed' => $th->getMessage()]);
         }
     }
 }

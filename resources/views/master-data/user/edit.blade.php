@@ -46,14 +46,25 @@
                     </div>
                     <div class="form-group">
                         <label for=""><strong>Password</strong></label>
-                        <input type="password" name="password   " class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Select Role</label>
+                        <select name="role_id" class="form-control form-control-sm" id="">
+                            <option value="">--SELECT ROLE </option>
+                            @foreach ($roles as $d)
+                                <option {{$user->role_id == $d->id ? 'selected=selected' :''}} value="{{$d->id}}">{{$d->name}}</option>
+
+
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="">Select Kode Dokter</label>
                         <select name="fs_kd_peg" class="form-control form-control-sm" id="">
                             <option value="">--SELECT DOKTER </option>
                             @foreach ($dokter as $d)
-                                <option {{$user->fs_kd_peg === $d->fs_kd_dokter ? 'selected=selected' :''}} value="{{$d->fs_kd_dokter}}">{{$d->fs_dokter}}</option>
+                                <option {{$user->fs_kd_peg == $d->fs_kd_dokter ? 'selected=selected' :''}} value="{{$d->fs_kd_dokter}}">{{$d->fs_dokter}}</option>
 
                             @endforeach
                         </select>

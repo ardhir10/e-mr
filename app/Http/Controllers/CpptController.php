@@ -202,6 +202,7 @@ class CpptController extends Controller
         $QUERY_CPPT = "select * from TAR_CPPT where FN_ID = '$id' order by FN_ID desc";
         $data['CPPT'] = DB::select($QUERY_CPPT);
         $nomorMr = $data['CPPT'][0]->FS_MR;
+        $kdRegister = $data['CPPT'][0]->FS_REGISTER;
 
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
@@ -213,7 +214,8 @@ class CpptController extends Controller
         inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
         inner join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
 
-        where aa.FS_MR = '$nomorMr'";
+        where aa.FS_MR = '$nomorMr'
+        and FS_KD_REG = '$kdRegister'";
         $dataRekamMedis = DB::select($QUERY);
         if (count($dataRekamMedis) < 1) {
             $dataRekamMedis = [];

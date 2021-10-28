@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/rekam-medis', 'RekamMedisController@index')->name('rekam-medis.index');
     Route::get('/rekam-medis/datatables', 'RekamMedisController@getRekamMedis')->name('rekam-medis.datatables');
     Route::get('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
+    Route::post('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detailFiltered')->name('rekam-medis.detail');
 
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
@@ -80,6 +81,10 @@ Route::middleware('auth')->group(function () {
 
     // --- LIST DOKTER
     Route::get('/data-master/dokter', 'DokterController@index')->name('dokter.index');
+
+
+    // --- RIWAYAT LABORATORIUM
+    Route::get('/riwayat/laboratorium/{no_mr?}','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.index');
 
 });
 

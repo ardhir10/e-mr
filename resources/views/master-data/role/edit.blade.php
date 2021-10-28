@@ -30,30 +30,18 @@
                     </ul>
                 </div>
                 @endif
-                <form action="{{route('user.update',$user->id)}}" method="POST">
+                <form action="{{ route('role.update',$role->id) }}" method="post">
                     @csrf
-                    <div class="form-group">
-                        <label for=""><strong>Nama Lengkap</strong></label>
-                        <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" value="{{$user->name}}">
+                   <div class="form-group">
+                        <label for=""><strong>Name</strong></label>
+                        <input type="text" name="name" value="{{$role->name}}" class="form-control" placeholder="Role name">
                     </div>
-                    <div class="form-group">
-                        <label for=""><strong>Email</strong></label>
-                        <input type="text" name="email" class="form-control" placeholder="Email" value="{{$user->email}}">
-                    </div>
-                    <div class="form-group">
-                        <label for=""><strong>username</strong></label>
-                        <input type="text" name="username" class="form-control" placeholder="username" value="{{$user->username}}">
-                    </div>
-                    <div class="form-group">
-                        <label for=""><strong>Password</strong></label>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-                   
+
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>
                             Save</button>
-                        <a href="{{route('user.index')}}" class="btn btn-sm btn-danger"><i
+                        <a href="{{route('role.index')}}" class="btn btn-sm btn-danger"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </form>

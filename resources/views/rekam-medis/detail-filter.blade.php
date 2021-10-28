@@ -169,7 +169,7 @@
                                                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                 <li>
 
-                                                    <a class="dropdown-item" href="{{route('riwayat.laboratorium.index',$rekam_medis->FS_MR)}}">Riwayat Laboratorium</a></li>
+                                                    <a class="dropdown-item" href="#">Riwayat Laboratorium</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
@@ -456,7 +456,9 @@
                                                     </td>
                                                     <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
                                                     <td style="padding:2px ;">
-                                                        <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]" checked>
+                                                        <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]"
+                                                        {{in_array($rk->fs_kd_reg,$filtered) == true ? 'checked' : '' }}
+                                                        >
                                                         {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
                                                     </td>
                                                 </tr>
@@ -821,6 +823,8 @@ $.fn.isInViewport = function() {
     return elementBottom > viewportTop && elementTop < viewportBottom;
 };
 
-
+// $('.filter-riwayat-kunjungan').on('click',function(){
+//     alert(this.value);
+// })
 </script>
 @endpush

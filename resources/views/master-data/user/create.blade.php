@@ -53,6 +53,16 @@
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
+                        <label for="">Select Role</label>
+                        <select name="role_id" class="form-control form-control-sm" id="">
+                            <option value="">--SELECT ROLE </option>
+                            @foreach ($roles as $d)
+                                <option value="{{$d->id}}">{{$d->name}}</option>
+
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="">Select Kode Dokter</label>
                         <select name="fs_kd_peg" class="form-control form-control-sm" id="">
                             <option value="">--SELECT DOKTER </option>

@@ -36,12 +36,12 @@
                         <label for=""><strong>Name</strong></label>
                         <input type="text" name="name" class="form-control" placeholder="Role name">
                     </div>
-                    
+
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>
                             Save</button>
-                        <a href="{{route('user.index')}}" class="btn btn-sm btn-danger"><i
+                        <a href="{{route('role.index')}}" class="btn btn-sm btn-danger"><i
                                 class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </form>

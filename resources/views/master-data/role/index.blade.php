@@ -40,12 +40,12 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$role->name}}</td>
                             <td>
-                                <a href="{{route('user.edit',$role->id)}}"
-                                    class="btn btn-sm btn-warning d-none">
+                                <a href="{{route('role.edit',$role->id)}}"
+                                    class="btn btn-sm btn-warning   ">
                                     <i class="fa fa-edit"></i> EDIT</a>
 
 
-                                    <button class="btn btn-sm btn-danger d-none"
+                                    <button class="btn btn-sm btn-danger    "
                                     onclick="return confirmDelete('{{route('role.delete',$role->id)}}')">
                                     <i class="fa fa-trash"></i> DELETE</button>
                             </td>
