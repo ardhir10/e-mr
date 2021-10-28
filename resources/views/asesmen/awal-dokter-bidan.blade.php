@@ -602,7 +602,7 @@
                                                                                         style="margin-left:30px;">
                                                                                         TD :
                                                                                         <input type="text" class=""
-                                                                                            name="cDoTD" max="120">
+                                                                                            name="cDoTD" >
                                                                                         mmHg
                                                                                     </div>
                                                                                     <div class="m-r-1"

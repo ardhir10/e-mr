@@ -238,7 +238,7 @@
                                                                     <label for="">TD :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="number" step="0.1" name="cTd" value="{{$data_asesmen->FN_PF_TD}}" class="form-control form-control-sm">
+                                                                    <input type="text" step="0.1" name="cTd" value="{{$data_asesmen->FN_PF_TD}}" class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-4">
                                                                     mmHG

@@ -235,7 +235,7 @@
                                                                     <label for="">TD :</label>
                                                                 </div>
                                                                 <div class="col-5">
-                                                                    <input type="number" step="0.1" name="cTd" class="form-control form-control-sm" max="120">
+                                                                    <input type="text"  name="cTd" class="form-control form-control-sm" max="120">
                                                                 </div>
                                                                 <div class="col-4">
                                                                     mmHG
