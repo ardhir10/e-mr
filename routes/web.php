@@ -84,7 +84,8 @@ Route::middleware('auth')->group(function () {
 
 
     // --- RIWAYAT LABORATORIUM
-    Route::get('/riwayat/laboratorium/{no_mr?}','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.index');
+    Route::get('/riwayat/laboratorium','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.index');
+    Route::post('/riwayat/laboratorium','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.search');
 
 });
 
