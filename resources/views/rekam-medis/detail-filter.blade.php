@@ -169,7 +169,7 @@
                                                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                 <li>
 
-                                                    <a class="dropdown-item" href="{{route('riwayat.laboratorium.index',$rekam_medis->FS_MR)}}">Riwayat Laboratorium</a></li>
+                                                    <a class="dropdown-item" href="{{route('riwayat.laboratorium.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Laboratorium</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>

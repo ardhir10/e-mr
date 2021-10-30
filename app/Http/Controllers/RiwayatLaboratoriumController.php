@@ -24,7 +24,9 @@ class RiwayatLaboratoriumController extends Controller
             inner   join tc_mr cc on bb.fs_mr = cc.fs_mr
             inner   join td_peg dd on aa.fs_kd_petugas_medis = dd.fs_kd_peg
             inner   join ta_trs_tindakan ee on aa.fs_kd_trs_tindakan = ee.fs_kd_trs
-            where cc.fs_mr = '$no_mr'");
+            where cc.fs_mr = '$no_mr'
+            order by fd_tgl_sample desc
+            ");
 
             $fs_kd_hasil = $data['riwayat'][0]->fs_kd_hasil ?? '';
             if($request->lab){
@@ -44,6 +46,8 @@ class RiwayatLaboratoriumController extends Controller
             inner   join ta_trs_tindakan ee on aa.fs_kd_trs_tindakan = ee.fs_kd_trs
             where aa.fs_kd_hasil = '$fs_kd_hasil'");
 
+
+
         $data['detail'] = DB::select("  select  fn_urut,fn_jenis_periksa, aa.fs_kd_periksa  , aa.fs_kd_gol_rentang,
             fs_nm_periksa, '' fs_nilai_normal, isnull(fs_nm_gol_rentang,'') fs_nm_gol_rentang,
             isnull(fs_nm_satuan,'') fs_nm_satuan,
@@ -55,8 +59,6 @@ class RiwayatLaboratoriumController extends Controller
         left    join tg_satuan dd on aa.fs_kd_satuan = dd.fs_kd_satuan
         where   fs_kd_hasil = '$fs_kd_hasil'
         order   by aa.fn_urut");
-
-
             $data['_self'] = $this;
             $data['fs_mr'] = $no_mr;
             $data['fs_kd_hasil'] = $fs_kd_hasil;

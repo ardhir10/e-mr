@@ -265,10 +265,14 @@
                                                                 <span class=" font-italic "
                                                                     style="margin-left: 40px;">{{$dtl->fs_nm_periksa}}</span>
                                                             </td>
-                                                            <td class="bg-tbl-detail-blue">{{$dtl->fs_hasil}}</td>
+                                                            <td class="bg-tbl-detail-blue">{{$dtl->fs_ket_hasil}}</td>
                                                             <td>{{$dtl->fs_nm_satuan}}</td>
                                                             <td class="bg-tbl-detail-blue text-center">
-                                                                {{$dtl->fn_batas_bawah}} - {{$dtl->fn_batas_atas}}
+                                                                @if ($dtl->fs_normal_kualitatif != ' ')
+                                                                    {{$dtl->fs_normal_kualitatif}}
+                                                                @else
+                                                                    {{($dtl->fn_batas_bawah < 1 ) ? number_format($dtl->fn_batas_bawah,1) : number_format($dtl->fn_batas_bawah,0)}} - {{($dtl->fn_batas_bawah < 1 ) ? number_format($dtl->fn_batas_atas,1) : number_format($dtl->fn_batas_atas,0)}}
+                                                                @endif
                                                             </td>
                                                             <td>{{$dtl->fs_catatan}}</td>
                                                         </tr>
