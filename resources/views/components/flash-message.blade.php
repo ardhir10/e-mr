@@ -46,5 +46,19 @@
         })
     </script>
     @endif
+    @if(session()->has('failed'))
+    <script>
+         Swal.fire({
+            title: "Information !",
+            text: "{!! session()->get('failed') !!}",
+            icon: "warning",
+            // showCancelButton: !0,
+            timer: 3000
+
+            // confirmButtonColor: "#038edc",
+            // cancelButtonColor: "#f34e4e"
+        })
+    </script>
+    @endif
 
 @endpush

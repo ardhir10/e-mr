@@ -96,26 +96,32 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <form action="" method="get">
                                         <div class="form-group row">
-                                            <div class="col-2">
-                                                <label for="" style="color: #AA0909;">MR :</label>
+                                            <div class="col-6 text-right">
+                                                <label for="" class="text-right" style="color: #AA0909;align:right;">NO HASIL RO :</label>
                                             </div>
-                                            <div class="col-6 ">
-                                                <input class="form-control form-control-sm" name="mr" value="{{$fs_mr}}" type="text" placeholder="">
+                                            <div class="col-6">
+                                                <input class="form-control form-control-sm" readonly name="ro" value="{{$header[0]->fs_kd_hasil ?? ''}}" type="text" placeholder="">
                                             </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-sm btn-success">Cari Pasien (MR)</button>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-6 text-right">
+                                                <label for="" class="text-right" style="">Tgl Hasil :</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <input class="form-control form-control-sm" readonly name="tgl_hasil" value="{{date('d-m-Y',strtotime($header[0]->fd_tgl_hasil)) ?? ''}}" type="text" placeholder="">
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-5">
                                     <table class="w-100">
                                         <tr>
-                                            <td align="right"><label for="">No. Lab : </label></td>
-                                            <td><input class="form-control form-control-sm" type="text" placeholder="" value="{{$header[0]->fs_kd_hasil ?? ''}}"
+                                            <td align="right"><label for="" style="color: #AA0909;">NO. RADIOLOGI : </label></td>
+                                            <td><input class="form-control form-control-sm" type="text" placeholder="" value="{{  substr($header[0]->FS_KD_TRS_TINDAKAN,0,2).'-'.substr($header[0]->FS_KD_TRS_TINDAKAN,2) ?? ''}}"
                                                     readonly></td>
                                         </tr>
                                         <tr>
@@ -123,20 +129,6 @@
                                             <td><input class="form-control form-control-sm" type="text"
                                                     placeholder="" value="{{$header[0]->fs_nm_pasien ?? ''}}" readonly></td>
                                         </tr>
-                                        <tr>
-                                            <td align="right"> <label for="">J.Kel / Umur: </label></td>
-                                            <td>
-                                                @if (isset($header[0]))
-                                                <input class="form-control form-control-sm" type="text" placeholder="" value="{{($header[0]->fb_jns_kelamin   == 1) ? 'Perempuan' : 'Laki - Laki' }} / {{$_self->hitungUmur($header[0]->fd_tgl_lahir)}}" readonly>
-                                                @else
-                                                <input class="form-control form-control-sm" type="text" placeholder="" value="" readonly>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-5">
-                                    <table class="w-100">
                                         <tr>
                                             <td align="right">
                                                 <label for="">REG : </label>
@@ -151,21 +143,41 @@
                                                     <span class="fw-thin"
                                                         style="margin-right:10px;margin-left:10px;color:black">
                                                         {{$header[0]->fs_mr ?? ''}}</span>
-                                                    <label for="">LAHIR : </label>
 
-                                                    <span class="fw-thin" style="margin-left:10px;color:black">
-                                                      {{date('d-m-Y',strtotime($header[0]->fd_tgl_lahir ?? '')) ?? ''}}</span>
 
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td align="right"> <label for="">J.Kel / Umur: </label></td>
+                                            <td>
+                                                @if (isset($header[0]))
+                                                <input class="form-control form-control-sm" type="text" placeholder="" value="{{($header[0]->fb_jns_kelamin   == 1) ? 'Perempuan' : 'Laki - Laki' }} / {{$_self->hitungUmur($header[0]->fd_tgl_lahir)}}" readonly>
+                                                @else
+                                                <input class="form-control form-control-sm" type="text" placeholder="" value="" readonly>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-4">
+                                    <table class="w-100">
+
+                                        <tr>
                                             <td align="right"> <label for="">Dr. Pengirim : </label></td>
                                             <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                         <tr>
-                                            <td align="right"> <label for="">Dr. Pemeriksa : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_peg ?? ''}}" type="text" placeholder=""></td>
+                                            <td align="right"> <label for="">Pemeriksaan : </label></td>
+                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_tarif ?? ''}}" type="text" placeholder=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"> <label for="">STUDY : </label></td>
+                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->FS_NO_FILM ?? ''}}" type="text" placeholder=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right"> <label for="">Dr. Radiologi : </label></td>
+                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_dokter_pemeriksa ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -176,11 +188,13 @@
 
 
             </div>
-            <div class="box-header">
-                <h5 class="text-riwayat">Riwayat Pemeriksaan</h5>
-            </div>
+
             <div class="row">
+
                 <div class="col-4">
+                    <div class="box-header">
+                        <h5 class="text-riwayat">Riwayat Pemeriksaan</h5>
+                    </div>
                     <div class="card" style="">
                         <div class="card-body">
                             <div class="box" style="border:0px solid black;min-height: 200px">
@@ -190,15 +204,17 @@
                                             <thead>
                                                 <tr>
                                                     <td>TANGGAL</td>
+                                                    <td>JAM</td>
                                                     <td>REG</td>
-                                                    <td>NO LAB</td>
+                                                    <td>NO HASIL RO</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($riwayat as $rw)
 
-                                                <tr onclick="window.location='{{Request::url()}}?mr={{$rw->fs_mr}}&lab={{$rw->fs_kd_hasil}}';" style="cursor:pointer;{{$fs_kd_hasil == $rw->fs_kd_hasil ? 'background:#FDC180' : '' }}" >
-                                                    <td>{{date('d-m-Y',strtotime($rw->fd_tgl_sample))}}</td>
+                                                <tr onclick="window.location='{{Request::url()}}?mr={{$rw->fs_mr}}&ro={{$rw->fs_kd_hasil}}';" style="cursor:pointer;{{$fs_kd_hasil == $rw->fs_kd_hasil ? 'background:#FDC180' : '' }}" >
+                                                    <td>{{date('d-m-Y',strtotime($rw->fd_tgl_hasil))}}</td>
+                                                    <td>{{$rw->FS_JAM_HASIL}}</td>
                                                     <td>{{$rw->fs_kd_reg}}</td>
                                                     <td>{{$rw->fs_kd_hasil}}</td>
                                                 </tr>
@@ -209,85 +225,22 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="{{route('riwayat.laboratorium.index')}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
+                            <a href="{{route('riwayat.radiologi.index',['mr'=>$header[0]->fs_mr])}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
                             <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-8">
+                    <div class="box-header">
+                        <h5 class="text-riwayat">Teman Sejawat Yang Terhormat</h5>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="box" style="border:0px solid black;">
 
                                 <div class="box-body">
-                                    <div class="table-responsive">
-                                        <table class="tabel-riwayat-detail">
-                                            <thead>
-                                                <tr>
-                                                    <td>JENIS PEMERIKSAAN</td>
-                                                    <td>HASIL</td>
-                                                    <td>SATUAN</td>
-                                                    <td>NILAI NORMAL</td>
-                                                    <td>CATATAN</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{--  --}}
+                                    <textarea style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >{{$detail[0]->fs_ket}}</textarea>
 
-                                                @foreach ($detail as $dtl)
-                                                @switch($dtl->fn_tab)
-                                                    @case(0)
-                                                        <tr style="background: white;color:blue;">
-                                                            <td>
-                                                                <span class="fw-bold font-italic"><em>{{$dtl->fs_nm_periksa}}</em></span>
-                                                            </td>
-                                                              <td class="bg-tbl-detail-blue"></td>
-                                                            <td></td>
-                                                            <td class="bg-tbl-detail-blue"></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        @break
-                                                    @case(1)
-                                                        <tr style="">
-                                                            <td>
-                                                                <span class="fw-bold font-italic text-riwayat"
-                                                                    style="margin-left: 20px;"><em>{{$dtl->fs_nm_periksa}}</em></span>
-                                                            </td>
-                                                            <td class="bg-tbl-detail-blue"></td>
-                                                            <td></td>
-                                                            <td class="bg-tbl-detail-blue"></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        @break
-                                                    @case(2)
-                                                        <tr style="">
-                                                            <td>
-                                                                <span class=" font-italic "
-                                                                    style="margin-left: 40px;">{{$dtl->fs_nm_periksa}}</span>
-                                                            </td>
-                                                            <td class="bg-tbl-detail-blue">{{$dtl->fs_ket_hasil}}</td>
-                                                            <td>{{$dtl->fs_nm_satuan}}</td>
-                                                            <td class="bg-tbl-detail-blue text-center">
-                                                                @if ($dtl->fs_normal_kualitatif != ' ')
-                                                                    {{$dtl->fs_normal_kualitatif}}
-                                                                @else
-                                                                    {{($dtl->fn_batas_bawah < 1 ) ? number_format($dtl->fn_batas_bawah,1) : number_format($dtl->fn_batas_bawah,0)}} - {{($dtl->fn_batas_bawah < 1 ) ? number_format($dtl->fn_batas_atas,1) : number_format($dtl->fn_batas_atas,0)}}
-                                                                @endif
-                                                            </td>
-                                                            <td>{{$dtl->fs_catatan}}</td>
-                                                        </tr>
-                                                        @break
-                                                    @default
-
-                                                @endswitch
-
-
-
-                                                @endforeach
-
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>

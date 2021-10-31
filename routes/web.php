@@ -87,6 +87,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayat/laboratorium','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.index');
     Route::post('/riwayat/laboratorium','RiwayatLaboratoriumController@index')->name('riwayat.laboratorium.search');
 
+    // --- RIWAYAT RADIOLOGI
+    Route::get('/riwayat/radiologi','RiwayatRadiologiController@index')->name('riwayat.radiologi.index');
+    Route::post('/riwayat/radiologi','RiwayatRadiologiController@index')->name('riwayat.radiologi.search');
+
 });
 
 

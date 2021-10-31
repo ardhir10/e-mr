@@ -173,7 +173,9 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">Riwayat Radiologi</a></li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Radiologi</a></li>
+
 
                                                 <li>
                                                     <hr class="dropdown-divider">
