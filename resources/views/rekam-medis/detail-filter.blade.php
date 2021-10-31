@@ -749,7 +749,12 @@
                                                             @endif
                                                     @endif
                                                 @else
-                                                <p style="font-size: 9.2px;    white-space: normal !important;" class="badge bg-danger">Not Allowed</p>
+                                                    @if ($cppt->FS_VERIFIED_BY)
+                                                        <span class="d-block">{{$cppt->FS_DPJP}}</span>
+
+                                                    @else
+                                                        <p style="font-size: 9.2px;    white-space: normal !important;" class="badge bg-danger">Not Allowed</p>
+                                                    @endif
                                                 @endif
 
                                             </td>

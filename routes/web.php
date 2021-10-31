@@ -91,6 +91,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayat/radiologi','RiwayatRadiologiController@index')->name('riwayat.radiologi.index');
     Route::post('/riwayat/radiologi','RiwayatRadiologiController@index')->name('riwayat.radiologi.search');
 
+    // --- RIWAYAT RESEP DOKTER
+    Route::get('/riwayat/resep-dokter','RiwayatResepDokterController@index')->name('riwayat.resep-dokter.index');
+    Route::post('/riwayat/resep-dokter','RiwayatResepDokterController@index')->name('riwayat.resep-dokter.search');
+
+
+    // --- RIWAYAT SINGKAT KUNJUNGAN
+    Route::get('/riwayat/singkat-kunjungan','RiwayatSingkatKunjunganController@index')->name('riwayat.singkat-kunjungan.index');
+    Route::post('/riwayat/singkat-kunjungan','RiwayatSingkatKunjunganController@index')->name('riwayat.singkat-kunjungan.search');
+
 });
 
 
