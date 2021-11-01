@@ -454,7 +454,10 @@
                                                     <td style="padding:2px ;">
                                                         {{$rk->fs_nm_layanan}}
                                                     </td>
-                                                    <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
+                                                    <td style="padding:2px ;">
+                                                        {{$rk->fs_dokter}}
+                                                        ({{$rk->fs_kd_reg}})
+                                                    </td>
                                                     <td style="padding:2px ;">
                                                         <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]" checked>
                                                         {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
@@ -790,18 +793,17 @@
         "bFilter": true,
         "bInfo": false,
         "bAutoWidth": false,
-        "order": [[ 0, "desc" ]],
-        "columnDefs": [
-            {
-                "orderable": false,
-                "targets": [3]
-            },
-            {
-                "orderable": true,
-                "targets": [[ 0, "desc" ], 1, 2]
-            }
-        ]
-        //   "ordering": false
+        // "columnDefs": [
+        //     {
+        //         "orderable": false,
+        //         "targets": [0]
+        //     },
+        //     {
+        //         "orderable": false,
+        //         "targets": [3]
+        //     }
+        // ]
+        "ordering": false
     });
 
 

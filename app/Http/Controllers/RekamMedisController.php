@@ -45,7 +45,9 @@ class RekamMedisController extends Controller
         }
         $whereQuery = implode($parameterSeachQuery, ' ') ;
 
-        $QUERY = "select fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr where 1=1 $whereQuery ";
+        $QUERY = "select aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa
+        inner join TA_REGISTRASI bb on aa.fs_mr = bb.fs_mr
+        where 1=1 $whereQuery order by fs_kd_reg desc";
         $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
         if($request->from == 'yajra'){
@@ -308,7 +310,7 @@ class RekamMedisController extends Controller
         order	by aa.FD_TGL_MASUK desc, aa.fs_jam_masuk desc, FS_NM_LAYANAN";
 
         $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
-
+        // dd($data['riwayat_kunjungan']);
 
 
         $data['page_title'] = "Rekam Medis Pasien";

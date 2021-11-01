@@ -173,12 +173,12 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">Riwayat Radiologi</a></li>
-
+                                                <li>
+                                                    <a class="dropdown-item" href="{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Radiologi</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">Riwayat Resep</a></li>
+                                                <li><a class="dropdown-item" href="{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Resep</a></li>
 
                                                 <li>
                                                     <hr class="dropdown-divider">
@@ -194,7 +194,7 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">Riwayat Singkat Kunjungan</a></li>
+                                                <li><a class="dropdown-item" href="{{route('riwayat.singkat-kunjungan.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Singkat Kunjungan</a></li>
                                             </ul>
                                         </div>
                                         <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
