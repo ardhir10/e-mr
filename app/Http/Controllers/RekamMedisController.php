@@ -30,7 +30,7 @@ class RekamMedisController extends Controller
                     $key = 'FS_HP_PASIEN';
                     break;
                 case 'nomor_mr':
-                    $key = 'fs_mr';
+                    $key = 'aa.fs_mr';
                     break;
                 case 'tgl_lahir':
                     $key = 'fd_tgl_lahir';
