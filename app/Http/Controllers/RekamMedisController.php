@@ -59,7 +59,7 @@ class RekamMedisController extends Controller
         if($request->from == 'yajra'){
             return $data['datatables'] = Datatables::of($data['rekam_medis'])
             ->addColumn('tgl_lahir', function($qr) {
-                return date('d-m-Y',strtotime($qr->fd_tgl_lahir)).$qr->fs_kd_reg;
+                return date('d-m-Y',strtotime($qr->fd_tgl_lahir));
             })
 
             ->addColumn('action', function ($qr) {
