@@ -53,7 +53,7 @@ class AuthController extends Controller
         // dd(Auth::attempt($data));
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
-            return redirect()->route('dashboard');
+            return redirect()->route('rekam-medis.index');
         } else { // false
 
             //Login Fail
