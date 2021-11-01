@@ -45,15 +45,21 @@ class RekamMedisController extends Controller
         }
         $whereQuery = implode($parameterSeachQuery, ' ') ;
 
-        $QUERY = "select aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa
-
-        where 1=1 $whereQuery order by fs_mr desc";
+        $QUERY = "select bb.fs_kd_reg,aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa
+        left join
+        (
+              SELECT  max(fs_kd_reg) as fs_kd_reg,fs_mr
+              FROM      TA_REGISTRASI
+              group by fs_mr
+          )
+        bb on aa.fs_mr = bb.fs_mr
+        where 1=1 $whereQuery order by fs_kd_reg desc";
         $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
         if($request->from == 'yajra'){
             return $data['datatables'] = Datatables::of($data['rekam_medis'])
             ->addColumn('tgl_lahir', function($qr) {
-                return date('d-m-Y',strtotime($qr->fd_tgl_lahir));
+                return date('d-m-Y',strtotime($qr->fd_tgl_lahir)).$qr->fs_kd_reg;
             })
 
             ->addColumn('action', function ($qr) {
