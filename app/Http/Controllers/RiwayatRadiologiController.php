@@ -34,9 +34,9 @@ class RiwayatRadiologiController extends Controller
             where cc.fs_mr = '$no_mr'
             order by fd_tgl_hasil desc
             ");
-        if(!$data['riwayat']){
-            return redirect()->back()->with(['failed'=>'Radiologi tidak ditemukan !']);
-        }
+        // if(!$data['riwayat']){
+        //     return redirect()->back()->with(['failed'=>'Radiologi tidak ditemukan !']);
+        // }
 
         $fs_kd_hasil = $data['riwayat'][0]->fs_kd_hasil ?? '';
         if ($request->ro) {

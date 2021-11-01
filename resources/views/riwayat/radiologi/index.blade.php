@@ -112,7 +112,7 @@
                                                 <label for="" class="text-right" style="">Tgl Hasil :</label>
                                             </div>
                                             <div class="col-6">
-                                                <input class="form-control form-control-sm" readonly name="tgl_hasil" value="{{date('d-m-Y',strtotime($header[0]->fd_tgl_hasil)) ?? ''}}" type="text" placeholder="">
+                                                <input class="form-control form-control-sm" readonly name="tgl_hasil" value="{{date('d-m-Y',strtotime($header[0]->fd_tgl_hasil ?? '' )) }}" type="text" placeholder="">
                                             </div>
                                         </div>
                                     </form>
@@ -121,7 +121,7 @@
                                     <table class="w-100">
                                         <tr>
                                             <td align="right"><label for="" style="color: #AA0909;">NO. RADIOLOGI : </label></td>
-                                            <td><input class="form-control form-control-sm" type="text" placeholder="" value="{{  substr($header[0]->FS_KD_TRS_TINDAKAN,0,2).'-'.substr($header[0]->FS_KD_TRS_TINDAKAN,2) ?? ''}}"
+                                            <td><input class="form-control form-control-sm" type="text" placeholder="" value="{{  substr($header[0]->FS_KD_TRS_TINDAKAN ?? '',0,2).'-'.substr($header[0]->FS_KD_TRS_TINDAKAN ?? '',2) ?? ''}}"
                                                     readonly></td>
                                         </tr>
                                         <tr>
@@ -225,7 +225,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="{{route('riwayat.radiologi.index',['mr'=>$header[0]->fs_mr])}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
+                            <a href="{{route('riwayat.radiologi.index',['mr'=>$header[0]->fs_mr ?? ''])}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
                             <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
                             <div class="box" style="border:0px solid black;">
 
                                 <div class="box-body">
-                                    <textarea style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >{{$detail[0]->fs_ket}}</textarea>
+                                    <textarea style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >{{$detail[0]->fs_ket ?? ''}}</textarea>
 
                                 </div>
                             </div>

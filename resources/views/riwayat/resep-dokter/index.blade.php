@@ -190,7 +190,7 @@ Tlp  : (021) 842565/66
 DOKTER          : {{$header_resep_dokter[0]->fs_nm_peg ?? ''}}
 DARI            : {{$header_resep_dokter[0]->fs_nm_layanan ?? ''}}
 Reg/M.R.        : {{$header_resep_dokter[0]->fs_mr ?? ''}} ({{$header_resep_dokter[0]->fs_kd_reg ?? ''}})
-Tanggal         : {{date('d-m-Y',strtotime($header_resep_dokter[0]->fd_tgl_resep)) ?? ''}} / {{$header_resep_dokter[0]->fs_jam_resep ?? ''}}
+Tanggal         : {{date('d-m-Y',strtotime($header_resep_dokter[0]->fd_tgl_resep ?? '')) ?? ''}} / {{$header_resep_dokter[0]->fs_jam_resep ?? ''}}
 --------------------------------------------------------------------------------------------------------------------
 @foreach ($detail_resep as $dr)
 R/ {{$dr->fs_nm_barang}}

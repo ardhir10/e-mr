@@ -28,10 +28,10 @@ class RiwayatResepDokterController extends Controller
 
 
 
-        if (!$riwayatResepDokter) {
-            return redirect()->back()->with(['failed' => 'Resep Dokter tidak ditemukan !']);
-        }
-        $fs_kd_resep = $riwayatResepDokter[0]->fs_kd_resep;
+        // if (!$riwayatResepDokter) {
+        //     return redirect()->back()->with(['failed' => 'Resep Dokter tidak ditemukan !']);
+        // }
+        $fs_kd_resep = $riwayatResepDokter[0]->fs_kd_resep ?? '';
 
         if($request->resep){
             $fs_kd_resep = $request->resep;
