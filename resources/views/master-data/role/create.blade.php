@@ -32,9 +32,17 @@
                 @endif
                 <form action="{{ route('role.store') }}" method="post">
                     @csrf
-                   <div class="form-group">
+                    <div class="form-group">
                         <label for=""><strong>Name</strong></label>
                         <input type="text" name="name" class="form-control" placeholder="Role name">
+                    </div>
+                    <div class="form-group">
+                        <label for=""><strong>Permissions</strong></label>
+                        <select name="permissions[]" class="form-control" multiple id="">
+                            @foreach ($permissions as $p)
+                                <option value="{{$p->id}}">{{$p->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mt-2">

@@ -127,6 +127,10 @@ class UserController extends Controller
         // --- HANDLE PROCESS
         try {
             User::where('id',$id)->update($parameterUpdate);
+            $role = Role::find($request->role_id);
+            $user = User::find($id);
+            $user->syncRoles($role->name);
+
             return redirect()->route('user.index')->with(['success' => 'Data berhasil disimpan !']);
         } catch (\Throwable $th) {
             return redirect()->route('user.index')->with(['failed' => $th->getMessage()]);

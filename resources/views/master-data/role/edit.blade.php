@@ -36,6 +36,14 @@
                         <label for=""><strong>Name</strong></label>
                         <input type="text" name="name" value="{{$role->name}}" class="form-control" placeholder="Role name">
                     </div>
+                     <div class="form-group">
+                        <label for=""><strong>Permissions</strong></label>
+                        <select name="permissions[]" class="form-control" multiple id="select-permission-type">
+                            @foreach ($permissions as $p)
+                                <option value="{{$p->id}}">{{$p->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
@@ -60,6 +68,13 @@
 @push('scripts')
 <script>
     $('#data-table').DataTable({});
+    // var options = document.getElementById('select-permission-type').selectedOptions;
+    var options = @json($role->permissions);
+    console.log(options[0].id);
 
+    var values = options.map((v)=>{
+        return v.id
+    });
+    $('#select-permission-type').val(values);
 </script>
 @endpush

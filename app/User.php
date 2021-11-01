@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -53,5 +55,10 @@ class User extends Authenticatable
         }else{
             return '-';
         }
+    }
+
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }

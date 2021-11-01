@@ -16,14 +16,16 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $dataPermissions = [
-            'buat-user',
-            'lihat-user',
-            'edit-user',
-            'hapus-user'
+            'menu-dashboard',
+            'menu-rekam-medis',
+            'menu-rawat-jalan',
+            'menu-rawat-inap'
         ];
-        $permission = Permission::insert($dataPermissions);
-        $role = Role::create(['name' => 'root']);
-        $role->givePermissionTo($permission);
+
+        foreach ($dataPermissions as $dp) {
+            Permission::updateOrCreate(['name'=>$dp],['name'=> $dp]);
+        }
+
 
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Contracts\Permission;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -17,7 +19,10 @@ class RoleController extends Controller
 
     public function create()
     {
+        $permissions = ModelsPermission::get();
+
         $data['page_title'] = "Buat Data Role";
+        $data['permissions'] = $permissions;
         return view('master-data.role.create', $data);
     }
     public function edit($id)
@@ -25,7 +30,10 @@ class RoleController extends Controller
         $data['page_title'] = "Edit Data user";
 
         $data['role'] = Role::find($id);
+        $permissions = ModelsPermission::get();
 
+        $data['permissions'] = $permissions;
+        $data['my_permissions'] = $data['role']->permissions;
 
         return view('master-data.role.edit', $data);
     }
@@ -48,6 +56,8 @@ class RoleController extends Controller
         // --- HANDLE PROCESS
         try {
             $role = Role::create(['name' => $request->name]);
+            $role->syncPermissions($request->permissions);
+
             return redirect()->route('role.index')->with(['success' => 'Data berhasil dibuat !']);
         } catch (\Throwable $th) {
             return redirect()->route('role.index')->with(['failed' => $th->getMessage()]);
@@ -70,7 +80,9 @@ class RoleController extends Controller
 
         // --- HANDLE PROCESS
         try {
-            $role = Role::where('id', $id)->update(['name' => $request->name]);
+            Role::where('id', $id)->update(['name' => $request->name]);
+            $role = Role::findById($id);
+            $role->syncPermissions($request->permissions);
             return redirect()->route('role.index')->with(['success' => 'Data berhasil diupdate !']);
         } catch (\Throwable $th) {
             return redirect()->route('role.index')->with(['failed' => $th->getMessage()]);

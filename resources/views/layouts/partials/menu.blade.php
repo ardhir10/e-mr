@@ -35,42 +35,56 @@
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title" data-key="t-dashboards">HOME</li>
 
-                        <li>
-                            <a href="{{route('dashboard')}}">
-                                {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
-                                {{-- <i class="fas fa-search" ></i> --}}
-                                <i class="icon nav-icon" data-feather="trello"></i>
+                        @if(auth()->user()->can('menu-dashboard'))
+                            <li>
+                                <a href="{{route('dashboard')}}">
+                                    {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
+                                    {{-- <i class="fas fa-search" ></i> --}}
+                                    <i class="icon nav-icon" data-feather="trello"></i>
 
 
-                                <span class="menu-item" data-key="t-sales">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('rekam-medis.index')}}">
-                                {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
-                                {{-- <i class="fas fa-search" ></i> --}}
-                                <i class="icon nav-icon" data-feather="search"></i>
+                                    <span class="menu-item" data-key="t-sales">Dashboard</span>
+                                </a>
+                            </li>
+                        @endif
 
 
-                                <span class="menu-item" data-key="t-sales">Cari Rekam Medis</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('rawat-jalan.index')}}">
-                                {{-- <i class="fas fa-hospital-user" ></i> --}}
-                                <i class="icon nav-icon" data-feather="user"></i>
+                        @if(auth()->user()->can('menu-rekam-medis'))
+                            <li>
+                                <a href="{{route('rekam-medis.index')}}">
+                                    {{-- <i class="icon nav-icon" data-feather="search"></i> --}}
+                                    {{-- <i class="fas fa-search" ></i> --}}
+                                    <i class="icon nav-icon" data-feather="search"></i>
 
-                                <span class="menu-item" data-key="t-sales">Pasien Rawat Jalan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('rawat-inap.index')}}">
-                                {{-- <i class="fas fa-hospital" ></i> --}}
-                                <i class="icon nav-icon" data-feather="user-check"></i>
 
-                                <span class="menu-item" data-key="t-sales">Pasien Rawat Inap</span>
-                            </a>
-                        </li>
+                                    <span class="menu-item" data-key="t-sales">Cari Rekam Medis</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if(auth()->user()->can('menu-rawat-jalan'))
+                            <li>
+                                <a href="{{route('rawat-jalan.index')}}">
+                                    {{-- <i class="fas fa-hospital-user" ></i> --}}
+                                    <i class="icon nav-icon" data-feather="user"></i>
+
+                                    <span class="menu-item" data-key="t-sales">Pasien Rawat Jalan</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(auth()->user()->can('menu-rawat-inap'))
+                            <li>
+                                <a href="{{route('rawat-inap.index')}}">
+                                    {{-- <i class="fas fa-hospital" ></i> --}}
+                                    <i class="icon nav-icon" data-feather="user-check"></i>
+
+                                    <span class="menu-item" data-key="t-sales">Pasien Rawat Inap</span>
+                                </a>
+                            </li>
+                        @endif
+
+
+
 
 
                         <li class="menu-title" data-key="t-applications">DATA MASTER</li>

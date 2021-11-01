@@ -71,7 +71,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="cell-border table-striped" id="data-table">
+                        <table class="cell-border table-striped" id="yajra-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -89,7 +89,7 @@
                             </thead>
                             <tbody style="font-size: 12px">
 
-                                @foreach ($rawat_jalan as $rj)
+                                {{-- @foreach ($rawat_jalan as $rj)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{date('d-m-Y',strtotime($rj->fd_tgl_masuk))}}</td>
@@ -111,7 +111,7 @@
                                      </td>
 
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
 
 
 
@@ -132,6 +132,70 @@
 @endsection
 
 @push('scripts')
+<script>
+    if (@json($jumlah_data) > 0) {
+        var table = $('#yajra-datatable').DataTable({
+            "language":
+            {
+            "processing": "<img style='width:70px; height:auto;' src='{{asset('/assets/images/loading-buffering.gif')}}' />",
+            },
+            processing: true,
+            serverSide: true,
+            ajax: window.location.href + '&from=yajra',
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'tanggal',
+                    name: 'tanggal'
+                },
+                {
+                    data: 'fs_kd_reg',
+                    name: 'fs_kd_reg'
+                },
+                {
+                    data: 'fs_mr',
+                    name: 'fs_mr'
+                },
+                {
+                    data: 'FS_NM_PASIEN',
+                    name: 'FS_NM_PASIEN'
+                },
+                {
+                    data: 'jenis_kelamin',
+                    name: 'jenis_kelamin'
+                },
+                {
+                    data: 'umur',
+                    name: 'umur'
+                },
+                {
+                    data: 'fs_nm_layanan',
+                    name: 'fs_nm_layanan'
+                },
+                {
+                    data: 'fs_dokter',
+                    name: 'fs_dokter'
+                },
+                {
+                    data: 'fs_nm_jaminan',
+                    name: 'fs_nm_jaminan'
+                },
+
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ]
+        });
+    }else{
+        table = $('#yajra-datatable').DataTable({});
+    }
+
+</script>
 <script>
     $('#data-table').DataTable({});
 

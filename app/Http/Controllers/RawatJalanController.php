@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Yajra\DataTables\DataTables;
 class RawatJalanController extends Controller
 {
     public function index(Request $request)
@@ -61,6 +61,36 @@ class RawatJalanController extends Controller
         $whereLayanan
         ";
         $data['rawat_jalan'] = DB::select($QUERY_RAWAT_JALAN);
+
+
+        if ($request->from == 'yajra') {
+            return $data['datatables'] = Datatables::of($data['rawat_jalan'])
+
+            ->addColumn('tanggal', function ($qr) {
+               return date('d-m-Y',strtotime($qr->fd_tgl_masuk));
+            })
+            ->addColumn('umur', function ($qr) {
+               return $qr->fn_umur .' Th '.$qr->fn_umur_bulan .' Bl';
+            })
+            ->addColumn('jenis_kelamin', function ($qr) {
+                if($qr->FB_JNS_KELAMIN == 1){
+                    return 'P';
+                }else{
+                    return 'L';
+                }
+            })
+
+                ->addColumn('action', function ($qr) {
+                    return '<a href="' . route('rekam-medis.detail', ['rawatjalan',$qr->fs_mr, $qr->fs_kd_dokter, $qr->fs_kd_reg]) . '" class=" "> Lihat Detail</a>';
+                })
+                ->escapeColumns([])
+                ->addIndexColumn()
+                ->toJson();
+        }
+
+        $data['jumlah_data'] = count($data['rawat_jalan']);
+
+
 
         return view('rawat-jalan.index', $data);
     }

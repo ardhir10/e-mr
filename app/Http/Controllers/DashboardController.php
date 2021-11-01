@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:menu-dashboard',['only'=>'index']);
+    }
     public function index(){
+
+
 
         $data['total_rekam_medis'] = DB::select('select count(fs_mr) as jrm from tc_mr')[0];
         $data['total_rawat_jalan'] = DB::select("

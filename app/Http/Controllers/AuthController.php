@@ -9,7 +9,7 @@ use Validator;
 use Hash;
 use Session;
 use App\User;
-
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -104,6 +104,8 @@ class AuthController extends Controller
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->role_id = $request->role_id;
         $simpan = $user->save();
+        $role = Role::find($request->role_id);
+        $user->syncRoles($role->name);
 
         if ($simpan) {
             Session::flash('success', 'Pembuatan berhasil ! Silahkan login untuk mengakses data');

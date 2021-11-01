@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
+    Route::post('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.post');
 
     // --- CPPT
 

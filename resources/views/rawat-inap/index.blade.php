@@ -72,7 +72,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="cell-border table-striped" id="data-table">
+                        <table class="cell-border table-striped" id="yajra-datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -89,33 +89,6 @@
                                 </tr>
                             </thead>
                             <tbody style="font-size: 12px">
-                                @foreach ($rawat_inap as $ri)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{date('d-m-Y',strtotime($ri->fd_tgl_masuk))}}</td>
-                                    <td>{{$ri->fs_kd_reg }}</td>
-                                    <td>{{$ri->fs_mr }}</td>
-                                    <td>{{$ri->FS_NM_PASIEN }}</td>
-                                    @if ($ri->FB_JNS_KELAMIN)
-                                    <td>P</td>
-                                    @else
-                                    <td>L</td>
-                                    @endif
-                                    <td>{{$ri->fn_umur}} Th {{$ri->fn_umur_bulan}} Bl</td>
-                                    <td>{{$ri->fs_dokter}}</td>
-                                    <td>{{$ri->fs_nm_jaminan}}</td>
-                                    <td>{{ $ri->FD_TGL_KELUAR == '' ? '' : date('d-m-Y',strtotime($ri->FD_TGL_KELUAR))}}</td>
-                                    <td>
-
-                                         <a href="{{route('rekam-medis.detail',['rawatinap',$ri->fs_mr,$ri->fs_kd_dokter,$ri->fs_kd_reg])}}">Lihat</a>
-
-                                    </td>
-
-                                </tr>
-                                @endforeach
-
-
-
 
                             </tbody>
 
@@ -133,7 +106,78 @@
 
 @push('scripts')
 <script>
-    $('#data-table').DataTable({});
 
+    if (@json($jumlah_data) > 0) {
+        var table = $('#yajra-datatable').DataTable({
+            "language":
+            {
+            "processing": "<img style='width:70px; height:auto;' src='{{asset('/assets/images/loading-buffering.gif')}}' />",
+            },
+            processing: true,
+            serverSide: true,
+             "ajax": {
+                url:  window.location.href + '',
+                data : {
+                    'from':'yajra',
+                    "_token": "{{ csrf_token() }}",
+                },
+                type:   "POST"
+            },
+
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'tanggal',
+                    name: 'tanggal'
+                },
+                {
+                    data: 'fs_kd_reg',
+                    name: 'fs_kd_reg'
+                },
+                {
+                    data: 'fs_mr',
+                    name: 'fs_mr'
+                },
+                {
+                    data: 'FS_NM_PASIEN',
+                    name: 'FS_NM_PASIEN'
+                },
+                {
+                    data: 'jenis_kelamin',
+                    name: 'jenis_kelamin'
+                },
+                {
+                    data: 'umur',
+                    name: 'umur'
+                },
+
+                {
+                    data: 'fs_dokter',
+                    name: 'fs_dokter'
+                },
+                {
+                    data: 'fs_nm_jaminan',
+                    name: 'fs_nm_jaminan'
+                },
+                {
+                    data: 'FD_TGL_KELUAR',
+                    name: 'FD_TGL_KELUAR'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ]
+        });
+    }else{
+        table = $('#yajra-datatable').DataTable({});
+    }
+</script>
+<script>
+    $('#data-table').DataTable({});
 </script>
 @endpush
