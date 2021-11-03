@@ -80,6 +80,21 @@
             background: #C1FEFF ;
         }
 
+
+         .vertical-menu{
+            display: none !important;
+        }
+
+        #page-topbar{
+            display: none;
+            /* margin-left: 0px !important; */
+        }
+        .main-content{
+            margin-left: 0px !important;
+        }
+        .page-content{
+            padding-top: 20px !important;
+        }
     </style>
 
 @endpush
@@ -168,7 +183,7 @@
                             </div>
                             <hr>
                             <a href="{{route('riwayat.resep-dokter.index',['mr'=>$no_mr])}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
-                            <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button>
+                            {{-- <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button> --}}
                         </div>
                     </div>
                 </div>

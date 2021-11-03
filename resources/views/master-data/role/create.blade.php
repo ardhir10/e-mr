@@ -36,13 +36,24 @@
                         <label for=""><strong>Name</strong></label>
                         <input type="text" name="name" class="form-control" placeholder="Role name">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for=""><strong>Permissions</strong></label>
-                        <select name="permissions[]" class="form-control" multiple id="">
+                        <select name="permissions_old[]" class="form-control" multiple id="">
                             @foreach ($permissions as $p)
                                 <option value="{{$p->id}}">{{$p->name}}</option>
                             @endforeach
                         </select>
+                    </div> --}}
+
+                    <div class="form-group">
+                        <label for="">Permissions</label>
+                        <br>
+                        @foreach ($permissions as $p)
+                        <div style="display:block">
+                            <input name="permissions[]" type="checkbox" value="{{$p->id}}">
+                            <small>{{$p->name}}</small>
+                        </div>
+                        @endforeach
                     </div>
 
                     <div class="mt-2">

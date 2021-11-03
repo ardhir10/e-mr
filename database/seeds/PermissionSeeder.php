@@ -19,7 +19,13 @@ class PermissionSeeder extends Seeder
             'menu-dashboard',
             'menu-rekam-medis',
             'menu-rawat-jalan',
-            'menu-rawat-inap'
+            'menu-rawat-inap',
+
+            'menu-setup-user',
+            'menu-setup-role',
+            'menu-satuan-tugas-medis',
+            'menu-layanan-bagian',
+            'menu-list-dokter',
         ];
 
         foreach ($dataPermissions as $dp) {

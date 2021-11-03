@@ -78,7 +78,20 @@
         .bg-tbl-detail-blue{
             background: #C1FEFF ;
         }
+        .vertical-menu{
+            display: none !important;
+        }
 
+        #page-topbar{
+            display: none;
+            /* margin-left: 0px !important; */
+        }
+        .main-content{
+            margin-left: 0px !important;
+        }
+        .page-content{
+            padding-top: 20px !important;
+        }
     </style>
 
 @endpush
@@ -96,7 +109,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <form action="" method="get">
                                         <div class="form-group row">
                                             <div class="col-2">
@@ -110,7 +123,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> --}}
                                 <div class="col-3">
                                     <table class="w-100">
                                         <tr>
@@ -210,7 +223,7 @@
                             </div>
                             <hr>
                             <a href="{{route('riwayat.laboratorium.index')}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
-                            <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button>
+                            {{-- <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button> --}}
                         </div>
                     </div>
                 </div>

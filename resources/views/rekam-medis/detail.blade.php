@@ -169,16 +169,16 @@
                                                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                 <li>
 
-                                                    <a class="dropdown-item" href="{{route('riwayat.laboratorium.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Laboratorium</a></li>
+                                                    <a class="dropdown-item" onclick="openNew(`{{route('riwayat.laboratorium.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Laboratorium</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Radiologi</a></li>
+                                                    <a class="dropdown-item" onclick="openNew(`{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Radiologi</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Resep</a></li>
+                                                <li><a class="dropdown-item" onclick="openNew(`{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}`)"  >Riwayat Resep</a></li>
 
                                                 <li>
                                                     <hr class="dropdown-divider">
@@ -194,7 +194,7 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="{{route('riwayat.singkat-kunjungan.index',['mr'=>$rekam_medis->FS_MR])}}">Riwayat Singkat Kunjungan</a></li>
+                                                <li><a class="dropdown-item" onclick="openNew(`{{route('riwayat.singkat-kunjungan.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Singkat Kunjungan</a></li>
                                             </ul>
                                         </div>
                                         <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
@@ -828,6 +828,18 @@ $.fn.isInViewport = function() {
     return elementBottom > viewportTop && elementTop < viewportBottom;
 };
 
+function openNew(url) {
+      var url = url
+      // console.log(url)
+      // window.open(url, '_blank');
 
+      newwindow = window.open(url, 'name', ' location=0');
+      if (window.focus) {
+        newwindow.focus()
+          newwindow.resizeTo(1280, 768);
+
+      }
+      return false;
+    }
 </script>
 @endpush

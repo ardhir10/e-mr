@@ -88,37 +88,51 @@
 
 
                         <li class="menu-title" data-key="t-applications">DATA MASTER</li>
-
+                        @if(auth()->user()->can('menu-setup-user'))
                         <li>
                             <a href="{{route('user.index')}}">
                                 <i class="icon nav-icon" data-feather="users"></i>
                                 <span class="menu-item" data-key="t-calendar">Setup User</span>
                             </a>
                         </li>
+                        @endif
+
+                        @if(auth()->user()->can('menu-setup-role'))
                         <li>
                             <a href="{{route('role.index')}}">
                                 <i class="icon nav-icon" data-feather="sliders"></i>
                                 <span class="menu-item" data-key="t-calendar">Setup Role User</span>
                             </a>
                         </li>
+                        @endif
+
+
+                        @if(auth()->user()->can('menu-satuan-tugas-medis'))
                         <li>
                             <a href="{{route('satuan-tugas-medis.index')}}">
                                 <i class="icon nav-icon" data-feather="slack"></i>
                                 <span class="menu-item" data-key="t-calendar">Satuan Tugas Medis</span>
                             </a>
                         </li>
+                        @endif
+
+                        @if(auth()->user()->can('menu-layanan-bagian'))
                         <li>
                             <a href="{{route('layanan.index')}}">
                                 <i class="icon nav-icon" data-feather="settings"></i>
                                 <span class="menu-item" data-key="t-calendar">Layanan/Bagian</span>
                             </a>
                         </li>
+                        @endif
+
+                        @if(auth()->user()->can('menu-list-dokter'))
                         <li>
                             <a href="{{route('dokter.index')}}">
                                 <i class="icon nav-icon" data-feather="user-check"></i>
                                 <span class="menu-item" data-key="t-calendar">List Dokter</span>
                             </a>
                         </li>
+                         @endif
 
 
                     </ul>

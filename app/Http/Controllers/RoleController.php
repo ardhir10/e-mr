@@ -33,7 +33,13 @@ class RoleController extends Controller
         $permissions = ModelsPermission::get();
 
         $data['permissions'] = $permissions;
-        $data['my_permissions'] = $data['role']->permissions;
+
+        $permission = [];
+        foreach ($data['role']->permissions as $key => $value) {
+            $permission[] = $value;
+
+        }
+        $data['my_permissions'] = $permission;
 
         return view('master-data.role.edit', $data);
     }
@@ -50,7 +56,7 @@ class RoleController extends Controller
             'name' => 'required',
         ], $messages);
 
-
+        // dd($request->permissions_old);
 
 
         // --- HANDLE PROCESS

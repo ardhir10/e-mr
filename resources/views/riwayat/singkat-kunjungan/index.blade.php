@@ -48,6 +48,22 @@
             background: #C1FEFF ;
         }
 
+
+         .vertical-menu{
+            display: none !important;
+        }
+
+        #page-topbar{
+            display: none;
+            /* margin-left: 0px !important; */
+        }
+        .main-content{
+            margin-left: 0px !important;
+        }
+        .page-content{
+            padding-top: 20px !important;
+        }
+
     </style>
 
 @endpush
