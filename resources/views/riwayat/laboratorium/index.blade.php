@@ -174,11 +174,11 @@
                                         </tr>
                                         <tr>
                                             <td align="right"> <label for="">Dr. Pengirim : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder="" readonly></td>
                                         </tr>
                                         <tr>
                                             <td align="right"> <label for="">Dr. Pemeriksa : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_peg ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_peg ?? ''}}" type="text" placeholder="" readonly></td>
                                         </tr>
                                     </table>
                                 </div>

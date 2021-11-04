@@ -180,19 +180,19 @@
 
                                         <tr>
                                             <td align="right"> <label for="">Dr. Pengirim : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input readonly class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td align="right"> <label for="">Pemeriksaan : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_tarif ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input readonly class="form-control form-control-sm"  value="{{$header[0]->fs_nm_tarif ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td align="right"> <label for="">STUDY : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->FS_NO_FILM ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input readonly class="form-control form-control-sm"  value="{{$header[0]->FS_NO_FILM ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                         <tr>
                                             <td align="right"> <label for="">Dr. Radiologi : </label></td>
-                                            <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_dokter_pemeriksa ?? ''}}" type="text" placeholder=""></td>
+                                            <td><input readonly class="form-control form-control-sm"  value="{{$header[0]->fs_nm_dokter_pemeriksa ?? ''}}" type="text" placeholder=""></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -254,7 +254,7 @@
                             <div class="box" style="border:0px solid black;">
 
                                 <div class="box-body">
-                                    <textarea style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >{{$detail[0]->fs_ket ?? ''}}</textarea>
+                                    <textarea readonly style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >{{$detail[0]->fs_ket ?? ''}}</textarea>
 
                                 </div>
                             </div>
