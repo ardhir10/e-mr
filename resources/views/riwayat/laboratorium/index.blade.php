@@ -222,7 +222,8 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="{{route('riwayat.laboratorium.index')}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
+                            <a href="{{route('riwayat.laboratorium.index',['mr'=>$header[0]->fs_mr ?? ''])}}" class="btn btn-outline-primary w-100" style="margin-bottom: 10px"><i class="icon " data-feather="refresh-ccw"></i>  Refresh</a>
+
                             {{-- <button class="btn btn-outline-success w-100"><i class="icon " data-feather="printer"></i> Cetak</button> --}}
                         </div>
                     </div>
