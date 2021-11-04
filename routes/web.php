@@ -69,7 +69,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-master/user/add', 'UserController@create')->name('user.create');
     Route::post('/data-master/user', 'UserController@store')->name('user.store');
     Route::get('/data-master/user/{id}/edit', 'UserController@edit')->name('user.edit');
+    Route::get('/data-master/user/{id}/edit/profile', 'UserController@editProfile')->name('user.edit.profile');
     Route::post('/data-master/user/{id}/update', 'UserController@update')->name('user.update');
+    Route::post('/data-master/user/{id}/update-profile', 'UserController@updateProfile')->name('user.update-profile');
     Route::get('/data-master/user/{id}/delete', 'UserController@delete')->name('user.delete');
 
     // --- ROLE SETUP

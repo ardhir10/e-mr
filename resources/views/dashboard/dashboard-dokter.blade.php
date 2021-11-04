@@ -31,6 +31,9 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
+                                    @include('components.flash-message')
+                                </div>
+                                <div class="col-12">
                                     <h5 class="">Selamat Datang , {{ Auth::user()->namaDokter() }}</h5>
                                     <form action="">
                                        <div class="d-flex">

@@ -56,6 +56,23 @@ class UserController extends Controller
 
         return view('master-data.user.edit', $data);
     }
+    public function editProfile($id)
+    {
+        $data['page_title'] = "Edit Profile";
+
+        $data['user'] = User::find($id);
+        $data['page_title'] = "Edit Profile";
+        $QUERY = "select	fs_kd_peg fs_kd_dokter ,
+		fs_nm_peg fs_dokter
+        from	td_peg
+        where	fn_profesi_medis in (0,1,2)
+        and		FB_SUDAH_RESIGN = 0
+        order	by fs_nm_peg";
+        $data['dokter'] = DB::select($QUERY);
+        $data['roles'] = Role::all();
+
+        return view('master-data.user.edit-profile', $data);
+    }
 
 
     public function store(Request $request)
@@ -134,6 +151,29 @@ class UserController extends Controller
             return redirect()->route('user.index')->with(['success' => 'Data berhasil disimpan !']);
         } catch (\Throwable $th) {
             return redirect()->route('user.index')->with(['failed' => $th->getMessage()]);
+        }
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        // --- BAGIAN VALIDASI
+
+
+
+        if ($request->password != '') {
+            $parameterUpdate['password'] = Hash::make($request->password);
+        }else{
+            return redirect()->route('dashboard');
+        }
+
+
+
+        // --- HANDLE PROCESS
+        try {
+            User::where('id', $id)->update($parameterUpdate);
+            return redirect()->route('dashboard')->with(['success' => 'Profile berhasil diubah !']);
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard')->with(['failed' => $th->getMessage()]);
         }
     }
 

@@ -35,7 +35,7 @@
                             <p class="mb-0 font-size-11 text-white-50 fw-semibold">{{Auth::user()->email}}</p>
                         </div>
 
-                        <a class="dropdown-item" href="{{route('user.edit',Auth::user()->id)}}"><i class="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Edit Profile</span></a>
+                        <a class="dropdown-item" href="{{route('user.edit.profile',Auth::user()->id)}}"><i class="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Edit Profile</span></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{route('logout')}}"><i class="mdi mdi-logout text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Logout</span></a>
                     </div>
