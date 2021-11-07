@@ -11,15 +11,16 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:menu-dashboard',['only'=>'index']);
+        $this->middleware('permission:menu-dashboard', ['only' => 'index']);
     }
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
 
-        $date_from = $request->date_from?? date('Y-m-d');
-        $date_to = $request->date_to?? date('Y-m-d');
+        $date_from = $request->date_from ?? date('Y-m-d');
+        $date_to = $request->date_to ?? date('Y-m-d');
 
-        $data['request']= $request;
+        $data['request'] = $request;
         $data['total_rekam_medis'] = DB::select('select count(fs_mr) as jrm from tc_mr')[0];
         $data['total_rawat_jalan'] = DB::select("
         select	aa.fd_tgl_masuk
@@ -113,7 +114,7 @@ class DashboardController extends Controller
         // ];
 
 
-        if(Auth::user()->fs_kd_peg){
+        if (Auth::user()->fs_kd_peg) {
             $kd_dokter = Auth::user()->fs_kd_peg;
             $data['jml_blm_verif'] = DB::select("		select
         aa.FN_ID,
@@ -279,9 +280,139 @@ class DashboardController extends Controller
 		and FS_VERIFIED_BY IS NULL
 
         order by FD_DATE desc");
-            return view('dashboard.dashboard-dokter',$data);
-        }else{
-            return view('dashboard.dashboard-non-dokter',$data);
+            return view('dashboard.dashboard-dokter', $data);
+        } else {
+            return view('dashboard.dashboard-non-dokter', $data);
         }
+    }
+
+
+    public function chartGraphicDokter(Request $request)
+    {
+        $dataRawatJalanDokter = DB::select("select	DATEPART(Year, aa.fd_tgl_masuk) Year, DATEPART(Month, aa.fd_tgl_masuk) Month,
+		count(aa.fd_tgl_masuk) [TotalAmount]
+        from	TA_REGISTRASI aa
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+		inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        where	aa.fd_tgl_void = '3000-01-01'
+        and		ff.FS_KD_INSTALASI_DK in (1,2,4)
+		and ee.fs_kd_peg = '$request->kodeDokter'
+		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+
+
+		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk),FS_NM_PEG
+		ORDER BY Year, Month");
+        $dataRawatJalanDokter = array_map(function ($value) {
+            return (array)$value;
+        }, $dataRawatJalanDokter);
+
+
+        $mL = [
+            1=>'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December'
+        ];
+
+        $months = array_column($dataRawatJalanDokter, 'Month');
+        $vals = array_column($dataRawatJalanDokter, 'TotalAmount');
+
+        $dataCharts = [];
+        $i = 0;
+        foreach ($mL as $key => $value) {
+            $m = $months[$i] ?? null;
+            if($m == $key){
+                $dataChart = [
+                    'month'=>$value,
+                    'val' => (float)$vals[$i]
+                ];
+            }else{
+                $dataChart = [
+                    'month' => $value,
+                    'val' => 0
+                ];
+            }
+            $dataCharts[]= $dataChart;
+            $i++;
+        }
+
+
+
+        $data['months'] = array_column($dataCharts, 'month');
+        $data['vals'] = array_column($dataCharts, 'val');
+        return json_encode($data);
+    }
+
+    public function chartGraphicNonDokter(Request $request)
+    {
+        $dataRawatJalanDokter = DB::select("select	DATEPART(Year, aa.fd_tgl_masuk) Year, DATEPART(Month, aa.fd_tgl_masuk) Month,
+		count(aa.fd_tgl_masuk) [TotalAmount]
+        from	TA_REGISTRASI aa
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+		inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        where	aa.fd_tgl_void = '3000-01-01'
+        and		ff.FS_KD_INSTALASI_DK in (1,2,4)
+		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+
+
+		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk)
+		ORDER BY Year, Month");
+        $dataRawatJalanDokter = array_map(function ($value) {
+            return (array)$value;
+        }, $dataRawatJalanDokter);
+
+
+        $mL = [
+            1 => 'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December'
+        ];
+
+        $months = array_column($dataRawatJalanDokter, 'Month');
+        $vals = array_column($dataRawatJalanDokter, 'TotalAmount');
+
+        $dataCharts = [];
+        $i = 0;
+        foreach ($mL as $key => $value) {
+            $m = $months[$i] ?? null;
+            if ($m == $key) {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => (float)$vals[$i]
+                ];
+            } else {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => 0
+                ];
+            }
+            $dataCharts[] = $dataChart;
+            $i++;
+        }
+
+
+
+        $data['months'] = array_column($dataCharts, 'month');
+        $data['vals'] = array_column($dataCharts, 'val');
+        return json_encode($data);
     }
 }

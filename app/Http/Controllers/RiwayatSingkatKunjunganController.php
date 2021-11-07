@@ -12,7 +12,7 @@ class RiwayatSingkatKunjunganController extends Controller
         $no_mr = null;
         $namaPasien = null;
 
-        $data['page_title'] = '::Riwayat Kunjungan ::';
+        $data['page_title'] = '::Riwayat Kunjungan :: -> Riwayat Singkat Kunjungan';
         if ($request->mr) {
             $no_mr = $request->mr;
         }

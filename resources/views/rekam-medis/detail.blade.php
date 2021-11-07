@@ -450,13 +450,14 @@
 
                                                 @foreach ($riwayat_kunjungan as $rk)
                                                 <tr>
-                                                    <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
+                                                    <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}
+                                                    ({{$rk->fs_kd_reg}})</td>
                                                     <td style="padding:2px ;">
                                                         {{$rk->fs_nm_layanan}}
                                                     </td>
                                                     <td style="padding:2px ;">
                                                         {{$rk->fs_dokter}}
-                                                        ({{$rk->fs_kd_reg}})
+
                                                     </td>
                                                     <td style="padding:2px ;">
                                                         <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]" checked>

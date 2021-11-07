@@ -10,7 +10,7 @@ class RiwayatLaboratoriumController extends Controller
 {
     public function index(Request $request){
         $no_mr = null;
-        $data['page_title'] = '::Info :Hasil Pemeriksaan Laboratorium ::';
+        $data['page_title'] = '::Info :Hasil Pemeriksaan Laboratorium :: -> Riwayat Hasil Pemeriksaan Laboratorium';
 
         if($request->mr){
             $no_mr = $request->mr;

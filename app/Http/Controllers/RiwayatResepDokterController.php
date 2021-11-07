@@ -11,7 +11,7 @@ class RiwayatResepDokterController extends Controller
     public function index(Request $request)
     {
         $no_mr = null;
-        $data['page_title'] = '::Riwayat Resep Dokter ::';
+        $data['page_title'] = '::Riwayat Resep Dokter :: -> Riwayat Resep Dokter';
 
         $no_mr = $request->mr;
         $riwayatResepDokter = DB::select(" select  aa.fs_kd_resep, fd_tgl_resep,
@@ -71,7 +71,11 @@ class RiwayatResepDokterController extends Controller
 
         $data['_self'] = $this;
         $data['no_mr'] = $no_mr;
-        $data['fs_kd_resep'] = $fs_kd_resep     ;
+        $data['fs_kd_resep'] = $fs_kd_resep;
+
+        $data['rumah_sakit'] = DB::select("select	fs_nm_rs, fs_alm_rs, fs_tlp_rs , FS_FAX_RS from	t_parameter");
+
+
 
         return view('riwayat.resep-dokter.index', $data);
     }

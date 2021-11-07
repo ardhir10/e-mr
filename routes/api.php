@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('/geticd', 'AsesmenDokterController@getIcd')->name('api.icd.search');
 
+Route::post('/dashboardDokterRawatjalan', 'DashboardController@chartGraphicDokter')->name('api.dashboard-rawat-jalan-dokter');
+Route::post('/dashboardNonDokterRawatjalan', 'DashboardController@chartGraphicNonDokter')->name('api.dashboard-rawat-jalan-non-dokter');

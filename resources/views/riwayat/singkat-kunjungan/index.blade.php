@@ -88,7 +88,7 @@
                                                 <label for="">MR</label>
                                             </div>
                                             <div class="col-8">
-                                                <input  class="form-control form-control-sm" name="mr" type="text"  value="{{$fs_mr}}">
+                                                <input  class="form-control form-control-sm" name="mr" type="text"  value="{{$fs_mr}}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -118,6 +118,7 @@
                             <table class="table table-striped tabel-riwayat">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>REGISTER</th>
                                         <th>IN</th>
                                         <th>JAM</th>
@@ -130,6 +131,7 @@
                                 <tbody>
                                    @foreach ($riwayat_singkat as $rs)
                                     <tr>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>{{$rs->fs_kd_reg}}</td>
                                         <td>{{date('d-m-Y',strtotime($rs->fd_tgl_masuk))}}</td>
                                         <td>{{$rs->fs_jam_masuk}}</td>
@@ -168,18 +170,15 @@
 <script src="{{asset('assets/libs/datatable-downloads/vfs_fonts.js')}}"></script>
     <script>
 
-        $('.tabel-riwayat').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
-        // $('.tabel-riwayat').DataTable({
-        //     "pageLength": 100,
-        //  dom: 'Bfrtip',
+        // $('.tabel-riwayat').DataTable( {
+        //     dom: 'Bfrtip',
         //     buttons: [
         //         'copy', 'csv', 'excel', 'pdf', 'print'
-        //     ]});
+        //     ]
+        // } );
+        $('.tabel-riwayat').DataTable({
+            "pageLength": 100,
+          });
         $('#data-table2').DataTable({
 
             "bPaginate": false,
@@ -187,20 +186,20 @@
             "bFilter": true,
             "bInfo": false,
             "bAutoWidth": false,
-            "order": [
-                [0, "desc"]
-            ],
-            "columnDefs": [{
-                    "orderable": false,
-                    "targets": [3]
-                },
-                {
-                    "orderable": true,
-                    "targets": [
-                        [0, "desc"], 1, 2
-                    ]
-                }
-            ]
+            // "order": [
+            //     [0, "desc"]
+            // ],
+            // "columnDefs": [{
+            //         "orderable": false,
+            //         "targets": [3]
+            //     },
+            //     {
+            //         "orderable": true,
+            //         "targets": [
+            //             [0, "desc"], 1, 2
+            //         ]
+            //     }
+            // ]
             //   "ordering": false
         });
     </script>
