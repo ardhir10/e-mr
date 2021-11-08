@@ -420,11 +420,23 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}"
-                                    class="btn btn-success ">
-                                    <i data-feather="folder-plus"></i>
-                                    Tambah CPPT</a>
-                                    <h1>{{ session()->get('hl')}}</h1>
+
+                                <div class="card border border-dark">
+                                    <div class="card-header  border-dark"
+                                        style="background-color: #A9D08E;padding:3px 18px;">
+                                        <h6 class="my-0 text-dark">CPPT</h6>
+                                    </div>
+                                    <div class="card-body" style="padding:10px">
+                                        <div class="" style="">
+                                            <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}"
+                                            class="btn btn-success ">
+                                            <i data-feather="folder-plus"></i>
+                                            Tambah CPPT</a>
+                                            {{-- <h1>{{ session()->get('hl')}}</h1> --}}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <hr>
