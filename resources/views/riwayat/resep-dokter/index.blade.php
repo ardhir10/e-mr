@@ -223,7 +223,7 @@ S. {{$dr->fs_nm_aturan_pakai}}
 
 
 PRO             : {{$header_resep_dokter[0]->fs_nm_pasien ??''}}
-PRO             : {{$header_resep_dokter[0]->fn_umur ??''}} Th {{$header_resep_dokter[0]->fn_umur_bulan ?? ''}} Bl
+Umur            : {{$header_resep_dokter[0]->fn_umur ??''}} Th {{$header_resep_dokter[0]->fn_umur_bulan ?? ''}} Bl
                                     </pre>
 
                                 </div>
