@@ -102,12 +102,12 @@
                                 <form action="">
                                     <div class="d-flex">
                                         <label>Tanggal : &nbsp;</label>
-                                        <input type="date" name="date_from" class=""
+                                        <input type="date" name="date_from" class="form-control form-control-sm" style="width: auto;"
                                             value="{{$request->date_from ?? date('Y-m-d')}}">
                                         &nbsp;
-                                        <input type="date" name="date_to" class=""
+                                        <input type="date" name="date_to" class="form-control form-control-sm" style="width: auto;"
                                             value="{{$request->date_to ?? date('Y-m-d')}}">
-                                        <button>Filter</button>
+                                        <button class="btn btn-sm btn-primary" style="margin-left: 5px">Filter</button>
                                     </div>
                                 </form>
                                 <br>
@@ -193,7 +193,7 @@
                     <div class="card-header" style="    border-top-left-radius: 23px;border-top-right-radius: 23px;">
                         <span class="fw-bold font-size-xs card-title text-uppercase">Grafik Bulanan Pasian R.Jalan ,
                             {{ Auth::user()->namaDokter() }}</span>
-                        <select id="chartBulanan" onchange="getData()" style=" float: right;" name="year">
+                        <select id="chartBulanan" class="form-seelct form-control-sm"   onchange="getData()" style=" float: right;width: auto;" name="year">
                             {{ $last= date('Y')-120 }}
                             {{ $now = date('Y') }}
                             @for ($i = $now; $i >= $last; $i--)

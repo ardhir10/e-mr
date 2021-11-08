@@ -33,18 +33,21 @@ class RiwayatResepDokterController extends Controller
         // }
         $fs_kd_resep = $riwayatResepDokter[0]->fs_kd_resep ?? '';
 
-        if($request->resep){
+        if ($request->resep) {
             $fs_kd_resep = $request->resep;
         }
 
         $headerResepDokter = DB::select("  select  aa.fs_kd_resep, fd_tgl_resep,fs_jam_resep,
-                fs_nm_peg , fs_nm_layanan,fs_mr,fs_nm_pasien,fs_nm_jaminan,ee.fs_kd_jaminan,cc.fs_kd_peg,aa.fs_kd_reg
+                fs_nm_peg , fs_nm_layanan,ff.fs_mr,aa.fs_nm_pasien,fs_nm_jaminan,ee.fs_kd_jaminan,cc.fs_kd_peg,aa.fs_kd_reg,
+                DATEDIFF(YYYY, ff.fd_tgl_lahir,bb.fd_tgl_masuk ) fn_umur,
+                		 DATEDIFF(m, ff.fd_tgl_lahir,bb.fd_tgl_masuk )%12 fn_umur_bulan
+
         from    tb_trs_resep_header aa
         inner   join ta_registrasi bb on aa.fs_kd_reg = bb.fs_kd_reg
         inner   join td_peg cc on aa.fs_kd_medis = cc.fs_kd_peg
         inner   join ta_layanan dd on aa.fs_kd_layanan_resep = dd.fs_kd_layanan
         inner	join ta_jaminan ee on bb.fs_kd_jaminan= ee.fs_kd_jaminan
-
+        inner   join tc_mr ff on bb.fs_mr= ff.fs_mr
         where   aa.fd_tgl_void = '3000-01-01'
         and bb.fs_mr = '$no_mr'
         and fs_kd_resep = '$fs_kd_resep'
@@ -95,6 +98,4 @@ class RiwayatResepDokterController extends Controller
         }
         return $returnValue;
     }
-
-
 }

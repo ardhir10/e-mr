@@ -34,8 +34,9 @@
         }
         .tabel-riwayat thead tr {
             font-weight: bold;
-            background: #c5c5c5;
+            background: #B4C6E7;
             color: black;
+                /* border-bottom: 2px solid black; */
         }
         .tabel-riwayat tbody tr:hover {
             background-color: #fdc18080;
@@ -43,7 +44,11 @@
 
         .tabel-riwayat td {
             padding: 3px;
-            border: 1px solid black;
+            border: 1px solid #EBEBEB;
+        }
+        .tabel-riwayat thead tr td {
+                padding: 13px 2px;
+            text-align: center;
         }
 
 
@@ -57,12 +62,12 @@
         .tabel-riwayat-detail thead tr {
             font-weight: bold;
             background: #c5c5c5;
-            color: black;
+            color: #EBEBEB;
         }
 
         .tabel-riwayat-detail thead tr td {
             padding: 3px;
-            border: 1px solid black;
+            border: 1px solid #EBEBEB;
             text-align: center;
         }
 
@@ -215,6 +220,10 @@ S. {{$dr->fs_nm_aturan_pakai}}
                                                     No . {{$_self->numberToRomanRepresentation($dr->FN_QTY_ASLI)}}
 --------------------------------------------------------------------------------------------------------------------
 @endforeach
+
+
+PRO             : {{$header_resep_dokter[0]->fs_nm_pasien ??''}}
+PRO             : {{$header_resep_dokter[0]->fn_umur ??''}} Th {{$header_resep_dokter[0]->fn_umur_bulan ?? ''}} Bl
                                     </pre>
 
                                 </div>

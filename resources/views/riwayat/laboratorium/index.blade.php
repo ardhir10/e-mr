@@ -20,11 +20,12 @@
             background-color: #000000;
         }
 
+
         .text-riwayat {
             color: #AA0909 !important;
         }
 
-        .tabel-riwayat {
+       .tabel-riwayat {
             border-collapse: collapse;
             border: 1px solid black;
             width: 100%;
@@ -32,8 +33,9 @@
         }
         .tabel-riwayat thead tr {
             font-weight: bold;
-            background: #c5c5c5;
+            background: #B4C6E7;
             color: black;
+                /* border-bottom: 2px solid black; */
         }
         .tabel-riwayat tbody tr:hover {
             background-color: #fdc18080;
@@ -41,7 +43,10 @@
 
         .tabel-riwayat td {
             padding: 3px;
-            border: 1px solid black;
+            border: 1px solid #EBEBEB;
+        }
+        .tabel-riwayat thead tr td {
+                padding: 13px 2px;
             text-align: center;
         }
 
@@ -55,13 +60,16 @@
         }
         .tabel-riwayat-detail thead tr {
             font-weight: bold;
-            background: #c5c5c5;
+                        background: #B4C6E7;
+
             color: black;
+
         }
 
         .tabel-riwayat-detail thead tr td {
-            padding: 3px;
-            border: 1px solid black;
+            border: 1px solid #EBEBEB;
+
+             padding: 13px 2px;
             text-align: center;
         }
 
@@ -92,6 +100,10 @@
         .page-content{
             padding-top: 20px !important;
         }
+
+        .case-0::before {
+  content: "Read this -";
+}
     </style>
 
 @endpush
@@ -253,7 +265,7 @@
                                                     @case(0)
                                                         <tr style="background: white;color:blue;">
                                                             <td>
-                                                                <span class="fw-bold font-italic"><em>{{$dtl->fs_nm_periksa}}</em></span>
+                                                                <span class="fw-bold font-italic case-0"><em>{{$dtl->fs_nm_periksa}}</em></span>
                                                             </td>
                                                               <td class="bg-tbl-detail-blue"></td>
                                                             <td></td>
