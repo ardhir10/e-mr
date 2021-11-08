@@ -429,10 +429,9 @@
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
                                             <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}"
-                                            class="btn btn-success ">
+                                            class="btn btn-success form-control ">
                                             <i data-feather="folder-plus"></i>
                                             Tambah CPPT</a>
-                                            {{-- <h1>{{ session()->get('hl')}}</h1> --}}
                                         </div>
                                     </div>
                                 </div>

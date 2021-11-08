@@ -54,7 +54,7 @@
 </head>
 
 
-<body style="background: #efefef;">
+<body style="background: #efefef;" data-sidebar-size="lg">
 
     <!-- <body data-layout="horizontal"> -->
 

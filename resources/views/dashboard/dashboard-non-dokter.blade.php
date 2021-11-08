@@ -1,6 +1,69 @@
 @extends('main')
 
 
+@push('styles')
+<link
+    rel="stylesheet"
+    href="{{asset('assets/css/animate.min.css')}}"
+  />
+<style>
+     .card-1 {
+    --animate-duration: 0.5s;
+    }
+    .card-2 {
+    --animate-duration: 0.8s;
+    }
+    .card-3 {
+    --animate-duration: 1.1s;
+    }
+    .card-1{
+        background-image: linear-gradient( 109.6deg,  rgba(45,116,213,1) 11.2%, rgba(121,137,212,1) 91.2% );
+        min-height: 150px !important;
+        color: white !important;
+        border: 0px solid black !important;
+        border-radius: 25px !important;
+          box-shadow: 1px 3px 28px -7px rgb(0 0 0 / 71%);
+    -webkit-box-shadow: 1px 3px 16px -7px rgb(0 0 0 / 71%);
+    -moz-box-shadow: 1px 3px 28px -7px rgba(0,0,0,0.71);
+
+    }
+    .card-2{
+background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,28,1) 118% );        min-height: 150px !important;
+        color: white !important;
+        border: 0px solid black !important;
+        border-radius: 25px !important;
+          box-shadow: 1px 3px 28px -7px rgb(0 0 0 / 71%);
+    -webkit-box-shadow: 1px 3px 16px -7px rgb(0 0 0 / 71%);
+    -moz-box-shadow: 1px 3px 28px -7px rgba(0,0,0,0.71);
+
+    }
+    .card-3{
+        background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,152,155,1) 0.1%, rgba(0,94,120,1) 94.2% );
+        min-height: 150px !important;
+        color: white !important;
+        border: 0px solid black !important;
+        border-radius: 25px !important;
+          box-shadow: 1px 3px 28px -7px rgb(0 0 0 / 71%);
+    -webkit-box-shadow: 1px 3px 16px -7px rgb(0 0 0 / 71%);
+    -moz-box-shadow: 1px 3px 28px -7px rgba(0,0,0,0.71);
+
+    }
+
+    .text-card-d1{
+            font-size: 20px;
+            font-weight: 500;
+            font-family: 'Roboto';
+    }
+    .text-card-d2{
+            display: block;
+    font-size: 57px !important;
+    font-weight: 500;
+    color: white;
+    vertical-align: top;
+    font-family: 'Roboto';
+    }
+</style>
+@endpush
 
 @section('content')
     <div class="page-content">
@@ -27,7 +90,7 @@
 
             <div class="row ">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card" style="border-radius: 23px;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
@@ -45,52 +108,57 @@
                                 </div>
                                 <div class="col-xl-4 col-sm-6">
                                     <!-- Card -->
-                                    <div class="card"
-                                        style="background: #8EAADC;color:black !important;border:1px solid black">
+                                    <div class="card card-1 animate__animated  animate__fadeInUp"
+                                        style="">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="font-size-xs ">Jml Pasien R.Jalan & IGD</h6>
-                                                    <h5 class="mt-2 font-weight-bold mb-2 d-flex align-items-center"
-                                                        style="    font-size: 40px;font-weight: 500;">
+                                                <div class="">
+                                                    <span class="font-size-xs font-weight-bold text-card-d1">Pasien Rawat Jalan & IGD</span>
+                                                    <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
+                                                            style="    font-size: 40px;font-weight: 500;">
                                                         {{ number_format(count($jml_pasien_rj), 0, ',', '.') }}
-                                                    </h5>
+                                                    </h1>
+                                                    <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat jalan & IGD</small>
                                                 </div>
+                                                <img src="{{asset('assets/images/rawat-jalan-warna.png')}}" alt="" style="height:120px;width: auto;">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-sm-6">
                                     <!-- Card -->
-                                    <div class="card"
-                                        style="background: #315496;color:#ffffff !important;border:1px solid black">
+                                    <div class="card card-2 animate__animated  animate__fadeInUp"
+                                        style="color:#ffffff !important;border:1px solid black">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <h6 class="font-size-xs " style="color:#ffffff !important;">Pasien R.Inap Masuk Baru</h6>
-                                                    <h5 class="mt-2 font-weight-bold mb-2 d-flex align-items-center"
-                                                        style="    font-size: 40px;font-weight: 500;color:#ffffff !important;">
-                                                        -
-                                                    </h5>
+                                                    <span class="font-size-xs text-card-d1">Pasien R.Inap Masuk Baru</span>
+                                                    <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
+                                                            style="    font-size: 40px;font-weight: 500;">
+                                                        {{ number_format(count([]), 0, ',', '.') }}
+                                                    </h1>
+                                                    <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat inap masuk baru</small>
                                                 </div>
+                                                <img src="{{asset('assets/images/ri2.png')}}" alt="" style="height:120px;width: auto;">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-sm-6">
                                     <!-- Card -->
-                                    <div class="card"
-                                        style="background: #FFE699;color:#000000 !important;border:1px solid black">
+                                    <div class="card card-3 animate__animated  animate__fadeInUp"
+                                        style="">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="font-size-xs " style="color:#000000 !important;">Pasien
-                                                        R.Inap Terkini</h6>
-                                                    <h5 class="mt-2 font-weight-bold mb-2 d-flex align-items-center"
-                                                        style="    font-size: 40px;font-weight: 500;color:#000000 !important;">
-                                                        {{ number_format(count($jml_pasien_ri), 0, ',', '.') }}
-                                                    </h5>
+                                               <div>
+                                                    <span class="font-size-xs text-card-d1">Pasien R.Inap Terkini</span>
+                                                    <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
+                                                            style="    font-size: 40px;font-weight: 500;">
+                                                        {{ number_format(count($jml_pasien_rj), 0, ',', '.') }}
+                                                    </h1>
+                                                    <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat inap terkini </small>
                                                 </div>
+                                                <img src="{{asset('assets/images/rawat-inap.png')}}" alt="" style="height:120px;width: auto;">
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +173,7 @@
             <div class="row">
                 <div class="col-xl-12 col-sm-12">
                     <!-- Card -->
-                    <div class="card">
+                <div class="card animate__animated animate__fadeInUpBig" style="border-radius: 23px;">
                         <div class="card-header">
                             <span class="fw-bold font-size-xs card-title text-uppercase">Grafik Bulanan Pasian Rawat Jalan & IGD</span>
                              <select id="chartBulanan" onchange="getData()" style=" float: right;" name="year" >
