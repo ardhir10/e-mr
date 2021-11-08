@@ -199,8 +199,8 @@
                                     <pre style="font-weight: 700;width:100%;background: #D6FEEA;border:1px solid black;border-radius:10px;padding:10px;height:400px;overflow:auto;font-family: monospace;"  name="" id="" >
 {{$rumah_sakit[0]->fs_nm_rs ?? ''}}
 {{$rumah_sakit[0]->fs_alm_rs ?? ''}}
-{{$rumah_sakit[0]->fs_tlp_rs ?? ''}}
-{{$rumah_sakit[0]->FS_FAX_RS ?? ''}}
+Tlp : {{$rumah_sakit[0]->fs_tlp_rs ?? ''}}
+{{-- {{$rumah_sakit[0]->FS_FAX_RS ?? ''}} --}}
 
                             R E S E P ({{$header_resep_dokter[0]->fs_kd_resep ?? ''}})
 
