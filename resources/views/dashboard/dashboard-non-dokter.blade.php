@@ -187,8 +187,8 @@ background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,2
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <div id="" style="padding:20px;height: 450px;width:100%;border-radius:30px">
-                                    <div id="dashboard-statistic" style="height: 100%"></div>
+                                <div id="" class="" style="padding:20px;height: 450px;width:100%;border-radius:30px">
+                                    <div class="dashboard-statistic" id="dashboard-statistic" style="height: 100%"></div>
 
                                 </div>
 
@@ -284,7 +284,7 @@ background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,2
                         padding: [3, 3, 3, 3]
                     },
                     data: data['vals'],
-                    type: 'line',
+                    type: 'bar',
                     itemStyle:{
                         color:'#267EDC'
                     },
@@ -303,6 +303,7 @@ background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,2
             };
 
             option && myChart.setOption(option);
+            resizeChart('dashboard-statistic');
         }
     </script>
 @endpush

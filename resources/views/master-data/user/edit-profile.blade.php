@@ -49,7 +49,7 @@
                         <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <label for="">Select Role</label>
+                        <label for="">Role</label>
                         <select name="role_id" class="form-control form-control-sm" id="" disabled>
                             <option value="">--SELECT ROLE </option>
                             @foreach ($roles as $d)
@@ -60,7 +60,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Select Kode Dokter</label>
+                        <label for="">Dokter</label>
                         <select name="fs_kd_peg" class="form-control form-control-sm" id="" disabled>
                             <option value="">--SELECT DOKTER </option>
                             @foreach ($dokter as $d)

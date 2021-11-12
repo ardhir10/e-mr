@@ -47,11 +47,6 @@ class CreateTarAsesmenDokterTable extends Migration
 
 
 
-
-
-
-
-
             $table->timestamps();
         });
     }

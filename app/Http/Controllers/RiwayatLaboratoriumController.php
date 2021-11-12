@@ -62,6 +62,9 @@ class RiwayatLaboratoriumController extends Controller
             $data['_self'] = $this;
             $data['fs_mr'] = $no_mr;
             $data['fs_kd_hasil'] = $fs_kd_hasil;
+
+
+
         return view('riwayat.laboratorium.index',$data);
     }
 

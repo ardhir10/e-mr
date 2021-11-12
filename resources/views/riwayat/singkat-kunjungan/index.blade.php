@@ -177,7 +177,30 @@
 
 <script src="{{asset('assets/libs/datatable-downloads/jszip.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatable-downloads/vfs_fonts.js')}}"></script>
+   <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
     <script>
+
+        let jumlah = @json($riwayat_singkat);
+        jumlah = jumlah.length;
+
+        if(jumlah < 1){
+            Swal.fire({
+                title: "Information !",
+                text: "Data Not Found !",
+                icon: "warning",
+                // showCancelButton: !0,
+                timer: 3000
+
+                // confirmButtonColor: "#038edc",
+                // cancelButtonColor: "#f34e4e"
+            })
+            setTimeout(() => {
+                window.open('','_self').close()
+
+            }, 1500);
+
+        }
 
         // $('.tabel-riwayat').DataTable( {
         //     dom: 'Bfrtip',

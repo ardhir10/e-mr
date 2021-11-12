@@ -22,6 +22,8 @@
 
     <link href="{{asset('/assets')}}/libs/datatables.net-dt/css/jquery.dataTables.min.css" id="app-style"
         rel="stylesheet" type="text/css" />
+    <link href="{{asset('/assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
 
     <!-- alertifyjs Css -->
     <link href="{{asset('/assets')}}/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
@@ -54,7 +56,7 @@
 </head>
 
 
-<body style="background: #efefef;" data-sidebar-size="lg">
+<body style="background: #efefef;" data-sidebar-size="lg" class="sidebar-enable">
 
     <!-- <body data-layout="horizontal"> -->
 
@@ -74,20 +76,20 @@
             @yield('content')
             <!-- End Page-content -->
 
-            {{-- <footer class="footer">
+            <footer class="footer" style="left: 210px;">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> &copy; Dashonic.
+                            <script>document.write(new Date().getFullYear())</script> &copy; SKT
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
-                                Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://pichforest.com/" target="_blank" class="text-reset">Pichforest</a>
+                                Copyright by Solvus
                             </div>
                         </div>
                     </div>
                 </div>
-            </footer> --}}
+            </footer>
         </div>
         <!-- end main content-->
 
@@ -118,15 +120,20 @@
     {{-- <script src="{{asset('/assets')}}/js/pages/dashboard-sales.init.js"></script> --}}
     <script>
         var baseUrl = @json(asset('/assets'));
-
+         document.body.setAttribute('data-sidebar-size', 'lg')
     </script>
     <script src="{{asset('/assets')}}/js/app.js"></script>
     <script src="{{asset('/assets')}}/libs/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('/assets')}}/libs/alertifyjs/build/alertify.min.js"></script>
+    <script src="{{asset('assets/js/jspdf.min.js')}}">
+    <script src="{{asset('assets/js/html2canvas.js')}}">
 
+    </script>
     @stack('scripts')
     <script>
         $('.ada').val();
+
+
 
 
         // --- FUNCTION DELETE
@@ -136,6 +143,13 @@
             }, function () {
                 alertify.error("Cancel")
             }).set({title:"Delete"})
+        }
+
+        function resizeChart(divId) {
+            var chart = echarts.init(document.getElementById(divId));
+            new ResizeSensor(jQuery('#' + divId), function () {
+                chart.resize();
+            })
         }
     </script>
 

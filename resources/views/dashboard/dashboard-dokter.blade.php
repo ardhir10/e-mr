@@ -119,7 +119,7 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between ">
                                             <div class="">
-                                                <span class="font-size-xs font-weight-bold text-card-d1">Pasien Rawat Jalan</span>
+                                                <span class="font-size-xs font-weight-bold text-card-d1">Pasien Rawat Jalan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
@@ -307,7 +307,7 @@
                     padding: [3, 3, 3, 3]
                 },
                 data: data['vals'],
-                type: 'line',
+                type: 'bar',
                 itemStyle: {
                     color: '#267EDC'
                 },
@@ -326,6 +326,8 @@
         };
 
         option && myChart.setOption(option);
+            resizeChart('dashboard-statistic');
+
     }
 
 </script>

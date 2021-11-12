@@ -324,6 +324,7 @@ class RekamMedisController extends Controller
         $data['rekam_medis'] = $dataRekamMedis;
         return view('rekam-medis.detail', $data);
     }
+
     public function detailFiltered(Request $request,$from,$nomorMr,$kdDokter = '',$kdReg=''){
         $data['kd_dokter'] = $kdDokter;
         $data['kd_reg'] = $kdReg;

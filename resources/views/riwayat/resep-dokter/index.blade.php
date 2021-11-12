@@ -118,13 +118,13 @@
                         <div class="card-body">
                             <form action="" method="get">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <div class="form-group row">
                                                 <label for="">MEDICAL RECORD</label>
                                                 <input  class="form-control form-control-sm" name="mr" type="text"  value="{{$header_resep_dokter[0]->fs_mr ?? ''}}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-8">
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td style="color: #AA0909;font-weight:bold;">Pasien</td>
@@ -250,8 +250,30 @@ Umur            : {{$header_resep_dokter[0]->fn_umur ??''}} Th {{$header_resep_d
 
 <script src="{{asset('assets/libs/datatable-downloads/jszip.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatable-downloads/vfs_fonts.js')}}"></script>
+   <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
     <script>
 
+        let jumlah = @json($header_resep_dokter);
+        jumlah = jumlah.length;
+
+        if(jumlah < 1){
+            Swal.fire({
+                title: "Information !",
+                text: "Data Not Found !",
+                icon: "warning",
+                // showCancelButton: !0,
+                timer: 3000
+
+                // confirmButtonColor: "#038edc",
+                // cancelButtonColor: "#f34e4e"
+            })
+            setTimeout(() => {
+                window.open('','_self').close()
+
+            }, 1500);
+
+        }
 
 
         $('#data-table2').DataTable({

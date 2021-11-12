@@ -92,8 +92,8 @@
                 </div>
                 <div class="form-check sidebar-setting">
                     <input class="form-check-input" type="radio" name="sidebar-size"
-                        id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
-                    <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
+                        id="sidebar-size-small" value="small" onchange="-sidebar-size', 'sm')">
+                    <labedocument.body.setAttribute class="form-check-label" for="sidebar-size-small">Small (Icon View)</labedocument.body.setAttribute('datal>
                 </div>
 
                 <h6 class="mt-4 mb-3 sidebar-setting">Sidebar Color</h6>

@@ -281,7 +281,30 @@
 @endsection
 
 @push('scripts')
+    <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
     <script>
+
+        let jumlah = @json($header);
+        jumlah = jumlah.length;
+
+        if(jumlah < 1){
+            Swal.fire({
+                title: "Information !",
+                text: "Data Not Found !",
+                icon: "warning",
+                // showCancelButton: !0,
+                timer: 3000
+
+                // confirmButtonColor: "#038edc",
+                // cancelButtonColor: "#f34e4e"
+            })
+            setTimeout(() => {
+                window.open('','_self').close()
+
+            }, 1500);
+
+        }
         $('#data-table').DataTable({});
         $('#data-table2').DataTable({
             "bPaginate": false,

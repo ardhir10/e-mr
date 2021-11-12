@@ -102,8 +102,8 @@
         }
 
         .case-0::before {
-  content: "Read this -";
-}
+        /* content: "Read this -"; */
+        }
     </style>
 
 @endpush
@@ -136,20 +136,20 @@
                                         </div>
                                     </form>
                                 </div> --}}
-                                <div class="col-3">
+                                <div class="col-6">
                                     <table class="w-100">
                                         <tr>
-                                            <td align="right"><label for="">No. Lab : </label></td>
+                                            <td align="left"><label for="">No. Lab : </label></td>
                                             <td><input class="form-control form-control-sm" type="text" placeholder="" value="{{$header[0]->fs_kd_hasil ?? ''}}"
                                                     readonly></td>
                                         </tr>
                                         <tr>
-                                            <td align="right"> <label for="">Nama Pasien : </label></td>
+                                            <td align="left"> <label for="">Nama Pasien : </label></td>
                                             <td><input class="form-control form-control-sm" type="text"
                                                     placeholder="" value="{{$header[0]->fs_nm_pasien ?? ''}}" readonly></td>
                                         </tr>
                                         <tr>
-                                            <td align="right"> <label for="">J.Kel / Umur: </label></td>
+                                            <td align="left"> <label for="">J.Kel / Umur: </label></td>
                                             <td>
                                                 @if (isset($header[0]))
                                                 <input class="form-control form-control-sm" type="text" placeholder="" value="{{($header[0]->fb_jns_kelamin   == 1) ? 'Perempuan' : 'Laki - Laki' }} / {{$_self->hitungUmur($header[0]->fd_tgl_lahir)}}" readonly>
@@ -160,10 +160,10 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
                                     <table class="w-100">
                                         <tr>
-                                            <td align="right">
+                                            <td align="left">
                                                 <label for="">REG : </label>
 
                                             </td>
@@ -185,11 +185,11 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right"> <label for="">Dr. Pengirim : </label></td>
+                                            <td align="left"> <label for="">Dr. Pengirim : </label></td>
                                             <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_dokter_pengirim ?? ''}}" type="text" placeholder="" readonly></td>
                                         </tr>
                                         <tr>
-                                            <td align="right"> <label for="">Dr. Pemeriksa : </label></td>
+                                            <td align="left"> <label for="">Dr. Pemeriksa : </label></td>
                                             <td><input class="form-control form-control-sm"  value="{{$header[0]->fs_nm_peg ?? ''}}" type="text" placeholder="" readonly></td>
                                         </tr>
                                     </table>
@@ -330,7 +330,34 @@
 @endsection
 
 @push('scripts')
+    <script src="{{asset('assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+
     <script>
+
+        let jumlah = @json($header);
+        jumlah = jumlah.length;
+
+        if(jumlah < 1){
+            Swal.fire({
+                title: "Information !",
+                text: "Data Not Found !",
+                icon: "warning",
+                // showCancelButton: !0,
+                timer: 3000
+
+                // confirmButtonColor: "#038edc",
+                // cancelButtonColor: "#f34e4e"
+            })
+            setTimeout(() => {
+                window.open('','_self').close()
+
+            }, 1500);
+
+        }
+
+
+
+
         $('#data-table').DataTable({});
         $('#data-table2').DataTable({
             "bPaginate": false,

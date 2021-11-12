@@ -26,10 +26,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">{{$page_title}}</h5>
+                        <button class="btn btn-sm btn-danger" onclick="CreatePDFfromHTML()">PRINT PDF </button>
                     </div>
                     <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">
                         @csrf
-                        <div class="card-body">
+                        <div class="card-body html-content" id="formData">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -87,7 +88,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="hidden" class="form-control form-control-sm" name="cFrom"
-                                                    value="{{$from}}" readonly>
+                                        value="{{$from}}" readonly>
                                     <table class="w-100">
                                         <tr>
                                             <td class="leftCol">
@@ -401,6 +402,59 @@
 @push('scripts')
 <script>
     $('#data-table').DataTable({});
+
+    function CreatePDFfromHTML() {
+        var HTML_Width = $(".html-content").width();
+        var HTML_Height = $(".html-content").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+        html2canvas($(".html-content")[0]).then(function (canvas) {
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+            for (var i = 1; i <= totalPDFPages; i++) {
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            pdf.save("Your_PDF_Name.pdf");
+            $(".html-content").hide();
+        });
+    }
+
+
+    var doc = new jsPDF();
+
+
+    function saveDiv(divId, title) {
+        doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML +
+            `</body></html>`);
+        doc.save('div.pdf');
+    }
+
+    function printDiv(divId,
+        title) {
+
+        let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+        console.log($('#'+divId).html());
+        mywindow.document.write(`<html><head><title>${title}</title>`);
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(document.getElementById(divId).innerHTML);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
 
 </script>
 @endpush

@@ -83,7 +83,7 @@
     }
 
     .table-catatan-perkembangan td {
-        font-size: 10px !important;
+        font-size: 12px !important;
         border: 1px solid #ebebeb;
     }
 
@@ -116,6 +116,10 @@
     .style-3::-webkit-scrollbar-thumb {
         background-color: #000000;
     }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+    padding: 6px 8px;
+}
 
 </style>
 
@@ -180,16 +184,16 @@
                                                 </li>
                                                 <li><a class="dropdown-item" onclick="openNew(`{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}`)"  >Riwayat Resep</a></li>
 
-                                                <li>
+                                                {{-- <li>
                                                     <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">Riwayat Resume Medis</a></li>
+                                                </li> --}}
+                                                {{-- <li><a class="dropdown-item" href="#">Riwayat Resume Medis</a></li>
 
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item" href="#">Riwayat Resume Keperawatan</a>
-                                                </li>
+                                                </li> --}}
 
                                                 <li>
                                                     <hr class="dropdown-divider">
@@ -451,7 +455,7 @@
                                             <thead>
                                                 <tr style="">
                                                     <th>Tanggal</th>
-                                                    <th>Bagian
+                                                    <th>Bagian /
                                                         Layanan</th>
                                                     <th>Dokter</th>
                                                     <th></th>
@@ -510,24 +514,36 @@
                                             <td style="vertical-align:top;">
                                                 @if ($cppt->TB_FROM == 'cppt')
                                                     <a href="{{route('cppt.detail',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
-                                                    <small>CPPT</small>
+                                                    {{-- <small>CPPT</small> --}}
                                                 @elseif ($cppt->TB_FROM == 'asesmen_dokter')
                                                     <a href="{{route('asesmen.detail.dokter',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
-                                                    <small>Asesmen Dokter</small>
+                                                    {{-- <small>Asesmen Dokter</small> --}}
 
                                                 @elseif ($cppt->TB_FROM == 'asesmen_dokter_bidan')
                                                     <a href="{{route('asesmen.detail.dokterbidan',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
-                                                    <small>Asesmen Dokter Bidan</small>
+                                                    {{-- <small>Asesmen Dokter Bidan</small> --}}
 
                                                 @else
                                                     <a href="{{route('asesmen.detail.perawat',[$from,$cppt->FN_ID])}}">Lihat Detail</a>
-                                                    <small>Asesmen Perawat</small>
+                                                    {{-- <small>Asesmen Perawat</small> --}}
 
                                                 @endif
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <span class="badge bg-primary d-block" style="font-size: 10px;margin-bottom:3px;">{{$cppt->FS_PROFESI}}</span>
-                                                <span class="badge bg-secondary " style="font-size: 10px;    white-space: normal !important;">{{$cppt->FS_NM_LAYANAN}}</span>
+                                                <span class="badge bg-secondary " style="font-size: 10px;    white-space: normal !important;margin-bottom:3px;">{{$cppt->FS_NM_LAYANAN}}</span>
+                                                @if ($cppt->TB_FROM == 'cppt')
+                                                    <span class="badge bg-info d-block">CPPT</span>
+                                                @elseif ($cppt->TB_FROM == 'asesmen_dokter')
+                                                    <span class="badge bg-info d-block">Asesmen Dokter</span>
+
+                                                @elseif ($cppt->TB_FROM == 'asesmen_dokter_bidan')
+                                                    <span class="badge bg-info d-block">Asesmen Dokter Bidan</span>
+
+                                                @else
+                                                    <span class="badge bg-info d-block">Asesmen Perawat</span>
+
+                                                @endif
                                             </td>
                                             <td style="vertical-align:top;">
                                                 <div style=" height: 200px;overflow: auto;" class="style-3 detail-soap">
