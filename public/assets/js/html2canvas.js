@@ -5,9 +5,10 @@
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.html2canvas = factory());
-}(this, (function () { 'use strict';
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.html2canvas = factory());
+}(this, (function () {
+    'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -25,7 +26,7 @@
     ***************************************************************************** */
     /* global Reflect, Promise */
 
-    var extendStatics = function(d, b) {
+    var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
@@ -40,7 +41,7 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
-    var __assign = function() {
+    var __assign = function () {
         __assign = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
@@ -62,8 +63,8 @@
     }
 
     function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
         function verb(n) { return function (v) { return step([n, v]); }; }
         function step(op) {
             if (f) throw new TypeError("Generator is already executing.");
@@ -673,9 +674,9 @@
         }
         // LB25 Do not break between the following pairs of classes relevant to numbers:
         if (
-        // (PR | PO) × ( OP | HY )? NU
-        ([PR, PO].indexOf(current) !== -1 &&
-            (next === NU || ([OP, HY].indexOf(next) !== -1 && classTypes[afterIndex + 1] === NU))) ||
+            // (PR | PO) × ( OP | HY )? NU
+            ([PR, PO].indexOf(current) !== -1 &&
+                (next === NU || ([OP, HY].indexOf(next) !== -1 && classTypes[afterIndex + 1] === NU))) ||
             // ( OP | HY ) × NU
             ([OP, HY].indexOf(current) !== -1 && next === NU) ||
             // NU ×	(NU | SY | IS)
@@ -805,7 +806,7 @@
                 var lineBreak = BREAK_NOT_ALLOWED$1;
                 while (nextIndex < length &&
                     (lineBreak = _lineBreakAtIndex(codePoints, classTypes, indicies, ++nextIndex, forbiddenBreakpoints)) ===
-                        BREAK_NOT_ALLOWED$1) { }
+                    BREAK_NOT_ALLOWED$1) { }
                 if (lineBreak !== BREAK_NOT_ALLOWED$1 || nextIndex === length) {
                     var value = new Break(codePoints, lineBreak, lastEnd, nextIndex);
                     lastEnd = nextIndex;
@@ -1972,6 +1973,12 @@
         YELLOWGREEN: 0x9acd32ff
     };
 
+    var BACKGROUND_CLIP;
+    (function (BACKGROUND_CLIP) {
+        BACKGROUND_CLIP[BACKGROUND_CLIP["BORDER_BOX"] = 0] = "BORDER_BOX";
+        BACKGROUND_CLIP[BACKGROUND_CLIP["PADDING_BOX"] = 1] = "PADDING_BOX";
+        BACKGROUND_CLIP[BACKGROUND_CLIP["CONTENT_BOX"] = 2] = "CONTENT_BOX";
+    })(BACKGROUND_CLIP || (BACKGROUND_CLIP = {}));
     var backgroundClip = {
         name: 'background-clip',
         initialValue: 'border-box',
@@ -1982,12 +1989,12 @@
                 if (isIdentToken(token)) {
                     switch (token.value) {
                         case 'padding-box':
-                            return 1 /* PADDING_BOX */;
+                            return BACKGROUND_CLIP.PADDING_BOX;
                         case 'content-box':
-                            return 2 /* CONTENT_BOX */;
+                            return BACKGROUND_CLIP.CONTENT_BOX;
                     }
                 }
-                return 0 /* BORDER_BOX */;
+                return BACKGROUND_CLIP.BORDER_BOX;
             });
         }
     };
@@ -2099,24 +2106,24 @@
         var rx = 0;
         var ry = 0;
         switch (gradient.size) {
-            case 0 /* CLOSEST_SIDE */:
+            case CSSRadialExtent.CLOSEST_SIDE:
                 // The ending shape is sized so that that it exactly meets the side of the gradient box closest to the gradient’s center.
                 // If the shape is an ellipse, it exactly meets the closest side in each dimension.
-                if (gradient.shape === 0 /* CIRCLE */) {
+                if (gradient.shape === CSSRadialShape.CIRCLE) {
                     rx = ry = Math.min(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
                 }
-                else if (gradient.shape === 1 /* ELLIPSE */) {
+                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
                     rx = Math.min(Math.abs(x), Math.abs(x - width));
                     ry = Math.min(Math.abs(y), Math.abs(y - height));
                 }
                 break;
-            case 2 /* CLOSEST_CORNER */:
+            case CSSRadialExtent.CLOSEST_CORNER:
                 // The ending shape is sized so that that it passes through the corner of the gradient box closest to the gradient’s center.
                 // If the shape is an ellipse, the ending shape is given the same aspect-ratio it would have if closest-side were specified.
-                if (gradient.shape === 0 /* CIRCLE */) {
+                if (gradient.shape === CSSRadialShape.CIRCLE) {
                     rx = ry = Math.min(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
                 }
-                else if (gradient.shape === 1 /* ELLIPSE */) {
+                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
                     // Compute the ratio ry/rx (which is to be the same as for "closest-side")
                     var c = Math.min(Math.abs(y), Math.abs(y - height)) / Math.min(Math.abs(x), Math.abs(x - width));
                     var _a = findCorner(width, height, x, y, true), cx = _a[0], cy = _a[1];
@@ -2124,23 +2131,23 @@
                     ry = c * rx;
                 }
                 break;
-            case 1 /* FARTHEST_SIDE */:
+            case CSSRadialExtent.FARTHEST_SIDE:
                 // Same as closest-side, except the ending shape is sized based on the farthest side(s)
-                if (gradient.shape === 0 /* CIRCLE */) {
+                if (gradient.shape === CSSRadialShape.CIRCLE) {
                     rx = ry = Math.max(Math.abs(x), Math.abs(x - width), Math.abs(y), Math.abs(y - height));
                 }
-                else if (gradient.shape === 1 /* ELLIPSE */) {
+                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
                     rx = Math.max(Math.abs(x), Math.abs(x - width));
                     ry = Math.max(Math.abs(y), Math.abs(y - height));
                 }
                 break;
-            case 3 /* FARTHEST_CORNER */:
+            case CSSRadialExtent.FARTHEST_CORNER:
                 // Same as closest-corner, except the ending shape is sized based on the farthest corner.
                 // If the shape is an ellipse, the ending shape is given the same aspect ratio it would have if farthest-side were specified.
-                if (gradient.shape === 0 /* CIRCLE */) {
+                if (gradient.shape === CSSRadialShape.CIRCLE) {
                     rx = ry = Math.max(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
                 }
-                else if (gradient.shape === 1 /* ELLIPSE */) {
+                else if (gradient.shape === CSSRadialShape.ELLIPSE) {
                     // Compute the ratio ry/rx (which is to be the same as for "farthest-side")
                     var c = Math.max(Math.abs(y), Math.abs(y - height)) / Math.max(Math.abs(x), Math.abs(x - width));
                     var _b = findCorner(width, height, x, y, false), cx = _b[0], cy = _b[1];
@@ -2174,7 +2181,7 @@
             var colorStop = parseColorStop(context, arg);
             stops.push(colorStop);
         });
-        return { angle: angle$1, stops: stops, type: 1 /* LINEAR_GRADIENT */ };
+        return { angle: angle$1, stops: stops, type: CSSImageType.LINEAR_GRADIENT };
     };
 
     var prefixLinearGradient = function (context, tokens) {
@@ -2199,26 +2206,26 @@
         return {
             angle: angle$1,
             stops: stops,
-            type: 1 /* LINEAR_GRADIENT */
+            type: CSSImageType.LINEAR_GRADIENT
         };
     };
 
     var webkitGradient = function (context, tokens) {
         var angle = deg(180);
         var stops = [];
-        var type = 1 /* LINEAR_GRADIENT */;
-        var shape = 0 /* CIRCLE */;
-        var size = 3 /* FARTHEST_CORNER */;
+        var type = CSSImageType.LINEAR_GRADIENT;
+        var shape = CSSRadialShape.CIRCLE;
+        var size = CSSRadialExtent.FARTHEST_CORNER;
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
             var firstToken = arg[0];
             if (i === 0) {
                 if (isIdentToken(firstToken) && firstToken.value === 'linear') {
-                    type = 1 /* LINEAR_GRADIENT */;
+                    type = CSSImageType.LINEAR_GRADIENT;
                     return;
                 }
                 else if (isIdentToken(firstToken) && firstToken.value === 'radial') {
-                    type = 2 /* RADIAL_GRADIENT */;
+                    type = CSSImageType.RADIAL_GRADIENT;
                     return;
                 }
             }
@@ -2246,7 +2253,7 @@
                 }
             }
         });
-        return type === 1 /* LINEAR_GRADIENT */
+        return type === CSSImageType.LINEAR_GRADIENT
             ? {
                 angle: (angle + deg(180)) % deg(360),
                 stops: stops,
@@ -2264,8 +2271,8 @@
     var COVER = 'cover';
     var CONTAIN = 'contain';
     var radialGradient = function (context, tokens) {
-        var shape = 0 /* CIRCLE */;
-        var size = 3 /* FARTHEST_CORNER */;
+        var shape = CSSRadialShape.CIRCLE;
+        var size = CSSRadialExtent.FARTHEST_CORNER;
         var stops = [];
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
@@ -2296,27 +2303,27 @@
                     else if (isIdentToken(token)) {
                         switch (token.value) {
                             case CIRCLE:
-                                shape = 0 /* CIRCLE */;
+                                shape = CSSRadialShape.CIRCLE;
                                 return false;
                             case ELLIPSE:
-                                shape = 1 /* ELLIPSE */;
+                                shape = CSSRadialShape.ELLIPSE;
                                 return false;
                             case 'at':
                                 isAtPosition_1 = true;
                                 return false;
                             case CLOSEST_SIDE:
-                                size = 0 /* CLOSEST_SIDE */;
+                                size = CSSRadialExtent.CLOSEST_SIDE;
                                 return false;
                             case COVER:
                             case FARTHEST_SIDE:
-                                size = 1 /* FARTHEST_SIDE */;
+                                size = CSSRadialExtent.FARTHEST_SIDE;
                                 return false;
                             case CONTAIN:
                             case CLOSEST_CORNER:
-                                size = 2 /* CLOSEST_CORNER */;
+                                size = CSSRadialExtent.CLOSEST_CORNER;
                                 return false;
                             case FARTHEST_CORNER:
-                                size = 3 /* FARTHEST_CORNER */;
+                                size = CSSRadialExtent.FARTHEST_CORNER;
                                 return false;
                         }
                     }
@@ -2335,12 +2342,12 @@
                 stops.push(colorStop);
             }
         });
-        return { size: size, shape: shape, stops: stops, position: position, type: 2 /* RADIAL_GRADIENT */ };
+        return { size: size, shape: shape, stops: stops, position: position, type: CSSImageType.RADIAL_GRADIENT };
     };
 
     var prefixRadialGradient = function (context, tokens) {
-        var shape = 0 /* CIRCLE */;
-        var size = 3 /* FARTHEST_CORNER */;
+        var shape = CSSRadialShape.CIRCLE;
+        var size = CSSRadialExtent.FARTHEST_CORNER;
         var stops = [];
         var position = [];
         parseFunctionArgs(tokens).forEach(function (arg, i) {
@@ -2374,24 +2381,24 @@
                     if (isIdentToken(token)) {
                         switch (token.value) {
                             case CIRCLE:
-                                shape = 0 /* CIRCLE */;
+                                shape = CSSRadialShape.CIRCLE;
                                 return false;
                             case ELLIPSE:
-                                shape = 1 /* ELLIPSE */;
+                                shape = CSSRadialShape.ELLIPSE;
                                 return false;
                             case CONTAIN:
                             case CLOSEST_SIDE:
-                                size = 0 /* CLOSEST_SIDE */;
+                                size = CSSRadialExtent.CLOSEST_SIDE;
                                 return false;
                             case FARTHEST_SIDE:
-                                size = 1 /* FARTHEST_SIDE */;
+                                size = CSSRadialExtent.FARTHEST_SIDE;
                                 return false;
                             case CLOSEST_CORNER:
-                                size = 2 /* CLOSEST_CORNER */;
+                                size = CSSRadialExtent.CLOSEST_CORNER;
                                 return false;
                             case COVER:
                             case FARTHEST_CORNER:
-                                size = 3 /* FARTHEST_CORNER */;
+                                size = CSSRadialExtent.FARTHEST_CORNER;
                                 return false;
                         }
                     }
@@ -2410,20 +2417,38 @@
                 stops.push(colorStop);
             }
         });
-        return { size: size, shape: shape, stops: stops, position: position, type: 2 /* RADIAL_GRADIENT */ };
+        return { size: size, shape: shape, stops: stops, position: position, type: CSSImageType.RADIAL_GRADIENT };
     };
 
+    var CSSImageType;
+    (function (CSSImageType) {
+        CSSImageType[CSSImageType["URL"] = 0] = "URL";
+        CSSImageType[CSSImageType["LINEAR_GRADIENT"] = 1] = "LINEAR_GRADIENT";
+        CSSImageType[CSSImageType["RADIAL_GRADIENT"] = 2] = "RADIAL_GRADIENT";
+    })(CSSImageType || (CSSImageType = {}));
     var isLinearGradient = function (background) {
-        return background.type === 1 /* LINEAR_GRADIENT */;
+        return background.type === CSSImageType.LINEAR_GRADIENT;
     };
     var isRadialGradient = function (background) {
-        return background.type === 2 /* RADIAL_GRADIENT */;
+        return background.type === CSSImageType.RADIAL_GRADIENT;
     };
+    var CSSRadialShape;
+    (function (CSSRadialShape) {
+        CSSRadialShape[CSSRadialShape["CIRCLE"] = 0] = "CIRCLE";
+        CSSRadialShape[CSSRadialShape["ELLIPSE"] = 1] = "ELLIPSE";
+    })(CSSRadialShape || (CSSRadialShape = {}));
+    var CSSRadialExtent;
+    (function (CSSRadialExtent) {
+        CSSRadialExtent[CSSRadialExtent["CLOSEST_SIDE"] = 0] = "CLOSEST_SIDE";
+        CSSRadialExtent[CSSRadialExtent["FARTHEST_SIDE"] = 1] = "FARTHEST_SIDE";
+        CSSRadialExtent[CSSRadialExtent["CLOSEST_CORNER"] = 2] = "CLOSEST_CORNER";
+        CSSRadialExtent[CSSRadialExtent["FARTHEST_CORNER"] = 3] = "FARTHEST_CORNER";
+    })(CSSRadialExtent || (CSSRadialExtent = {}));
     var image = {
         name: 'image',
         parse: function (context, value) {
             if (value.type === 22 /* URL_TOKEN */) {
-                var image_1 = { url: value.value, type: 0 /* URL */ };
+                var image_1 = { url: value.value, type: CSSImageType.URL };
                 context.cache.addImage(value.value);
                 return image_1;
             }
@@ -2506,6 +2531,13 @@
         }
     };
 
+    var BACKGROUND_REPEAT;
+    (function (BACKGROUND_REPEAT) {
+        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT"] = 0] = "REPEAT";
+        BACKGROUND_REPEAT[BACKGROUND_REPEAT["NO_REPEAT"] = 1] = "NO_REPEAT";
+        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT_X"] = 2] = "REPEAT_X";
+        BACKGROUND_REPEAT[BACKGROUND_REPEAT["REPEAT_Y"] = 3] = "REPEAT_Y";
+    })(BACKGROUND_REPEAT || (BACKGROUND_REPEAT = {}));
     var backgroundRepeat = {
         name: 'background-repeat',
         initialValue: 'repeat',
@@ -2514,27 +2546,27 @@
         parse: function (_context, tokens) {
             return parseFunctionArgs(tokens)
                 .map(function (values) {
-                return values
-                    .filter(isIdentToken)
-                    .map(function (token) { return token.value; })
-                    .join(' ');
-            })
+                    return values
+                        .filter(isIdentToken)
+                        .map(function (token) { return token.value; })
+                        .join(' ');
+                })
                 .map(parseBackgroundRepeat);
         }
     };
     var parseBackgroundRepeat = function (value) {
         switch (value) {
             case 'no-repeat':
-                return 1 /* NO_REPEAT */;
+                return BACKGROUND_REPEAT.NO_REPEAT;
             case 'repeat-x':
             case 'repeat no-repeat':
-                return 2 /* REPEAT_X */;
+                return BACKGROUND_REPEAT.REPEAT_X;
             case 'repeat-y':
             case 'no-repeat repeat':
-                return 3 /* REPEAT_Y */;
+                return BACKGROUND_REPEAT.REPEAT_Y;
             case 'repeat':
             default:
-                return 0 /* REPEAT */;
+                return BACKGROUND_REPEAT.REPEAT;
         }
     };
 
@@ -2557,68 +2589,84 @@
         return isIdentToken(value) || isLengthPercentage(value);
     };
 
-    var borderColorForSide = function (side) { return ({
-        name: "border-" + side + "-color",
-        initialValue: 'transparent',
-        prefix: false,
-        type: 3 /* TYPE_VALUE */,
-        format: 'color'
-    }); };
+    var borderColorForSide = function (side) {
+        return ({
+            name: "border-" + side + "-color",
+            initialValue: 'transparent',
+            prefix: false,
+            type: 3 /* TYPE_VALUE */,
+            format: 'color'
+        });
+    };
     var borderTopColor = borderColorForSide('top');
     var borderRightColor = borderColorForSide('right');
     var borderBottomColor = borderColorForSide('bottom');
     var borderLeftColor = borderColorForSide('left');
 
-    var borderRadiusForSide = function (side) { return ({
-        name: "border-radius-" + side,
-        initialValue: '0 0',
-        prefix: false,
-        type: 1 /* LIST */,
-        parse: function (_context, tokens) {
-            return parseLengthPercentageTuple(tokens.filter(isLengthPercentage));
-        }
-    }); };
+    var borderRadiusForSide = function (side) {
+        return ({
+            name: "border-radius-" + side,
+            initialValue: '0 0',
+            prefix: false,
+            type: 1 /* LIST */,
+            parse: function (_context, tokens) {
+                return parseLengthPercentageTuple(tokens.filter(isLengthPercentage));
+            }
+        });
+    };
     var borderTopLeftRadius = borderRadiusForSide('top-left');
     var borderTopRightRadius = borderRadiusForSide('top-right');
     var borderBottomRightRadius = borderRadiusForSide('bottom-right');
     var borderBottomLeftRadius = borderRadiusForSide('bottom-left');
 
-    var borderStyleForSide = function (side) { return ({
-        name: "border-" + side + "-style",
-        initialValue: 'solid',
-        prefix: false,
-        type: 2 /* IDENT_VALUE */,
-        parse: function (_context, style) {
-            switch (style) {
-                case 'none':
-                    return 0 /* NONE */;
-                case 'dashed':
-                    return 2 /* DASHED */;
-                case 'dotted':
-                    return 3 /* DOTTED */;
-                case 'double':
-                    return 4 /* DOUBLE */;
+    var BORDER_STYLE;
+    (function (BORDER_STYLE) {
+        BORDER_STYLE[BORDER_STYLE["NONE"] = 0] = "NONE";
+        BORDER_STYLE[BORDER_STYLE["SOLID"] = 1] = "SOLID";
+        BORDER_STYLE[BORDER_STYLE["DASHED"] = 2] = "DASHED";
+        BORDER_STYLE[BORDER_STYLE["DOTTED"] = 3] = "DOTTED";
+        BORDER_STYLE[BORDER_STYLE["DOUBLE"] = 4] = "DOUBLE";
+    })(BORDER_STYLE || (BORDER_STYLE = {}));
+    var borderStyleForSide = function (side) {
+        return ({
+            name: "border-" + side + "-style",
+            initialValue: 'solid',
+            prefix: false,
+            type: 2 /* IDENT_VALUE */,
+            parse: function (_context, style) {
+                switch (style) {
+                    case 'none':
+                        return BORDER_STYLE.NONE;
+                    case 'dashed':
+                        return BORDER_STYLE.DASHED;
+                    case 'dotted':
+                        return BORDER_STYLE.DOTTED;
+                    case 'double':
+                        return BORDER_STYLE.DOUBLE;
+                }
+                return BORDER_STYLE.SOLID;
             }
-            return 1 /* SOLID */;
-        }
-    }); };
+        });
+    };
     var borderTopStyle = borderStyleForSide('top');
     var borderRightStyle = borderStyleForSide('right');
     var borderBottomStyle = borderStyleForSide('bottom');
     var borderLeftStyle = borderStyleForSide('left');
 
-    var borderWidthForSide = function (side) { return ({
-        name: "border-" + side + "-width",
-        initialValue: '0',
-        type: 0 /* VALUE */,
-        prefix: false,
-        parse: function (_context, token) {
-            if (isDimensionToken(token)) {
-                return token.number;
+    var borderWidthForSide = function (side) {
+        return ({
+            name: "border-" + side + "-width",
+            initialValue: '0',
+            type: 0 /* VALUE */,
+            prefix: false,
+            parse: function (_context, token) {
+                if (isDimensionToken(token)) {
+                    return token.number;
+                }
+                return 0;
             }
-            return 0;
-        }
-    }); };
+        });
+    };
     var borderTopWidth = borderWidthForSide('top');
     var borderRightWidth = borderWidthForSide('right');
     var borderBottomWidth = borderWidthForSide('bottom');
@@ -2726,6 +2774,14 @@
         return 0 /* NONE */;
     };
 
+    var FLOAT;
+    (function (FLOAT) {
+        FLOAT[FLOAT["NONE"] = 0] = "NONE";
+        FLOAT[FLOAT["LEFT"] = 1] = "LEFT";
+        FLOAT[FLOAT["RIGHT"] = 2] = "RIGHT";
+        FLOAT[FLOAT["INLINE_START"] = 3] = "INLINE_START";
+        FLOAT[FLOAT["INLINE_END"] = 4] = "INLINE_END";
+    })(FLOAT || (FLOAT = {}));
     var float = {
         name: 'float',
         initialValue: 'none',
@@ -2734,15 +2790,15 @@
         parse: function (_context, float) {
             switch (float) {
                 case 'left':
-                    return 1 /* LEFT */;
+                    return FLOAT.LEFT;
                 case 'right':
-                    return 2 /* RIGHT */;
+                    return FLOAT.RIGHT;
                 case 'inline-start':
-                    return 3 /* INLINE_START */;
+                    return FLOAT.INLINE_START;
                 case 'inline-end':
-                    return 4 /* INLINE_END */;
+                    return FLOAT.INLINE_END;
             }
-            return 0 /* NONE */;
+            return FLOAT.NONE;
         }
     };
 
@@ -2818,6 +2874,11 @@
         }
     };
 
+    var LIST_STYLE_POSITION;
+    (function (LIST_STYLE_POSITION) {
+        LIST_STYLE_POSITION[LIST_STYLE_POSITION["INSIDE"] = 0] = "INSIDE";
+        LIST_STYLE_POSITION[LIST_STYLE_POSITION["OUTSIDE"] = 1] = "OUTSIDE";
+    })(LIST_STYLE_POSITION || (LIST_STYLE_POSITION = {}));
     var listStylePosition = {
         name: 'list-style-position',
         initialValue: 'outside',
@@ -2826,14 +2887,71 @@
         parse: function (_context, position) {
             switch (position) {
                 case 'inside':
-                    return 0 /* INSIDE */;
+                    return LIST_STYLE_POSITION.INSIDE;
                 case 'outside':
                 default:
-                    return 1 /* OUTSIDE */;
+                    return LIST_STYLE_POSITION.OUTSIDE;
             }
         }
     };
 
+    var LIST_STYLE_TYPE;
+    (function (LIST_STYLE_TYPE) {
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["NONE"] = -1] = "NONE";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISC"] = 0] = "DISC";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CIRCLE"] = 1] = "CIRCLE";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SQUARE"] = 2] = "SQUARE";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DECIMAL"] = 3] = "DECIMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_DECIMAL"] = 4] = "CJK_DECIMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DECIMAL_LEADING_ZERO"] = 5] = "DECIMAL_LEADING_ZERO";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ROMAN"] = 6] = "LOWER_ROMAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ROMAN"] = 7] = "UPPER_ROMAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_GREEK"] = 8] = "LOWER_GREEK";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ALPHA"] = 9] = "LOWER_ALPHA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ALPHA"] = 10] = "UPPER_ALPHA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ARABIC_INDIC"] = 11] = "ARABIC_INDIC";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ARMENIAN"] = 12] = "ARMENIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["BENGALI"] = 13] = "BENGALI";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CAMBODIAN"] = 14] = "CAMBODIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_EARTHLY_BRANCH"] = 15] = "CJK_EARTHLY_BRANCH";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_HEAVENLY_STEM"] = 16] = "CJK_HEAVENLY_STEM";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["CJK_IDEOGRAPHIC"] = 17] = "CJK_IDEOGRAPHIC";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DEVANAGARI"] = 18] = "DEVANAGARI";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ETHIOPIC_NUMERIC"] = 19] = "ETHIOPIC_NUMERIC";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GEORGIAN"] = 20] = "GEORGIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GUJARATI"] = 21] = "GUJARATI";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["GURMUKHI"] = 22] = "GURMUKHI";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HEBREW"] = 22] = "HEBREW";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HIRAGANA"] = 23] = "HIRAGANA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["HIRAGANA_IROHA"] = 24] = "HIRAGANA_IROHA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["JAPANESE_FORMAL"] = 25] = "JAPANESE_FORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["JAPANESE_INFORMAL"] = 26] = "JAPANESE_INFORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KANNADA"] = 27] = "KANNADA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KATAKANA"] = 28] = "KATAKANA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KATAKANA_IROHA"] = 29] = "KATAKANA_IROHA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KHMER"] = 30] = "KHMER";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANGUL_FORMAL"] = 31] = "KOREAN_HANGUL_FORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANJA_FORMAL"] = 32] = "KOREAN_HANJA_FORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["KOREAN_HANJA_INFORMAL"] = 33] = "KOREAN_HANJA_INFORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LAO"] = 34] = "LAO";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["LOWER_ARMENIAN"] = 35] = "LOWER_ARMENIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MALAYALAM"] = 36] = "MALAYALAM";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MONGOLIAN"] = 37] = "MONGOLIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["MYANMAR"] = 38] = "MYANMAR";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["ORIYA"] = 39] = "ORIYA";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["PERSIAN"] = 40] = "PERSIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SIMP_CHINESE_FORMAL"] = 41] = "SIMP_CHINESE_FORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["SIMP_CHINESE_INFORMAL"] = 42] = "SIMP_CHINESE_INFORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TAMIL"] = 43] = "TAMIL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TELUGU"] = 44] = "TELUGU";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["THAI"] = 45] = "THAI";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TIBETAN"] = 46] = "TIBETAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TRAD_CHINESE_FORMAL"] = 47] = "TRAD_CHINESE_FORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["TRAD_CHINESE_INFORMAL"] = 48] = "TRAD_CHINESE_INFORMAL";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["UPPER_ARMENIAN"] = 49] = "UPPER_ARMENIAN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISCLOSURE_OPEN"] = 50] = "DISCLOSURE_OPEN";
+        LIST_STYLE_TYPE[LIST_STYLE_TYPE["DISCLOSURE_CLOSED"] = 51] = "DISCLOSURE_CLOSED";
+    })(LIST_STYLE_TYPE || (LIST_STYLE_TYPE = {}));
     var listStyleType = {
         name: 'list-style-type',
         initialValue: 'none',
@@ -2842,129 +2960,139 @@
         parse: function (_context, type) {
             switch (type) {
                 case 'disc':
-                    return 0 /* DISC */;
+                    return LIST_STYLE_TYPE.DISC;
                 case 'circle':
-                    return 1 /* CIRCLE */;
+                    return LIST_STYLE_TYPE.CIRCLE;
                 case 'square':
-                    return 2 /* SQUARE */;
+                    return LIST_STYLE_TYPE.SQUARE;
                 case 'decimal':
-                    return 3 /* DECIMAL */;
+                    return LIST_STYLE_TYPE.DECIMAL;
                 case 'cjk-decimal':
-                    return 4 /* CJK_DECIMAL */;
+                    return LIST_STYLE_TYPE.CJK_DECIMAL;
                 case 'decimal-leading-zero':
-                    return 5 /* DECIMAL_LEADING_ZERO */;
+                    return LIST_STYLE_TYPE.DECIMAL_LEADING_ZERO;
                 case 'lower-roman':
-                    return 6 /* LOWER_ROMAN */;
+                    return LIST_STYLE_TYPE.LOWER_ROMAN;
                 case 'upper-roman':
-                    return 7 /* UPPER_ROMAN */;
+                    return LIST_STYLE_TYPE.UPPER_ROMAN;
                 case 'lower-greek':
-                    return 8 /* LOWER_GREEK */;
+                    return LIST_STYLE_TYPE.LOWER_GREEK;
                 case 'lower-alpha':
-                    return 9 /* LOWER_ALPHA */;
+                    return LIST_STYLE_TYPE.LOWER_ALPHA;
                 case 'upper-alpha':
-                    return 10 /* UPPER_ALPHA */;
+                    return LIST_STYLE_TYPE.UPPER_ALPHA;
                 case 'arabic-indic':
-                    return 11 /* ARABIC_INDIC */;
+                    return LIST_STYLE_TYPE.ARABIC_INDIC;
                 case 'armenian':
-                    return 12 /* ARMENIAN */;
+                    return LIST_STYLE_TYPE.ARMENIAN;
                 case 'bengali':
-                    return 13 /* BENGALI */;
+                    return LIST_STYLE_TYPE.BENGALI;
                 case 'cambodian':
-                    return 14 /* CAMBODIAN */;
+                    return LIST_STYLE_TYPE.CAMBODIAN;
                 case 'cjk-earthly-branch':
-                    return 15 /* CJK_EARTHLY_BRANCH */;
+                    return LIST_STYLE_TYPE.CJK_EARTHLY_BRANCH;
                 case 'cjk-heavenly-stem':
-                    return 16 /* CJK_HEAVENLY_STEM */;
+                    return LIST_STYLE_TYPE.CJK_HEAVENLY_STEM;
                 case 'cjk-ideographic':
-                    return 17 /* CJK_IDEOGRAPHIC */;
+                    return LIST_STYLE_TYPE.CJK_IDEOGRAPHIC;
                 case 'devanagari':
-                    return 18 /* DEVANAGARI */;
+                    return LIST_STYLE_TYPE.DEVANAGARI;
                 case 'ethiopic-numeric':
-                    return 19 /* ETHIOPIC_NUMERIC */;
+                    return LIST_STYLE_TYPE.ETHIOPIC_NUMERIC;
                 case 'georgian':
-                    return 20 /* GEORGIAN */;
+                    return LIST_STYLE_TYPE.GEORGIAN;
                 case 'gujarati':
-                    return 21 /* GUJARATI */;
+                    return LIST_STYLE_TYPE.GUJARATI;
                 case 'gurmukhi':
-                    return 22 /* GURMUKHI */;
+                    return LIST_STYLE_TYPE.GURMUKHI;
                 case 'hebrew':
-                    return 22 /* HEBREW */;
+                    return LIST_STYLE_TYPE.HEBREW;
                 case 'hiragana':
-                    return 23 /* HIRAGANA */;
+                    return LIST_STYLE_TYPE.HIRAGANA;
                 case 'hiragana-iroha':
-                    return 24 /* HIRAGANA_IROHA */;
+                    return LIST_STYLE_TYPE.HIRAGANA_IROHA;
                 case 'japanese-formal':
-                    return 25 /* JAPANESE_FORMAL */;
+                    return LIST_STYLE_TYPE.JAPANESE_FORMAL;
                 case 'japanese-informal':
-                    return 26 /* JAPANESE_INFORMAL */;
+                    return LIST_STYLE_TYPE.JAPANESE_INFORMAL;
                 case 'kannada':
-                    return 27 /* KANNADA */;
+                    return LIST_STYLE_TYPE.KANNADA;
                 case 'katakana':
-                    return 28 /* KATAKANA */;
+                    return LIST_STYLE_TYPE.KATAKANA;
                 case 'katakana-iroha':
-                    return 29 /* KATAKANA_IROHA */;
+                    return LIST_STYLE_TYPE.KATAKANA_IROHA;
                 case 'khmer':
-                    return 30 /* KHMER */;
+                    return LIST_STYLE_TYPE.KHMER;
                 case 'korean-hangul-formal':
-                    return 31 /* KOREAN_HANGUL_FORMAL */;
+                    return LIST_STYLE_TYPE.KOREAN_HANGUL_FORMAL;
                 case 'korean-hanja-formal':
-                    return 32 /* KOREAN_HANJA_FORMAL */;
+                    return LIST_STYLE_TYPE.KOREAN_HANJA_FORMAL;
                 case 'korean-hanja-informal':
-                    return 33 /* KOREAN_HANJA_INFORMAL */;
+                    return LIST_STYLE_TYPE.KOREAN_HANJA_INFORMAL;
                 case 'lao':
-                    return 34 /* LAO */;
+                    return LIST_STYLE_TYPE.LAO;
                 case 'lower-armenian':
-                    return 35 /* LOWER_ARMENIAN */;
+                    return LIST_STYLE_TYPE.LOWER_ARMENIAN;
                 case 'malayalam':
-                    return 36 /* MALAYALAM */;
+                    return LIST_STYLE_TYPE.MALAYALAM;
                 case 'mongolian':
-                    return 37 /* MONGOLIAN */;
+                    return LIST_STYLE_TYPE.MONGOLIAN;
                 case 'myanmar':
-                    return 38 /* MYANMAR */;
+                    return LIST_STYLE_TYPE.MYANMAR;
                 case 'oriya':
-                    return 39 /* ORIYA */;
+                    return LIST_STYLE_TYPE.ORIYA;
                 case 'persian':
-                    return 40 /* PERSIAN */;
+                    return LIST_STYLE_TYPE.PERSIAN;
                 case 'simp-chinese-formal':
-                    return 41 /* SIMP_CHINESE_FORMAL */;
+                    return LIST_STYLE_TYPE.SIMP_CHINESE_FORMAL;
                 case 'simp-chinese-informal':
-                    return 42 /* SIMP_CHINESE_INFORMAL */;
+                    return LIST_STYLE_TYPE.SIMP_CHINESE_INFORMAL;
                 case 'tamil':
-                    return 43 /* TAMIL */;
+                    return LIST_STYLE_TYPE.TAMIL;
                 case 'telugu':
-                    return 44 /* TELUGU */;
+                    return LIST_STYLE_TYPE.TELUGU;
                 case 'thai':
-                    return 45 /* THAI */;
+                    return LIST_STYLE_TYPE.THAI;
                 case 'tibetan':
-                    return 46 /* TIBETAN */;
+                    return LIST_STYLE_TYPE.TIBETAN;
                 case 'trad-chinese-formal':
-                    return 47 /* TRAD_CHINESE_FORMAL */;
+                    return LIST_STYLE_TYPE.TRAD_CHINESE_FORMAL;
                 case 'trad-chinese-informal':
-                    return 48 /* TRAD_CHINESE_INFORMAL */;
+                    return LIST_STYLE_TYPE.TRAD_CHINESE_INFORMAL;
                 case 'upper-armenian':
-                    return 49 /* UPPER_ARMENIAN */;
+                    return LIST_STYLE_TYPE.UPPER_ARMENIAN;
                 case 'disclosure-open':
-                    return 50 /* DISCLOSURE_OPEN */;
+                    return LIST_STYLE_TYPE.DISCLOSURE_OPEN;
                 case 'disclosure-closed':
-                    return 51 /* DISCLOSURE_CLOSED */;
+                    return LIST_STYLE_TYPE.DISCLOSURE_CLOSED;
                 case 'none':
                 default:
-                    return -1 /* NONE */;
+                    return LIST_STYLE_TYPE.NONE;
             }
         }
     };
 
-    var marginForSide = function (side) { return ({
-        name: "margin-" + side,
-        initialValue: '0',
-        prefix: false,
-        type: 4 /* TOKEN_VALUE */
-    }); };
+    var marginForSide = function (side) {
+        return ({
+            name: "margin-" + side,
+            initialValue: '0',
+            prefix: false,
+            type: 4 /* TOKEN_VALUE */
+        });
+    };
     var marginTop = marginForSide('top');
     var marginRight = marginForSide('right');
     var marginBottom = marginForSide('bottom');
     var marginLeft = marginForSide('left');
 
+    var OVERFLOW;
+    (function (OVERFLOW) {
+        OVERFLOW[OVERFLOW["VISIBLE"] = 0] = "VISIBLE";
+        OVERFLOW[OVERFLOW["HIDDEN"] = 1] = "HIDDEN";
+        OVERFLOW[OVERFLOW["SCROLL"] = 2] = "SCROLL";
+        OVERFLOW[OVERFLOW["CLIP"] = 3] = "CLIP";
+        OVERFLOW[OVERFLOW["AUTO"] = 4] = "AUTO";
+    })(OVERFLOW || (OVERFLOW = {}));
     var overflow = {
         name: 'overflow',
         initialValue: 'visible',
@@ -2974,16 +3102,16 @@
             return tokens.filter(isIdentToken).map(function (overflow) {
                 switch (overflow.value) {
                     case 'hidden':
-                        return 1 /* HIDDEN */;
+                        return OVERFLOW.HIDDEN;
                     case 'scroll':
-                        return 2 /* SCROLL */;
+                        return OVERFLOW.SCROLL;
                     case 'clip':
-                        return 3 /* CLIP */;
+                        return OVERFLOW.CLIP;
                     case 'auto':
-                        return 4 /* AUTO */;
+                        return OVERFLOW.AUTO;
                     case 'visible':
                     default:
-                        return 0 /* VISIBLE */;
+                        return OVERFLOW.VISIBLE;
                 }
             });
         }
@@ -3005,18 +3133,26 @@
         }
     };
 
-    var paddingForSide = function (side) { return ({
-        name: "padding-" + side,
-        initialValue: '0',
-        prefix: false,
-        type: 3 /* TYPE_VALUE */,
-        format: 'length-percentage'
-    }); };
+    var paddingForSide = function (side) {
+        return ({
+            name: "padding-" + side,
+            initialValue: '0',
+            prefix: false,
+            type: 3 /* TYPE_VALUE */,
+            format: 'length-percentage'
+        });
+    };
     var paddingTop = paddingForSide('top');
     var paddingRight = paddingForSide('right');
     var paddingBottom = paddingForSide('bottom');
     var paddingLeft = paddingForSide('left');
 
+    var TEXT_ALIGN;
+    (function (TEXT_ALIGN) {
+        TEXT_ALIGN[TEXT_ALIGN["LEFT"] = 0] = "LEFT";
+        TEXT_ALIGN[TEXT_ALIGN["CENTER"] = 1] = "CENTER";
+        TEXT_ALIGN[TEXT_ALIGN["RIGHT"] = 2] = "RIGHT";
+    })(TEXT_ALIGN || (TEXT_ALIGN = {}));
     var textAlign = {
         name: 'text-align',
         initialValue: 'left',
@@ -3025,17 +3161,25 @@
         parse: function (_context, textAlign) {
             switch (textAlign) {
                 case 'right':
-                    return 2 /* RIGHT */;
+                    return TEXT_ALIGN.RIGHT;
                 case 'center':
                 case 'justify':
-                    return 1 /* CENTER */;
+                    return TEXT_ALIGN.CENTER;
                 case 'left':
                 default:
-                    return 0 /* LEFT */;
+                    return TEXT_ALIGN.LEFT;
             }
         }
     };
 
+    var POSITION;
+    (function (POSITION) {
+        POSITION[POSITION["STATIC"] = 0] = "STATIC";
+        POSITION[POSITION["RELATIVE"] = 1] = "RELATIVE";
+        POSITION[POSITION["ABSOLUTE"] = 2] = "ABSOLUTE";
+        POSITION[POSITION["FIXED"] = 3] = "FIXED";
+        POSITION[POSITION["STICKY"] = 4] = "STICKY";
+    })(POSITION || (POSITION = {}));
     var position = {
         name: 'position',
         initialValue: 'static',
@@ -3044,15 +3188,15 @@
         parse: function (_context, position) {
             switch (position) {
                 case 'relative':
-                    return 1 /* RELATIVE */;
+                    return POSITION.RELATIVE;
                 case 'absolute':
-                    return 2 /* ABSOLUTE */;
+                    return POSITION.ABSOLUTE;
                 case 'fixed':
-                    return 3 /* FIXED */;
+                    return POSITION.FIXED;
                 case 'sticky':
-                    return 4 /* STICKY */;
+                    return POSITION.STICKY;
             }
-            return 0 /* STATIC */;
+            return POSITION.STATIC;
         }
     };
 
@@ -3096,6 +3240,13 @@
         }
     };
 
+    var TEXT_TRANSFORM;
+    (function (TEXT_TRANSFORM) {
+        TEXT_TRANSFORM[TEXT_TRANSFORM["NONE"] = 0] = "NONE";
+        TEXT_TRANSFORM[TEXT_TRANSFORM["LOWERCASE"] = 1] = "LOWERCASE";
+        TEXT_TRANSFORM[TEXT_TRANSFORM["UPPERCASE"] = 2] = "UPPERCASE";
+        TEXT_TRANSFORM[TEXT_TRANSFORM["CAPITALIZE"] = 3] = "CAPITALIZE";
+    })(TEXT_TRANSFORM || (TEXT_TRANSFORM = {}));
     var textTransform = {
         name: 'text-transform',
         initialValue: 'none',
@@ -3104,13 +3255,13 @@
         parse: function (_context, textTransform) {
             switch (textTransform) {
                 case 'uppercase':
-                    return 2 /* UPPERCASE */;
+                    return TEXT_TRANSFORM.UPPERCASE;
                 case 'lowercase':
-                    return 1 /* LOWERCASE */;
+                    return TEXT_TRANSFORM.LOWERCASE;
                 case 'capitalize':
-                    return 3 /* CAPITALIZE */;
+                    return TEXT_TRANSFORM.CAPITALIZE;
             }
-            return 0 /* NONE */;
+            return TEXT_TRANSFORM.NONE;
         }
     };
 
@@ -3168,6 +3319,12 @@
         }
     };
 
+    var VISIBILITY;
+    (function (VISIBILITY) {
+        VISIBILITY[VISIBILITY["VISIBLE"] = 0] = "VISIBLE";
+        VISIBILITY[VISIBILITY["HIDDEN"] = 1] = "HIDDEN";
+        VISIBILITY[VISIBILITY["COLLAPSE"] = 2] = "COLLAPSE";
+    })(VISIBILITY || (VISIBILITY = {}));
     var visibility = {
         name: 'visible',
         initialValue: 'none',
@@ -3176,12 +3333,12 @@
         parse: function (_context, visibility) {
             switch (visibility) {
                 case 'hidden':
-                    return 1 /* HIDDEN */;
+                    return VISIBILITY.HIDDEN;
                 case 'collapse':
-                    return 2 /* COLLAPSE */;
+                    return VISIBILITY.COLLAPSE;
                 case 'visible':
                 default:
-                    return 0 /* VISIBLE */;
+                    return VISIBILITY.VISIBLE;
             }
         }
     };
@@ -3271,18 +3428,18 @@
             return tokens
                 .filter(isIdentToken)
                 .map(function (token) {
-                switch (token.value) {
-                    case 'underline':
-                        return 1 /* UNDERLINE */;
-                    case 'overline':
-                        return 2 /* OVERLINE */;
-                    case 'line-through':
-                        return 3 /* LINE_THROUGH */;
-                    case 'none':
-                        return 4 /* BLINK */;
-                }
-                return 0 /* NONE */;
-            })
+                    switch (token.value) {
+                        case 'underline':
+                            return 1 /* UNDERLINE */;
+                        case 'overline':
+                            return 2 /* OVERLINE */;
+                        case 'line-through':
+                            return 3 /* LINE_THROUGH */;
+                        case 'none':
+                            return 4 /* BLINK */;
+                    }
+                    return 0 /* NONE */;
+                })
                 .filter(function (line) { return line !== 0 /* NONE */; });
         }
     };
@@ -3357,6 +3514,12 @@
         }
     };
 
+    var FONT_STYLE;
+    (function (FONT_STYLE) {
+        FONT_STYLE["NORMAL"] = "normal";
+        FONT_STYLE["ITALIC"] = "italic";
+        FONT_STYLE["OBLIQUE"] = "oblique";
+    })(FONT_STYLE || (FONT_STYLE = {}));
     var fontStyle = {
         name: 'font-style',
         initialValue: 'normal',
@@ -3365,12 +3528,12 @@
         parse: function (_context, overflow) {
             switch (overflow) {
                 case 'oblique':
-                    return "oblique" /* OBLIQUE */;
+                    return FONT_STYLE.OBLIQUE;
                 case 'italic':
-                    return "italic" /* ITALIC */;
+                    return FONT_STYLE.ITALIC;
                 case 'normal':
                 default:
-                    return "normal" /* NORMAL */;
+                    return FONT_STYLE.NORMAL;
             }
         }
     };
@@ -3539,24 +3702,30 @@
         }
     };
 
+    var PAINT_ORDER_LAYER;
+    (function (PAINT_ORDER_LAYER) {
+        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["FILL"] = 0] = "FILL";
+        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["STROKE"] = 1] = "STROKE";
+        PAINT_ORDER_LAYER[PAINT_ORDER_LAYER["MARKERS"] = 2] = "MARKERS";
+    })(PAINT_ORDER_LAYER || (PAINT_ORDER_LAYER = {}));
     var paintOrder = {
         name: 'paint-order',
         initialValue: 'normal',
         prefix: false,
         type: 1 /* LIST */,
         parse: function (_context, tokens) {
-            var DEFAULT_VALUE = [0 /* FILL */, 1 /* STROKE */, 2 /* MARKERS */];
+            var DEFAULT_VALUE = [PAINT_ORDER_LAYER.FILL, PAINT_ORDER_LAYER.STROKE, PAINT_ORDER_LAYER.MARKERS];
             var layers = [];
             tokens.filter(isIdentToken).forEach(function (token) {
                 switch (token.value) {
                     case 'stroke':
-                        layers.push(1 /* STROKE */);
+                        layers.push(PAINT_ORDER_LAYER.STROKE);
                         break;
                     case 'fill':
-                        layers.push(0 /* FILL */);
+                        layers.push(PAINT_ORDER_LAYER.FILL);
                         break;
                     case 'markers':
-                        layers.push(2 /* MARKERS */);
+                        layers.push(PAINT_ORDER_LAYER.MARKERS);
                         break;
                 }
             });
@@ -3662,7 +3831,7 @@
             this.zIndex = parse(context, zIndex, declaration.zIndex);
         }
         CSSParsedDeclaration.prototype.isVisible = function () {
-            return this.display > 0 && this.opacity > 0 && this.visibility === 0 /* VISIBLE */;
+            return this.display > 0 && this.opacity > 0 && this.visibility === VISIBILITY.VISIBLE;
         };
         CSSParsedDeclaration.prototype.isTransparent = function () {
             return isTransparent(this.backgroundColor);
@@ -3671,13 +3840,13 @@
             return this.transform !== null;
         };
         CSSParsedDeclaration.prototype.isPositioned = function () {
-            return this.position !== 0 /* STATIC */;
+            return this.position !== POSITION.STATIC;
         };
         CSSParsedDeclaration.prototype.isPositionedWithZIndex = function () {
             return this.isPositioned() && !this.zIndex.auto;
         };
         CSSParsedDeclaration.prototype.isFloating = function () {
-            return this.float !== 0 /* NONE */;
+            return this.float !== FLOAT.NONE;
         };
         CSSParsedDeclaration.prototype.isInlineLevel = function () {
             return (contains(this.display, 4 /* INLINE */) ||
@@ -4261,23 +4430,23 @@
         ctx.fillRect(0, 0, size, size);
         return loadSerializedSVG$1(svg)
             .then(function (img) {
-            ctx.drawImage(img, 0, 0);
-            var data = ctx.getImageData(0, 0, size, size).data;
-            ctx.fillStyle = 'red';
-            ctx.fillRect(0, 0, size, size);
-            var node = document.createElement('div');
-            node.style.backgroundImage = "url(" + greenImageSrc + ")";
-            node.style.height = size + "px";
-            // Firefox 55 does not render inline <img /> tags
-            return isGreenPixel(data)
-                ? loadSerializedSVG$1(createForeignObjectSVG(size, size, 0, 0, node))
-                : Promise.reject(false);
-        })
+                ctx.drawImage(img, 0, 0);
+                var data = ctx.getImageData(0, 0, size, size).data;
+                ctx.fillStyle = 'red';
+                ctx.fillRect(0, 0, size, size);
+                var node = document.createElement('div');
+                node.style.backgroundImage = "url(" + greenImageSrc + ")";
+                node.style.height = size + "px";
+                // Firefox 55 does not render inline <img /> tags
+                return isGreenPixel(data)
+                    ? loadSerializedSVG$1(createForeignObjectSVG(size, size, 0, 0, node))
+                    : Promise.reject(false);
+            })
             .then(function (img) {
-            ctx.drawImage(img, 0, 0);
-            // Edge does not render background-images
-            return isGreenPixel(ctx.getImageData(0, 0, size, size).data);
-        })
+                ctx.drawImage(img, 0, 0);
+                // Edge does not render background-images
+                return isGreenPixel(ctx.getImageData(0, 0, size, size).data);
+            })
             .catch(function () { return false; });
     };
     var createForeignObjectSVG = function (width, height, x, y, node) {
@@ -4456,11 +4625,11 @@
     }());
     var transform = function (text, transform) {
         switch (transform) {
-            case 1 /* LOWERCASE */:
+            case TEXT_TRANSFORM.LOWERCASE:
                 return text.toLowerCase();
-            case 3 /* CAPITALIZE */:
+            case TEXT_TRANSFORM.CAPITALIZE:
                 return text.replace(CAPITALIZE, capitalize);
-            case 2 /* UPPERCASE */:
+            case TEXT_TRANSFORM.UPPERCASE:
                 return text.toUpperCase();
             default:
                 return text;
@@ -4580,20 +4749,20 @@
                 _this.styles.backgroundColor = 0xdededeff;
                 _this.styles.borderTopColor =
                     _this.styles.borderRightColor =
-                        _this.styles.borderBottomColor =
-                            _this.styles.borderLeftColor =
-                                0xa5a5a5ff;
+                    _this.styles.borderBottomColor =
+                    _this.styles.borderLeftColor =
+                    0xa5a5a5ff;
                 _this.styles.borderTopWidth =
                     _this.styles.borderRightWidth =
-                        _this.styles.borderBottomWidth =
-                            _this.styles.borderLeftWidth =
-                                1;
+                    _this.styles.borderBottomWidth =
+                    _this.styles.borderLeftWidth =
+                    1;
                 _this.styles.borderTopStyle =
                     _this.styles.borderRightStyle =
-                        _this.styles.borderBottomStyle =
-                            _this.styles.borderLeftStyle =
-                                1 /* SOLID */;
-                _this.styles.backgroundClip = [0 /* BORDER_BOX */];
+                    _this.styles.borderBottomStyle =
+                    _this.styles.borderLeftStyle =
+                    BORDER_STYLE.SOLID;
+                _this.styles.backgroundClip = [BACKGROUND_CLIP.BORDER_BOX];
                 _this.styles.backgroundOrigin = [0 /* BORDER_BOX */];
                 _this.bounds = reformatInputBounds(_this.bounds);
             }
@@ -4601,16 +4770,16 @@
                 case CHECKBOX:
                     _this.styles.borderTopRightRadius =
                         _this.styles.borderTopLeftRadius =
-                            _this.styles.borderBottomRightRadius =
-                                _this.styles.borderBottomLeftRadius =
-                                    CHECKBOX_BORDER_RADIUS;
+                        _this.styles.borderBottomRightRadius =
+                        _this.styles.borderBottomLeftRadius =
+                        CHECKBOX_BORDER_RADIUS;
                     break;
                 case RADIO:
                     _this.styles.borderTopRightRadius =
                         _this.styles.borderTopLeftRadius =
-                            _this.styles.borderBottomRightRadius =
-                                _this.styles.borderBottomLeftRadius =
-                                    RADIO_BORDER_RADIUS;
+                        _this.styles.borderBottomRightRadius =
+                        _this.styles.borderBottomLeftRadius =
+                        RADIO_BORDER_RADIUS;
                     break;
             }
             return _this;
@@ -5007,7 +5176,7 @@
     var CJK_HUNDRED_COEFFICIENTS = 1 << 3;
     var createCJKCounter = function (value, numbers, multipliers, negativeSign, suffix, flags) {
         if (value < -9999 || value > 9999) {
-            return createCounterText(value, 4 /* CJK_DECIMAL */, suffix.length > 0);
+            return createCounterText(value, LIST_STYLE_TYPE.CJK_DECIMAL, suffix.length > 0);
         }
         var tmp = Math.abs(value);
         var string = suffix;
@@ -5043,101 +5212,101 @@
         var koreanSuffix = appendSuffix ? ', ' : '';
         var spaceSuffix = appendSuffix ? ' ' : '';
         switch (type) {
-            case 0 /* DISC */:
+            case LIST_STYLE_TYPE.DISC:
                 return '•' + spaceSuffix;
-            case 1 /* CIRCLE */:
+            case LIST_STYLE_TYPE.CIRCLE:
                 return '◦' + spaceSuffix;
-            case 2 /* SQUARE */:
+            case LIST_STYLE_TYPE.SQUARE:
                 return '◾' + spaceSuffix;
-            case 5 /* DECIMAL_LEADING_ZERO */:
+            case LIST_STYLE_TYPE.DECIMAL_LEADING_ZERO:
                 var string = createCounterStyleFromRange(value, 48, 57, true, defaultSuffix);
                 return string.length < 4 ? "0" + string : string;
-            case 4 /* CJK_DECIMAL */:
+            case LIST_STYLE_TYPE.CJK_DECIMAL:
                 return createCounterStyleFromSymbols(value, '〇一二三四五六七八九', cjkSuffix);
-            case 6 /* LOWER_ROMAN */:
-                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, 3 /* DECIMAL */, defaultSuffix).toLowerCase();
-            case 7 /* UPPER_ROMAN */:
-                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, 3 /* DECIMAL */, defaultSuffix);
-            case 8 /* LOWER_GREEK */:
+            case LIST_STYLE_TYPE.LOWER_ROMAN:
+                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, LIST_STYLE_TYPE.DECIMAL, defaultSuffix).toLowerCase();
+            case LIST_STYLE_TYPE.UPPER_ROMAN:
+                return createAdditiveCounter(value, 1, 3999, ROMAN_UPPER, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
+            case LIST_STYLE_TYPE.LOWER_GREEK:
                 return createCounterStyleFromRange(value, 945, 969, false, defaultSuffix);
-            case 9 /* LOWER_ALPHA */:
+            case LIST_STYLE_TYPE.LOWER_ALPHA:
                 return createCounterStyleFromRange(value, 97, 122, false, defaultSuffix);
-            case 10 /* UPPER_ALPHA */:
+            case LIST_STYLE_TYPE.UPPER_ALPHA:
                 return createCounterStyleFromRange(value, 65, 90, false, defaultSuffix);
-            case 11 /* ARABIC_INDIC */:
+            case LIST_STYLE_TYPE.ARABIC_INDIC:
                 return createCounterStyleFromRange(value, 1632, 1641, true, defaultSuffix);
-            case 12 /* ARMENIAN */:
-            case 49 /* UPPER_ARMENIAN */:
-                return createAdditiveCounter(value, 1, 9999, ARMENIAN, 3 /* DECIMAL */, defaultSuffix);
-            case 35 /* LOWER_ARMENIAN */:
-                return createAdditiveCounter(value, 1, 9999, ARMENIAN, 3 /* DECIMAL */, defaultSuffix).toLowerCase();
-            case 13 /* BENGALI */:
+            case LIST_STYLE_TYPE.ARMENIAN:
+            case LIST_STYLE_TYPE.UPPER_ARMENIAN:
+                return createAdditiveCounter(value, 1, 9999, ARMENIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
+            case LIST_STYLE_TYPE.LOWER_ARMENIAN:
+                return createAdditiveCounter(value, 1, 9999, ARMENIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix).toLowerCase();
+            case LIST_STYLE_TYPE.BENGALI:
                 return createCounterStyleFromRange(value, 2534, 2543, true, defaultSuffix);
-            case 14 /* CAMBODIAN */:
-            case 30 /* KHMER */:
+            case LIST_STYLE_TYPE.CAMBODIAN:
+            case LIST_STYLE_TYPE.KHMER:
                 return createCounterStyleFromRange(value, 6112, 6121, true, defaultSuffix);
-            case 15 /* CJK_EARTHLY_BRANCH */:
+            case LIST_STYLE_TYPE.CJK_EARTHLY_BRANCH:
                 return createCounterStyleFromSymbols(value, '子丑寅卯辰巳午未申酉戌亥', cjkSuffix);
-            case 16 /* CJK_HEAVENLY_STEM */:
+            case LIST_STYLE_TYPE.CJK_HEAVENLY_STEM:
                 return createCounterStyleFromSymbols(value, '甲乙丙丁戊己庚辛壬癸', cjkSuffix);
-            case 17 /* CJK_IDEOGRAPHIC */:
-            case 48 /* TRAD_CHINESE_INFORMAL */:
+            case LIST_STYLE_TYPE.CJK_IDEOGRAPHIC:
+            case LIST_STYLE_TYPE.TRAD_CHINESE_INFORMAL:
                 return createCJKCounter(value, '零一二三四五六七八九', CHINESE_INFORMAL_MULTIPLIERS, '負', cjkSuffix, CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case 47 /* TRAD_CHINESE_FORMAL */:
+            case LIST_STYLE_TYPE.TRAD_CHINESE_FORMAL:
                 return createCJKCounter(value, '零壹貳參肆伍陸柒捌玖', CHINESE_FORMAL_MULTIPLIERS, '負', cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case 42 /* SIMP_CHINESE_INFORMAL */:
+            case LIST_STYLE_TYPE.SIMP_CHINESE_INFORMAL:
                 return createCJKCounter(value, '零一二三四五六七八九', CHINESE_INFORMAL_MULTIPLIERS, '负', cjkSuffix, CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case 41 /* SIMP_CHINESE_FORMAL */:
+            case LIST_STYLE_TYPE.SIMP_CHINESE_FORMAL:
                 return createCJKCounter(value, '零壹贰叁肆伍陆柒捌玖', CHINESE_FORMAL_MULTIPLIERS, '负', cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS | CJK_HUNDRED_COEFFICIENTS);
-            case 26 /* JAPANESE_INFORMAL */:
+            case LIST_STYLE_TYPE.JAPANESE_INFORMAL:
                 return createCJKCounter(value, '〇一二三四五六七八九', '十百千万', JAPANESE_NEGATIVE, cjkSuffix, 0);
-            case 25 /* JAPANESE_FORMAL */:
+            case LIST_STYLE_TYPE.JAPANESE_FORMAL:
                 return createCJKCounter(value, '零壱弐参四伍六七八九', '拾百千万', JAPANESE_NEGATIVE, cjkSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case 31 /* KOREAN_HANGUL_FORMAL */:
+            case LIST_STYLE_TYPE.KOREAN_HANGUL_FORMAL:
                 return createCJKCounter(value, '영일이삼사오육칠팔구', '십백천만', KOREAN_NEGATIVE, koreanSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case 33 /* KOREAN_HANJA_INFORMAL */:
+            case LIST_STYLE_TYPE.KOREAN_HANJA_INFORMAL:
                 return createCJKCounter(value, '零一二三四五六七八九', '十百千萬', KOREAN_NEGATIVE, koreanSuffix, 0);
-            case 32 /* KOREAN_HANJA_FORMAL */:
+            case LIST_STYLE_TYPE.KOREAN_HANJA_FORMAL:
                 return createCJKCounter(value, '零壹貳參四五六七八九', '拾百千', KOREAN_NEGATIVE, koreanSuffix, CJK_ZEROS | CJK_TEN_COEFFICIENTS | CJK_TEN_HIGH_COEFFICIENTS);
-            case 18 /* DEVANAGARI */:
+            case LIST_STYLE_TYPE.DEVANAGARI:
                 return createCounterStyleFromRange(value, 0x966, 0x96f, true, defaultSuffix);
-            case 20 /* GEORGIAN */:
-                return createAdditiveCounter(value, 1, 19999, GEORGIAN, 3 /* DECIMAL */, defaultSuffix);
-            case 21 /* GUJARATI */:
+            case LIST_STYLE_TYPE.GEORGIAN:
+                return createAdditiveCounter(value, 1, 19999, GEORGIAN, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
+            case LIST_STYLE_TYPE.GUJARATI:
                 return createCounterStyleFromRange(value, 0xae6, 0xaef, true, defaultSuffix);
-            case 22 /* GURMUKHI */:
+            case LIST_STYLE_TYPE.GURMUKHI:
                 return createCounterStyleFromRange(value, 0xa66, 0xa6f, true, defaultSuffix);
-            case 22 /* HEBREW */:
-                return createAdditiveCounter(value, 1, 10999, HEBREW, 3 /* DECIMAL */, defaultSuffix);
-            case 23 /* HIRAGANA */:
+            case LIST_STYLE_TYPE.HEBREW:
+                return createAdditiveCounter(value, 1, 10999, HEBREW, LIST_STYLE_TYPE.DECIMAL, defaultSuffix);
+            case LIST_STYLE_TYPE.HIRAGANA:
                 return createCounterStyleFromSymbols(value, 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん');
-            case 24 /* HIRAGANA_IROHA */:
+            case LIST_STYLE_TYPE.HIRAGANA_IROHA:
                 return createCounterStyleFromSymbols(value, 'いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす');
-            case 27 /* KANNADA */:
+            case LIST_STYLE_TYPE.KANNADA:
                 return createCounterStyleFromRange(value, 0xce6, 0xcef, true, defaultSuffix);
-            case 28 /* KATAKANA */:
+            case LIST_STYLE_TYPE.KATAKANA:
                 return createCounterStyleFromSymbols(value, 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン', cjkSuffix);
-            case 29 /* KATAKANA_IROHA */:
+            case LIST_STYLE_TYPE.KATAKANA_IROHA:
                 return createCounterStyleFromSymbols(value, 'イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス', cjkSuffix);
-            case 34 /* LAO */:
+            case LIST_STYLE_TYPE.LAO:
                 return createCounterStyleFromRange(value, 0xed0, 0xed9, true, defaultSuffix);
-            case 37 /* MONGOLIAN */:
+            case LIST_STYLE_TYPE.MONGOLIAN:
                 return createCounterStyleFromRange(value, 0x1810, 0x1819, true, defaultSuffix);
-            case 38 /* MYANMAR */:
+            case LIST_STYLE_TYPE.MYANMAR:
                 return createCounterStyleFromRange(value, 0x1040, 0x1049, true, defaultSuffix);
-            case 39 /* ORIYA */:
+            case LIST_STYLE_TYPE.ORIYA:
                 return createCounterStyleFromRange(value, 0xb66, 0xb6f, true, defaultSuffix);
-            case 40 /* PERSIAN */:
+            case LIST_STYLE_TYPE.PERSIAN:
                 return createCounterStyleFromRange(value, 0x6f0, 0x6f9, true, defaultSuffix);
-            case 43 /* TAMIL */:
+            case LIST_STYLE_TYPE.TAMIL:
                 return createCounterStyleFromRange(value, 0xbe6, 0xbef, true, defaultSuffix);
-            case 44 /* TELUGU */:
+            case LIST_STYLE_TYPE.TELUGU:
                 return createCounterStyleFromRange(value, 0xc66, 0xc6f, true, defaultSuffix);
-            case 45 /* THAI */:
+            case LIST_STYLE_TYPE.THAI:
                 return createCounterStyleFromRange(value, 0xe50, 0xe59, true, defaultSuffix);
-            case 46 /* TIBETAN */:
+            case LIST_STYLE_TYPE.TIBETAN:
                 return createCounterStyleFromRange(value, 0xf20, 0xf29, true, defaultSuffix);
-            case 3 /* DECIMAL */:
+            case LIST_STYLE_TYPE.DECIMAL:
             default:
                 return createCounterStyleFromRange(value, 48, 57, true, defaultSuffix);
         }
@@ -5170,46 +5339,48 @@
             /* Chrome doesn't detect relative background-images assigned in inline <style> sheets when fetched through getComputedStyle
              if window url is about:blank, we can assign the url to current by writing onto the document
              */
-            var iframeLoad = iframeLoader(iframe).then(function () { return __awaiter(_this, void 0, void 0, function () {
-                var onclone, referenceElement;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            this.scrolledElements.forEach(restoreNodeScroll);
-                            if (cloneWindow) {
-                                cloneWindow.scrollTo(windowSize.left, windowSize.top);
-                                if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent) &&
-                                    (cloneWindow.scrollY !== windowSize.top || cloneWindow.scrollX !== windowSize.left)) {
-                                    this.context.logger.warn('Unable to restore scroll position for cloned document');
-                                    this.context.windowBounds = this.context.windowBounds.add(cloneWindow.scrollX - windowSize.left, cloneWindow.scrollY - windowSize.top, 0, 0);
+            var iframeLoad = iframeLoader(iframe).then(function () {
+                return __awaiter(_this, void 0, void 0, function () {
+                    var onclone, referenceElement;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                this.scrolledElements.forEach(restoreNodeScroll);
+                                if (cloneWindow) {
+                                    cloneWindow.scrollTo(windowSize.left, windowSize.top);
+                                    if (/(iPad|iPhone|iPod)/g.test(navigator.userAgent) &&
+                                        (cloneWindow.scrollY !== windowSize.top || cloneWindow.scrollX !== windowSize.left)) {
+                                        this.context.logger.warn('Unable to restore scroll position for cloned document');
+                                        this.context.windowBounds = this.context.windowBounds.add(cloneWindow.scrollX - windowSize.left, cloneWindow.scrollY - windowSize.top, 0, 0);
+                                    }
                                 }
-                            }
-                            onclone = this.options.onclone;
-                            referenceElement = this.clonedReferenceElement;
-                            if (typeof referenceElement === 'undefined') {
-                                return [2 /*return*/, Promise.reject("Error finding the " + this.referenceElement.nodeName + " in the cloned document")];
-                            }
-                            if (!(documentClone.fonts && documentClone.fonts.ready)) return [3 /*break*/, 2];
-                            return [4 /*yield*/, documentClone.fonts.ready];
-                        case 1:
-                            _a.sent();
-                            _a.label = 2;
-                        case 2:
-                            if (!/(AppleWebKit)/g.test(navigator.userAgent)) return [3 /*break*/, 4];
-                            return [4 /*yield*/, imagesReady(documentClone)];
-                        case 3:
-                            _a.sent();
-                            _a.label = 4;
-                        case 4:
-                            if (typeof onclone === 'function') {
-                                return [2 /*return*/, Promise.resolve()
+                                onclone = this.options.onclone;
+                                referenceElement = this.clonedReferenceElement;
+                                if (typeof referenceElement === 'undefined') {
+                                    return [2 /*return*/, Promise.reject("Error finding the " + this.referenceElement.nodeName + " in the cloned document")];
+                                }
+                                if (!(documentClone.fonts && documentClone.fonts.ready)) return [3 /*break*/, 2];
+                                return [4 /*yield*/, documentClone.fonts.ready];
+                            case 1:
+                                _a.sent();
+                                _a.label = 2;
+                            case 2:
+                                if (!/(AppleWebKit)/g.test(navigator.userAgent)) return [3 /*break*/, 4];
+                                return [4 /*yield*/, imagesReady(documentClone)];
+                            case 3:
+                                _a.sent();
+                                _a.label = 4;
+                            case 4:
+                                if (typeof onclone === 'function') {
+                                    return [2 /*return*/, Promise.resolve()
                                         .then(function () { return onclone(documentClone, referenceElement); })
                                         .then(function () { return iframe; })];
-                            }
-                            return [2 /*return*/, iframe];
-                    }
+                                }
+                                return [2 /*return*/, iframe];
+                        }
+                    });
                 });
-            }); });
+            });
             documentClone.open();
             documentClone.write(serializeDoctype(document.doctype) + "<html></html>");
             // Chrome scrolls the parent document for some reason after the write to the cloned window???
@@ -5395,7 +5566,7 @@
                             var counterState = _this.counters.getCounterValue(counter.value);
                             var counterType = counterStyle && isIdentToken(counterStyle)
                                 ? listStyleType.parse(_this.context, counterStyle.value)
-                                : 3 /* DECIMAL */;
+                                : LIST_STYLE_TYPE.DECIMAL;
                             anonymousReplacedElement.appendChild(document.createTextNode(createCounterText(counterState, counterType, false)));
                         }
                     }
@@ -5405,7 +5576,7 @@
                             var counterStates = _this.counters.getCounterValues(counter.value);
                             var counterType_1 = counterStyle && isIdentToken(counterStyle)
                                 ? listStyleType.parse(_this.context, counterStyle.value)
-                                : 3 /* DECIMAL */;
+                                : LIST_STYLE_TYPE.DECIMAL;
                             var separator = delim && delim.type === 0 /* STRING_TOKEN */ ? delim.value : '';
                             var text = counterStates
                                 .map(function (value) { return createCounterText(value, counterType_1, false); })
@@ -5413,7 +5584,7 @@
                             anonymousReplacedElement.appendChild(document.createTextNode(text));
                         }
                     }
-                    else ;
+                    else;
                 }
                 else if (token.type === 20 /* IDENT_TOKEN */) {
                     switch (token.value) {
@@ -5647,22 +5818,22 @@
                         case 2:
                             this.context.logger.debug("Added image " + key.substring(0, 256));
                             return [4 /*yield*/, new Promise(function (resolve, reject) {
-                                    var img = new Image();
-                                    img.onload = function () { return resolve(img); };
-                                    img.onerror = reject;
-                                    //ios safari 10.3 taints canvas with data urls unless crossOrigin is set to anonymous
-                                    if (isInlineBase64Image(src) || useCORS) {
-                                        img.crossOrigin = 'anonymous';
-                                    }
-                                    img.src = src;
-                                    if (img.complete === true) {
-                                        // Inline XML images may fail to parse, throwing an Error later on
-                                        setTimeout(function () { return resolve(img); }, 500);
-                                    }
-                                    if (_this._options.imageTimeout > 0) {
-                                        setTimeout(function () { return reject("Timed out (" + _this._options.imageTimeout + "ms) loading image"); }, _this._options.imageTimeout);
-                                    }
-                                })];
+                                var img = new Image();
+                                img.onload = function () { return resolve(img); };
+                                img.onerror = reject;
+                                //ios safari 10.3 taints canvas with data urls unless crossOrigin is set to anonymous
+                                if (isInlineBase64Image(src) || useCORS) {
+                                    img.crossOrigin = 'anonymous';
+                                }
+                                img.src = src;
+                                if (img.complete === true) {
+                                    // Inline XML images may fail to parse, throwing an Error later on
+                                    setTimeout(function () { return resolve(img); }, 500);
+                                }
+                                if (_this._options.imageTimeout > 0) {
+                                    setTimeout(function () { return reject("Timed out (" + _this._options.imageTimeout + "ms) loading image"); }, _this._options.imageTimeout);
+                                }
+                            })];
                         case 3: return [2 /*return*/, _a.sent()];
                     }
                 });
@@ -5725,9 +5896,36 @@
     var isBlobImage = function (src) { return src.substr(0, 4) === 'blob'; };
     var isSVG = function (src) { return src.substr(-3).toLowerCase() === 'svg' || INLINE_SVG.test(src); };
 
+    var PathType;
+    (function (PathType) {
+        PathType[PathType["VECTOR"] = 0] = "VECTOR";
+        PathType[PathType["BEZIER_CURVE"] = 1] = "BEZIER_CURVE";
+    })(PathType || (PathType = {}));
+    var equalPath = function (a, b) {
+        if (a.length === b.length) {
+            return a.some(function (v, i) { return v === b[i]; });
+        }
+        return false;
+    };
+    var transformPath = function (path, deltaX, deltaY, deltaW, deltaH) {
+        return path.map(function (point, index) {
+            switch (index) {
+                case 0:
+                    return point.add(deltaX, deltaY);
+                case 1:
+                    return point.add(deltaX + deltaW, deltaY);
+                case 2:
+                    return point.add(deltaX + deltaW, deltaY + deltaH);
+                case 3:
+                    return point.add(deltaX, deltaY + deltaH);
+            }
+            return point;
+        });
+    };
+
     var Vector = /** @class */ (function () {
         function Vector(x, y) {
-            this.type = 0 /* VECTOR */;
+            this.type = PathType.VECTOR;
             this.x = x;
             this.y = y;
         }
@@ -5742,7 +5940,7 @@
     };
     var BezierCurve = /** @class */ (function () {
         function BezierCurve(start, startControl, endControl, end) {
-            this.type = 1 /* BEZIER_CURVE */;
+            this.type = PathType.BEZIER_CURVE;
             this.start = start;
             this.startControl = startControl;
             this.endControl = endControl;
@@ -5765,7 +5963,7 @@
         };
         return BezierCurve;
     }());
-    var isBezierCurve = function (path) { return path.type === 1 /* BEZIER_CURVE */; };
+    var isBezierCurve = function (path) { return path.type === PathType.BEZIER_CURVE; };
 
     var BoundCurves = /** @class */ (function () {
         function BoundCurves(element) {
@@ -5979,28 +6177,6 @@
     var isClipEffect = function (effect) { return effect.type === 1 /* CLIP */; };
     var isOpacityEffect = function (effect) { return effect.type === 2 /* OPACITY */; };
 
-    var equalPath = function (a, b) {
-        if (a.length === b.length) {
-            return a.some(function (v, i) { return v === b[i]; });
-        }
-        return false;
-    };
-    var transformPath = function (path, deltaX, deltaY, deltaW, deltaH) {
-        return path.map(function (point, index) {
-            switch (index) {
-                case 0:
-                    return point.add(deltaX, deltaY);
-                case 1:
-                    return point.add(deltaX + deltaW, deltaY);
-                case 2:
-                    return point.add(deltaX + deltaW, deltaY + deltaH);
-                case 3:
-                    return point.add(deltaX, deltaY + deltaH);
-            }
-            return point;
-        });
-    };
-
     var StackingContext = /** @class */ (function () {
         function StackingContext(container) {
             this.element = container;
@@ -6029,7 +6205,7 @@
                 var matrix = this.container.styles.transform;
                 this.effects.push(new TransformEffect(offsetX, offsetY, matrix));
             }
-            if (this.container.styles.overflowX !== 0 /* VISIBLE */) {
+            if (this.container.styles.overflowX !== OVERFLOW.VISIBLE) {
                 var borderBox = calculateBorderBoxPath(this.curves);
                 var paddingBox = calculatePaddingBoxPath(this.curves);
                 if (equalPath(borderBox, paddingBox)) {
@@ -6042,15 +6218,15 @@
             }
         }
         ElementPaint.prototype.getEffects = function (target) {
-            var inFlow = [2 /* ABSOLUTE */, 3 /* FIXED */].indexOf(this.container.styles.position) === -1;
+            var inFlow = [POSITION.ABSOLUTE, POSITION.FIXED].indexOf(this.container.styles.position) === -1;
             var parent = this.parent;
             var effects = this.effects.slice(0);
             while (parent) {
                 var croplessEffects = parent.effects.filter(function (effect) { return !isClipEffect(effect); });
-                if (inFlow || parent.container.styles.position !== 0 /* STATIC */ || !parent.parent) {
+                if (inFlow || parent.container.styles.position !== POSITION.STATIC || !parent.parent) {
                     effects.unshift.apply(effects, croplessEffects);
-                    inFlow = [2 /* ABSOLUTE */, 3 /* FIXED */].indexOf(parent.container.styles.position) === -1;
-                    if (parent.container.styles.overflowX !== 0 /* VISIBLE */) {
+                    inFlow = [POSITION.ABSOLUTE, POSITION.FIXED].indexOf(parent.container.styles.position) === -1;
+                    if (parent.container.styles.overflowX !== OVERFLOW.VISIBLE) {
                         var borderBox = calculateBorderBoxPath(parent.curves);
                         var paddingBox = calculatePaddingBoxPath(parent.curves);
                         if (!equalPath(borderBox, paddingBox)) {
@@ -6282,10 +6458,10 @@
         return paddingBox(element);
     };
     var calculateBackgroundPaintingArea = function (backgroundClip, element) {
-        if (backgroundClip === 0 /* BORDER_BOX */) {
+        if (backgroundClip === BACKGROUND_CLIP.BORDER_BOX) {
             return element.bounds;
         }
-        if (backgroundClip === 2 /* CONTENT_BOX */) {
+        if (backgroundClip === BACKGROUND_CLIP.CONTENT_BOX) {
             return contentBox(element);
         }
         return paddingBox(element);
@@ -6413,21 +6589,21 @@
         var x = _a[0], y = _a[1];
         var width = _b[0], height = _b[1];
         switch (repeat) {
-            case 2 /* REPEAT_X */:
+            case BACKGROUND_REPEAT.REPEAT_X:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + backgroundPositioningArea.width), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + backgroundPositioningArea.width), Math.round(height + backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left), Math.round(height + backgroundPositioningArea.top + y))
                 ];
-            case 3 /* REPEAT_Y */:
+            case BACKGROUND_REPEAT.REPEAT_Y:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top)),
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.height + backgroundPositioningArea.top))
                 ];
-            case 1 /* NO_REPEAT */:
+            case BACKGROUND_REPEAT.NO_REPEAT:
                 return [
                     new Vector(Math.round(backgroundPositioningArea.left + x), Math.round(backgroundPositioningArea.top + y)),
                     new Vector(Math.round(backgroundPositioningArea.left + x + width), Math.round(backgroundPositioningArea.top + y)),
@@ -6632,7 +6808,7 @@
                     text.textBounds.forEach(function (text) {
                         paintOrder.forEach(function (paintOrderLayer) {
                             switch (paintOrderLayer) {
-                                case 0 /* FILL */:
+                                case PAINT_ORDER_LAYER.FILL:
                                     _this.ctx.fillStyle = asString(styles.color);
                                     _this.renderTextWithLetterSpacing(text, styles.letterSpacing, baseline);
                                     var textShadows = styles.textShadow;
@@ -6641,12 +6817,12 @@
                                             .slice(0)
                                             .reverse()
                                             .forEach(function (textShadow) {
-                                            _this.ctx.shadowColor = asString(textShadow.color);
-                                            _this.ctx.shadowOffsetX = textShadow.offsetX.number * _this.options.scale;
-                                            _this.ctx.shadowOffsetY = textShadow.offsetY.number * _this.options.scale;
-                                            _this.ctx.shadowBlur = textShadow.blur.number;
-                                            _this.renderTextWithLetterSpacing(text, styles.letterSpacing, baseline);
-                                        });
+                                                _this.ctx.shadowColor = asString(textShadow.color);
+                                                _this.ctx.shadowOffsetX = textShadow.offsetX.number * _this.options.scale;
+                                                _this.ctx.shadowOffsetY = textShadow.offsetY.number * _this.options.scale;
+                                                _this.ctx.shadowBlur = textShadow.blur.number;
+                                                _this.renderTextWithLetterSpacing(text, styles.letterSpacing, baseline);
+                                            });
                                         _this.ctx.shadowColor = '';
                                         _this.ctx.shadowOffsetX = 0;
                                         _this.ctx.shadowOffsetY = 0;
@@ -6673,7 +6849,7 @@
                                         });
                                     }
                                     break;
-                                case 1 /* STROKE */:
+                                case PAINT_ORDER_LAYER.STROKE:
                                     if (styles.webkitTextStrokeWidth && text.text.trim().length) {
                                         _this.ctx.strokeStyle = asString(styles.webkitTextStrokeColor);
                                         _this.ctx.lineWidth = styles.webkitTextStrokeWidth;
@@ -6814,10 +6990,10 @@
                                 bounds = contentBox(container);
                                 x = 0;
                                 switch (container.styles.textAlign) {
-                                    case 1 /* CENTER */:
+                                    case TEXT_ALIGN.CENTER:
                                         x += bounds.width / 2;
                                         break;
-                                    case 2 /* RIGHT */:
+                                    case TEXT_ALIGN.RIGHT:
                                         x += bounds.width;
                                         break;
                                 }
@@ -6838,7 +7014,7 @@
                             if (!contains(container.styles.display, 2048 /* LIST_ITEM */)) return [3 /*break*/, 20];
                             if (!(container.styles.listStyleImage !== null)) return [3 /*break*/, 19];
                             img = container.styles.listStyleImage;
-                            if (!(img.type === 0 /* URL */)) return [3 /*break*/, 18];
+                            if (!(img.type === CSSImageType.URL)) return [3 /*break*/, 18];
                             image = void 0;
                             url = img.url;
                             _c.label = 15;
@@ -6855,7 +7031,7 @@
                             return [3 /*break*/, 18];
                         case 18: return [3 /*break*/, 20];
                         case 19:
-                            if (paint.listValue && container.styles.listStyleType !== -1 /* NONE */) {
+                            if (paint.listValue && container.styles.listStyleType !== LIST_STYLE_TYPE.NONE) {
                                 fontFamily = this.createFontStyle(styles)[0];
                                 this.ctx.font = fontFamily;
                                 this.ctx.fillStyle = asString(styles.color);
@@ -6900,9 +7076,9 @@
                         case 4:
                             _i++;
                             return [3 /*break*/, 2];
-                        case 5: 
-                        // 3. For all its in-flow, non-positioned, block-level descendants in tree order:
-                        return [4 /*yield*/, this.renderNodeContent(stack.element)];
+                        case 5:
+                            // 3. For all its in-flow, non-positioned, block-level descendants in tree order:
+                            return [4 /*yield*/, this.renderNodeContent(stack.element)];
                         case 6:
                             // 3. For all its in-flow, non-positioned, block-level descendants in tree order:
                             _p.sent();
@@ -7050,7 +7226,7 @@
                                 return __generator(this, function (_h) {
                                     switch (_h.label) {
                                         case 0:
-                                            if (!(backgroundImage.type === 0 /* URL */)) return [3 /*break*/, 5];
+                                            if (!(backgroundImage.type === CSSImageType.URL)) return [3 /*break*/, 5];
                                             image = void 0;
                                             url = backgroundImage.url;
                                             _h.label = 1;
@@ -7220,28 +7396,28 @@
                                 .slice(0)
                                 .reverse()
                                 .forEach(function (shadow) {
-                                _this.ctx.save();
-                                var borderBoxArea = calculateBorderBoxPath(paint.curves);
-                                var maskOffset = shadow.inset ? 0 : MASK_OFFSET;
-                                var shadowPaintingArea = transformPath(borderBoxArea, -maskOffset + (shadow.inset ? 1 : -1) * shadow.spread.number, (shadow.inset ? 1 : -1) * shadow.spread.number, shadow.spread.number * (shadow.inset ? -2 : 2), shadow.spread.number * (shadow.inset ? -2 : 2));
-                                if (shadow.inset) {
-                                    _this.path(borderBoxArea);
-                                    _this.ctx.clip();
-                                    _this.mask(shadowPaintingArea);
-                                }
-                                else {
-                                    _this.mask(borderBoxArea);
-                                    _this.ctx.clip();
-                                    _this.path(shadowPaintingArea);
-                                }
-                                _this.ctx.shadowOffsetX = shadow.offsetX.number + maskOffset;
-                                _this.ctx.shadowOffsetY = shadow.offsetY.number;
-                                _this.ctx.shadowColor = asString(shadow.color);
-                                _this.ctx.shadowBlur = shadow.blur.number;
-                                _this.ctx.fillStyle = shadow.inset ? asString(shadow.color) : 'rgba(0,0,0,1)';
-                                _this.ctx.fill();
-                                _this.ctx.restore();
-                            });
+                                    _this.ctx.save();
+                                    var borderBoxArea = calculateBorderBoxPath(paint.curves);
+                                    var maskOffset = shadow.inset ? 0 : MASK_OFFSET;
+                                    var shadowPaintingArea = transformPath(borderBoxArea, -maskOffset + (shadow.inset ? 1 : -1) * shadow.spread.number, (shadow.inset ? 1 : -1) * shadow.spread.number, shadow.spread.number * (shadow.inset ? -2 : 2), shadow.spread.number * (shadow.inset ? -2 : 2));
+                                    if (shadow.inset) {
+                                        _this.path(borderBoxArea);
+                                        _this.ctx.clip();
+                                        _this.mask(shadowPaintingArea);
+                                    }
+                                    else {
+                                        _this.mask(borderBoxArea);
+                                        _this.ctx.clip();
+                                        _this.path(shadowPaintingArea);
+                                    }
+                                    _this.ctx.shadowOffsetX = shadow.offsetX.number + maskOffset;
+                                    _this.ctx.shadowOffsetY = shadow.offsetY.number;
+                                    _this.ctx.shadowColor = asString(shadow.color);
+                                    _this.ctx.shadowBlur = shadow.blur.number;
+                                    _this.ctx.fillStyle = shadow.inset ? asString(shadow.color) : 'rgba(0,0,0,1)';
+                                    _this.ctx.fill();
+                                    _this.ctx.restore();
+                                });
                             _a.label = 2;
                         case 2:
                             side = 0;
@@ -7250,20 +7426,20 @@
                         case 3:
                             if (!(_i < borders_1.length)) return [3 /*break*/, 13];
                             border = borders_1[_i];
-                            if (!(border.style !== 0 /* NONE */ && !isTransparent(border.color) && border.width > 0)) return [3 /*break*/, 11];
-                            if (!(border.style === 2 /* DASHED */)) return [3 /*break*/, 5];
-                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, 2 /* DASHED */)];
+                            if (!(border.style !== BORDER_STYLE.NONE && !isTransparent(border.color) && border.width > 0)) return [3 /*break*/, 11];
+                            if (!(border.style === BORDER_STYLE.DASHED)) return [3 /*break*/, 5];
+                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, BORDER_STYLE.DASHED)];
                         case 4:
                             _a.sent();
                             return [3 /*break*/, 11];
                         case 5:
-                            if (!(border.style === 3 /* DOTTED */)) return [3 /*break*/, 7];
-                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, 3 /* DOTTED */)];
+                            if (!(border.style === BORDER_STYLE.DOTTED)) return [3 /*break*/, 7];
+                            return [4 /*yield*/, this.renderDashedDottedBorder(border.color, border.width, side, paint.curves, BORDER_STYLE.DOTTED)];
                         case 6:
                             _a.sent();
                             return [3 /*break*/, 11];
                         case 7:
-                            if (!(border.style === 4 /* DOUBLE */)) return [3 /*break*/, 9];
+                            if (!(border.style === BORDER_STYLE.DOUBLE)) return [3 /*break*/, 9];
                             return [4 /*yield*/, this.renderDoubleBorder(border.color, border.width, side, paint.curves)];
                         case 8:
                             _a.sent();
@@ -7290,7 +7466,7 @@
                     this.ctx.save();
                     strokePaths = parsePathForBorderStroke(curvePoints, side);
                     boxPaths = parsePathForBorder(curvePoints, side);
-                    if (style === 2 /* DASHED */) {
+                    if (style === BORDER_STYLE.DASHED) {
                         this.path(boxPaths);
                         this.ctx.clip();
                     }
@@ -7317,7 +7493,7 @@
                         length = Math.abs(startY - endY);
                     }
                     this.ctx.beginPath();
-                    if (style === 3 /* DOTTED */) {
+                    if (style === BORDER_STYLE.DOTTED) {
                         this.formatPath(strokePaths);
                     }
                     else {
@@ -7325,7 +7501,7 @@
                     }
                     dashLength = width < 3 ? width * 3 : width * 2;
                     spaceLength = width < 3 ? width * 2 : width;
-                    if (style === 3 /* DOTTED */) {
+                    if (style === BORDER_STYLE.DOTTED) {
                         dashLength = width;
                         spaceLength = width;
                     }
@@ -7348,14 +7524,14 @@
                                 : maxSpace;
                     }
                     if (useLineDash) {
-                        if (style === 3 /* DOTTED */) {
+                        if (style === BORDER_STYLE.DOTTED) {
                             this.ctx.setLineDash([0, dashLength + spaceLength]);
                         }
                         else {
                             this.ctx.setLineDash([dashLength, spaceLength]);
                         }
                     }
-                    if (style === 3 /* DOTTED */) {
+                    if (style === BORDER_STYLE.DOTTED) {
                         this.ctx.lineCap = 'round';
                         this.ctx.lineWidth = width;
                     }
@@ -7366,7 +7542,7 @@
                     this.ctx.stroke();
                     this.ctx.setLineDash([]);
                     // dashed round edge gap
-                    if (style === 2 /* DASHED */) {
+                    if (style === BORDER_STYLE.DASHED) {
                         if (isBezierCurve(boxPaths[0])) {
                             path1 = boxPaths[3];
                             path2 = boxPaths[0];
@@ -7423,22 +7599,22 @@
     };
     var calculateBackgroundCurvedPaintingArea = function (clip, curves) {
         switch (clip) {
-            case 0 /* BORDER_BOX */:
+            case BACKGROUND_CLIP.BORDER_BOX:
                 return calculateBorderBoxPath(curves);
-            case 2 /* CONTENT_BOX */:
+            case BACKGROUND_CLIP.CONTENT_BOX:
                 return calculateContentBoxPath(curves);
-            case 1 /* PADDING_BOX */:
+            case BACKGROUND_CLIP.PADDING_BOX:
             default:
                 return calculatePaddingBoxPath(curves);
         }
     };
     var canvasTextAlign = function (textAlign) {
         switch (textAlign) {
-            case 1 /* CENTER */:
+            case TEXT_ALIGN.CENTER:
                 return 'center';
-            case 2 /* RIGHT */:
+            case TEXT_ALIGN.RIGHT:
                 return 'right';
-            case 0 /* LEFT */:
+            case TEXT_ALIGN.LEFT:
             default:
                 return 'left';
         }
@@ -7591,99 +7767,101 @@
     if (typeof window !== 'undefined') {
         CacheStorage.setContext(window);
     }
-    var renderElement = function (element, opts) { return __awaiter(void 0, void 0, void 0, function () {
-        var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a, width, height, left, top, backgroundColor, renderOptions, canvas, renderer, root, renderer;
-        var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
-        return __generator(this, function (_u) {
-            switch (_u.label) {
-                case 0:
-                    if (!element || typeof element !== 'object') {
-                        return [2 /*return*/, Promise.reject('Invalid element provided as first argument')];
-                    }
-                    ownerDocument = element.ownerDocument;
-                    if (!ownerDocument) {
-                        throw new Error("Element is not attached to a Document");
-                    }
-                    defaultView = ownerDocument.defaultView;
-                    if (!defaultView) {
-                        throw new Error("Document is not attached to a Window");
-                    }
-                    resourceOptions = {
-                        allowTaint: (_b = opts.allowTaint) !== null && _b !== void 0 ? _b : false,
-                        imageTimeout: (_c = opts.imageTimeout) !== null && _c !== void 0 ? _c : 15000,
-                        proxy: opts.proxy,
-                        useCORS: (_d = opts.useCORS) !== null && _d !== void 0 ? _d : false
-                    };
-                    contextOptions = __assign({ logging: (_e = opts.logging) !== null && _e !== void 0 ? _e : true, cache: opts.cache }, resourceOptions);
-                    windowOptions = {
-                        windowWidth: (_f = opts.windowWidth) !== null && _f !== void 0 ? _f : defaultView.innerWidth,
-                        windowHeight: (_g = opts.windowHeight) !== null && _g !== void 0 ? _g : defaultView.innerHeight,
-                        scrollX: (_h = opts.scrollX) !== null && _h !== void 0 ? _h : defaultView.pageXOffset,
-                        scrollY: (_j = opts.scrollY) !== null && _j !== void 0 ? _j : defaultView.pageYOffset
-                    };
-                    windowBounds = new Bounds(windowOptions.scrollX, windowOptions.scrollY, windowOptions.windowWidth, windowOptions.windowHeight);
-                    context = new Context(contextOptions, windowBounds);
-                    foreignObjectRendering = (_k = opts.foreignObjectRendering) !== null && _k !== void 0 ? _k : false;
-                    cloneOptions = {
-                        allowTaint: (_l = opts.allowTaint) !== null && _l !== void 0 ? _l : false,
-                        onclone: opts.onclone,
-                        ignoreElements: opts.ignoreElements,
-                        inlineImages: foreignObjectRendering,
-                        copyStyles: foreignObjectRendering
-                    };
-                    context.logger.debug("Starting document clone with size " + windowBounds.width + "x" + windowBounds.height + " scrolled to " + -windowBounds.left + "," + -windowBounds.top);
-                    documentCloner = new DocumentCloner(context, element, cloneOptions);
-                    clonedElement = documentCloner.clonedReferenceElement;
-                    if (!clonedElement) {
-                        return [2 /*return*/, Promise.reject("Unable to find element in cloned iframe")];
-                    }
-                    return [4 /*yield*/, documentCloner.toIFrame(ownerDocument, windowBounds)];
-                case 1:
-                    container = _u.sent();
-                    _a = isBodyElement(clonedElement) || isHTMLElement(clonedElement)
-                        ? parseDocumentSize(clonedElement.ownerDocument)
-                        : parseBounds(context, clonedElement), width = _a.width, height = _a.height, left = _a.left, top = _a.top;
-                    backgroundColor = parseBackgroundColor(context, clonedElement, opts.backgroundColor);
-                    renderOptions = {
-                        canvas: opts.canvas,
-                        backgroundColor: backgroundColor,
-                        scale: (_o = (_m = opts.scale) !== null && _m !== void 0 ? _m : defaultView.devicePixelRatio) !== null && _o !== void 0 ? _o : 1,
-                        x: ((_p = opts.x) !== null && _p !== void 0 ? _p : 0) + left,
-                        y: ((_q = opts.y) !== null && _q !== void 0 ? _q : 0) + top,
-                        width: (_r = opts.width) !== null && _r !== void 0 ? _r : Math.ceil(width),
-                        height: (_s = opts.height) !== null && _s !== void 0 ? _s : Math.ceil(height)
-                    };
-                    if (!foreignObjectRendering) return [3 /*break*/, 3];
-                    context.logger.debug("Document cloned, using foreign object rendering");
-                    renderer = new ForeignObjectRenderer(context, renderOptions);
-                    return [4 /*yield*/, renderer.render(clonedElement)];
-                case 2:
-                    canvas = _u.sent();
-                    return [3 /*break*/, 5];
-                case 3:
-                    context.logger.debug("Document cloned, element located at " + left + "," + top + " with size " + width + "x" + height + " using computed rendering");
-                    context.logger.debug("Starting DOM parsing");
-                    root = parseTree(context, clonedElement);
-                    if (backgroundColor === root.styles.backgroundColor) {
-                        root.styles.backgroundColor = COLORS.TRANSPARENT;
-                    }
-                    context.logger.debug("Starting renderer for element at " + renderOptions.x + "," + renderOptions.y + " with size " + renderOptions.width + "x" + renderOptions.height);
-                    renderer = new CanvasRenderer(context, renderOptions);
-                    return [4 /*yield*/, renderer.render(root)];
-                case 4:
-                    canvas = _u.sent();
-                    _u.label = 5;
-                case 5:
-                    if ((_t = opts.removeContainer) !== null && _t !== void 0 ? _t : true) {
-                        if (!DocumentCloner.destroy(container)) {
-                            context.logger.error("Cannot detach cloned iframe as it is not in the DOM anymore");
+    var renderElement = function (element, opts) {
+        return __awaiter(void 0, void 0, void 0, function () {
+            var ownerDocument, defaultView, resourceOptions, contextOptions, windowOptions, windowBounds, context, foreignObjectRendering, cloneOptions, documentCloner, clonedElement, container, _a, width, height, left, top, backgroundColor, renderOptions, canvas, renderer, root, renderer;
+            var _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t;
+            return __generator(this, function (_u) {
+                switch (_u.label) {
+                    case 0:
+                        if (!element || typeof element !== 'object') {
+                            return [2 /*return*/, Promise.reject('Invalid element provided as first argument')];
                         }
-                    }
-                    context.logger.debug("Finished rendering");
-                    return [2 /*return*/, canvas];
-            }
+                        ownerDocument = element.ownerDocument;
+                        if (!ownerDocument) {
+                            throw new Error("Element is not attached to a Document");
+                        }
+                        defaultView = ownerDocument.defaultView;
+                        if (!defaultView) {
+                            throw new Error("Document is not attached to a Window");
+                        }
+                        resourceOptions = {
+                            allowTaint: (_b = opts.allowTaint) !== null && _b !== void 0 ? _b : false,
+                            imageTimeout: (_c = opts.imageTimeout) !== null && _c !== void 0 ? _c : 15000,
+                            proxy: opts.proxy,
+                            useCORS: (_d = opts.useCORS) !== null && _d !== void 0 ? _d : false
+                        };
+                        contextOptions = __assign({ logging: (_e = opts.logging) !== null && _e !== void 0 ? _e : true, cache: opts.cache }, resourceOptions);
+                        windowOptions = {
+                            windowWidth: (_f = opts.windowWidth) !== null && _f !== void 0 ? _f : defaultView.innerWidth,
+                            windowHeight: (_g = opts.windowHeight) !== null && _g !== void 0 ? _g : defaultView.innerHeight,
+                            scrollX: (_h = opts.scrollX) !== null && _h !== void 0 ? _h : defaultView.pageXOffset,
+                            scrollY: (_j = opts.scrollY) !== null && _j !== void 0 ? _j : defaultView.pageYOffset
+                        };
+                        windowBounds = new Bounds(windowOptions.scrollX, windowOptions.scrollY, windowOptions.windowWidth, windowOptions.windowHeight);
+                        context = new Context(contextOptions, windowBounds);
+                        foreignObjectRendering = (_k = opts.foreignObjectRendering) !== null && _k !== void 0 ? _k : false;
+                        cloneOptions = {
+                            allowTaint: (_l = opts.allowTaint) !== null && _l !== void 0 ? _l : false,
+                            onclone: opts.onclone,
+                            ignoreElements: opts.ignoreElements,
+                            inlineImages: foreignObjectRendering,
+                            copyStyles: foreignObjectRendering
+                        };
+                        context.logger.debug("Starting document clone with size " + windowBounds.width + "x" + windowBounds.height + " scrolled to " + -windowBounds.left + "," + -windowBounds.top);
+                        documentCloner = new DocumentCloner(context, element, cloneOptions);
+                        clonedElement = documentCloner.clonedReferenceElement;
+                        if (!clonedElement) {
+                            return [2 /*return*/, Promise.reject("Unable to find element in cloned iframe")];
+                        }
+                        return [4 /*yield*/, documentCloner.toIFrame(ownerDocument, windowBounds)];
+                    case 1:
+                        container = _u.sent();
+                        _a = isBodyElement(clonedElement) || isHTMLElement(clonedElement)
+                            ? parseDocumentSize(clonedElement.ownerDocument)
+                            : parseBounds(context, clonedElement), width = _a.width, height = _a.height, left = _a.left, top = _a.top;
+                        backgroundColor = parseBackgroundColor(context, clonedElement, opts.backgroundColor);
+                        renderOptions = {
+                            canvas: opts.canvas,
+                            backgroundColor: backgroundColor,
+                            scale: (_o = (_m = opts.scale) !== null && _m !== void 0 ? _m : defaultView.devicePixelRatio) !== null && _o !== void 0 ? _o : 1,
+                            x: ((_p = opts.x) !== null && _p !== void 0 ? _p : 0) + left,
+                            y: ((_q = opts.y) !== null && _q !== void 0 ? _q : 0) + top,
+                            width: (_r = opts.width) !== null && _r !== void 0 ? _r : Math.ceil(width),
+                            height: (_s = opts.height) !== null && _s !== void 0 ? _s : Math.ceil(height)
+                        };
+                        if (!foreignObjectRendering) return [3 /*break*/, 3];
+                        context.logger.debug("Document cloned, using foreign object rendering");
+                        renderer = new ForeignObjectRenderer(context, renderOptions);
+                        return [4 /*yield*/, renderer.render(clonedElement)];
+                    case 2:
+                        canvas = _u.sent();
+                        return [3 /*break*/, 5];
+                    case 3:
+                        context.logger.debug("Document cloned, element located at " + left + "," + top + " with size " + width + "x" + height + " using computed rendering");
+                        context.logger.debug("Starting DOM parsing");
+                        root = parseTree(context, clonedElement);
+                        if (backgroundColor === root.styles.backgroundColor) {
+                            root.styles.backgroundColor = COLORS.TRANSPARENT;
+                        }
+                        context.logger.debug("Starting renderer for element at " + renderOptions.x + "," + renderOptions.y + " with size " + renderOptions.width + "x" + renderOptions.height);
+                        renderer = new CanvasRenderer(context, renderOptions);
+                        return [4 /*yield*/, renderer.render(root)];
+                    case 4:
+                        canvas = _u.sent();
+                        _u.label = 5;
+                    case 5:
+                        if ((_t = opts.removeContainer) !== null && _t !== void 0 ? _t : true) {
+                            if (!DocumentCloner.destroy(container)) {
+                                context.logger.error("Cannot detach cloned iframe as it is not in the DOM anymore");
+                            }
+                        }
+                        context.logger.debug("Finished rendering");
+                        return [2 /*return*/, canvas];
+                }
+            });
         });
-    }); };
+    };
     var parseBackgroundColor = function (context, element, backgroundColorOverride) {
         var ownerDocument = element.ownerDocument;
         // http://www.w3.org/TR/css3-background/#special-backgrounds

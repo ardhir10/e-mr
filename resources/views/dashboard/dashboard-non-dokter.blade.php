@@ -135,7 +135,7 @@ background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,2
                                                     <span class="font-size-xs text-card-d1">Pasien R.Inap Masuk Baru</span>
                                                     <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
                                                             style="    font-size: 40px;font-weight: 500;">
-                                                        {{ number_format(count([]), 0, ',', '.') }}
+                                                        {{ number_format(count($jml_pasien_ri_baru), 0, ',', '.') }}
                                                     </h1>
                                                     <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat inap masuk baru</small>
                                                 </div>
@@ -154,7 +154,7 @@ background-image: linear-gradient( 99deg,  rgba(115,18,81,1) 10.6%, rgba(28,28,2
                                                     <span class="font-size-xs text-card-d1">Pasien R.Inap Terkini</span>
                                                     <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
                                                             style="    font-size: 40px;font-weight: 500;">
-                                                        {{ number_format(count($jml_pasien_rj), 0, ',', '.') }}
+                                                        {{ number_format(count($jml_pasien_ri), 0, ',', '.') }}
                                                     </h1>
                                                     <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat inap terkini </small>
                                                 </div>

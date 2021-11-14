@@ -147,12 +147,12 @@
     <script src="{{asset('/assets')}}/libs/alertifyjs/build/alertify.min.js"></script>
     <script src="{{asset('assets/js/jspdf.min.js')}}">
     <script src="{{asset('assets/js/html2canvas.js')}}">
+    <script src="{{asset('assets/js/FileSaver.min.js')}}">
 
     </script>
     @stack('scripts')
     <script>
         $('.ada').val();
-
 
 
 
