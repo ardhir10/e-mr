@@ -53,6 +53,7 @@
             bottom: 0px;
             left: 0px;
         } */
+    }
 
     </style>
 </head>
@@ -61,13 +62,15 @@
 <body style="overflow: hidden">
 
     <!-- <body data-layout="horizontal"> -->
-    <video id="headVideo" class="pos-absolute a-0 wd-100p ht-100p object-fit-cover" autoplay="" muted="" loop=""
+    {{-- <video id="headVideo" class="pos-absolute a-0 wd-100p ht-100p object-fit-cover" autoplay="" muted="" loop=""
         __idm_id__="902646785">
         <source src="{{asset('/assets')}}/video/1.mp4" type="video/mp4">
         <source src="/public/videos/video1.ogv" type="video/ogg">
         <source src="/public/videos/video1.webm" type="video/webm">
-    </video>
-    <div class="authentication-bg min-vh-100">
+    </video> --}}
+    <div class="authentication-bg bg-wall min-vh-100" style="background-image:url({{asset('assets/images/loginwall.jpg')}}) ;  background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;">
         <div class=" "></div>
         <div class="container">
             <div class="d-flex flex-column min-vh-100 px-3 pt-4">
@@ -76,7 +79,7 @@
 
                         <div class="text-center bg-white pd-1 py-5" style="border-radius: 30px;padding: 22px;">
                             <div class="mb-2 mb-md-3">
-                                <a href="index.html" class="d-block auth-logo" style="padding: 10px 41px">
+                                <a href="{{route('dashboard')}}" class="d-block auth-logo" style="padding: 10px 41px">
                                     <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" width="100%"
                                         class="auth-logo-dark">
                                     <img src="{{asset('assets/')}}/images/logo-solvus.jpeg" alt="" width="100%"
@@ -141,7 +144,7 @@
                                 <div class="mt-3">
                                     <button class="btn btn-info w-100" type="submit">Log In</button>
                                 </div>
-                                {{-- 
+                                {{--
                                     <div class="mt-4">
                                         <a href="auth-resetpassword-basic.html" class="text-muted text-decoration-underline">Forgot your password?</a>
                                     </div> --}}

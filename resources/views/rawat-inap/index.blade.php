@@ -35,18 +35,19 @@
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Masuk :</label>
                                 <input class="form-control form-control-sm" name="tgl_masuk" type="date"
-                                    value="{{$request->get('tgl_masuk')}}">
+                                    value="{{$request->get('tgl_masuk') ?? date('Y-m-d')}}">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Sampai Dengan :</label>
                                 <input class="form-control form-control-sm" name="tgl_masuk_sampai" type="date"
-                                    value="{{$request->get('tgl_masuk_sampai')}}">
+                                    value="{{$request->get('tgl_masuk_sampai') ?? date('Y-m-d')}}">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="">Status Pasien :</label>
-                                <select class="form-select form-select-sm " name="" id="">
-                                    <option value="">Aktif</option>
-                                    <option value="">Tidak Aktif</option>
+                                <select class="form-select form-select-sm " name="status" id="">
+                                    <option value="">Semua</option>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="tidakaktif">Tidak Aktif</option>
                                 </select>
                             </div>
                             <div class="mt-2">

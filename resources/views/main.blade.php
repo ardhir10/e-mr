@@ -51,12 +51,32 @@
         .table-striped tr:nth-child(even) {
           background-color: #b5d3e754;
     }
+
+
+    #sidebar-menu ul li a {
+        color: white;
+    }
+    #sidebar-menu ul li a:hover {
+        color: #bdbdbd;
+    }
+
+    #sidebar-menu ul li a .nav-icon{
+        color: white;
+    }
+    #sidebar-menu ul li a:hover .nav-icon{
+        color: #bdbdbd;
+    }
+    .menu-title {
+        color: white;
+    }
+
+
     </style>
 
 </head>
 
 
-<body style="background: #efefef;" data-sidebar-size="lg" class="sidebar-enable">
+<body style="background: #e7e7e7;" data-sidebar-size="lg" class="sidebar-enable">
 
     <!-- <body data-layout="horizontal"> -->
 

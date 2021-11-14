@@ -11,6 +11,8 @@ use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
+
+    protected $table = 'TAR_USERS';
     use Notifiable;
     use HasRoles;
     /**

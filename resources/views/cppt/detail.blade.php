@@ -22,10 +22,12 @@
         <!-- end page title -->
 
         <div class="row">
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{$page_title}}</h5>
+            <div class="col-lg-12">
+                 <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
+-webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
+-moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
+                    <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
+                        <h5 class="card-title text-white">{{$page_title}} </h5>
                         <button class="btn btn-sm btn-danger" onclick="CreatePDFfromHTML()">PRINT PDF </button>
                     </div>
                     <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">

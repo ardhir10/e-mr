@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cppt/tambah/{from}/{id}/{kd_dokter?}/{kd_reg?}', 'CpptController@create')->name('cppt.create');
     Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
     Route::get('/cppt/detail/{from}/{id}', 'CpptController@detail')->name('cppt.detail');
+    // Route::get('/cppt/pdf/{from}/{id}', 'CpptController@pdf')->name('cppt.detail');
     Route::get('/cppt/verified/{id}', 'CpptController@verified')->name('cppt.verified');
     Route::get('/cppt/unverified/{id}', 'CpptController@unverified')->name('cppt.unverified');
     Route::post('/cppt/update/{id}', 'CpptController@update')->name('cppt.update');

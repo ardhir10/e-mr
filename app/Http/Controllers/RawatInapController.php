@@ -38,6 +38,13 @@ class RawatInapController extends Controller
         if ($request->get('dokter')) {
             $whereDokter = "and fs_nm_peg like '%{$request->get('dokter')}%'";
         }
+        $whereStatus = "";
+        if ($request->get('status') == 'aktif') {
+            $whereStatus = "and FD_TGL_KELUAR = '3000-01-01'";
+        }elseif($request->get('status') == 'tidakaktif'){
+            $whereStatus = "and FD_TGL_KELUAR <> '3000-01-01'";
+        }
+
 
         if ($request->seach == true) {
             $whereNotHome = "";
@@ -45,6 +52,7 @@ class RawatInapController extends Controller
 
         $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
         $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai') : date('Y-m-d');
+
         // --- DEFAULT LIST ADALAH FD_TGL_KELUAR = 3000-01-01
         $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr,
 		FS_NM_PASIEN, bb.FB_JNS_KELAMIN,
@@ -63,7 +71,11 @@ class RawatInapController extends Controller
         where	aa.fd_tgl_void = '3000-01-01'
         and		ff.FS_KD_INSTALASI_DK in (3) ";
         $QUERY_RAWAT_JALAN .= "
-        and (fd_tgl_keluar = '3000-01-01' or (fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'))
+
+
+        and fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'
+
+        $whereStatus
         $whereDokter
         ";
         $data['rawat_inap'] = DB::select($QUERY_RAWAT_JALAN);
@@ -91,6 +103,9 @@ class RawatInapController extends Controller
                 ->addIndexColumn()
                 ->toJson();
         }
+
+
+        // dd($QUERY_RAWAT_JALAN);
 
         $data['jumlah_data'] = count($data['rawat_inap']);
 

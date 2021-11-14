@@ -45,7 +45,7 @@ class RekamMedisController extends Controller
         }
         $whereQuery = implode($parameterSeachQuery, ' ') ;
 
-        $QUERY = "select bb.fs_kd_reg,aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa
+        $QUERY = "select TOP 5000 bb.fs_kd_reg,aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa
         left join
         (
               SELECT  max(fs_kd_reg) as fs_kd_reg,fs_mr
@@ -53,7 +53,7 @@ class RekamMedisController extends Controller
               group by fs_mr
           )
         bb on aa.fs_mr = bb.fs_mr
-        where 1=1 $whereQuery order by fs_kd_reg desc";
+        where 1=1 $whereQuery order by fs_kd_reg desc ";
         $data['rekam_medis'] = $request->seach == true? DB::select($QUERY) : [];
 
         if($request->from == 'yajra'){

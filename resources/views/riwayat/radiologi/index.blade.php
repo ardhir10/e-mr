@@ -102,6 +102,9 @@
         .page-content{
             padding-top: 20px !important;
         }
+         .footer{
+            display: none !important;
+        }
 
     </style>
 

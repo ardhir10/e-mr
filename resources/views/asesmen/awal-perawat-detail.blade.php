@@ -33,9 +33,11 @@
                 @include('components.flash-message')
             </div>
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{$page_title}}</h5>
+                <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
+-webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
+-moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
+                    <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
+                        <h5 class="card-title text-white">{{$page_title}}</h5>
                     </div>
                     <form action="{{route('asesmen-awal-perawat.update',$data_asesmen->FN_ID)}}" method="POST">
                         @csrf
@@ -934,7 +936,7 @@
                                                                 <span class="align-top"> Minum Obat</span>
                                                                 &nbsp;&nbsp;
                                                             </div>
-                                                            <div class="m-r-1" style="margin-right:30px;width:25%">
+                                                            <div class="m-r-1" style="margin-right:30px;width:30%">
                                                                 <input type="checkbox" name="cSnNhbMendengarkanMusik" {{$data_asesmen->FJ_SN_NHB['MendengarkanMusik'] == 'on' ?'checked':''}}>
                                                                 <span class="align-top"> Mendengarkan Musik</span>
                                                                 &nbsp;&nbsp;
@@ -996,7 +998,6 @@
                                                             </div>
                                                             <div class="m-r-1" style="margin-right:30px;width:50%">
                                                                 <span class="align-top">Tidak merasa nyeri sama sekali</span>
-                                                                &nbsp;&nbsp;
                                                             </div>
                                                         </li>
 

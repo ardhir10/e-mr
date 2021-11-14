@@ -31,9 +31,11 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{$page_title}} ({{$type}})</h5>
+                 <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
+-webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
+-moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
+                    <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
+                        <h5 class="card-title text-white">{{$page_title}} ({{$type}})</h5>
                     </div>
                     <form action="{{route('asesmen-awal-dokter-bidan.update',$data_asesmen->FN_ID)}}" method="POST">
                         @csrf
@@ -573,7 +575,7 @@
                                                                             <tr>
                                                                                 <td class="d-flex ">
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;width:10%">
+                                                                                        style="margin-left:30px;width:10%;white-space:nowrap">
                                                                                         Keadaan Umum :
 
                                                                                     </div>
@@ -588,37 +590,37 @@
                                                                             <tr>
                                                                                 <td class="d-flex ">
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;width:10%">
+                                                                                        style="margin-left:30px;width:10%white-space:nowrap">
                                                                                         Kesadaran :
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Kesadaran']}}"
+                                                                                        style="margin-left:30px;white-space:nowrap">
+                                                                                        <input type="text" class="" style="width: 150px" value="{{$data_asesmen->FJ_DO['Kesadaran']}}"
                                                                                             name="cDoKesadaran">
 
                                                                                     </div>
 
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap">
                                                                                         GCS :
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">E
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSE']}}"
+                                                                                        style="margin-left:30px;white-space:nowrap">E
+                                                                                        <input type="text" class="" style="width: 150px" value="{{$data_asesmen->FJ_DO['GCSE']}}"
                                                                                             name="cDoGCSE">
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">V
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSV']}}"
+                                                                                        style="margin-left:30px;white-space:nowrap">V
+                                                                                        <input type="text" class="" style="width: 150px" value="{{$data_asesmen->FJ_DO['GCSV']}}"
                                                                                             name="cDoGCSV">
 
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">M
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['GCSM']}}"
+                                                                                        style="margin-left:30px;white-space:nowrap">M
+                                                                                        <input type="text" class="" style="width: 150px" value="{{$data_asesmen->FJ_DO['GCSM']}}"
                                                                                             name="cDoGCSM">
 
                                                                                     </div>
@@ -627,30 +629,30 @@
                                                                             <tr>
                                                                                 <td class="d-flex ">
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap">
                                                                                         TD :
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['TD']}}"
+                                                                                        <input type="text" class="" style="width: 100px;" value="{{$data_asesmen->FJ_DO['TD']}}"
                                                                                             name="cDoTD" max="1120">
                                                                                         mmHg
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap">
                                                                                         Nadi :
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Nadi']}}"
+                                                                                        <input type="text" class="" style="width: 100px;" value="{{$data_asesmen->FJ_DO['Nadi']}}"
                                                                                             name="cDoNadi">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap">
                                                                                         Respirasi :
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Respirasi']}}"
+                                                                                        <input type="text" class="" style="width: 100px;" value="{{$data_asesmen->FJ_DO['Respirasi']}}"
                                                                                             name="cDoRespirasi">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap">
                                                                                         Suhu :
-                                                                                        <input type="text" class="" value="{{$data_asesmen->FJ_DO['Suhu']}}"
+                                                                                        <input type="text" class="" style="width: 100px;" value="{{$data_asesmen->FJ_DO['Suhu']}}"
                                                                                             name="cDoSuhu">
                                                                                         C
                                                                                     </div>
@@ -662,30 +664,30 @@
                                                                              <tr>
                                                                                 <td class="d-flex ">
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap;">
                                                                                         TFU :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" style="width: 100px;"
                                                                                             name="cDoTFU" value="{{$data_asesmen->FJ_DO['TFU']}}">
                                                                                         cm
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap;">
                                                                                         DJJ :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" style="width: 100px;"
                                                                                             name="cDoDJJ" value="{{$data_asesmen->FJ_DO['DJJ']}}">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap;">
                                                                                         His :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" style="width: 100px;"
                                                                                             name="cDoHis" value="{{$data_asesmen->FJ_DO['His']}}">
                                                                                         x/menit
                                                                                     </div>
                                                                                     <div class="m-r-1"
-                                                                                        style="margin-left:30px;">
+                                                                                        style="margin-left:30px;white-space:nowrap;">
                                                                                         TBJ :
-                                                                                        <input type="text" class=""
+                                                                                        <input type="text" class="" style="width: 100px;"
                                                                                             name="cDoTBJ" value="{{$data_asesmen->FJ_DO['TBJ']}}">
                                                                                         gram
                                                                                     </div>

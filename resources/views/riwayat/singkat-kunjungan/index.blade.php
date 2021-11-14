@@ -73,6 +73,10 @@
             padding-top: 20px !important;
         }
 
+         .footer{
+            display: none !important;
+        }
+
     </style>
 
 @endpush
@@ -80,7 +84,6 @@
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
-
 
             <div class="row">
                 <div class="col-lg-12">

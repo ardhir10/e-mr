@@ -1,8 +1,8 @@
- <div class="vertical-menu">
+ <div class="vertical-menu" style="background: #4A4A55">
 
             <!-- LOGO -->
             <div class="navbar-brand-box" style="    box-shadow: -2px 6px 3px rgb(52 58 64 / 8%);">
-                <a href="index.html" class="logo logo-dark">
+                <a href="{{route('dashboard')}}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{asset('assets/')}}/images/logo-solvus-small.jpeg" alt="" height="35">
                     </span>

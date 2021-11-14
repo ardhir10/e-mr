@@ -101,6 +101,9 @@
             padding-top: 20px !important;
         }
 
+        .footer{
+            display: none !important;
+        }
         .case-0::before {
         /* content: "Read this -"; */
         }

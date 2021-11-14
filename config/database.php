@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'migrations' => 'migrations',
+    'migrations' => 'TAR_LARMIGRATIONS',
 
     /*
     |--------------------------------------------------------------------------

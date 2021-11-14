@@ -1,38 +1,41 @@
 @extends('main')
 
+@push('styles')
+    <style>
 
+         .vertical-menu{
+            display: none !important;
+        }
+         .footer{
+            display: none !important;
+        }
+        #page-topbar{
+            display: none;
+            /* margin-left: 0px !important; */
+        }
+        .main-content{
+            margin-left: 0px !important;
+        }
+        .page-content{
+            padding-top: 20px !important;
+        }
+    </style>
+@endpush
 @section('content')
 <div class="page-content">
     <div class="container-fluid">
 
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">E-MR</a></li>
-                            <li class="breadcrumb-item ">Rekam Medis</li>
-                            <li class="breadcrumb-item active">Buat CPPT</li>
-                        <li class="breadcrumb-item active">{{$from}}</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
+
 
         <div class="row">
             <div class="col-lg-12">
-                 <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
--webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
--moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
-                    <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
-                        <h5 class="card-title text-white">{{$page_title}} </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">{{$page_title}}</h5>
                     </div>
-                    <form action="{{route('cppt.store',$rekam_medis->FS_MR)}}" method="POST">
+                    <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">
                         @csrf
-                        <div class="card-body">
+                        <div class="card-body html-content" id="formData">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -90,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="hidden" class="form-control form-control-sm" name="cFrom"
-                                                    value="{{$from}}" readonly>
+                                        value="{{$from}}" readonly>
                                     <table class="w-100">
                                         <tr>
                                             <td class="leftCol">
@@ -98,14 +101,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol">
-                                                    {{-- <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly> --}}
-                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$riwayat_kunjungan[0]->fs_kd_reg}}" readonly>
-
-                                                {{-- @if ($kd_reg != '')
-                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="{{$rekam_medis->FS_KD_REG}}" readonly>
-                                                @else
-                                                    <input type="text" class="form-control form-control-sm" name="cRegister" value="" readonly>
-                                                @endif --}}
+                                                <input type="text" class="form-control form-control-sm"
+                                                    value="{{$rekam_medis->FS_KD_REG}}" name="cRegister" readonly>
                                             </td>
                                         </tr>
                                         <tr>
@@ -115,7 +112,7 @@
                                             </td>
                                             <td class="rightCol">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    value="{{date('d-m-Y',strtotime($riwayat_kunjungan[0]->FD_TGL_MASUK))}} {{$riwayat_kunjungan[0]->FS_JAM_MASUK}}"
+                                                    value="{{date('d-m-Y',strtotime($rekam_medis->FD_TGL_MASUK))}} {{$rekam_medis->FS_JAM_MASUK}}"
                                                     readonly>
                                             </td>
                                         </tr>
@@ -126,9 +123,9 @@
                                             </td>
                                             <td class="rightCol">
                                                 <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
-                                                    value="{{$riwayat_kunjungan[0]->FS_KD_PEG}}" readonly>
+                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
                                                 <input type="text" class="form-control form-control-sm" name="cDpjp"
-                                                    value="{{$riwayat_kunjungan[0]->FS_NM_PEG}}" readonly>
+                                                    value="{{$rekam_medis->FS_NM_PEG}}" readonly>
                                             </td>
                                         </tr>
                                         <tr>
@@ -158,9 +155,11 @@
                                             <td class="rightCol" width="60%">
                                                 <select class="form-select form-select-sm" id="" name="cProfesi">
                                                     <option value="">-- Pilih Profesi</option>
-                                                    <option {{ Auth::user()->fs_kd_peg  != '' ? 'selected=selected' :'' }}
+                                                    <option
+                                                        {{ $CPPT->FS_PROFESI == 'Dokter' ? 'selected=selected' :'' }}
                                                         value="Dokter">Dokter</option>
-                                                    <option {{ Auth::user()->fs_kd_peg  == '' ? 'selected=selected' :'' }}
+                                                    <option
+                                                        {{ $CPPT->FS_PROFESI == 'Perawat' ? 'selected=selected' :'' }}
                                                         value="Perawat">Perawat</option>
                                                 </select>
                                             </td>
@@ -176,7 +175,7 @@
                                                     <option value="">-- Pilih Layanan/Bagian</option>
                                                     @foreach ($layanan_bagian as $lb)
                                                     <option
-                                                        {{$riwayat_kunjungan[0]->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
+                                                        {{$CPPT->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
                                                         value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
                                                     @endforeach
                                                 </select>
@@ -195,7 +194,7 @@
                                                 style="font-weight: 700;font-size: 24px;">S</span>ubjective
                                         </label><span class="text-danger">*</span>:
                                         <textarea name="cSubjective" class="form-control" id="" cols="30"
-                                            rows="3">{{old('cSubjective')}}</textarea>
+                                            rows="3">{{$CPPT->FT_SUBJECTIVE}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +205,7 @@
                                         <label for=""><span style="font-weight: 700;font-size: 24px;">O</span>bjective
                                         </label><span class="text-danger">*</span>:
                                         <textarea name="cObjective" class="form-control" id="" cols="30"
-                                            rows="3">{{old('cObjective')}}</textarea>
+                                            rows="3">{{$CPPT->FT_OBJECTIVE}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +216,7 @@
                                         <label for=""><span style="font-weight: 700;font-size: 24px;">A</span>ssesmen
                                         </label><span class="text-danger">*</span> :
                                         <textarea name="cAssesmen" class="form-control" id="" cols="30"
-                                            rows="3">{{old('cAssesmen')}}</textarea>
+                                            rows="3">{{$CPPT->FT_ASSESMENT}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -240,13 +239,13 @@
                                                         <td style="vertical-align: top">1.</td>
                                                         <td>
                                                             <textarea rows="2" name="cPlan1" type="text"
-                                                                class="form-control form-control-sm">{{old('cPlan1')}}</textarea>
+                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN1}}</textarea>
                                                             <table style="width: 100%">
                                                                 <tr>
                                                                     <td style="vertical-align: top">1.a</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa1a"
-                                                                            value="{{old('cIppa1a')}}"
+                                                                            value="{{$CPPT->FS_IPPA1A}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -254,7 +253,7 @@
                                                                     <td style="vertical-align: top">1.b</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa1b"
-                                                                            value="{{old('cIppa1b')}}"
+                                                                            value="{{$CPPT->FS_IPPA1B}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -262,7 +261,7 @@
                                                                     <td style="vertical-align: top">1.c</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa1c"
-                                                                            value="{{old('cIppa1c')}}"
+                                                                            value="{{$CPPT->FS_IPPA1C}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -273,13 +272,13 @@
                                                         <td style="vertical-align: top">2.</td>
                                                         <td>
                                                             <textarea rows="2" name="cPlan2" type="text"
-                                                                class="form-control form-control-sm">{{old('cPlan2')}}</textarea>
+                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN2}}</textarea>
                                                             <table style="width: 100%">
                                                                 <tr>
                                                                     <td style="vertical-align: top">2.a</td>
                                                                     <td>
                                                                         <input type="text" name="cIpp2a"
-                                                                            value="{{old('cIpp2a')}}"
+                                                                            value="{{$CPPT->FS_IPPA2A}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -287,7 +286,7 @@
                                                                     <td style="vertical-align: top">2.b</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa2b"
-                                                                            value="{{old('cIppa2b')}}"
+                                                                            value="{{$CPPT->FS_IPPA2B}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -295,7 +294,7 @@
                                                                     <td style="vertical-align: top">2.c</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa2c"
-                                                                            value="{{old('cIppa2c')}}"
+                                                                            value="{{$CPPT->FS_IPPA2C}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -306,14 +305,14 @@
                                                         <td style="vertical-align: top">3.</td>
                                                         <td>
                                                             <textarea rows="2" name="cPlan3" type="text"
-                                                                class="form-control form-control-sm">{{old('cPlan3')}}</textarea>
+                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN3}}</textarea>
                                                             <table style="width: 100%">
 
                                                                 <tr>
                                                                     <td style="vertical-align: top">3.a</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa3a"
-                                                                            value="{{old('cIppa3a')}}"
+                                                                            value="{{$CPPT->FS_IPPA3A}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -321,7 +320,7 @@
                                                                     <td style="vertical-align: top">3.b</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa3b"
-                                                                            value="{{old('cIppa3b')}}"
+                                                                            value="{{$CPPT->FS_IPPA3B}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -329,7 +328,7 @@
                                                                     <td style="vertical-align: top">3.c</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa3c"
-                                                                            value="{{old('cIppa3b')}}"
+                                                                            value="{{$CPPT->FS_IPPA3C}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -340,22 +339,22 @@
                                                         <td style="vertical-align: top">4.</td>
                                                         <td>
                                                             <textarea rows="3" name="cPlan4" type="text"
-                                                                class="form-control form-control-sm">{{old('cPlan4')}}</textarea>
-                                                             <table style="width: 100%">
+                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN4}}</textarea>
+                                                            <table style="width: 100%">
 
                                                                 <tr>
                                                                     <td style="vertical-align: top">4.a</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa4a"
-                                                                            value="{{old('cIppa4a')}}"
+                                                                            value="{{$CPPT->FS_IPPA4A}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td style="vertical-align: top">4.b</td>
+                                                                    <td style="vertical-align: top">3.b</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa4b"
-                                                                            value="{{old('cIppa4b')}}"
+                                                                            value="{{$CPPT->FS_IPPA4B}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -363,7 +362,7 @@
                                                                     <td style="vertical-align: top">4.c</td>
                                                                     <td>
                                                                         <input type="text" name="cIppa4c"
-                                                                            value="{{old('cIppa4c')}}"
+                                                                            value="{{$CPPT->FS_IPPA4C}}"
                                                                             class="form-control form-control-sm">
                                                                     </td>
                                                                 </tr>
@@ -379,17 +378,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="margin-top:20px;">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa fa-save"></i>
-                                    SAVE
-                                </button>
 
-                                <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
-                                    <i class="fa fa-arrow-left"></i>
-                                    BACK
-                                </a>
-                            </div>
+
                         </div>
                     </form>
                 </div>
