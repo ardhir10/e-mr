@@ -29,7 +29,13 @@
     <link href="{{asset('/assets')}}/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
     <!-- alertifyjs default themes  Css -->
     <link href="{{asset('/assets')}}/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/assets')}}/libs/flatpickr/flatpickr.min.css" rel="stylesheet">
 
+            <link href="{{asset('/assets')}}/libs/flatpickr/flatpickr.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{asset('/assets')}}/libs/%40simonwep/pickr/themes/classic.min.css"/> <!-- 'classic' theme -->
+        <link rel="stylesheet" href="{{asset('/assets')}}/libs/%40simonwep/pickr/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+        <link rel="stylesheet" href="{{asset('/assets')}}/libs/%40simonwep/pickr/themes/nano.min.css"/> <!-- 'nano' theme -->
     @stack('styles')
     <style>
         .breadcrumb-item+.breadcrumb-item::before {
@@ -145,16 +151,22 @@
     <script src="{{asset('/assets')}}/js/app.js"></script>
     <script src="{{asset('/assets')}}/libs/datatables/jquery.dataTables.min.js"></script>
     <script src="{{asset('/assets')}}/libs/alertifyjs/build/alertify.min.js"></script>
-    <script src="{{asset('assets/js/jspdf.min.js')}}">
-    <script src="{{asset('assets/js/html2canvas.js')}}">
-    <script src="{{asset('assets/js/FileSaver.min.js')}}">
+    <script src="{{asset('assets/js/jspdf.min.js')}}"></script>
+    <script src="{{asset('assets/js/html2canvas.js')}}"></script>
+    <script src="{{asset('assets/js/FileSaver.min.js')}}"></script>
 
-    </script>
+        <script src="{{asset('assets/libs/flatpickr/flatpickr.min.js')}}"></script>
+        <script src="{{asset('assets/js/resize.js')}}"></script>
+
+        <script src="{{asset('/assets')}}/libs/%40simonwep/pickr/pickr.min.js"></script>
+
     @stack('scripts')
     <script>
         $('.ada').val();
 
-
+        flatpickr(".datepicker-basic",{
+            dateFormat: "d-m-Y"
+        });
 
         // --- FUNCTION DELETE
         function confirmDelete(urlDelete){

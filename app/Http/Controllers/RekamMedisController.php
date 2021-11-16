@@ -34,6 +34,7 @@ class RekamMedisController extends Controller
                     break;
                 case 'tgl_lahir':
                     $key = 'fd_tgl_lahir';
+                    $value = date('Y-m-d',strtotime($value));
                     break;
                 default:
                     $isSearcable = false;
@@ -43,6 +44,8 @@ class RekamMedisController extends Controller
                 array_push($parameterSeachQuery,'and '.$key." like '%$value%'");
             }
         }
+
+        // dd($parameterSeachQuery);
         $whereQuery = implode($parameterSeachQuery, ' ') ;
 
         $QUERY = "select TOP 5000 bb.fs_kd_reg,aa.fs_mr, fs_nm_pasien, fd_tgl_lahir, FS_ALM_PASIEN, FS_TLP_PASIEN, FS_HP_PASIEN from tc_mr aa

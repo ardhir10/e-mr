@@ -32,11 +32,11 @@
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Masuk :</label>
-                                <input class="form-control form-control-sm" name="tgl_masuk" type="date" value="{{$request->get('tgl_masuk') ?: date('Y-m-d')}}">
+                                <input class="form-control form-control-sm form-control flatpickr-input datepicker-basic" placeholder="d-m-Y" name="tgl_masuk" type="text" value="{{$request->get('tgl_masuk') ?: date('d-m-Y')}}">
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Sampai Dengan :</label>
-                                <input class="form-control form-control-sm" name="tgl_masuk_sampai" type="date" value="{{$request->get('tgl_masuk_sampai') ?: date('Y-m-d')}}">
+                                <input class="form-control form-control-sm form-control flatpickr-input datepicker-basic" placeholder="d-m-Y" name="tgl_masuk_sampai" type="text" value="{{$request->get('tgl_masuk_sampai') ?: date('d-m-Y')}}">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="">Poliklinik</label>

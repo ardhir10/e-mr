@@ -17,6 +17,9 @@
         text-align: right !important;
     }
 
+    .tableOnprint{
+        border: 1px solid white !important;
+    }
 </style>
 
 @endpush
@@ -33,7 +36,7 @@
                 @include('components.flash-message')
             </div>
             <div class="col-lg-12">
-                <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
+                <div class="card" id="formData" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
 -webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
 -moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
                     <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
@@ -867,7 +870,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <table class="detail-asesmen w-100 table-bordered">
+                                        <table class="detail-asesmen w-100 table-bordered" id="skn" >
                                             <tr>
                                                 <td colspan="2">
                                                     <div class="form-group row">
@@ -882,7 +885,7 @@
                                                 <td width="40%">
                                                     <img src="{{asset('assets/images/nyeri.png')}}" alt="">
                                                 </td>
-                                                <td width="60%" rowspan="2">
+                                                <td width="60%" rowspan="2" style="">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="d-flex">
                                                             Apakah ada nyeri
@@ -1064,7 +1067,7 @@
                             </div><!-- end row -->
 
 
-                            <div style="margin-top:20px;">
+                           <div style="margin-top:20px;" class="hidden-temp">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fa fa-save"></i>
                                     SAVE
@@ -1074,6 +1077,8 @@
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>
+                                <button class="btn  btn-warning" type="button" onclick="PrintDiv('formData')">PRINT PDF </button>
+
                             </div>
                         </div>
                     </form>
@@ -1109,6 +1114,33 @@
     //         $box.prop("checked", false);
     //     }
     // });
+    function PrintDiv(div) {
+        $('.hidden-temp').hide();
+        $('#skn').addClass('tableOnprint');
+        html2canvas(document.querySelector("#" + div)).then(canvas => {
+            var doc = new jsPDF('p', 'mm', 'a3');
+            console.log(doc);
+            var width = doc.internal.pageSize.height;
+            var height = doc.internal.pageSize.width;
+            doc.addImage(canvas.toDataURL(), 'PNG', 5, 5, width - 135, height + 100);
+            doc.save('ASESMEN-PERAWAT.pdf');
+            $('.hidden-temp').show();
+            $('#skn').removeClass('tableOnprint');
+
+
+        });
+    }
+
+    function downloadURI(uri, name) {
+        var link = document.createElement("a");
+
+        link.download = name;
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        //after creating link you should delete dynamic link
+        //clearDynamicLink(link);
+    }
 
 </script>
 @endpush

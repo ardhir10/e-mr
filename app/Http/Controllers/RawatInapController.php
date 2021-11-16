@@ -50,8 +50,8 @@ class RawatInapController extends Controller
             $whereNotHome = "";
         }
 
-        $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
-        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai') : date('Y-m-d');
+        $tglMasuk = $request->get('tgl_masuk') != '' ? date('Y-m-d', strtotime($request->get('tgl_masuk'))) : date('Y-m-d');
+        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  date('Y-m-d', strtotime($request->get('tgl_masuk_sampai'))) : date('Y-m-d');
 
         // --- DEFAULT LIST ADALAH FD_TGL_KELUAR = 3000-01-01
         $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr,
@@ -68,13 +68,11 @@ class RawatInapController extends Controller
         inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
         inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
         inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
-        where	aa.fd_tgl_void = '3000-01-01'
+        where	1=1
+        and aa.fd_tgl_void = '3000-01-01'
         and		ff.FS_KD_INSTALASI_DK in (3) ";
         $QUERY_RAWAT_JALAN .= "
-
-
-        and fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai'
-
+        and	((fd_tgl_masuk between '$tglMasuk' and '$tglMasukSampai') or fd_tgl_keluar = '3000-01-01' )
         $whereStatus
         $whereDokter
         ";
@@ -85,6 +83,9 @@ class RawatInapController extends Controller
 
             ->addColumn('tanggal', function ($qr) {
                 return date('d-m-Y', strtotime($qr->fd_tgl_masuk));
+            })
+            ->addColumn('tanggal_plg', function ($qr) {
+                return date('d-m-Y', strtotime($qr->FD_TGL_KELUAR));
             })
                 ->addColumn('umur', function ($qr) {
                     return $qr->fn_umur . ' Th ' . $qr->fn_umur_bulan . ' Bl';

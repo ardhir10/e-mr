@@ -23,16 +23,16 @@
 
         <div class="row">
             <div class="col-lg-12">
-                 <div class="card" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
+                <div class="card" id="formData" style="box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27);
 -webkit-box-shadow: -7px -1px 20px 0px rgb(0 0 0 / 27%);
 -moz-box-shadow: -7px -1px 29px 5px rgba(0,0,0,0.27); border:0px !important;border-radius: 20px;">
-                    <div class="card-header" style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
-                        <h5 class="card-title text-white">{{$page_title}} </h5>
-                        {{-- <button class="btn btn-sm btn-danger"  onclick="getPDF()">PRINT PDF </button> --}}
+                    <div class="card-header"
+                        style="background: cornflowerblue;border-top-left-radius:20px;border-top-right-radius:20px">
+                        <h5 class="card-title text-white" id="">{{$page_title}} </h5>
                     </div>
                     <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">
                         @csrf
-                        <div class="card-body html-content" id="formData">
+                        <div class="card-body html-content">
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -375,8 +375,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div style="margin-top:20px;">
+                            <div style="margin-top:20px;" class="hidden-temp">
                                 <button type="submit" class="btn btn-success">
                                     <i class="fa fa-save"></i>
                                     SAVE
@@ -386,10 +385,16 @@
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>
+                                <button class="btn  btn-warning" type="button" onclick="PrintDiv('formData')">PRINT PDF </button>
                             </div>
+
                         </div>
+
                     </form>
+
                 </div>
+
+
             </div>
         </div>
 
@@ -402,21 +407,37 @@
 @endsection
 
 @push('scripts')
+{{-- <script src="{{asset('assets/js/jspdf.min.js')}}"></script> --}}
 <script>
     $('#data-table').DataTable({});
 
- function getPDF()  {
-       html2canvas(document.getElementById("formData"),{
-        onrendered:function(canvas){
 
-        var img=canvas.toDataURL("image/png");
-        var doc = new jsPDF('l', 'cm');
-        doc.addImage(img,'PNG',2,2);
-        doc.save('reporte.pdf');
-       }
-    });
-}
 
+
+    function PrintDiv(div) {
+        $('.hidden-temp').hide();
+        html2canvas(document.querySelector("#" + div)).then(canvas => {
+            var doc = new jsPDF('p', 'mm', 'a3');
+            console.log(doc);
+            var width = doc.internal.pageSize.height;
+            var height = doc.internal.pageSize.width;
+            doc.addImage(canvas.toDataURL(), 'PNG', 5, 5, width - 135, height + 50);
+            doc.save('DETAIL-CPPT.pdf');
+            $('.hidden-temp').show();
+
+        });
+    }
+
+    function downloadURI(uri, name) {
+        var link = document.createElement("a");
+
+        link.download = name;
+        link.href = uri;
+        document.body.appendChild(link);
+        link.click();
+        //after creating link you should delete dynamic link
+        //clearDynamicLink(link);
+    }
 
 </script>
 @endpush

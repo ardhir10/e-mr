@@ -446,7 +446,7 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <h6 style="font-style: italic;">RIWAYAT KUNJUNGAN PASIEN</h6>
-                                <div style="" class="style-3 ">
+                                <div style="" class="style-3 table-responsive">
                                 {{-- <div style="max-height: 400px;overflow-y:auto;" class="style-3"> --}}
                                     <form action="" method="post">
                                         @csrf

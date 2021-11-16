@@ -56,8 +56,8 @@
                             </div>
                             <div class="form-group col-lg-2">
                                 <label for="">Tanggal Lahir</label>
-                                <input class="form-control form-control-sm" name="tgl_lahir" type="date"
-                                    value="{{$request->get('tgl_lahir')}}" paceholder="masukkan tanggal lahir">
+                                <input class="form-control form-control-sm form-control flatpickr-input datepicker-basic" name="tgl_lahir" type="text"
+                                    value="{{$request->get('tgl_lahir')}}" pLaceholder="d-m-Y">
                             </div>
                             <div class="mt-2">
                                 <button class="btn btn-sm btn-success">

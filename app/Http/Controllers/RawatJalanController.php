@@ -40,8 +40,10 @@ class RawatJalanController extends Controller
         if($request->get('layanan')){
             $whereLayanan = "and fs_nm_layanan like '%{$request->get('layanan')}%'";
         }
-        $tglMasuk = $request->get('tgl_masuk') != '' ? $request->get('tgl_masuk') : date('Y-m-d');
-        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  $request->get('tgl_masuk_sampai'): date('Y-m-d');
+        $tglMasuk = $request->get('tgl_masuk') != '' ? date('Y-m-d',strtotime($request->get('tgl_masuk'))) : date('Y-m-d');
+        $tglMasukSampai = $request->get('tgl_masuk_sampai') != '' ?  date('Y-m-d',strtotime($request->get('tgl_masuk_sampai'))): date('Y-m-d');
+
+        // dd($tglMasuk,$tglMasukSampai);
         $QUERY_RAWAT_JALAN = "select	aa.fd_tgl_masuk, aa.fs_kd_reg, aa.fs_mr,
 		FS_NM_PASIEN, bb.FB_JNS_KELAMIN,
          DATEDIFF(YYYY, bb.fd_tgl_lahir,aa.fd_tgl_masuk ) fn_umur,

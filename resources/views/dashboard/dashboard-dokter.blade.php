@@ -102,11 +102,11 @@
                                 <form action="">
                                     <div class="d-flex">
                                         <label>Tanggal : &nbsp;</label>
-                                        <input type="date" name="date_from" class="form-control form-control-sm" style="width: auto;"
-                                            value="{{$request->date_from ?? date('Y-m-d')}}">
+                                        <input type="text" name="date_from" class="form-control form-control-sm form-control flatpickr-input datepicker-basic" style="width: auto;"
+                                            value="{{$request->date_from ?? date('d-m-Y')}}">
                                         &nbsp;
-                                        <input type="date" name="date_to" class="form-control form-control-sm" style="width: auto;"
-                                            value="{{$request->date_to ?? date('Y-m-d')}}">
+                                        <input type="text" name="date_to" class="form-control form-control-sm form-control flatpickr-input datepicker-basic" style="width: auto;"
+                                            value="{{$request->date_to ?? date('d-m-Y')}}">
                                         <button class="btn btn-sm btn-primary" style="margin-left: 5px">Filter</button>
                                     </div>
                                 </form>
@@ -124,7 +124,7 @@
                                                     <div class="col-12">
                                                         <h1 class="mt-1 font-weight-bold-flex align-items-center text-card-d2"
                                                             style="">
-                                                            {{ number_format(count($jml_pasien_rj), 0, ',', '.') }}
+                                                            {{ number_format($jml_pasien_rj, 0, ',', '.') }}
                                                         </h1>
                                                           <small style="font-weight: 500;font-style: italic;opacity: 0.5;">Jumlah pasien rawat jalan</small>
                                                     </div>
@@ -236,6 +236,7 @@
 
 
 <script>
+
     getData();
     async function getData() {
         let tahun = $('#chartBulanan').val();
