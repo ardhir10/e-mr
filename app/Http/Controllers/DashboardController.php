@@ -18,8 +18,8 @@ class DashboardController extends Controller
         $kd_dokter = Auth::user()->fs_kd_peg;
 
 
-        $date_from = date('Y-m-d',strtotime($request->date_from)) ?? date('Y-m-d');
-        $date_to = date('Y-m-d',strtotime($request->date_to)) ?? date('Y-m-d');
+        $date_from = date('Y-m-d', strtotime($request->date_from)) ?? date('Y-m-d');
+        $date_to = date('Y-m-d', strtotime($request->date_to)) ?? date('Y-m-d');
 
         $data['request'] = $request;
 
@@ -141,6 +141,7 @@ class DashboardController extends Controller
             ORDER BY Year, Month
         ");
 
+            // dd($data['jml_pasien_rj']);
             $vals = array_column($data['jml_pasien_rj'], 'TotalAmount');
             $data['jml_pasien_rj'] = array_sum($vals);
 
@@ -350,7 +351,7 @@ class DashboardController extends Controller
 
 
         $mL = [
-            1=>'January',
+            1 => 'January',
             2 => 'February',
             3 => 'March',
             4 => 'April',
@@ -370,19 +371,20 @@ class DashboardController extends Controller
         $dataCharts = [];
         $i = 0;
         foreach ($mL as $key => $value) {
-            $m = $months[$i] ?? null;
-            if($m == $key){
+            $valueIn = array_search($key, $months);
+
+            if (in_array($key, $months)) {
                 $dataChart = [
-                    'month'=>$value,
-                    'val' => (float)$vals[$i]
+                    'month' => $value,
+                    'val' => (float)$vals[$valueIn]
                 ];
-            }else{
+            } else {
                 $dataChart = [
                     'month' => $value,
                     'val' => 0
                 ];
             }
-            $dataCharts[]= $dataChart;
+            $dataCharts[] = $dataChart;
             $i++;
         }
 
@@ -434,11 +436,12 @@ class DashboardController extends Controller
         $dataCharts = [];
         $i = 0;
         foreach ($mL as $key => $value) {
-            $m = $months[$i] ?? null;
-            if ($m == $key) {
+            $valueIn = array_search($key, $months);
+
+            if (in_array($key, $months)) {
                 $dataChart = [
                     'month' => $value,
-                    'val' => (float)$vals[$i]
+                    'val' => (float)$vals[$valueIn]
                 ];
             } else {
                 $dataChart = [

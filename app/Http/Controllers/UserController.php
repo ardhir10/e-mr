@@ -77,7 +77,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         // --- BAGIAN VALIDASI
         $messages = [
@@ -118,8 +118,8 @@ class UserController extends Controller
             'email.unique' => 'Email Sudah ada !',
         ];
         $request->validate([
-            'email'                 => 'required|email|unique:users,email,'. $id,
-            'username'              => 'required|unique:users,username,'.$id,
+            'email'                 => 'required|email|unique:TAR_USERS,email,'. $id,
+            'username'              => 'required|unique:TAR_USERS,username,'.$id,
             'name' => 'required',
             'role_id' => 'required',
         ], $messages);

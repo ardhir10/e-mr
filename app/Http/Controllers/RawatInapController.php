@@ -85,7 +85,12 @@ class RawatInapController extends Controller
                 return date('d-m-Y', strtotime($qr->fd_tgl_masuk));
             })
             ->addColumn('tanggal_plg', function ($qr) {
-                return date('d-m-Y', strtotime($qr->FD_TGL_KELUAR));
+                if($qr->FD_TGL_KELUAR != ''){
+                    return date('d-m-Y', strtotime($qr->FD_TGL_KELUAR));
+
+                }else{
+                    return '';
+                }
             })
                 ->addColumn('umur', function ($qr) {
                     return $qr->fn_umur . ' Th ' . $qr->fn_umur_bulan . ' Bl';

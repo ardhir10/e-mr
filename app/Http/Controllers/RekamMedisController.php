@@ -309,7 +309,7 @@ class RekamMedisController extends Controller
 
 
         // --- RIWAYAT KUNJUNGAN
-        $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk, fs_nm_layanan, fs_nm_peg fs_dokter
+        $QUERY_RIWAYAT_KUNJUNGAN = "select	aa.fs_kd_reg, aa.fd_tgl_masuk,fs_jam_masuk, fs_nm_layanan, fs_nm_peg fs_dokter
         from	TA_REGISTRASI aa
         inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
         inner	join TA_LAYANAN cc on aa.FS_KD_LAYANAN = cc.FS_KD_LAYANAN
