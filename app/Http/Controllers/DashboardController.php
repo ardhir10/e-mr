@@ -23,26 +23,18 @@ class DashboardController extends Controller
 
         $data['request'] = $request;
 
-        $data['jml_pasien_rj'] = DB::select("select
-        	DATEPART(Year, aa.fd_tgl_masuk) Year,
-            DATEPART(Month, aa.fd_tgl_masuk) Month,
-            count(aa.fd_tgl_masuk) [TotalAmount]
-            from TA_REGISTRASI aa
-            inner join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
-            inner join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
-            inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
-                where aa.fd_tgl_void = '3000-01-01'
-                and ff.FS_KD_INSTALASI_DK in (1,2,4)
-              and FD_TGL_MASUK >= '$date_from'
-			and FD_TGL_MASUK <= '$date_to'
-            GROUP BY DATEPART(Year, aa.fd_tgl_masuk),
-            DATEPART(Month, aa.fd_tgl_masuk),
-            FS_NM_PEG
-            ORDER BY Year, Month
+        $data['jml_pasien_rj'] = DB::select("select	aa.fs_mr
+        from	TA_REGISTRASI aa
+        inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
+        inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+        where	aa.fd_tgl_void = '3000-01-01'
+        and		fd_tgl_masuk between '$date_from' and '$date_to'
+        and		ff.FS_KD_INSTALASI_DK in (1,2,4)
         ");
-
-        $vals = array_column($data['jml_pasien_rj'], 'TotalAmount');
-        $data['jml_pasien_rj'] = array_sum($vals);
+        $data['jml_pasien_rj'] = count($data['jml_pasien_rj']);
 
 
         $data['jml_pasien_ri'] = DB::select(" select	count(FS_MR)
@@ -56,7 +48,6 @@ class DashboardController extends Controller
 		group by aa.FS_MR
         ");
 
-        // dd(count($data['jml_pasien_rj']));
 
 
         // $data['total_rawat_inap'] = DB::select("
@@ -144,6 +135,21 @@ class DashboardController extends Controller
             // dd($data['jml_pasien_rj']);
             $vals = array_column($data['jml_pasien_rj'], 'TotalAmount');
             $data['jml_pasien_rj'] = array_sum($vals);
+
+
+            $data['jml_pasien_ri'] = DB::select(" select fs_mr
+                from	TA_REGISTRASI aa
+                inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+                inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+                inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+
+                where	aa.fd_tgl_void = '3000-01-01'
+                and		ff.FS_KD_INSTALASI_DK in (3)
+                and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
+
+                and FS_KD_PEG = '$kd_dokter'
+
+            ");
 
             $kd_dokter = Auth::user()->fs_kd_peg;
             $data['jml_blm_verif'] = DB::select("		select

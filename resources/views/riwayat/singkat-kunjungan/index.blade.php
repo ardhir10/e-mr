@@ -145,9 +145,9 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$rs->fs_kd_reg}}</td>
-                                        <td>{{date('d-m-Y',strtotime($rs->fd_tgl_masuk))}}</td>
+                                        <td>{{$rs->fd_tgl_masuk == '' ? '' : date('d-m-Y',strtotime($rs->fd_tgl_masuk))}}</td>
                                         <td>{{$rs->fs_jam_masuk}}</td>
-                                        <td>{{date('d-m-Y',strtotime($rs->fd_tgl_keluar))}}</td>
+                                        <td>{{$rs->fd_tgl_keluar == '' ? '' : date('d-m-Y',strtotime($rs->fd_tgl_keluar))}}</td>
                                         <td>{{$rs->fs_nm_layanan}}</td>
                                         <td>{{$rs->fs_nm_peg}}</td>
                                         <td>{{$rs->fs_kd_diagnosa}}</td>
