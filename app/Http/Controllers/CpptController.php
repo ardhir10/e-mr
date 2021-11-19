@@ -218,6 +218,8 @@ class CpptController extends Controller
         $nomorMr = $data['CPPT'][0]->FS_MR;
         $kdRegister = $data['CPPT'][0]->FS_REGISTER;
 
+        $data['id']= $id;
+
         $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
         aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
         cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
@@ -294,10 +296,11 @@ class CpptController extends Controller
 
 
         $data['CPPT'] = $data['CPPT'][0];
-        // $pdf = PDF::loadView('cppt.pdf', $data);
-        $pdf = PDF::loadView('cppt.pdf', $data)->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('cppt.pdf', $data)->setOptions(['isRemoteEnabled' => true]);
 
-        return $pdf->stream('invoice.pdf');
+
+
+        return $pdf->stream('cppt.pdf');
         return view('cppt.pdf', $data);
     }
 

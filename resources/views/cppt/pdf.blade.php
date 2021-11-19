@@ -1,402 +1,269 @@
-@extends('main')
-
-@push('styles')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{$page_title}}</title>
     <style>
+        body{
+            background: white !important;
+        }
 
-         .vertical-menu{
-            display: none !important;
-        }
-         .footer{
-            display: none !important;
-        }
-        #page-topbar{
-            display: none;
-            /* margin-left: 0px !important; */
-        }
-        .main-content{
-            margin-left: 0px !important;
-        }
-        .page-content{
-            padding-top: 20px !important;
-        }
     </style>
-@endpush
-@section('content')
-<div class="page-content">
-    <div class="container-fluid">
+</head>
+<body style="font-family:sans-serif ;">
+    <div class="">
+        <div>
+            <img src="{{asset('assets/images/logo-solvus.jpeg')}}" alt="" width="100" class="auth-logo-light">
+        </div>
+        <hr>
+        {{-- HEADER --}}
+        <table style="font-size:12px; width:100%">
+            <tr>
+                <td style="width: 50%">
+                    <table>
+                        <tr>
+                            <td>
+                                <span style="width: 100px;">Nomor MR</span>
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FS_MR}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Nama Pasien
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FS_NM_PASIEN}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tanggal Lahir
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FD_TGL_LAHIR}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jenis Kelamin
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FB_JNS_KELAMIN == 0 ? 'LAKI - LAKI':'PEREMPUAN'}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                Register
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FS_KD_REG}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tanggal Jam Masuk
+                            </td>
+                            <td>
+                                : {{date('d-m-Y',strtotime($rekam_medis->FD_TGL_MASUK))}} {{$rekam_medis->FS_JAM_MASUK}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Dokter DPJP
+                            </td>
+                            <td>
+                                : {{$rekam_medis->FS_NM_PEG}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jaminan/ Cara Bayar
+                            </td>
+                            <td>
+                                : {{$rekam_medis->fs_nm_jaminan}}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <hr>
 
+        {{-- PROFESI/LAYANAN --}}
+        <table style="font-size:12px; width:100%;">
+            <tr>
+                <td style="width: 50%">
+                    <table>
+                        <tr>
+                            <td><span style="width: 110px;">Profesi </span></td>
+                            <td> : Dokter</td>
+                        </tr>
 
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">{{$page_title}}</h5>
-                    </div>
-                    <form action="{{route('cppt.update',$CPPT->FN_ID)}}" method="POST">
-                        @csrf
-                        <div class="card-body html-content" id="formData">
-                            @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    </table>
+                </td>
+                <td style="width: 50%">
+                    <table><tr>
+                            <td><span style="width: 120px;">Layanan / Bagian</span></td>
+                            @foreach ($layanan_bagian as $lb)
+                            @if ($CPPT->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN)
+                                <td> : {{$lb->FS_NM_LAYANAN}}</td>
                             @endif
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <table class=" w-100">
-                                        <tr>
-                                            <td class="leftCol" width="40%">
-                                                <label for="">Nomor MR</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol" width="60%">
-                                                <input type="text" class="form-control form-control-sm" name="cNomorMR"
-                                                    value="{{$rekam_medis->FS_MR}}" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol" width="40%">
-                                                <label for="">Nama Pasien</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol" width="60%">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FS_NM_PASIEN}}" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol" width="40%">
-                                                <label for="">Tanggal Lahir</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol" width="60%">
-                                                <input type="date" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FD_TGL_LAHIR}}" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol" width="40%">
-                                                <label for="">Jenis Kelamin</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol" width="60%">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FB_JNS_KELAMIN == 0 ? 'LAKI - LAKI':'PEREMPUAN'}}"
-                                                    readonly>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="hidden" class="form-control form-control-sm" name="cFrom"
-                                        value="{{$from}}" readonly>
-                                    <table class="w-100">
-                                        <tr>
-                                            <td class="leftCol">
-                                                <label for="">Register</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FS_KD_REG}}" name="cRegister" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol">
-                                                <label for="">Tanggal Jam Masuk</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{date('d-m-Y',strtotime($rekam_medis->FD_TGL_MASUK))}} {{$rekam_medis->FS_JAM_MASUK}}"
-                                                    readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol">
-                                                <label for="">Dokter DPJP</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol">
-                                                <input type="hidden" class="form-control form-control-sm" name="cKdpeg"
-                                                    value="{{$rekam_medis->FS_KD_PEG}}" readonly>
-                                                <input type="text" class="form-control form-control-sm" name="cDpjp"
-                                                    value="{{$rekam_medis->FS_NM_PEG}}" readonly>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol">
-                                                <label for="">Jaminan/ Cara Bayar</label>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->fs_nm_jaminan}}" readonly>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
+                            @endforeach
+                        </tr></table>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        {{-- SOAP --}}
+        <div style="width:100%">
+            <span style="font-size: 14px;display:block;font-weight:bold;">Subjective</span>
+            <span style="font-size: 12px;">
+                <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;min-height:30px;" readonly>{{$CPPT->FT_SUBJECTIVE}}</textarea>
+            </span>
+        </div>
 
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <table class=" w-100">
-                                        <tr>
-                                            <td class="leftCol" width="40%">
-                                                <label for="">Profesi</label>
-                                                <span class="text-danger">*</span>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol" width="60%">
-                                                <select class="form-select form-select-sm" id="" name="cProfesi">
-                                                    <option value="">-- Pilih Profesi</option>
-                                                    <option
-                                                        {{ $CPPT->FS_PROFESI == 'Dokter' ? 'selected=selected' :'' }}
-                                                        value="Dokter">Dokter</option>
-                                                    <option
-                                                        {{ $CPPT->FS_PROFESI == 'Perawat' ? 'selected=selected' :'' }}
-                                                        value="Perawat">Perawat</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="leftCol">
-                                                <label for="">Layanan / Bagian</label>
-                                                <span class="text-danger">*</span>
-                                                <span style="float:right;" class="float-right">:&nbsp;</span>
-                                            </td>
-                                            <td class="rightCol">
-                                                <select class="form-select form-select-sm" id="" name="cLayanan">
-                                                    <option value="">-- Pilih Layanan/Bagian</option>
-                                                    @foreach ($layanan_bagian as $lb)
-                                                    <option
-                                                        {{$CPPT->FS_KD_LAYANAN == $lb->FS_KD_LAYANAN ? 'selected=selected' :'' }}
-                                                        value="{{$lb->FS_KD_LAYANAN}}">{{$lb->FS_NM_LAYANAN}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        </tr>
+        <div style="width:100%">
+            <span style="font-size: 14px;display:block;font-weight:bold;">Objective</span>
+            <span style="font-size: 12px;">
+                <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;min-height:30px;" readonly>{{$CPPT->FT_OBJECTIVE}}</textarea>
+            </span>
+        </div>
 
-                                    </table>
+        <div style="width:100%">
+            <span style="font-size: 14px;display:block;font-weight:bold;">Assesmen</span>
+            <span style="font-size: 12px;">
+                <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;min-height:30px;" readonly>{{$CPPT->FT_ASSESMENT}}</textarea>
+            </span>
+        </div>
 
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for="" style=""><span
-                                                style="font-weight: 700;font-size: 24px;">S</span>ubjective
-                                        </label><span class="text-danger">*</span>:
-                                        <textarea name="cSubjective" class="form-control" id="" cols="30"
-                                            rows="3">{{$CPPT->FT_SUBJECTIVE}}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for=""><span style="font-weight: 700;font-size: 24px;">O</span>bjective
-                                        </label><span class="text-danger">*</span>:
-                                        <textarea name="cObjective" class="form-control" id="" cols="30"
-                                            rows="3">{{$CPPT->FT_OBJECTIVE}}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for=""><span style="font-weight: 700;font-size: 24px;">A</span>ssesmen
-                                        </label><span class="text-danger">*</span> :
-                                        <textarea name="cAssesmen" class="form-control" id="" cols="30"
-                                            rows="3">{{$CPPT->FT_ASSESMENT}}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <label for=""><span
-                                                        style="font-weight: 700;font-size: 24px;">P</span>lan :</label>
-                                                <br>
-                                                <label for="" style="">
-                                                    <span class=""
-                                                        style="font-size:22px;font-weight:400;">I</span>nstruksi PPA
-                                                    (Termasuk Pasca Bedah)</label>
+        <div style="width:100%">
+            <span style="font-size: 14px;display:block;font-weight:bold;">Plan :</span>
+            <span style="font-size: 14px;display:block;">Instruksi PPA (Termasuk Pasca Bedah)</span>
+            <div style="width: 100%;font-size: 12px;">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="vertical-align:top">1.</td>
+                        <td>
+                            <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;display:block;min-height:30px;" readonly>{{$CPPT->FS_PLAN1}} </textarea>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td width="50px">1.a</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA1A}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">1.b</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA1B}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">1.c</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA1C}}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
-                                                <table class=" w-100">
-                                                    <tr>
-                                                        <td style="vertical-align: top">1.</td>
-                                                        <td>
-                                                            <textarea rows="2" name="cPlan1" type="text"
-                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN1}}</textarea>
-                                                            <table style="width: 100%">
-                                                                <tr>
-                                                                    <td style="vertical-align: top">1.a</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa1a"
-                                                                            value="{{$CPPT->FS_IPPA1A}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">1.b</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa1b"
-                                                                            value="{{$CPPT->FS_IPPA1B}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">1.c</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa1c"
-                                                                            value="{{$CPPT->FS_IPPA1C}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="vertical-align: top">2.</td>
-                                                        <td>
-                                                            <textarea rows="2" name="cPlan2" type="text"
-                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN2}}</textarea>
-                                                            <table style="width: 100%">
-                                                                <tr>
-                                                                    <td style="vertical-align: top">2.a</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIpp2a"
-                                                                            value="{{$CPPT->FS_IPPA2A}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">2.b</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa2b"
-                                                                            value="{{$CPPT->FS_IPPA2B}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">2.c</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa2c"
-                                                                            value="{{$CPPT->FS_IPPA2C}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="vertical-align: top">3.</td>
-                                                        <td>
-                                                            <textarea rows="2" name="cPlan3" type="text"
-                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN3}}</textarea>
-                                                            <table style="width: 100%">
-
-                                                                <tr>
-                                                                    <td style="vertical-align: top">3.a</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa3a"
-                                                                            value="{{$CPPT->FS_IPPA3A}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">3.b</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa3b"
-                                                                            value="{{$CPPT->FS_IPPA3B}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">3.c</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa3c"
-                                                                            value="{{$CPPT->FS_IPPA3C}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="vertical-align: top">4.</td>
-                                                        <td>
-                                                            <textarea rows="3" name="cPlan4" type="text"
-                                                                class="form-control form-control-sm">{{$CPPT->FS_PLAN4}}</textarea>
-                                                            <table style="width: 100%">
-
-                                                                <tr>
-                                                                    <td style="vertical-align: top">4.a</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa4a"
-                                                                            value="{{$CPPT->FS_IPPA4A}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">3.b</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa4b"
-                                                                            value="{{$CPPT->FS_IPPA4B}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="vertical-align: top">4.c</td>
-                                                                    <td>
-                                                                        <input type="text" name="cIppa4c"
-                                                                            value="{{$CPPT->FS_IPPA4C}}"
-                                                                            class="form-control form-control-sm">
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-
-                                            </div>
+                    <tr>
+                        <td style="vertical-align:top">2.</td>
+                        <td>
+                            <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;display:block;min-height:30px;" readonly>{{$CPPT->FS_PLAN2}} </textarea>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td width="50px">2.a</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA2A}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">2.b</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA2B}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">2.c</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA2C}}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                     <tr>
+                        <td style="vertical-align:top">3.</td>
+                        <td>
+                            <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;display:block;min-height:30px;" readonly>{{$CPPT->FS_PLAN3}} </textarea>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td width="50px">3.a</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA3A}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">3.b</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA3B}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">3.c</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA3C}}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
 
-
-                        </div>
-                    </form>
-                </div>
+                     <tr>
+                        <td style="vertical-align:top">4.</td>
+                        <td>
+                            <textarea style="width: 100% ;font-family:sans-serif;padding:5px;border-radius:5px;height:auto;display:block;min-height:30px;" readonly>{{$CPPT->FS_PLAN4}} </textarea>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td width="50px">4.a</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA4A}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">4.b</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA4B}}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50px">4.c</td>
+                                    <td>
+                                        <input type="text" readonly style="border-radius:5px;width:100%;" value="{{$CPPT->FS_IPPA4C}}">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
 
+    </div>
 
-        <!-- end row -->
 
-    </div> <!-- container-fluid -->
-</div>
-@endsection
-
-@push('scripts')
-<script>
-    $('#data-table').DataTable({});
-
-</script>
-@endpush
+</body>
+</html>
