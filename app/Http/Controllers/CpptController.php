@@ -200,7 +200,7 @@ class CpptController extends Controller
 
         try {
             DB::table('TAR_CPPT')->where('FN_ID',$id)->update($parameterInsert);
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil diupdate !','hl'=> 'cppt'.$id]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data CPPT berhasil diupdate !','hl'=> 'cppt'.$id]);
 
         } catch (\Throwable $th) {
             return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
@@ -293,7 +293,7 @@ class CpptController extends Controller
         order	by FS_NM_INSTALASI desc";
         $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
 
-
+        $data['rumah_sakit'] = DB::select("select	fs_nm_rs, fs_alm_rs, fs_tlp_rs , FS_FAX_RS from	t_parameter");
 
         $data['CPPT'] = $data['CPPT'][0];
         $pdf = PDF::loadView('cppt.pdf', $data)->setOptions(['isRemoteEnabled' => true]);

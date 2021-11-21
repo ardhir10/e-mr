@@ -9,13 +9,18 @@
         body{
             background: white !important;
         }
+        @page { margin: 20px; }
 
     </style>
 </head>
 <body style="font-family:sans-serif ;">
     <div class="">
-        <div>
-            <img src="{{asset('assets/images/logo-solvus.jpeg')}}" alt="" width="100" class="auth-logo-light">
+       <div style="font-size:14px;">
+            <span style="float: right;font-weight:bolder;">FORM CPPT</span>
+            <span style="display: block;font-weight:bold;font-size:16px;">{{$rumah_sakit[0]->fs_nm_rs ?? ''}}</span>
+            <span style="display:block;font-size:14px;">{{$rumah_sakit[0]->fs_alm_rs ?? ''}}</span>
+            Tlp : {{$rumah_sakit[0]->fs_tlp_rs ?? ''}}
+            {{-- <img src="{{asset('assets/images/logo-solvus.jpeg')}}" alt="" width="100" class="auth-logo-light"> --}}
         </div>
         <hr>
         {{-- HEADER --}}

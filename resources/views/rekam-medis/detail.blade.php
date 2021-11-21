@@ -172,17 +172,30 @@
                                                 aria-labelledby="dropdownMenuButton2" data-popper-placement="top-start"
                                                 style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                 <li>
-
-                                                    <a class="dropdown-item" onclick="openNew(`{{route('riwayat.laboratorium.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Laboratorium</a></li>
+                                                    @if (count($cek_riwayat_lab))
+                                                        <a class="dropdown-item" onclick="openNew(`{{route('riwayat.laboratorium.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Laboratorium</a></li>
+                                                    @else
+                                                        <a class="dropdown-item bg-danger" style="cursor: not-allowed;" >Riwayat Laboratorium</a></li>
+                                                    @endif
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" onclick="openNew(`{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Radiologi</a></li>
+                                                    @if (count($cek_riwayat_radiologi))
+                                                        <a class="dropdown-item" onclick="openNew(`{{route('riwayat.radiologi.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Radiologi</a></li>
+                                                    @else
+                                                        <a class="dropdown-item bg-danger" style="cursor: not-allowed;"  >Riwayat Radiologi</a></li>
+                                                    @endif
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" onclick="openNew(`{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}`)"  >Riwayat Resep</a></li>
+                                                <li>
+                                                    @if (count($cek_riwayat_resep_dokter))
+                                                        <a class="dropdown-item" onclick="openNew(`{{route('riwayat.resep-dokter.index',['mr'=>$rekam_medis->FS_MR])}}`)"  >Riwayat Resep</a>
+                                                    @else
+                                                        <a class="dropdown-item bg-danger" style="cursor: not-allowed;">Riwayat Resep</a>
+                                                    @endif
+                                                </li>
 
                                                 {{-- <li>
                                                     <hr class="dropdown-divider">
@@ -198,7 +211,13 @@
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" onclick="openNew(`{{route('riwayat.singkat-kunjungan.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Singkat Kunjungan</a></li>
+                                                <li>
+                                                    @if (count($cek_riwayat_singkat))
+                                                        <a class="dropdown-item" onclick="openNew(`{{route('riwayat.singkat-kunjungan.index',['mr'=>$rekam_medis->FS_MR])}}`)" >Riwayat Singkat Kunjungan</a>
+                                                    @else
+                                                        <a class="dropdown-item bg-danger" style="cursor: not-allowed;" >Riwayat Singkat Kunjungan</a>
+                                                    @endif
+                                                </li>
                                             </ul>
                                         </div>
                                         <img src="{{asset('assets/images/no_avatar.png')}}" width="100%" height="auto"
@@ -445,7 +464,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-lg-3">
-                                <h6 style="font-style: italic;">RIWAYAT KUNJUNGAN PASIEN</h6>
+                                <h6 style="font-style: italic;font-weight:bold;margin-bottom:15px;">RIWAYAT KUNJUNGAN PASIEN</h6>
                                 <div style="" class="style-3 table-responsive">
                                 {{-- <div style="max-height: 400px;overflow-y:auto;" class="style-3"> --}}
                                     <form action="" method="post">
@@ -454,17 +473,21 @@
                                             style="border-collapse: collapse;width: 100%;" id="data-table2">
                                             <thead>
                                                 <tr style="">
+                                                    <th></th>
                                                     <th>Tanggal</th>
                                                     <th>Bagian /
                                                         Layanan</th>
                                                     <th>Dokter</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 @foreach ($riwayat_kunjungan as $rk)
                                                 <tr>
+                                                     <td style="padding:2px ;">
+                                                        <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]" checked>
+                                                        {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
+                                                    </td>
                                                     <td style="padding:2px ;">
                                                         {{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}
                                                         {{$rk->fs_jam_masuk}}
@@ -476,10 +499,7 @@
                                                         {{$rk->fs_dokter}}
 
                                                     </td>
-                                                    <td style="padding:2px ;">
-                                                        <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]" checked>
-                                                        {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
-                                                    </td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -491,7 +511,8 @@
 
                             </div>
                             <div class="col-lg-9">
-                                <h6 style="font-style: italic;">CATATAN PERKEMBANGAN PASIEN TERINTEGRASI</h6>
+                                <span style="font-weight:bold;font-style: italic;">CATATAN PERKEMBANGAN PASIEN TERINTEGRASI </span>
+                                    <div id="buttons" style="float:right;margin-bottom:3px;"></div>
                                 <table class="cell-border table-catatan-perkembangan " id="data-table">
                                     <thead>
                                         <tr>
@@ -815,8 +836,72 @@
 @endsection
 
 @push('scripts')
+
+
+<script src="{{asset('assets/js/dt-pdf/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/libs/datatable-downloads/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/js/dt-pdf/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/js/dt-pdf/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/js/dt-pdf/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/libs/datatable-downloads/jszip.min.js')}}"></script>
 <script>
-    $('#data-table').DataTable({});
+
+    var table = $('#data-table').DataTable();
+    var buttons = new $.fn.dataTable.Buttons(table, {
+        buttons: [
+        //     {
+        //     extend: 'pdfHtml5',
+        //     download: 'open',
+        //     title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+        //     orientation: 'landscape',
+        //     pageSize: 'LEGAL',
+        //     className: 'btn btn-danger btn-sm btn-corner',
+        //     text: '<i class="fas fa-file-pdf"></i>&nbsp; PDF',
+        //     titleAttr: 'Download as PDF',
+        //     customize: function(doc) {
+        //         doc.styles.tableBodyEven.alignment = 'left';
+        //         doc.styles.tableBodyOdd.alignment = 'left';
+        //     },
+        // },
+        {
+            extend: 'print',
+            download: 'open',
+            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+            orientation: 'landscape',
+            pageSize: 'LEGAL',
+            className: 'btn btn-danger btn-sm btn-corner',
+            text: '<i class="fas fa-file-pdf"></i>&nbsp; PRINT / PDF',
+            titleAttr: 'Print/Download as PDF',
+        },
+        {
+            extend: 'excelHtml5',
+            text: '<i class="fas fa-file-excel"></i>&nbsp; EXCEL',
+            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+            className: 'btn btn-success btn-sm btn-corner',
+            titleAttr: 'Download as Excel'
+        }, {
+            extend: 'csv',
+            text: '<i class="fas fa-file-csv"></i>&nbsp; CSV',
+            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+            className: 'btn btn-info btn-sm btn-corner',
+            titleAttr: 'Download as Csv'
+        } ],
+    }).container().appendTo($('#buttons'));
+
+
+
+
+    // $('#data-table').DataTable({
+    //     dom: 'Bfrtip',
+    //     buttons: [
+    //          'csv', 'excel',  {
+    //             extend: 'pdfHtml5',
+    //             download: 'open',
+    //             orientation: 'landscape',
+    //             pageSize: 'LEGAL'
+    //         }, 'print'
+    //     ]
+    // } );
     $('#data-table2').DataTable({
         "bPaginate": false,
         "bLengthChange": false,

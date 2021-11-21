@@ -508,8 +508,7 @@
                                                                                     class="align-top">
                                                                                     Hepatitis</span> &nbsp;:
                                                                             </div>
-                                                                            Lainnya&nbsp; <input type="text" name="cRkuRpkLainnya" value="{{$data_asesmen->FJ_RPK['Lainnya']}}
-">
+                                                                            Lainnya&nbsp; <input type="text" name="cRkuRpkLainnya" value="{{$data_asesmen->FJ_RPK['Lainnya']}}">
                                                                         </div>
                                                                     </li>
 
@@ -1077,8 +1076,7 @@
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>
-                                <button class="btn  btn-warning" type="button" onclick="PrintDiv('formData')">PRINT PDF </button>
-
+                                <a target="_blank" class="btn  btn-warning" href="{{route('asesmen-perawat.pdf',[$from,$id])}}">PRINT PDF</a>
                             </div>
                         </div>
                     </form>

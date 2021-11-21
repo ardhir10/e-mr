@@ -317,14 +317,69 @@ class RekamMedisController extends Controller
         where	bb.fs_mr = '$nomorMr'
         and		aa.fd_tgl_void = '3000-01-01'
         order	by aa.FD_TGL_MASUK desc, aa.fs_jam_masuk desc, FS_NM_LAYANAN";
-
         $data['riwayat_kunjungan'] = DB::select($QUERY_RIWAYAT_KUNJUNGAN);
-        // dd($data['riwayat_kunjungan']);
-
-
         $data['page_title'] = "Rekam Medis Pasien";
-
         $data['rekam_medis'] = $dataRekamMedis;
+
+
+        // ---- CEK RIWAYAT
+        $data['cek_riwayat_lab'] = DB::select(" select  aa.fs_kd_hasil, fs_nm_pasien, aa.fs_kd_reg, bb.fs_mr,
+            cc.fb_jns_kelamin, cc.fd_tgl_lahir, fs_dokter_pengirim, fs_nm_peg,
+            fd_tgl_sample , fs_jam_sample, fb_hasil_lis , fs_kd_trs_tindakan
+            from    ta_trs_tindakan_hasil_lab aa
+            inner   join ta_registrasi bb on aa.fs_kd_reg = bb.fs_kd_reg
+            inner   join tc_mr cc on bb.fs_mr = cc.fs_mr
+            inner   join td_peg dd on aa.fs_kd_petugas_medis = dd.fs_kd_peg
+            inner   join ta_trs_tindakan ee on aa.fs_kd_trs_tindakan = ee.fs_kd_trs
+            where cc.fs_mr = '$nomorMr'
+            order by fd_tgl_sample desc
+            ");
+        $data['cek_riwayat_radiologi'] = DB::select("select  aa.fs_kd_hasil, aa.FS_JAM_HASIL ,aa.fd_tgl_hasil, fs_nm_pasien, aa.fs_kd_reg, bb.fs_mr,
+            fs_dokter_pengirim, fs_nm_tarif, fs_nm_peg fs_nm_dokter_pemeriksa,
+            cc.fd_tgl_lahir , cc.fb_jns_kelamin , aa.fs_ket , hh.FS_NO_FILM,
+            fs_nm_jaminan, fs_nm_kelas,aa.FS_KD_TRS_TINDAKAN
+            from    ta_trs_tindakan_hasil_ro aa
+            inner   join ta_registrasi bb on aa.fs_kd_reg = bb.fs_kd_reg
+            inner   join tc_mr cc on bb.fs_mr = cc.fs_mr
+            inner   join td_peg dd on aa.fs_kd_petugas_medis = dd.fs_kd_peg
+            inner   join ta_tarif ee on aa.fs_kd_tarif = ee.fs_kd_tarif
+            inner   join ta_jaminan ff on bb.fs_kd_jaminan = ff.fs_kd_jaminan
+            inner   join ta_kelas gg on bb.fs_kd_kelas = gg.fs_kd_kelas
+            inner   join ta_trs_tindakan_hasil_ro2 hh on aa.fs_kd_hasil= hh.fs_kd_hasil
+            where cc.fs_mr = '$nomorMr'
+            order by fd_tgl_hasil desc
+            ");
+
+        $riwayatResepDokter = DB::select(" select  aa.fs_kd_resep, fd_tgl_resep,
+            fs_nm_peg , fs_nm_layanan,fs_nm_pasien
+            from    tb_trs_resep_header aa
+            inner   join ta_registrasi bb on aa.fs_kd_reg = bb.fs_kd_reg
+            inner   join td_peg cc on aa.fs_kd_medis = cc.fs_kd_peg
+            inner   join ta_layanan dd on aa.fs_kd_layanan_resep = dd.fs_kd_layanan
+            where   aa.fd_tgl_void = '3000-01-01'
+            and bb.fs_mr = '$nomorMr'
+            order   by fd_tgl_resep desc ");
+            $data['cek_riwayat_resep_dokter'] = $riwayatResepDokter;
+
+        $riwayatSingkat = DB::select("select aa.fs_kd_reg, ee.FS_NM_PASIEN, ee.FS_MR,fd_tgl_masuk, left(fs_jam_masuk,5) fs_jam_masuk ,
+            fd_tgl_keluar = case fd_tgl_keluar
+            when '3000-01-01' then ''
+            Else fd_tgl_keluar
+            end,
+            fs_nm_layanan, fs_nm_peg, isnull(fs_kd_diagnosa,'')fs_kd_diagnosa
+            from ta_registrasi aa
+            inner join ta_layanan bb on aa.fs_kd_layanan_akhir = bb.fs_kd_layanan
+            left join tc_mr2 cc on aa.fs_kd_reg = cc.fs_kd_reg
+            and fb_utama = 1
+            inner join td_peg dd on aa.fs_kd_medis = dd.fs_kd_peg
+            inner join tc_mr ee on aa.fs_mr= ee.FS_MR
+            where aa.fs_mr = '$nomorMr'
+
+            and aa.fd_tgl_void = '3000-01-01'
+            order by fd_tgl_masuk desc, fs_jam_masuk desc");
+
+            $data['cek_riwayat_singkat'] = $riwayatSingkat;
+
         return view('rekam-medis.detail', $data);
     }
 

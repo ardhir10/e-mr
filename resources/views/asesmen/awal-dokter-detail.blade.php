@@ -604,9 +604,9 @@
 
                                 <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-danger">
                                     <i class="fa fa-arrow-left"></i>
-                                    BACK
+                                    BACK {{$from}}
                                 </a>
-                                <button class="btn  btn-warning" type="button" onclick="PrintDiv('formData')">PRINT PDF </button>
+                                <a target="_blank" class="btn  btn-warning" href="{{route('asesmen-dokter.pdf',[$from,$id])}}">PRINT PDF</a>
 
                             </div>
                         </div>

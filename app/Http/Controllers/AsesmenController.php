@@ -6,6 +6,7 @@ use App\AsesmenPerawat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 class AsesmenController extends Controller
 {
     public function awalPerawat($from,$type,$nomorMr,$kdDokter = '', $kdReg=''){
@@ -267,6 +268,7 @@ class AsesmenController extends Controller
         $data['page_title'] = "Detail Asesmen Perawat";
         $data['type'] = $type;
         $data['from'] = $type;
+        $data['id'] = $id;
 
 
         $dataAsesmenPerawat = AsesmenPerawat::find($id);
@@ -569,6 +571,62 @@ class AsesmenController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with(['failed' => $th->getMessage()]);
         }
+    }
+
+    public function pdf($from, $id)
+    {
+        $data['page_title'] = "Detail Catatan SOAP";
+        $data['from'] = $from;
+
+
+        $dataAsesmenPerawat = AsesmenPerawat::find($id);
+        $data['data_asesmen'] = $dataAsesmenPerawat;
+
+        // --- DETAIL HEADER
+        $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
+        aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
+        from
+        tc_mr aa
+        inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
+        inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
+        inner	join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+
+        where aa.FS_MR = '$dataAsesmenPerawat->FS_MR'";
+        if ($dataAsesmenPerawat->FS_KD_PEG != '') {
+            $QUERY .= "and dd.FS_KD_PEG = '$dataAsesmenPerawat->FS_KD_PEG'";
+        }
+        if ($dataAsesmenPerawat->FS_REGISTER != '') {
+            $QUERY .= "and cc.FS_KD_REG = '$dataAsesmenPerawat->FS_REGISTER'";
+        }
+
+        $QUERY .= 'ORDER BY cc.FS_KD_REG desc';
+        $dataRekamMedis = DB::select($QUERY);
+        if (count($dataRekamMedis) < 1) {
+            $dataRekamMedis = [];
+        } else {
+            $dataRekamMedis = $dataRekamMedis[0];
+        }
+        // dd($dataAsesmenPerawat);
+
+        $data['rekam_medis'] = $dataRekamMedis;
+
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
+
+
+        $data['rumah_sakit'] = DB::select("select	fs_nm_rs, fs_alm_rs, fs_tlp_rs , FS_FAX_RS from	t_parameter");
+
+        $pdf = PDF::loadView('asesmen.awal-perawat-pdf', $data)->setOptions(['isRemoteEnabled' => true]);
+
+
+
+        return $pdf->stream('asesmen.awal-perawat-pdf');
     }
 
 

@@ -6,7 +6,7 @@ use App\AsesmenDokterBidan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use PDF;
 class AsesmenBidanController extends Controller
 {
     public function create($from, $type, $nomorMr, $kdDokter = '', $kdReg = '')
@@ -328,6 +328,7 @@ class AsesmenBidanController extends Controller
         $data['page_title'] = "Detail Asesmen Dokter ";
         $data['type'] = $type;
         $data['from'] = $type;
+        $data['id'] = $id;
 
 
         $dataAsesmen = AsesmenDokterBidan::find($id);
@@ -422,5 +423,74 @@ class AsesmenBidanController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with(['failed' => $th->getMessage()]);
         }
+    }
+
+    public function pdfPrint($from, $id)
+    {
+        $data['page_title'] = "Detail Catatan SOAP";
+        $data['from'] = $from;
+
+
+        $data['page_title'] = "Detail Asesmen Dokter ";
+        $data['type'] = $from;
+        $data['from'] = $from;
+        $data['id'] = $id;
+
+
+        $dataAsesmen = AsesmenDokterBidan::find($id);
+        $data['data_asesmen'] = $dataAsesmen;
+        // --- DETAIL HEADER
+        $QUERY = "select aa.FS_MR,aa.FS_NM_PASIEN,aa.FD_TGL_LAHIR,
+        aa.FB_JNS_KELAMIN,bb.fs_nm_agama,cc.FS_KD_REG,cc.FD_TGL_MASUK,
+        cc.FS_JAM_MASUK,dd.FS_NM_PEG,fs_nm_jaminan,dd.FS_KD_PEG
+        from
+        tc_mr aa
+        inner join TA_AGAMA bb on aa.FS_KD_AGAMA = bb.fs_kd_agama
+        inner join TA_REGISTRASI cc on aa.FS_MR = cc.FS_MR
+        inner join TD_PEG dd on cc.FS_KD_MEDIS = dd.FS_KD_PEG
+        inner join ta_jaminan ee on cc.fs_kd_jaminan = ee.fs_kd_jaminan
+
+
+        where aa.FS_MR = '$dataAsesmen->FS_MR'";
+        if ($dataAsesmen->FS_KD_PEG != '') {
+            $QUERY .= "and dd.FS_KD_PEG = '$dataAsesmen->FS_KD_PEG'";
+        }
+        if ($dataAsesmen->FS_REGISTER != '') {
+            $QUERY .= "and cc.FS_KD_REG = '$dataAsesmen->FS_REGISTER'";
+        }
+
+        $QUERY .= 'ORDER BY cc.FS_KD_REG desc';
+        $dataRekamMedis = DB::select($QUERY);
+        if (count($dataRekamMedis) < 1) {
+            $dataRekamMedis = [];
+        } else {
+            $dataRekamMedis = $dataRekamMedis[0];
+        }
+        // dd($dataAsesmen);
+
+        $data['rekam_medis'] = $dataRekamMedis;
+
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
+
+        $QUERY_LAYANAN = "select	aa.FS_KD_LAYANAN, FS_NM_LAYANAN, FS_NM_INSTALASI
+        from	TA_LAYANAN aa
+        inner	join TA_INSTALASI bb on aa.fs_kd_instalasi = bb.FS_KD_INSTALASI
+        where	1=1
+        order	by FS_NM_INSTALASI desc";
+        $data['layanan_bagian'] = DB::select($QUERY_LAYANAN);
+
+
+        $data['rumah_sakit'] = DB::select("select	fs_nm_rs, fs_alm_rs, fs_tlp_rs , FS_FAX_RS from	t_parameter");
+
+        $pdf = PDF::loadView('asesmen.awal-dokter-bidan-pdf', $data)->setOptions(['isRemoteEnabled' => true]);
+
+
+
+        return $pdf->stream('asesmen.awal-dokter-bidan.pdf');
     }
 }

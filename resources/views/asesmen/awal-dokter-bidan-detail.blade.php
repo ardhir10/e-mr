@@ -817,7 +817,7 @@
                                     <i class="fa fa-arrow-left"></i>
                                     BACK
                                 </a>
-                                <button class="btn  btn-warning" type="button" onclick="PrintDiv('formData')">PRINT PDF </button>
+                                <a target="_blank" class="btn  btn-warning" href="{{route('asesmen-dokter-bidan.pdf',[$from,$id])}}">PRINT PDF</a>
 
                             </div>
                         </div>

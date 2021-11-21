@@ -114,6 +114,7 @@ Route::post('/asesmen/awal-dewasa/perawat', 'AsesmenController@store')->name('as
 Route::post('/asesmen/awal-dewasa/perawat/{id}/update', 'AsesmenController@update')->name('asesmen-awal-perawat.update');
 Route::get('/asesmen/awal-dewasa/verified/{id}', 'AsesmenController@verified')->name('asesmen-perawat.verified');
 Route::get('/asesmen/awal-dewasa/unverified/{id}', 'AsesmenController@unverified')->name('asesmen-perawat.unverified');
+Route::get('/asesmen/awal-dewasa/pdf/{from}/{id}', 'AsesmenController@pdf')->name('asesmen-perawat.pdf');
 
 
 // --- ASESMEN DOKTER
@@ -123,6 +124,7 @@ Route::get('/asesmen/awal-dewasa/dokter-detail/{type}/{id}', 'AsesmenDokterContr
 Route::get('/asesmen/awal-dewasa/dokter/verified/{id}', 'AsesmenDokterController@verified')->name('asesmen-dokter.verified');
 Route::get('/asesmen/awal-dewasa/dokter/unverified/{id}', 'AsesmenDokterController@unverified')->name('asesmen-dokter.unverified');
 Route::post('/asesmen/awal-dewasa/dokter/{id}/update', 'AsesmenDokterController@update')->name('asesmen-awal-dokter.update');
+Route::get('/asesmen/awal-dewasa/dokter-pdf/{from}/{id}', 'AsesmenDokterController@pdfPrint')->name('asesmen-dokter.pdf');
 
 
 // --- ASESMEN BIDAN
@@ -132,6 +134,7 @@ Route::get('/asesmen/awal-dewasa/dokter-bidan-detail/{type}/{id}', 'AsesmenBidan
 Route::get('/asesmen/awal-dewasa/dokter-bidan/verified/{id}', 'AsesmenBidanController@verified')->name('asesmen-dokter-bidan.verified');
 Route::get('/asesmen/awal-dewasa/dokter-bidan/unverified/{id}', 'AsesmenBidanController@unverified')->name('asesmen-dokter-bidan.unverified');
 Route::post('/asesmen/awal-dewasa/dokter-bidan/{id}/update', 'AsesmenBidanController@update')->name('asesmen-awal-dokter-bidan.update');
+Route::get('/asesmen/awal-dewasa/dokter-bidan/-pdf/{from}/{id}', 'AsesmenBidanController@pdfPrint')->name('asesmen-dokter-bidan.pdf');
 
 Route::get('/geticd', 'AsesmenDokterController@getIcd')->name('');
 
