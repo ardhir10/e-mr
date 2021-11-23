@@ -845,7 +845,12 @@
 <script src="{{asset('assets/js/dt-pdf/vfs_fonts.js')}}"></script>
 <script src="{{asset('assets/libs/datatable-downloads/jszip.min.js')}}"></script>
 <script>
+    var mr = @json($rekam_medis->FS_MR);
+    var namaPasien = @json(preg_replace('/[^a-zA-Z0-9_.]/', '_', $rekam_medis->FS_NM_PASIEN));
 
+    var rsName = @json($rumah_sakit[0]->fs_nm_rs);
+    var almRs = @json($rumah_sakit[0]->fs_alm_rs);
+    var tlpRs = @json($rumah_sakit[0]->fs_tlp_rs);
     var table = $('#data-table').DataTable();
     var buttons = new $.fn.dataTable.Buttons(table, {
         buttons: [
@@ -866,26 +871,23 @@
         {
             extend: 'print',
             download: 'open',
-            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+            title: mr+'_'+namaPasien+'_CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
             orientation: 'landscape',
             pageSize: 'LEGAL',
             className: 'btn btn-danger btn-sm btn-corner',
             text: '<i class="fas fa-file-pdf"></i>&nbsp; PRINT / PDF',
             titleAttr: 'Print/Download as PDF',
+            messageTop: rsName +','+almRs+','+tlpRs
         },
         {
             extend: 'excelHtml5',
             text: '<i class="fas fa-file-excel"></i>&nbsp; EXCEL',
-            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
+            title: mr+'_'+namaPasien+'_CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
             className: 'btn btn-success btn-sm btn-corner',
-            titleAttr: 'Download as Excel'
-        }, {
-            extend: 'csv',
-            text: '<i class="fas fa-file-csv"></i>&nbsp; CSV',
-            title: 'CATATAN PERKEMBANGAN PASIEN TERINTEGRASI',
-            className: 'btn btn-info btn-sm btn-corner',
-            titleAttr: 'Download as Csv'
-        } ],
+            titleAttr: 'Download as Excel',
+            messageTop: rsName +','+almRs+','+tlpRs ,
+
+        }],
     }).container().appendTo($('#buttons'));
 
 

@@ -380,6 +380,8 @@ class RekamMedisController extends Controller
 
             $data['cek_riwayat_singkat'] = $riwayatSingkat;
 
+        $data['rumah_sakit'] = DB::select("select	fs_nm_rs, fs_alm_rs, fs_tlp_rs , FS_FAX_RS from	t_parameter");
+
         return view('rekam-medis.detail', $data);
     }
 
