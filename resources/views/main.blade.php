@@ -102,10 +102,10 @@
             @yield('content')
             <!-- End Page-content -->
 
-            <footer class="footer" style="left: 210px;">
+            <footer class="footer" style="left: 210px;background: white">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-sm-12 text-center " style="font-weight: bold;" >
                             <img src="{{asset('/assets')}}/images/logo-solvus.jpeg" height="20" alt="">
                             <script>document.write(new Date().getFullYear())</script> &copy; SKT ALL RIGHT RESERVED 	&copy;
                         </div>
