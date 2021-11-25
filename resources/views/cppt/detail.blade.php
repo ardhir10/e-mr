@@ -71,8 +71,8 @@
                                                 <span style="float:right;" class="float-right">:&nbsp;</span>
                                             </td>
                                             <td class="rightCol" width="60%">
-                                                <input type="date" class="form-control form-control-sm"
-                                                    value="{{$rekam_medis->FD_TGL_LAHIR}}" readonly>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    value="{{date('d-m-Y',strtotime($rekam_medis->FD_TGL_LAHIR))}}" readonly>
                                             </td>
                                         </tr>
                                         <tr>

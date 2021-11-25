@@ -513,7 +513,7 @@
                             <div class="col-lg-9">
                                 <span style="font-weight:bold;font-style: italic;">CATATAN PERKEMBANGAN PASIEN TERINTEGRASI </span>
                                     <div id="buttons" style="float:right;margin-bottom:3px;">
-                                    <a class="btn btn-sm btn-danger" target="_blank" href="{{route('rekam-medis.detail.pdf',['rekammedis',$rekam_medis->FS_MR])}}"><i class="fas fa-file-pdf"></i> PDF</a>
+                                    <a class="btn btn-sm btn-danger" target="_blank" href="{{route('rekam-medis.detail.pdf',['rekammedis',$rekam_medis->FS_MR])}}"><i class="fas fa-file-pdf"></i>  Cetak Rekam Medis Pasien</a>
                                     {{-- <a class="btn btn-sm btn-success" href="{{route('rekam-medis.detail.excel',['rekammedis',$rekam_medis->FS_MR])}}">EXCEL</a> --}}
                                 </div>
                                 <table class="cell-border table-catatan-perkembangan " id="data-table">
