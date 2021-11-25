@@ -8,7 +8,7 @@
     <title>Solvus | E- MR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('/assets')}}/images/logo-solvus-small.jpeg">
+    <link rel="shortcut icon" href="{{asset('/assets')}}/images/iconsolvus.png">
 
     <!-- plugin css -->
     <link href="{{asset('/assets')}}/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
@@ -105,14 +105,15 @@
             <footer class="footer" style="left: 210px;">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <script>document.write(new Date().getFullYear())</script> &copy; SKT
+                        <div class="col-sm-12 text-center">
+                            <img src="{{asset('/assets')}}/images/iconsolvus.png" height="20" alt="">
+                            <script>document.write(new Date().getFullYear())</script> &copy; SKT ALL RIGHT RESERVED 	&copy;
                         </div>
-                        <div class="col-sm-6">
+                        {{-- <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
                                 Copyright by Solvus
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </footer>
