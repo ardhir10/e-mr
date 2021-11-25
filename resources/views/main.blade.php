@@ -106,7 +106,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12 text-center">
-                            <img src="{{asset('/assets')}}/images/iconsolvus.png" height="20" alt="">
+                            <img src="{{asset('/assets')}}/images/logo-solvus.jpeg" height="20" alt="">
                             <script>document.write(new Date().getFullYear())</script> &copy; SKT ALL RIGHT RESERVED 	&copy;
                         </div>
                         {{-- <div class="col-sm-6">
