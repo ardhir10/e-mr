@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
     Route::post('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detailFiltered')->name('rekam-medis.detail');
 
+    Route::get('/rawat-medis/pdf/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@pdfPrint')->name('rekam-medis.detail.pdf');
+    Route::get('/rawat-medis/excel/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@exportExcel')->name('rekam-medis.detail.excel');
+
+
     Route::get('/rawat-jalan', 'RawatJalanController@index')->name('rawat-jalan.index');
     Route::get('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.index');
     Route::post('/rawat-inap', 'RawatInapController@index')->name('rawat-inap.post');

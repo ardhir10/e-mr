@@ -245,6 +245,18 @@ class DashboardController extends Controller
 
 
 
+            // $data['jml_pasien_ri'] = DB::select("select aa.fd_tgl_masuk,
+            //     FD_TGL_KELUAR = case FD_TGL_KELUAR when '3000-01-01' then ''
+            //     else FD_TGL_KELUAR end from TA_REGISTRASI aa
+            //     inner join tc_mr bb on aa.fs_mr = bb.fs_mr
+            //     inner join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+            //     inner join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
+            //     inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+            //     inner join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+            //     where aa.fd_tgl_void = '3000-01-01' and ff.FS_KD_INSTALASI_DK in (3)
+            //     and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
+            //     and FD_TGL_KELUAR = '3000-01-01'
+            //     ");
             $data['jml_pasien_ri'] = DB::select("select aa.fd_tgl_masuk,
                 FD_TGL_KELUAR = case FD_TGL_KELUAR when '3000-01-01' then ''
                 else FD_TGL_KELUAR end from TA_REGISTRASI aa
@@ -253,11 +265,25 @@ class DashboardController extends Controller
                 inner join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
                 inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
                 inner join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
-                where aa.fd_tgl_void = '3000-01-01' and ff.FS_KD_INSTALASI_DK in (3)
-                and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
-                and FD_TGL_KELUAR = '3000-01-01'
+                where  ff.FS_KD_INSTALASI_DK in (3)
+                and fd_tgl_void = '3000-01-01'
+                and 	fs_kd_jenis_inap <> ''
+                and 	fd_tgl_masuk between '$date_from' and '$date_to'
+
                 ");
 
+            // $data['jml_pasien_terkini'] = DB::select("
+            // select aa.fd_tgl_masuk,
+            //     FD_TGL_KELUAR = case FD_TGL_KELUAR when '3000-01-01' then ''
+            //     else FD_TGL_KELUAR end from TA_REGISTRASI aa
+            //     inner join tc_mr bb on aa.fs_mr = bb.fs_mr
+            //     inner join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+            //     inner join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
+            //     inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+            //     inner join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+            //     where aa.fd_tgl_void = '3000-01-01' and ff.FS_KD_INSTALASI_DK in (3)
+            //   and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
+            // ");
             $data['jml_pasien_terkini'] = DB::select("
             select aa.fd_tgl_masuk,
                 FD_TGL_KELUAR = case FD_TGL_KELUAR when '3000-01-01' then ''
@@ -267,8 +293,10 @@ class DashboardController extends Controller
                 inner join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
                 inner join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
                 inner join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
-                where aa.fd_tgl_void = '3000-01-01' and ff.FS_KD_INSTALASI_DK in (3)
-              and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
+                where ff.FS_KD_INSTALASI_DK in (3)
+                and     fd_tgl_void = '3000-01-01'
+                and 	fs_kd_jenis_inap <> ''
+                and 	fd_tgl_keluar = '3000-01-01'
             ");
 
 
