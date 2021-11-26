@@ -85,7 +85,7 @@
                                 Tanggal Lahir
                             </td>
                             <td>
-                                : {{$rekam_medis->FD_TGL_LAHIR}}
+                                :  {{date('d-m-Y',strtotime($rekam_medis->FD_TGL_LAHIR))}}
                             </td>
                         </tr>
                         <tr>

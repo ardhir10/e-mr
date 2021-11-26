@@ -220,6 +220,36 @@
 
         </div>
 
+        <div class="row">
+            <div class="col-xl-12 col-sm-12">
+                <!-- Card -->
+                <div class="card animate__animated animate__fadeInUpBig" style="border-radius: 23px;">
+                    <div class="card-header">
+                        <span class="fw-bold font-size-xs card-title text-uppercase">Grafik Bulanan Pasian Rawat Inap</span>
+                        <select id="chartBulananRawatInap" class="form-seelct form-control-sm" onchange="getDataRi()"
+                            style=" float: right;width: auto;" name="year">
+                            {{ $last= date('Y')-120 }}
+                            {{ $now = date('Y') }}
+                            @for ($i = $now; $i >= $last; $i--)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select>
+                        <span class="badge bg-info d-none" id="getDataLoadingRi"
+                            style=" float: right; margin-right: 15px;">Processing ...</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div id="" class="" style="padding:20px;height: 450px;width:100%;border-radius:30px">
+                                <div class="dashboard-statistic" id="dashboard-statistic-ri" style="height: 100%"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
     </div>
@@ -248,6 +278,20 @@
         });
         $('#getDataLoading').addClass('d-none');
         generateChart(data.data);
+        console.log(data);
+    }
+
+    getDataRi();
+    async function getDataRi() {
+        let tahun = $('#chartBulananRawatInap').val();
+        $('#getDataLoadingRi').removeClass('d-none');
+        let data = await axios.post("{{route('api.dashboard-rawat-inap-dokter')}}", {
+            // DR018
+            "kodeDokter": "{{Auth::user()->fs_kd_peg}}",
+            "tahun": tahun
+        });
+        $('#getDataLoadingRi').addClass('d-none');
+        generateChartRi(data.data);
         console.log(data);
     }
 
@@ -329,6 +373,84 @@
         option && myChart.setOption(option);
             resizeChart('dashboard-statistic');
 
+    }
+
+    function generateChartRi(data) {
+        var barColors = [
+            ['rgba(176,196,222, 0.3)', 'rgba(176,196,222, 1)'],
+            ['rgba(220,20,60, 0.3)', 'rgba(220,20,60, 1)'],
+            ['rgba(189,183,107, 0.3)', 'rgba(189,183,107, 1)'],
+            ['rgba(47,79,79, 0.3)', 'rgba(47,79,79, 1)'],
+            ['rgba(30,144,255, 0.3)', 'rgba(30,144,255, 1)'],
+            ['rgba(112,128,144, 0.3)', 'rgba(112,128,144, 1)'],
+        ];
+        var chartDom = document.getElementById('dashboard-statistic-ri');
+        var myChart = echarts.init(chartDom);
+        var option;
+        var graphic = echarts.graphic;
+
+        option = {
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: data['months']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+
+            series: [{
+
+                label: {
+                    show: true,
+                    position: "inside",
+                    distance: 6.5,
+                    offset: [0, 2],
+                    color: "#ffffff",
+                    fontWeight: "normal",
+                    backgroundColor: "#267EDC",
+                    // borderColor: "rgba(0, 255, 55, 1)",
+                    // borderWidth: 1.5,
+                    // borderDashOffset: 5,
+                    borderType: "solid",
+                    padding: [3, 3, 3, 3]
+                },
+                data: data['vals'],
+                type: 'bar',
+                itemStyle: {
+                    color: '#267EDC'
+                },
+                areaStyle: {
+                    color: new graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#A2D0FF'
+                        },
+                        {
+                            offset: 1,
+                            color: '#D9EEFF'
+                        }
+                    ]),
+                }
+            }]
+        };
+
+        option && myChart.setOption(option);
+        resizeChart('dashboard-statistic-ri');
     }
 
 </script>

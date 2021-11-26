@@ -439,4 +439,139 @@ class DashboardController extends Controller
         $data['vals'] = array_column($dataCharts, 'val');
         return json_encode($data);
     }
+
+    public function chartGraphicDokterRi(Request $request)
+    {
+        $dataRawatJalanDokter = DB::select("
+        select	DATEPART(Year, aa.fd_tgl_masuk) Year, DATEPART(Month, aa.fd_tgl_masuk) Month,
+		count(aa.fd_tgl_masuk) [TotalAmount]
+        from	TA_REGISTRASI aa
+         inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
+        inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+        where	aa.fd_tgl_void = '3000-01-01'
+        and ee.fs_kd_peg = '$request->kodeDokter'
+        and		ff.FS_KD_INSTALASI_DK in (3)
+		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk)
+		ORDER BY Year, Month");
+
+        $dataRawatJalanDokter = array_map(function ($value) {
+            return (array)$value;
+        }, $dataRawatJalanDokter);
+
+
+        $mL = [
+            1 => 'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December'
+        ];
+
+        $months = array_column($dataRawatJalanDokter, 'Month');
+        $vals = array_column($dataRawatJalanDokter, 'TotalAmount');
+
+        $dataCharts = [];
+        $i = 0;
+        foreach ($mL as $key => $value) {
+            $valueIn = array_search($key, $months);
+
+            if (in_array($key, $months)) {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => (float)$vals[$valueIn]
+                ];
+            } else {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => 0
+                ];
+            }
+            $dataCharts[] = $dataChart;
+            $i++;
+        }
+
+
+
+        $data['months'] = array_column($dataCharts, 'month');
+        $data['vals'] = array_column($dataCharts, 'val');
+        return json_encode($data);
+    }
+
+    public function chartGraphicNonDokterRi(Request $request)
+    {
+        $dataRawatJalanDokter = DB::select("
+        select	DATEPART(Year, aa.fd_tgl_masuk) Year, DATEPART(Month, aa.fd_tgl_masuk) Month,
+		count(aa.fd_tgl_masuk) [TotalAmount]
+        from	TA_REGISTRASI aa
+         inner	join tc_mr bb on aa.fs_mr = bb.fs_mr
+        inner	join TA_LAYANAN cc on aa.fs_kd_layanan = cc.fs_kd_layanan
+        inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
+        inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
+        inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
+        where	aa.fd_tgl_void = '3000-01-01'
+        and		ff.FS_KD_INSTALASI_DK in (3)
+		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk)
+		ORDER BY Year, Month");
+
+        $dataRawatJalanDokter = array_map(function ($value) {
+            return (array)$value;
+        }, $dataRawatJalanDokter);
+
+
+        $mL = [
+            1 => 'January',
+            2 => 'February',
+            3 => 'March',
+            4 => 'April',
+            5 => 'May',
+            6 => 'June',
+            7 => 'July',
+            8 => 'August',
+            9 => 'September',
+            10 => 'October',
+            11 => 'November',
+            12 => 'December'
+        ];
+
+        $months = array_column($dataRawatJalanDokter, 'Month');
+        $vals = array_column($dataRawatJalanDokter, 'TotalAmount');
+
+        $dataCharts = [];
+        $i = 0;
+        foreach ($mL as $key => $value) {
+            $valueIn = array_search($key, $months);
+
+            if (in_array($key, $months)) {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => (float)$vals[$valueIn]
+                ];
+            } else {
+                $dataChart = [
+                    'month' => $value,
+                    'val' => 0
+                ];
+            }
+            $dataCharts[] = $dataChart;
+            $i++;
+        }
+
+
+
+        $data['months'] = array_column($dataCharts, 'month');
+        $data['vals'] = array_column($dataCharts, 'val');
+        return json_encode($data);
+    }
 }

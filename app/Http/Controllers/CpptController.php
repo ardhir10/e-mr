@@ -215,8 +215,8 @@ class CpptController extends Controller
 
         $QUERY_CPPT = "select * from TAR_CPPT where FN_ID = '$id' order by FN_ID desc";
         $data['CPPT'] = DB::select($QUERY_CPPT);
-        $nomorMr = $data['CPPT'][0]->FS_MR;
-        $kdRegister = $data['CPPT'][0]->FS_REGISTER;
+        $nomorMr = $data['CPPT'][0]->FS_MR ?? '';
+        $kdRegister = $data['CPPT'][0]->FS_REGISTER ?? '';
 
         $data['id']= $id;
 
@@ -250,7 +250,7 @@ class CpptController extends Controller
 
 
 
-        $data['CPPT'] = $data['CPPT'][0];
+        $data['CPPT'] = $data['CPPT'][0] ?? '';
         return view('cppt.detail', $data);
     }
 

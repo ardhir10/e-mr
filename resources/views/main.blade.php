@@ -101,7 +101,6 @@
         <div class="main-content" >
             @yield('content')
             <!-- End Page-content -->
-
             <footer class="footer" style="left: 210px;background: white">
                 <div class="container-fluid">
                     <div class="row">
