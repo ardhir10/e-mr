@@ -451,12 +451,13 @@ class DashboardController extends Controller
         inner	join ta_jaminan dd on aa.fs_kd_jaminan = dd.fs_kd_jaminan
         inner	join td_peg ee on aa.fs_kd_medis = ee.fs_kd_peg
         inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
-        where	aa.fd_tgl_void = '3000-01-01'
-        and ee.fs_kd_peg = '$request->kodeDokter'
+         where	1=1
+        and aa.fd_tgl_void = '3000-01-01'
         and		ff.FS_KD_INSTALASI_DK in (3)
-		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+		and ((DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun')  or fd_tgl_keluar = '3000-01-01' )
 		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk)
 		ORDER BY Year, Month");
+
 
         $dataRawatJalanDokter = array_map(function ($value) {
             return (array)$value;
@@ -521,7 +522,7 @@ class DashboardController extends Controller
         inner	join TA_INSTALASI ff on cc.FS_KD_INSTALASI = ff.FS_KD_INSTALASI
         where	aa.fd_tgl_void = '3000-01-01'
         and		ff.FS_KD_INSTALASI_DK in (3)
-		and DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun'
+	and ((DATEPART(Year, aa.fd_tgl_masuk) = '$request->tahun')  or fd_tgl_keluar = '3000-01-01' )
 		GROUP BY DATEPART(Year, aa.fd_tgl_masuk), DATEPART(Month, aa.fd_tgl_masuk)
 		ORDER BY Year, Month");
 
