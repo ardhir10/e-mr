@@ -58,7 +58,6 @@ class DashboardController extends Controller
                 and		ff.FS_KD_INSTALASI_DK in (3)
                 and	((fd_tgl_masuk between '$date_from' and '$date_to') or fd_tgl_keluar = '3000-01-01' )
 
-                and FS_KD_PEG = '$kd_dokter'
 
             ");
 

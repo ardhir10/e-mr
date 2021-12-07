@@ -872,6 +872,35 @@ class RekamMedisController extends Controller
         return Excel::download(new MrExport($from, $nomorMr, $kdDokter, $kdReg), 'invoices.xlsx');
     }
 
+    public function delete(Request $request){
+        $type = $request->type;
+        $fn_id = $request->id;
+        try {
+            switch ($type) {
+                case 'cppt':
+                    DB::table('TAR_CPPT')->where('FN_ID', $fn_id)->delete();
+                    break;
+                case 'asesmen':
+                    DB::table('TAR_ASESMEN_PERAWAT')->where('FN_ID', $fn_id)->delete();
+                    break;
+                case 'asesmen_dokter':
+                    DB::table('TAR_ASESMEN_DOKTER')->where('FN_ID', $fn_id)->delete();
+                    break;
+                case 'asesmen_dokter_bidan':
+                    DB::table('TAR_ASESMEN_DOKTER_BIDAN')->where('FN_ID', $fn_id)->delete();
+                    break;
+                default:
+                    break;
+            }
+
+            return redirect()->back()->with(['success' => 'Data Berhasil di hapus !']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['failed' => 'Data gagal hapus !']);
+        }
+
+
+    }
+
 
 
 }

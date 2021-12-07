@@ -806,9 +806,11 @@
                                                 @else
                                                     @if ($cppt->FS_VERIFIED_BY)
                                                         <span class="d-block">{{$cppt->FS_DPJP}}</span>
-
                                                     @else
                                                         <p style="font-size: 9.2px;    white-space: normal !important;" class="badge bg-danger">Not Allowed</p>
+                                                        <button class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete" onclick="return confirmDelete('{{route('mr.delete',['type'=>$cppt->TB_FROM,'id'=>$cppt->FN_ID])}}')">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
                                                     @endif
                                                 @endif
 

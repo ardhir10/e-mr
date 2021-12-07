@@ -143,3 +143,7 @@ Route::get('/asesmen/awal-dewasa/dokter-bidan/-pdf/{from}/{id}', 'AsesmenBidanCo
 Route::get('/geticd', 'AsesmenDokterController@getIcd')->name('');
 
 
+// -- DELETE
+Route::get('/mr/delete','RekamMedisController@delete')->name('mr.delete');
+
+
