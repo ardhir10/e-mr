@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 @endif
-                <form action="{{ route('register') }}" method="post">
+                <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
                     @csrf
                    <div class="form-group">
                         <label for=""><strong>Nama Lengkap</strong></label>
@@ -72,6 +72,12 @@
                             @endforeach
                         </select>
                     </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="">Upload Profil</label>
+                        <input type="file" name="avatar" class="form-control-sm">
+                    </div>
+
                     <div class="mt-2">
                         <button class="btn btn-sm btn-success">
                             <i class="fa fa-save"></i>

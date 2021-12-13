@@ -10,8 +10,16 @@ use Yajra\DataTables\DataTables;
 use PDF;
 class AsesmenDokterController extends Controller
 {
-    public function create($from, $type, $nomorMr, $kdDokter = '', $kdReg = '')
+    public function create($from, $type, $nomorMr, $kdReg = '')
     {
+        $cariKdDokter = "select * from TA_REGISTRASI where fs_kd_reg = '$kdReg'";
+        $dt = DB::select($cariKdDokter);
+
+        if ($dt) {
+            $kdDokter = $dt[0]->FS_KD_MEDIS;
+        } else {
+            $kdDokter = '';
+        }
         $data['page_title'] = "Asesmen Awal Dokter";
         $data['kd_reg'] = $kdReg;
         $data['from'] = $from;
@@ -157,10 +165,10 @@ class AsesmenDokterController extends Controller
         try {
             AsesmenDokter::create($parameterInsert);
 
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil dibuat !']);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil dibuat !']);
         } catch (\Throwable $th) {
             dd($th);
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['failed' => $th->getMessage()]);
         }
 
 
@@ -341,10 +349,10 @@ class AsesmenDokterController extends Controller
         try {
             AsesmenDokter::where('FN_ID', $id)->update($parameterInsert);
 
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil diupdate !']);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['success' => 'Data Asesmen Dokter berhasil diupdate !']);
         } catch (\Throwable $th) {
             dd($th);
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['failed' => $th->getMessage()]);
         }
 
 

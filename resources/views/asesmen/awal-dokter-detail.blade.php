@@ -607,7 +607,11 @@
                                     BACK {{$from}}
                                 </a>
                                 <a target="_blank" class="btn  btn-warning" href="{{route('asesmen-dokter.pdf',[$from,$id])}}">PRINT PDF</a>
-
+                                @if (!$data_asesmen->FS_VERIFIED_BY)
+                                    <button class="btn  btn-danger" type="button" data-toggle="tooltip" title="Delete" onclick="return confirmDelete('{{route('mr.delete',['type'=>'asesmen_dokter','id'=>$data_asesmen->FN_ID,'cFrom'=>$from,'cNomorMR'=>$rekam_medis->FS_MR,'cRegister'=>$rekam_medis->FS_KD_REG])}}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </form>

@@ -355,14 +355,14 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">DOKTER</a>
+                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Dewasa',$rekam_medis->FS_MR,$kd_reg])}}">DOKTER</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -391,14 +391,14 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Anak',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Anak',$rekam_medis->FS_MR,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Anak',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">DOKTER</a>
+                                                            href="{{route('asesmen.awal-dewasa.dokter',[$from,'Anak',$rekam_medis->FS_MR,$kd_reg])}}">DOKTER</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -426,14 +426,14 @@
                                                     style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(3px, -34px);">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Kebidanan',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">PERAWAT</a>
+                                                            href="{{route('asesmen.awal-dewasa.perawat',[$from,'Kebidanan',$rekam_medis->FS_MR,$kd_reg])}}">PERAWAT</a>
                                                     </li>
                                                     <li>
                                                         <hr class="dropdown-divider">
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
-                                                            href="{{route('asesmen.awal-bidan.dokter',[$from,'Kebidanan',$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}">DOKTER</a>
+                                                            href="{{route('asesmen.awal-bidan.dokter',[$from,'Kebidanan',$rekam_medis->FS_MR,$kd_reg])}}">DOKTER</a>
 
                                                     </li>
                                                 </ul>
@@ -451,7 +451,7 @@
                                     </div>
                                     <div class="card-body" style="padding:10px">
                                         <div class="" style="">
-                                            <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_dokter,$kd_reg])}}"
+                                            <a href="{{route('cppt.create',[$from,$rekam_medis->FS_MR,$kd_reg])}}"
                                             class="btn btn-success form-control ">
                                             <i data-feather="folder-plus"></i>
                                             Tambah CPPT</a>
@@ -808,9 +808,7 @@
                                                         <span class="d-block">{{$cppt->FS_DPJP}}</span>
                                                     @else
                                                         <p style="font-size: 9.2px;    white-space: normal !important;" class="badge bg-danger">Not Allowed</p>
-                                                        <button class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete" onclick="return confirmDelete('{{route('mr.delete',['type'=>$cppt->TB_FROM,'id'=>$cppt->FN_ID])}}')">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
+
                                                     @endif
                                                 @endif
 

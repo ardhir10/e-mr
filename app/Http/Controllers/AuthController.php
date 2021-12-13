@@ -71,8 +71,8 @@ class AuthController extends Controller
     {
         $rules = [
             'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email|unique:users,email',
-            'username'              => 'required|unique:users,username',
+            'email'                 => 'required|email|unique:TAR_USERS,email',
+            'username'              => 'required|unique:TAR_USERS,username',
             'password'              => 'required|confirmed',
             'role_id'              => 'required'
         ];
@@ -89,6 +89,8 @@ class AuthController extends Controller
             'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
         ];
 
+
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
@@ -103,9 +105,18 @@ class AuthController extends Controller
         $user->fs_kd_peg = $request->fs_kd_peg;
         $user->email_verified_at = \Carbon\Carbon::now();
         $user->role_id = $request->role_id;
-        $simpan = $user->save();
         $role = Role::find($request->role_id);
         $user->syncRoles($role->name);
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $name = time() . '.' . $avatar->getClientOriginalExtension();
+            $destinationPath = public_path('images/avatar/');
+            $avatar->move($destinationPath, $name);
+            $user->fs_avatar = $name;
+        }
+
+        $simpan = $user->save();
+
 
         if ($simpan) {
             Session::flash('success', 'Pembuatan berhasil ! Silahkan login untuk mengakses data');

@@ -30,6 +30,7 @@
                     <thead>
                         <tr>
                             <th width="5%">No</th>
+                            <th>Pic</th>
                             <th width="20%">Nama </th>
                             <th width="20%">Nama Pegawai </th>
                             <th>Email </th>
@@ -41,7 +42,11 @@
                         @foreach ($users as $user)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$user->name}}</td>
+                            <td>
+                                <img src="{{asset('images/avatar/'.$user->fs_avatar)}}" width="30" alt="" style="">
+                            </td>
+                            <td>
+                                {{$user->name}}</td>
                             <td>{{$user->namaDokter()}}</td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->username}}</td>

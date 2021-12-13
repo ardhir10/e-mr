@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     Route::get('/rekam-medis', 'RekamMedisController@index')->name('rekam-medis.index');
     Route::get('/rekam-medis/datatables', 'RekamMedisController@getRekamMedis')->name('rekam-medis.datatables');
-    Route::get('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
-    Route::post('/rawat-medis/detail/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@detailFiltered')->name('rekam-medis.detail');
+    Route::get('/rawat-medis/detail/{from}/{no}/{kd_reg?}', 'RekamMedisController@detail')->name('rekam-medis.detail');
+    Route::post('/rawat-medis/detail/{from}/{no}/{kd_reg?}', 'RekamMedisController@detailFiltered')->name('rekam-medis.detail');
 
     Route::get('/rawat-medis/pdf/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@pdfPrint')->name('rekam-medis.detail.pdf');
     Route::get('/rawat-medis/excel/{from}/{no}/{kd_dokter?}/{kd_reg?}', 'RekamMedisController@exportExcel')->name('rekam-medis.detail.excel');
@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     // --- CPPT
 
-    Route::get('/cppt/tambah/{from}/{id}/{kd_dokter?}/{kd_reg?}', 'CpptController@create')->name('cppt.create');
+    Route::get('/cppt/tambah/{from}/{id}/{kd_reg?}', 'CpptController@create')->name('cppt.create');
     Route::post('/cppt/simpan/{id}', 'CpptController@store')->name('cppt.store');
     Route::get('/cppt/detail/{from}/{id}', 'CpptController@detail')->name('cppt.detail');
     Route::get('/cppt/pdf/{from}/{id}', 'CpptController@pdf')->name('cppt.pdf');

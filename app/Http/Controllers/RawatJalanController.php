@@ -83,7 +83,7 @@ class RawatJalanController extends Controller
             })
 
                 ->addColumn('action', function ($qr) {
-                    return '<a href="' . route('rekam-medis.detail', ['rawatjalan',$qr->fs_mr, $qr->fs_kd_dokter, $qr->fs_kd_reg]) . '" class=" "> Lihat Detail</a>';
+                    return '<a href="' . route('rekam-medis.detail', ['rawatjalan',$qr->fs_mr, $qr->fs_kd_reg]) . '" class=" "> Lihat Detail</a>';
                 })
                 ->escapeColumns([])
                 ->addIndexColumn()

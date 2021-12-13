@@ -439,28 +439,29 @@
                                             style="border-collapse: collapse;width: 100%;" id="data-table2">
                                             <thead>
                                                 <tr style="">
+                                                    <th></th>
                                                     <th>Tanggal</th>
                                                     <th>Bagian
                                                         Layanan</th>
                                                     <th>Dokter</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
 
                                                 @foreach ($riwayat_kunjungan as $rk)
                                                 <tr>
-                                                    <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
-                                                    <td style="padding:2px ;">
-                                                        {{$rk->fs_nm_layanan}}
-                                                    </td>
-                                                    <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
-                                                    <td style="padding:2px ;">
+                                                     <td style="padding:2px ;">
                                                         <input type="checkbox" class="filter-riwayat-kunjungan" value="{{$rk->fs_kd_reg}}" name="filter[]"
                                                         {{in_array($rk->fs_kd_reg,$filtered) == true ? 'checked' : '' }}
                                                         >
                                                         {{-- <i data-feather="check" style="height: 15px;color:#21A366"></i> --}}
                                                     </td>
+                                                    <td style="padding:2px ;">{{date('d-m-Y',strtotime($rk->fd_tgl_masuk))}}</td>
+                                                    <td style="padding:2px ;">
+                                                        {{$rk->fs_nm_layanan}}
+                                                    </td>
+                                                    <td style="padding:2px ;">{{$rk->fs_dokter}}</td>
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>

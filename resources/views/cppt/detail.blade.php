@@ -386,6 +386,11 @@
                                     BACK
                                 </a>
                                 <a target="_blank" class="btn  btn-warning" href="{{route('cppt.pdf',[$from,$id])}}">PRINT PDF</a>
+                                @if (!$CPPT->FS_VERIFIED_BY)
+                                    <button class="btn  btn-danger" type="button" data-toggle="tooltip" title="Delete" onclick="return confirmDelete('{{route('mr.delete',['type'=>'cppt','id'=>$CPPT->FN_ID,'cFrom'=>$from,'cNomorMR'=>$rekam_medis->FS_MR,'cRegister'=>$rekam_medis->FS_KD_REG])}}')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                @endif
                             </div>
 
                         </div>

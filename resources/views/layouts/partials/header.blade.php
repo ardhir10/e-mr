@@ -21,7 +21,7 @@
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="{{asset('assets/')}}/images/users/avatar-0.png"
+                        <img class="rounded-circle header-profile-user" src="{{asset('/')}}/images/avatar/{{Auth::user()->fs_avatar}}"
                         alt="Header Avatar">
                         <span class="ms-2 d-none d-sm-block user-item-desc">
                             <span class="user-name">{{Auth::user()->name}}</span>

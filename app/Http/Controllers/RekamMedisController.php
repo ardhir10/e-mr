@@ -123,11 +123,25 @@ class RekamMedisController extends Controller
 
     }
 
-    public function detail($from,$nomorMr,$kdDokter = '',$kdReg=''){
+    public function detail($from,$nomorMr,$kdReg=''){
+
+
+        $cariKdDokter = "select * from TA_REGISTRASI where fs_kd_reg = '$kdReg'";
+        $dt = DB::select($cariKdDokter);
+
+        if($dt){
+            $kdDokter = $dt[0]->FS_KD_MEDIS;
+        }else{
+            $kdDokter = '';
+        }
 
         $data['kd_dokter'] = $kdDokter;
         $data['kd_reg'] = $kdReg;
         $data['from'] = $from;
+
+
+
+
 
         $QUERY = "select aa.*,bb.fs_nm_agama,fs_nm_kelurahan,fs_nm_kecamatan,fs_nm_kabupaten from
         tc_mr aa
@@ -387,7 +401,15 @@ class RekamMedisController extends Controller
         return view('rekam-medis.detail', $data);
     }
 
-    public function detailFiltered(Request $request,$from,$nomorMr,$kdDokter = '',$kdReg=''){
+    public function detailFiltered(Request $request,$from,$nomorMr,$kdReg=''){
+        $cariKdDokter = "select * from TA_REGISTRASI where fs_kd_reg = '$kdReg'";
+        $dt = DB::select($cariKdDokter);
+
+        if ($dt) {
+            $kdDokter = $dt[0]->FS_KD_MEDIS;
+        } else {
+            $kdDokter = '';
+        }
         $data['kd_dokter'] = $kdDokter;
         $data['kd_reg'] = $kdReg;
         $data['from'] = $from;
@@ -888,12 +910,12 @@ class RekamMedisController extends Controller
                     break;
                 case 'asesmen_dokter_bidan':
                     DB::table('TAR_ASESMEN_DOKTER_BIDAN')->where('FN_ID', $fn_id)->delete();
-                    break;
-                default:
-                    break;
-            }
 
-            return redirect()->back()->with(['success' => 'Data Berhasil di hapus !']);
+                    break;
+                    default:
+                    break;
+                };
+                return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['success' => 'Data Berhasil di hapus !']);
         } catch (\Throwable $th) {
             return redirect()->back()->with(['failed' => 'Data gagal hapus !']);
         }

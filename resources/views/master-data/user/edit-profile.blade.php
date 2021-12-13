@@ -30,7 +30,7 @@
                     </ul>
                 </div>
                 @endif
-                <form action="{{route('user.update-profile',$user->id)}}" method="POST">
+                <form action="{{route('user.update-profile',$user->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for=""><strong>Nama Lengkap</strong></label>
@@ -68,6 +68,12 @@
 
                             @endforeach
                         </select>
+                    </div>
+                     <div class="form-group">
+                        <img src="{{asset('images/avatar/'.$user->fs_avatar)}}" width="70" alt="" style="">
+                        <br>
+                        <label for="">Upload Profil</label>
+                        <input type="file" name="avatar" class="form-control-sm">
                     </div>
 
                     <div class="mt-2">

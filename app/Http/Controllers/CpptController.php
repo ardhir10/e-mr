@@ -8,7 +8,16 @@ use Illuminate\Support\Facades\DB;
 use PDF;
 class CpptController extends Controller
 {
-    public function create($from,$nomorMr, $kdDokter ='',$kdReg = ''){
+    public function create($from,$nomorMr,$kdReg = ''){
+
+        $cariKdDokter = "select * from TA_REGISTRASI where fs_kd_reg = '$kdReg'";
+        $dt = DB::select($cariKdDokter);
+
+        if ($dt) {
+            $kdDokter = $dt[0]->FS_KD_MEDIS;
+        } else {
+            $kdDokter = '';
+        }
         $data['page_title'] = "Tambah Catatan SOAP";
 
         $data['kd_reg'] = $kdReg;
@@ -138,9 +147,9 @@ class CpptController extends Controller
         // --- HANDLE PROCESS
         try {
             DB::table('TAR_CPPT')->insert($parameterInsert);
-            return redirect()->route('rekam-medis.detail', [$request->cFrom,$request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data berhasil dibuat !']);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom,$request->cNomorMR,  $request->cRegister])->with(['success' => 'Data berhasil dibuat !']);
         } catch (\Throwable $th) {
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['failed' => $th->getMessage()]);
         }
     }
 
@@ -200,10 +209,10 @@ class CpptController extends Controller
 
         try {
             DB::table('TAR_CPPT')->where('FN_ID',$id)->update($parameterInsert);
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['success' => 'Data CPPT berhasil diupdate !','hl'=> 'cppt'.$id]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['success' => 'Data CPPT berhasil diupdate !','hl'=> 'cppt'.$id]);
 
         } catch (\Throwable $th) {
-            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR, $request->cKdpeg, $request->cRegister])->with(['failed' => $th->getMessage()]);
+            return redirect()->route('rekam-medis.detail', [$request->cFrom, $request->cNomorMR,  $request->cRegister])->with(['failed' => $th->getMessage()]);
         }
     }
 

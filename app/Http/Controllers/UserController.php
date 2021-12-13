@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\File;
+
 
 class UserController extends Controller
 {
@@ -97,6 +99,14 @@ class UserController extends Controller
             'FB_MEDIS' => 1
         ];
 
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $name = time() . '.' . $avatar->getClientOriginalExtension();
+            $destinationPath = public_path('images/avatar/');
+            $avatar->move($destinationPath, $name);
+            dd($name);
+        }
+
 
         // --- HANDLE PROCESS
         try {
@@ -141,12 +151,29 @@ class UserController extends Controller
 
 
 
+
         // --- HANDLE PROCESS
         try {
             User::where('id',$id)->update($parameterUpdate);
             $role = Role::find($request->role_id);
             $user = User::find($id);
             $user->syncRoles($role->name);
+            if ($request->hasFile('avatar')) {
+                // Delete Picture
+                if ($user->fs_avatar) {
+                    $picture_path = public_path('images/avatar/' . $user->fs_avatar);
+                    if (File::exists($picture_path)) {
+                        File::delete($picture_path);
+                    }
+                }
+
+                $avatar = $request->file('avatar');
+                $name = time() . '.' . $avatar->getClientOriginalExtension();
+                $destinationPath = public_path('images/avatar/');
+                $avatar->move($destinationPath, $name);
+                $user->fs_avatar = $name;
+            }
+            $user->save();
 
             return redirect()->route('user.index')->with(['success' => 'Data berhasil disimpan !']);
         } catch (\Throwable $th) {
@@ -160,16 +187,33 @@ class UserController extends Controller
 
 
 
+        $parameterUpdate= [];
+
         if ($request->password != '') {
             $parameterUpdate['password'] = Hash::make($request->password);
-        }else{
-            return redirect()->route('dashboard');
         }
-
-
 
         // --- HANDLE PROCESS
         try {
+
+            if ($request->hasFile('avatar')) {
+                // Delete Picture
+                $user = User::where('id',$id)->first();
+                if ($user->fs_avatar) {
+                    $picture_path = public_path('images/avatar/' . $user->fs_avatar);
+                    if (File::exists($picture_path)) {
+                        File::delete($picture_path);
+                    }
+                }
+
+                $avatar = $request->file('avatar');
+                $name = time() . '.' . $avatar->getClientOriginalExtension();
+                $destinationPath = public_path('images/avatar/');
+                $avatar->move($destinationPath, $name);
+                $parameterUpdate['fs_avatar'] = $name;
+            }
+
+
             User::where('id', $id)->update($parameterUpdate);
             return redirect()->route('dashboard')->with(['success' => 'Profile berhasil diubah !']);
         } catch (\Throwable $th) {
